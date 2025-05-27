@@ -1,0 +1,145 @@
+
+
+main * {
+	font-family:"spacemono", "Courier New", monospace;
+}
+
+main {
+	padding-top:0;
+}
+
+main h1 {
+	text-align:center;
+	font-size:3rem;
+	text-shadow: var(--text-glow-color) 0 0 0.75rem;
+	margin: 0.5rem auto;
+	animation: 0.5s ease-in-out 1 reverse fade-in;
+}
+
+.release-wrap {
+	margin:0;
+	width:100%;
+	display:flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	align-items:flex-start;
+	gap:0rem 2rem;
+
+	animation: 0.5s ease-in-out 1 reverse fade-in;
+}
+
+.release-left {
+	display:flex;
+	flex-flow:column nowrap;
+}
+	
+	.release-art {
+		margin: 1rem auto;
+	}
+	
+	.release-listen {
+	
+	}
+	
+		.listen-text {
+			color:var(--text-color);
+			text-shadow: var(--text-glow-color) 0 0 0.75rem;
+			margin: 0 auto 1rem auto;
+			text-align:center;
+			font-size:1.5rem;
+		}
+
+		.release-icons {
+			display:flex;
+			flex-flow: row wrap;
+			justify-content:center;
+			gap:1rem;
+		}
+
+		.release-icons img {
+			background-color:var(--text-color);
+			transition-duration:0.2s;
+		}
+
+		.release-icons img:hover {
+			background-color:var(--main-color);
+			margin-bottom:0;
+		}
+
+.release-right {
+	text-align:left;
+	border:0.1rem solid var(--main-color);
+	box-shadow: 0 0 0.75rem var(--main-box-glow-color),
+				inset 0 0 0.75rem var(--main-box-glow-color);
+	margin-top:1rem;
+	padding:1rem;
+}
+	
+	.release-info p {
+		margin-top:0;
+		font-size: 1.5rem;
+	}
+
+	.info-title {
+		color: var(--accent-color);
+		text-shadow: var(--accent-text-glow-color) 0 0 0.5rem;
+	}
+	
+	.release-support {
+		text-align:left;
+	}
+	
+		.support-text {
+			color:var(--main-color);
+			text-shadow: var(--main-text-glow-color) 0 0 0.75rem;
+			margin: 0 auto 1rem auto;
+			text-align:left;
+			font-size:1.5rem;
+		}
+		
+		.release-support button {
+
+			padding:0.75rem;
+			color:var(--main-color);
+			text-align:center;
+			text-shadow: var(--main-text-glow-color) 0 0 0.75rem;
+			border: 0.1rem solid var(--main-color);
+			box-shadow: 0 0 0.75rem var(--main-box-glow-color),
+						inset 0 0 0.75rem var(--main-box-glow-color);
+			background-color:var(--main-bg-color-2);
+			transition-duration:0.2s;
+			font-size:1.5rem;
+		}
+		
+		.release-support button:hover {
+			background-color:var(--main-color);
+			color:var(--bg-color);
+			cursor:pointer;
+		}
+
+.back {
+	animation: 0.5s ease-in-out 1 reverse fade-in;
+}
+
+.back button {
+	font-size: 1.5rem;
+	margin: 3rem auto 0 auto;
+	text-align:center;
+	width:100%;
+	
+	padding:0.75rem;
+		color:var(--main-color);
+		text-align:center;
+		text-shadow: var(--main-text-glow-color) 0 0 0.75rem;
+		border: 0.1rem solid var(--main-color);
+		box-shadow: 0 0 0.75rem var(--main-box-glow-color),
+					inset 0 0 0.75rem var(--main-box-glow-color);
+		background-color:var(--main-bg-color-2);
+		transition-duration:0.2s;
+}
+
+.back button:hover {
+	color:var(--bg-color);
+	background-color:var(--main-color);
+	cursor:pointer;
+}

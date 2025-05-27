@@ -1,0 +1,126 @@
+@keyframes typing {
+	0%{width:0;}
+	100%{width:29.2vw;}
+}
+
+@keyframes blink {
+	0%{border-color: var(--transparent);}
+	50%{border-color: var(--text-color);}
+	100%{border-color: var(--transparent);}
+}
+
+@keyframes widen {
+	0%{width:0;}
+	100%{width:calc(100vw - 9rem);}
+}
+
+main {
+	padding-top:0;
+}
+
+main h1 {
+	position:relative;
+	font-family:"spacemono", "Courier New", monospace;
+	background-color:var(--text-bg-color);
+	text-align:center;
+	font-size:4.5vw;
+	text-shadow: var(--text-glow-color) 0 0 0.75rem;
+	border:0.3rem solid var(--text-color);
+	box-shadow: 0 0 0.75rem var(--text-glow-color),
+				inset 0 0 0.75rem var(--text-glow-color);
+	padding:1rem;
+	margin: 0.5rem auto 0 auto;
+	
+	white-space:nowrap;
+	overflow:hidden;
+	
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	
+	animation: widen 0.7s cubic-bezier(.56,.09,.28,.99),
+				0.5s ease-in-out 1 reverse fade-in/*,0.5s ease-in-out 1 reverse right-in*/;
+
+	width:calc(100vw - 9rem);
+}
+
+main .supertitle {
+	text-shadow: var(--text-glow-color) 0 0 0.75rem;
+	font-family:"spacemono", "Courier New", monospace;
+	background-color:var(--transparent);
+	font-weight:normal;
+	font-size:2vw;
+	height:2.5vw;
+	
+	display:inline-flex;
+	align-items:center;
+
+	white-space:nowrap;
+	overflow:hidden;
+	margin:auto;
+	border-right: 0.3vw solid var(--transparent);
+	width:29.2vw;
+	
+	animation: typing 1s steps(25, end),
+				blink 0.5s step-start 2/*,0.5s ease-in-out 1 reverse right-in*/;
+	
+	position:relative;
+	left:0;
+}
+
+.supertitle-wrap {
+	margin: 0.5rem auto;
+	font-family:"spacemono", "Courier New", monospace;
+	background-color:var(--transparent);
+	font-weight:normal;
+	font-size:2vw;
+	height:2.5vw;
+	
+	animation: blink 0.33s step-start 3, 0.5s ease-in-out 1 reverse fade-in/*,0.5s ease-in-out 1 reverse right-in*/;
+}
+
+main h1 img {
+	width:30vw;
+	height:auto;
+}
+
+main h2 {
+	text-align:center;
+	font-size: 2.5rem;
+	font-weight:normal;
+}
+
+main .body_content {
+	position:relative;
+	top:0;
+	animation: 0.5s ease-in-out 1 reverse fade-in;
+}
+
+main p {
+	text-align:center;
+	font-size: 2rem;
+	margin:2.5rem 0rem;
+}
+
+main span.pink {
+	color: var(--main-color);
+	text-shadow: var(--main-text-glow-color) 0 0 0.5rem;
+}	
+
+main strong {
+	color: var(--accent-color);
+	font-weight: normal;
+	text-shadow: var(--accent-text-glow-color) 0 0 0.5rem;
+}
+
+main p a:link, main p a:visited {
+	color: var(--main-color);
+	text-shadow: var(--main-text-glow-color) 0 0 0.5rem;
+	transition-duration:0.2s;
+}	
+
+main p a:hover {
+	color: var(--accent-color);
+	text-shadow: var(--accent-text-glow-color) 0 0 0.5rem;
+	text-decoration:none;
+}	

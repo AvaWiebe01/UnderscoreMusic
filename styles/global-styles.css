@@ -1,0 +1,356 @@
+/* FONTS */
+@font-face {
+    font-family: 'spacemono';
+    src: url('fonts/spacemono-bold-webfont.woff2') format('woff2'),
+         url('fonts/spacemono-bold-webfont.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'spacemono';
+    src: url('fonts/spacemono-bolditalic-webfont.woff2') format('woff2'),
+         url('fonts/spacemono-bolditalic-webfont.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+
+}
+
+@font-face {
+    font-family: 'spacemono';
+    src: url('fonts/spacemono-italic-webfont.woff2') format('woff2'),
+         url('fonts/spacemono-italic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+
+}
+
+@font-face {
+    font-family: 'spacemono';
+    src: url('fonts/spacemono-regular-webfont.woff2') format('woff2'),
+         url('fonts/spacemono-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'zector';
+    src: url('fonts/zector-webfont.woff2') format('woff2'),
+         url('fonts/zector-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'larabie';
+    src: url('fonts/larabiefont_rg-webfont.woff2') format('woff2'),
+         url('fonts/larabiefont_rg-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+/* KEYFRAMES */
+@keyframes nav {
+	0% {border-radius:0;}
+	50% {border-radius:2rem;}
+	100%{border-radius:0;}
+}
+
+@keyframes wave {
+	0% {bottom:-8px;}
+	50% {bottom:8px;}
+	100% {bottom:-8px;}
+}
+
+@keyframes rotate {
+	0% {transform:rotate(5deg);}
+	50% {transform:rotate(-5deg);}
+	100% {transform:rotate(5deg);}
+}
+
+@keyframes right-in {
+	0% {left:0; opacity:1;}
+	100% {left: 40%; opacity:0;}
+}
+
+@keyframes fade-in {
+	0% {opacity:1;}
+	100% {opacity:0;}
+}
+
+
+@keyframes left-in {
+	0% {right:0; opacity:1;}
+	100% {right: 40%; opacity:0;}
+}
+
+
+/* COLOR PALETTE */
+:root {
+	--bg-color: #0D0411;
+	--footer-bg-color: #08030A;
+	
+	--main-color: #FF0050;
+	--main-bg-color: #190414;
+	--main-bg-color-2: #250417;
+	--main-text-glow-color: rgba(255,0,80,0.5);
+	--main-box-glow-color: rgba(255,0,80,0.35);
+	
+	--accent-color: #D044FF;
+	--accent-bg-color: #17071D;
+	--accent-text-glow-color: rgba(208,68,255,0.5);
+	--accent-box-glow-color: rgba(208,68,255,0.35);
+	
+	--text-color: #FFFFFF;
+	--text-glow-color: rgba(255,255,255,0.3);
+	--text-bg-color: rgba(255,255,255,0.03);
+	
+	--transparent: rgba(0,0,0,0);
+}
+
+/* GLOBAL FORMATTING */
+html {
+	scrollbar-gutter: stable;
+}
+
+*:not(footer) {
+	background-color:var(--bg-color);
+	font-variant-ligatures:none;
+	text-align: justify;
+	
+	  scroll-snap-type: y mandatory;
+	  scroll-padding: 8rem;
+}
+
+
+/* HEADER FORMATTING */
+header {
+	height:10vw;
+	text-align:center;
+}
+
+header img {
+	position:relative;
+	width: 50vw;
+	height:auto;
+}
+
+/* NAV FORMATTING */
+nav .border {
+	display:flex;
+	
+	background-color: var(--main-bg-color);
+	border:0.3rem solid var(--main-color);
+	box-shadow: 0 0 0.75rem var(--main-box-glow-color),
+				inset 0 0 0.75rem var(--main-box-glow-color);
+	height:3rem;
+	margin:1rem 1.5rem 2rem 1.5rem;
+	padding:1rem 3vw;
+	align-items:center;
+	justify-content:space-between;
+	animation-play-state: paused;
+	
+	transition-duration: 0.2s;
+}
+
+nav .border:hover {
+	height:5rem;
+}
+
+nav a {
+	font-family: "spacemono", 'Courier New', monospace;
+	background-color: var(--transparent);
+	font-size: 2.5vw;
+	color: var(--main-color);
+	text-shadow: var(--main-text-glow-color) 0 0 0.75rem;
+	transition-duration: 0.2s;
+	position:relative;
+}
+
+nav a.current {
+	color:var(--main-text-glow-color);
+	text-shadow:none;
+	cursor:default;
+}
+
+nav a:hover:not(.current) {
+	transform: scale(1.15, 1.15);
+}
+
+/* MAIN FORMATTING */
+main {
+	color: white;
+	padding:2rem;
+}
+
+main span.pink {
+	color: var(--main-color);
+	text-shadow: var(--main-text-glow-color) 0 0 0.5rem;
+}
+
+/* WAVE EFFECT */
+.wave1 {
+	position:relative;
+	bottom:-8px;
+	animation: 1.3s ease-in-out -0.675s infinite wave;
+}
+
+.wave2 {
+	position:relative;
+	bottom:-8px;
+	animation: 1.3s ease-in-out -0.6s infinite wave;
+}
+
+.wave3 {
+	position:relative;
+	bottom:-8px;
+	animation: 1.3s ease-in-out -0.525s infinite wave;
+}
+
+.wave4 {
+	position:relative;
+	bottom:-8px;
+	animation: 1.3s ease-in-out -0.45s infinite wave;
+}
+
+.wave5 {
+	position:relative;
+	bottom:-8px;
+	animation: 1.3s ease-in-out -0.375s infinite wave;
+}
+
+.wave6 {
+	position:relative;
+	bottom:-8px;
+	animation: 1.3s ease-in-out -0.3s infinite wave;
+}
+
+.wave7 {
+	position:relative;
+	bottom:-8px;
+	animation: 1.3s ease-in-out -0.225s infinite wave;
+}
+
+.wave8 {
+	position:relative;
+	bottom:-8px;
+	animation: 1.3s ease-in-out -0.15s infinite wave;
+}
+
+.wave9 {
+	position:relative;
+	bottom:-8px;
+	animation: 1.3s ease-in-out -0.075s infinite wave;
+}
+
+.wave10 {
+	position:relative;
+	bottom:-8px;
+	animation: 1.3s ease-in-out 0s infinite wave;
+}
+
+/* ROTATE EFFECT */
+.rotate {
+	font-sgize:6rem;
+	display:inline-block;
+	position:relative;
+	animation: 2s ease-in-out infinite rotate;
+}
+
+/* INTRO ANIMATION */
+main h1 {
+	position:relative;
+	left:0;
+	margin-top:0;
+	animation: 0.5s ease-in-out 1 reverse right-in;
+}
+
+main .body_content {
+	position:relative;
+	right:0;
+	font-family:"spacemono", "Courier New", monospace;
+	animation: 0.5s ease-in-out 1 reverse left-in;
+}
+
+/* FOOTER FORMATTING */
+footer {
+	font-family:"Courier New", monospace;
+	font-size:1rem;
+	position:absolute;
+	left:0;
+	right:0;
+	background-color:var(--footer-bg-color);
+	color:white;
+	margin: 2rem 0 0 0;
+	padding:1rem;
+	display:grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+footer div, footer p, footer a, footer h3 {
+	background-color:inherit;
+}
+
+footer img {
+	background-color:var(--transparent);
+}
+
+footer .left p {
+	text-align:left;
+}
+
+footer .right p, footer .right h3 {
+	text-align: right;
+}
+
+footer h3 {
+	font-family:"Courier New", monospace;
+	font-weight:normal;
+	font-size: 1.5rem;
+	vertical-align:top;
+	margin-top:1rem;
+}
+
+footer .icons {
+	display:flex;
+	flex-flow: row wrap;
+	justify-content:flex-end;
+	gap:1rem;
+}
+
+footer .icons img {
+	background-color:var(--text-color);
+	transition-duration:0.2s;
+}
+
+footer .icons img:hover {
+	background-color:var(--main-color);
+}
+
+footer .flags {
+	margin-top:2rem;
+	background-color:var(--transparent);
+}
+
+footer .flags img:active {
+	transform: scale(0.8, 0.8);
+	transition-duration:0.05s;
+}
+
+#heart {
+	background-color:inherit;
+}
+
+footer a:link, footer a:visited {
+	color: var(--text-color);
+	transition-duration:0.2s;
+}
+
+footer a:hover {
+	color: var(--main-color);
+	text-decoration:none;
+}
