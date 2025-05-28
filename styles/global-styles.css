@@ -109,6 +109,9 @@
 	--text-glow-color: rgba(255,255,255,0.3);
 	--text-bg-color: rgba(255,255,255,0.03);
 	
+	--deactivated-color: rgba(99,99,99,0.8);
+	--deactivated-glow-color: rgba(99,99,99,0.3);
+
 	--transparent: rgba(0,0,0,0);
 }
 

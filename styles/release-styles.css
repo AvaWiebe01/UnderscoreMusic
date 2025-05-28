@@ -117,6 +117,24 @@ main h1 {
 			cursor:pointer;
 		}
 
+	.no-release-support {
+		text-align:left;
+	}
+
+		.no-release-support button {
+
+			padding:0.75rem;
+			color:var(--deactivated-color);
+			text-align:center;
+			text-shadow: var(--deactivated-glow-color) 0 0 0.75rem;
+			border: 0.1rem solid var(--deactivated-glow-color);
+			box-shadow: 0 0 0.75rem var(--deactivated-glow-color),
+						inset 0 0 0.75rem var(--deactivated-glow-color);
+			transition-duration:0.2s;
+			font-size:1.5rem;
+		}
+
+
 .back {
 	animation: 0.5s ease-in-out 1 reverse fade-in;
 }
