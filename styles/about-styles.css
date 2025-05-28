@@ -28,3 +28,8 @@ main strong {
 	color:var(--accent-color);
 	text-shadow: var(--accent-text-glow-color) 0 0 0.75rem;
 }
+
+main .body_content {
+	padding-left: 12vw;
+	padding-right: 12vw;
+}
