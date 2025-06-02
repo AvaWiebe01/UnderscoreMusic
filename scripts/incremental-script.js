@@ -71,7 +71,7 @@ function updateResources() {
 }
 
 window.onload = function() {
-    setInterval(updateResources, 20);
+    setInterval(updateResources, 1000/REFRESH_RATE);
     document.getElementsByClassName("resource1_display")[0].innerHTML = "Testing";
 }
 
