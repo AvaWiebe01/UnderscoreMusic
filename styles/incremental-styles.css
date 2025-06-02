@@ -1,0 +1,144 @@
+@keyframes widen {
+	0%{width:0;}
+	100%{width:calc(100vw - 9rem);}
+}
+
+main {
+	padding-top:0;
+}
+
+main h1 {
+	position:relative;
+	font-family:"spacemono", "Courier New", monospace;
+	background-color:var(--text-bg-color);
+	text-align:center;
+	font-size:4.5vw;
+	text-shadow: var(--text-glow-color) 0 0 0.75rem;
+	border:0.3rem solid var(--text-color);
+	box-shadow: 0 0 0.75rem var(--text-glow-color),
+				inset 0 0 0.75rem var(--text-glow-color);
+	padding:1rem;
+	margin: 0.5rem auto 0 auto;
+	
+	white-space:nowrap;
+	overflow:hidden;
+	
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	
+	animation: widen 0.7s cubic-bezier(.56,.09,.28,.99),
+				0.5s ease-in-out 1 reverse fade-in/*,0.5s ease-in-out 1 reverse right-in*/;
+
+	width:calc(100vw - 9rem);
+}
+
+main h1 img {
+	width:30vw;
+	height:auto;
+}
+
+main h2 {
+	text-align:center;
+	font-size: 2.5rem;
+	font-weight:normal;
+}
+
+main .game {
+	position:relative;
+    font-family:"spacemono", "Courier New", monospace;
+	top:2rem;
+	animation: 0.5s ease-in-out 1 reverse fade-in;
+    background:var(--text-bg-color);
+    text-shadow: var(--text-glow-color) 0 0 0.75rem;
+	border:0.1rem solid var(--text-color);
+	box-shadow: 0 0 0.75rem var(--text-glow-color),
+				inset 0 0 0.75rem var(--text-glow-color);
+	padding:1rem;
+}
+
+main .game * {
+    background:var(--transparent);
+} 
+
+main .game .main_panel {
+    padding: 1.5rem;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+main .game .resource_panel {
+
+    background:var(--text-bg-color);
+    text-shadow: var(--text-glow-color) 0 0 0.75rem;
+	border:0.1rem solid var(--text-color);
+	box-shadow: 0 0 0.75rem var(--text-glow-color),
+		inset 0 0 0.75rem var(--text-glow-color);
+    display:flex;
+    width:100%;
+    flex-direction: row;
+    justify-content: center;
+    padding:2rem;
+}
+
+
+main .game .resource_display {
+    text-align:center;
+    line-height:150%;
+    font-size: 2rem;
+	padding:1rem;
+    width:25%;
+}
+
+main .game button {
+    padding:0.5rem;
+    color:var(--main-color);
+    font-family:"spacemono", "Courier New", monospace;
+    text-align:center;
+    text-shadow: var(--main-text-glow-color) 0 0 0.75rem;
+    border: 0.1rem solid var(--main-color);
+    box-shadow: 0 0 0.75rem var(--main-box-glow-color),
+                inset 0 0 0.75rem var(--main-box-glow-color);
+    background-color:var(--main-bg-color-2);
+    transition-duration:0.2s;
+    font-size:1.25rem;
+}
+
+main .game button:hover {
+    background-color:var(--main-color);
+    color:var(--bg-color);
+    cursor:pointer;
+}
+
+main .game .not_unlocked {
+    display: none;
+}
+
+main p {
+	text-align:left;
+	font-size: 1.5rem;
+}
+
+main span.pink {
+	color: var(--main-color);
+	text-shadow: var(--main-text-glow-color) 0 0 0.5rem;
+}	
+
+main strong {
+	color: var(--accent-color);
+	font-weight: normal;
+	text-shadow: var(--accent-text-glow-color) 0 0 0.5rem;
+}
+
+main p a:link, main p a:visited {
+	color: var(--main-color);
+	text-shadow: var(--main-text-glow-color) 0 0 0.5rem;
+	transition-duration:0.2s;
+}	
+
+main p a:hover {
+	color: var(--accent-color);
+	text-shadow: var(--accent-text-glow-color) 0 0 0.5rem;
+	text-decoration:none;
+}	
