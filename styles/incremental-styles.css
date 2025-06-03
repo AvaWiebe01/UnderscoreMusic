@@ -62,22 +62,21 @@ main .game * {
 } 
 
 main .game .main_panel {
-    padding: 1.5rem;
+    padding: 0.5rem;
     display:flex;
     flex-direction: column;
     justify-content: center;
 }
 
 main .game .resource_panel {
-
     background:var(--text-bg-color);
     text-shadow: var(--text-glow-color) 0 0 0.75rem;
 	border:0.1rem solid var(--text-color);
 	box-shadow: 0 0 0.75rem var(--text-glow-color),
 		inset 0 0 0.75rem var(--text-glow-color);
     display:flex;
-    width:100%;
     flex-direction: row;
+	text-align:center;
     justify-content: center;
     padding:2rem;
 }
@@ -91,6 +90,68 @@ main .game .resource_display {
     width:25%;
 }
 
+main .game .generate_panel {
+    background:var(--text-bg-color);
+    text-shadow: var(--text-glow-color) 0 0 0.75rem;
+	border:0.1rem solid var(--text-color);
+	box-shadow: 0 0 0.75rem var(--text-glow-color),
+		inset 0 0 0.75rem var(--text-glow-color);
+    display:flex;
+    flex-direction: row;
+	text-align:center;
+    justify-content: center;
+    padding:2rem;
+}
+
+main .game .generate_panel .generate_button {
+	display:flex;
+	flex-direction: column;
+	text-align:center;
+}
+
+main .game .generate_panel .generate_button .button_value_display {
+	margin-top: 1rem;
+	color: var(--accent-color);
+	text-shadow: var(--accent-text-glow-color) 0 0 0.75rem;
+	text-align: center;
+}
+
+main .game .upgrade_panel {
+	background:var(--text-bg-color);
+    text-shadow: var(--text-glow-color) 0 0 0.75rem;
+	border:0.1rem solid var(--text-color);
+	box-shadow: 0 0 0.75rem var(--text-glow-color),
+		inset 0 0 0.75rem var(--text-glow-color);
+    display:flex;
+    flex-direction: row;
+	text-align:center;
+    justify-content: center;
+    padding:2rem;
+}
+
+main .game .upgrade_panel .upgrade_list {
+    display:flex;
+    flex-direction: row;
+	text-align:center;
+    justify-content: center;
+	flex-wrap: wrap;
+    padding:2rem;
+}
+
+main .game .upgrade_panel .upgrade_list .upgrade {
+	text-shadow: var(--text-glow-color) 0 0 0.75rem;
+	border:0.1rem solid var(--text-color);
+	box-shadow: 0 0 0.75rem var(--text-glow-color),
+		inset 0 0 0.75rem var(--text-glow-color);
+    display:flex;
+    flex-direction: column;
+	text-align:center;
+    justify-content: center;
+    padding:1rem;
+	margin:1rem;
+	width: 25%;
+}
+
 main .game button {
     padding:0.5rem;
     color:var(--main-color);
@@ -101,7 +162,7 @@ main .game button {
     box-shadow: 0 0 0.75rem var(--main-box-glow-color),
                 inset 0 0 0.75rem var(--main-box-glow-color);
     background-color:var(--main-bg-color-2);
-    transition-duration:0.2s;
+    transition-duration:0.15s;
     font-size:1.25rem;
 }
 
@@ -111,13 +172,54 @@ main .game button:hover {
     cursor:pointer;
 }
 
+main .game button:active {
+	transform: scale(0.95, 0.95);
+	transition-duration:0.05s;
+}
+
+main .game .generate_panel button:active {
+	transform: scale(1.25, 1.25);
+	transition-duration:0.04s;
+}
+
 main .game .not_unlocked {
     display: none;
 }
 
-main p {
-	text-align:left;
+main .game h3 {
+	font-family:"spacemono", "Courier New", monospace;
+	font-weight:normal;
 	font-size: 1.5rem;
+	text-align: left;
+	vertical-align:top;
+	margin:0 0 0.5rem 0;
+}
+
+main .game .main_panel .upgrade_panel p.cost {
+	color:var(--main-color);
+    font-family:"spacemono", "Courier New", monospace;
+    text-align:center;
+    text-shadow: var(--main-text-glow-color) 0 0 0.75rem;
+	margin-bottom: 0.25rem;
+}
+
+main .game p {
+	text-align:left;
+	font-size: 1rem;
+	margin: 0 0 0.5rem 0;
+}
+
+main span.suffix {
+	color: var(--accent-color);
+	font-weight: normal;
+	text-shadow: var(--accent-text-glow-color) 0 0 0.5rem;
+}
+
+main .game .main_panel .upgrade_panel span.suffix {
+	color:var(--main-color);
+    font-family:"spacemono", "Courier New", monospace;
+    text-align:center;
+    text-shadow: var(--main-text-glow-color) 0 0 0.75rem;
 }
 
 main span.pink {
