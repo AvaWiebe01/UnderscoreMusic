@@ -3,6 +3,19 @@
 	100%{width:calc(100vw - 9rem);}
 }
 
+@keyframes fade {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.fade-in {
+    animation: fade 1s forwards;
+}
+
+.fade-out {
+    animation: fade 1s backwards;
+}
+
 main {
 	padding-top:0;
 }
@@ -78,9 +91,8 @@ main .game .resource_panel {
     flex-direction: row;
 	text-align:center;
     justify-content: center;
-    padding:2rem;
+    padding:1rem;
 }
-
 
 main .game .resource_display {
     text-align:center;
@@ -88,6 +100,15 @@ main .game .resource_display {
     font-size: 2rem;
 	padding:1rem;
     width:25%;
+}
+
+main .game .resource_display .gain_display {
+	font-size: 1rem;
+	color:var(--text-glow-color);
+	margin:0;
+	padding:0;
+	text-align: center;
+	text-shadow: none
 }
 
 main .game .generate_panel {
@@ -109,7 +130,7 @@ main .game .generate_panel .generate_button {
 	text-align:center;
 }
 
-main .game .generate_panel .generate_button .button_value_display {
+main .game .generate_panel .generate_button .btnval_display {
 	margin-top: 1rem;
 	color: var(--accent-color);
 	text-shadow: var(--accent-text-glow-color) 0 0 0.75rem;
@@ -182,7 +203,21 @@ main .game .generate_panel button:active {
 	transition-duration:0.04s;
 }
 
+main .game button.bought{
+	color:var(--deactivated-color);
+	background:var(--deactivated-glow-color);
+	text-shadow: var(--deactivated-glow-color) 0 0 0.75rem;
+	border: 0.1rem solid var(--deactivated-glow-color);
+	box-shadow: 0 0 0.75rem var(--deactivated-glow-color),
+				inset 0 0 0.75rem var(--deactivated-glow-color);
+	pointer-events:none;
+}
+
 main .game .not_unlocked {
+    display: none;
+}
+
+main .game .upgrade_panel .upgrade_list .upgrade.hidden {
     display: none;
 }
 
