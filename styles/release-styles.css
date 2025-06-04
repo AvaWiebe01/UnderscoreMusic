@@ -37,10 +37,6 @@ main h1 {
 		margin: 1rem auto;
 	}
 	
-	.release-listen {
-	
-	}
-	
 		.listen-text {
 			color:var(--text-color);
 			text-shadow: var(--text-glow-color) 0 0 0.75rem;

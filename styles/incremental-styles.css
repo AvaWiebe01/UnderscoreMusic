@@ -1,0 +1,281 @@
+@keyframes widen {
+	0%{width:0;}
+	100%{width:calc(100vw - 9rem);}
+}
+
+@keyframes fade {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.fade-in {
+    animation: fade 1s forwards;
+}
+
+.fade-out {
+    animation: fade 1s backwards;
+}
+
+main {
+	padding-top:0;
+}
+
+main h1 {
+	position:relative;
+	font-family:"spacemono", "Courier New", monospace;
+	background-color:var(--text-bg-color);
+	text-align:center;
+	font-size:4.5vw;
+	text-shadow: var(--text-glow-color) 0 0 0.75rem;
+	border:0.3rem solid var(--text-color);
+	box-shadow: 0 0 0.75rem var(--text-glow-color),
+				inset 0 0 0.75rem var(--text-glow-color);
+	padding:1rem;
+	margin: 0.5rem auto 0 auto;
+	
+	white-space:nowrap;
+	overflow:hidden;
+	
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	
+	animation: widen 0.7s cubic-bezier(.56,.09,.28,.99),
+				0.5s ease-in-out 1 reverse fade-in/*,0.5s ease-in-out 1 reverse right-in*/;
+
+	width:calc(100vw - 9rem);
+}
+
+main h1 img {
+	width:30vw;
+	height:auto;
+}
+
+main h2 {
+	text-align:center;
+	font-size: 2.5rem;
+	font-weight:normal;
+}
+
+main .game {
+	position:relative;
+    font-family:"spacemono", "Courier New", monospace;
+	top:2rem;
+	animation: 0.5s ease-in-out 1 reverse fade-in;
+    background:var(--text-bg-color);
+    text-shadow: var(--text-glow-color) 0 0 0.75rem;
+	border:0.1rem solid var(--text-color);
+	box-shadow: 0 0 0.75rem var(--text-glow-color),
+				inset 0 0 0.75rem var(--text-glow-color);
+	padding:1rem;
+}
+
+main .game * {
+    background:var(--transparent);
+} 
+
+main .game .main_panel {
+    padding: 0.5rem;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+main .game .resource_panel {
+    background:var(--text-bg-color);
+    text-shadow: var(--text-glow-color) 0 0 0.75rem;
+	border:0.1rem solid var(--text-color);
+	box-shadow: 0 0 0.75rem var(--text-glow-color),
+		inset 0 0 0.75rem var(--text-glow-color);
+    display:flex;
+    flex-direction: row;
+	text-align:center;
+    justify-content: center;
+    padding:1rem;
+}
+
+main .game .resource_display {
+    text-align:center;
+    line-height:150%;
+    font-size: 2rem;
+	padding:1rem;
+    width:25%;
+}
+
+main .game .resource_display .gain_display {
+	font-size: 1rem;
+	color:var(--text-glow-color);
+	margin:0;
+	padding:0;
+	text-align: center;
+	text-shadow: none
+}
+
+main .game .generate_panel {
+    background:var(--text-bg-color);
+    text-shadow: var(--text-glow-color) 0 0 0.75rem;
+	border:0.1rem solid var(--text-color);
+	box-shadow: 0 0 0.75rem var(--text-glow-color),
+		inset 0 0 0.75rem var(--text-glow-color);
+    display:flex;
+    flex-direction: row;
+	text-align:center;
+    justify-content: center;
+    padding:2rem;
+}
+
+main .game .generate_panel .generate_button {
+	display:flex;
+	flex-direction: column;
+	text-align:center;
+}
+
+main .game .generate_panel .generate_button .btnval_display {
+	margin-top: 1rem;
+	color: var(--accent-color);
+	text-shadow: var(--accent-text-glow-color) 0 0 0.75rem;
+	text-align: center;
+}
+
+main .game .upgrade_panel {
+	background:var(--text-bg-color);
+    text-shadow: var(--text-glow-color) 0 0 0.75rem;
+	border:0.1rem solid var(--text-color);
+	box-shadow: 0 0 0.75rem var(--text-glow-color),
+		inset 0 0 0.75rem var(--text-glow-color);
+    display:flex;
+    flex-direction: row;
+	text-align:center;
+    justify-content: center;
+    padding:2rem;
+}
+
+main .game .upgrade_panel .upgrade_list {
+    display:flex;
+    flex-direction: row;
+	text-align:center;
+    justify-content: center;
+	flex-wrap: wrap;
+    padding:2rem;
+}
+
+main .game .upgrade_panel .upgrade_list .upgrade {
+	text-shadow: var(--text-glow-color) 0 0 0.75rem;
+	border:0.1rem solid var(--text-color);
+	box-shadow: 0 0 0.75rem var(--text-glow-color),
+		inset 0 0 0.75rem var(--text-glow-color);
+    display:flex;
+    flex-direction: column;
+	text-align:center;
+    justify-content: center;
+    padding:1rem;
+	margin:1rem;
+	width: 25%;
+}
+
+main .game button {
+    padding:0.5rem;
+    color:var(--main-color);
+    font-family:"spacemono", "Courier New", monospace;
+    text-align:center;
+    text-shadow: var(--main-text-glow-color) 0 0 0.75rem;
+    border: 0.1rem solid var(--main-color);
+    box-shadow: 0 0 0.75rem var(--main-box-glow-color),
+                inset 0 0 0.75rem var(--main-box-glow-color);
+    background-color:var(--main-bg-color-2);
+    transition-duration:0.15s;
+    font-size:1.25rem;
+}
+
+main .game button:hover {
+    background-color:var(--main-color);
+    color:var(--bg-color);
+    cursor:pointer;
+}
+
+main .game button:active {
+	transform: scale(0.95, 0.95);
+	transition-duration:0.05s;
+}
+
+main .game .generate_panel button:active {
+	transform: scale(1.25, 1.25);
+	transition-duration:0.04s;
+}
+
+main .game button.bought{
+	color:var(--deactivated-color);
+	background:var(--deactivated-glow-color);
+	text-shadow: var(--deactivated-glow-color) 0 0 0.75rem;
+	border: 0.1rem solid var(--deactivated-glow-color);
+	box-shadow: 0 0 0.75rem var(--deactivated-glow-color),
+				inset 0 0 0.75rem var(--deactivated-glow-color);
+	pointer-events:none;
+}
+
+main .game .not_unlocked {
+    display: none;
+}
+
+main .game .upgrade_panel .upgrade_list .upgrade.hidden {
+    display: none;
+}
+
+main .game h3 {
+	font-family:"spacemono", "Courier New", monospace;
+	font-weight:normal;
+	font-size: 1.5rem;
+	text-align: left;
+	vertical-align:top;
+	margin:0 0 0.5rem 0;
+}
+
+main .game .main_panel .upgrade_panel p.cost {
+	color:var(--main-color);
+    font-family:"spacemono", "Courier New", monospace;
+    text-align:center;
+    text-shadow: var(--main-text-glow-color) 0 0 0.75rem;
+	margin-bottom: 0.25rem;
+}
+
+main .game p {
+	text-align:left;
+	font-size: 1rem;
+	margin: 0 0 0.5rem 0;
+}
+
+main span.suffix {
+	color: var(--accent-color);
+	font-weight: normal;
+	text-shadow: var(--accent-text-glow-color) 0 0 0.5rem;
+}
+
+main .game .main_panel .upgrade_panel span.suffix {
+	color:var(--main-color);
+    font-family:"spacemono", "Courier New", monospace;
+    text-align:center;
+    text-shadow: var(--main-text-glow-color) 0 0 0.75rem;
+}
+
+main span.pink {
+	color: var(--main-color);
+	text-shadow: var(--main-text-glow-color) 0 0 0.5rem;
+}	
+
+main strong {
+	color: var(--accent-color);
+	font-weight: normal;
+	text-shadow: var(--accent-text-glow-color) 0 0 0.5rem;
+}
+
+main p a:link, main p a:visited {
+	color: var(--main-color);
+	text-shadow: var(--main-text-glow-color) 0 0 0.5rem;
+	transition-duration:0.2s;
+}	
+
+main p a:hover {
+	color: var(--accent-color);
+	text-shadow: var(--accent-text-glow-color) 0 0 0.5rem;
+	text-decoration:none;
+}	

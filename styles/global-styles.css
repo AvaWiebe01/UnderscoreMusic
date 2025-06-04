@@ -258,7 +258,6 @@ main span.pink {
 
 /* ROTATE EFFECT */
 .rotate {
-	font-sgize:6rem;
 	display:inline-block;
 	position:relative;
 	animation: 2s ease-in-out infinite rotate;
