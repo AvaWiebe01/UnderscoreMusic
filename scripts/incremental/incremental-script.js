@@ -248,10 +248,10 @@ function displayUpgrade(upgradeKey) {
 }
 
 // ======== MAIN GAME LOOP ======== //
-function gameTick(currentTime) {
-    let deltaTime = currentTime - lastTime;
+function gameTick(currentTime, gameData = new GameData()) {
+    let deltaTime = currentTime - gameData.lastTime;
 
-    if (deltaTime >= 1000/REFRESH_RATE) {
+    if (deltaTime >= 1000/gameData.CONSTS.REFRESH_RATE) {
 
         // Perform all actions that must occur every tick
         arcBits.resourceTick(deltaTime);
@@ -269,7 +269,7 @@ function gameTick(currentTime) {
     }
 
 
-    requestAnimationFrame(gameTick);
+    requestAnimationFrame((currentTime) => gameTick(currentTime, gameData));
 }
 
 // ======== START ======== //
