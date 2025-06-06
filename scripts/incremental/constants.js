@@ -18,7 +18,7 @@ static ABBREVIATED_SUFFIXES = ["","K","M","B","T","Q","Qi","Sx","Sp","Oc","No","
 // The next two constants must have the same amount of entries
 
 static RESOURCE_INFO = [ // htmlName, amt, delta, btnVal, displayableName
-    ["arcbits", 0, 0, 0.00010, "ArcBits"],
+    ["arcbits", 0, 1, 0.00010, "ArcBits"],
 ];
 
 static ALL_UPGRADES_INFO = new Map([ // resourceName, upgradesList

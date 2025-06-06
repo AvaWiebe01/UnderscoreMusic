@@ -39,7 +39,7 @@ export class Resource {
     }
 
     getAverageGain() {
-        return this.gain.reduce((sum, curr) => sum + curr, 0) / this.gain.length;
+        return this.gain.reduce((sum, curr) => sum + curr, 0);
     }
 
     displayAverageGain() {
