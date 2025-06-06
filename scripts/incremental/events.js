@@ -11,6 +11,13 @@ export function initEventHandlers(gameData = new GameData()) {
 
         $(".resource_button").click((event) => {
             let resourceName = event.currentTarget.getAttribute("resource");
+            //let btnValDisplay = document.getElementsByClassName(resourceName + "_btnval_display")[0];
+            event.currentTarget.style.animation = "none";
+            //btnValDisplay.style.animation = "none";
+            event.currentTarget.offsetHeight; // Force browser to reset animation
+            //btnValDisplay.offsetHeight;
+            event.currentTarget.style.animation = "click 0.25s";
+            //btnValDisplay.style.animation = "shake 0.25s";
             gameData.resources.get(resourceName).btnClicked();
         })
 
@@ -30,8 +37,27 @@ export function initEventHandlers(gameData = new GameData()) {
                 }); 
             }
             else {
-                // Animation for failure
+                event.currentTarget.classList.add("shake");
+                event.currentTarget.addEventListener("animationend", () => {
+                event.currentTarget.classList.remove("shake"); 
+                }); 
             }
+        })
+
+        $(".upgrade_button").mouseenter((event) => {
+            const parentDiv = event.currentTarget.closest("div");
+            let upgradeKey = parentDiv.getAttribute("upgrade_key");
+            let resourceName = parentDiv.getAttribute("resource");
+            let upgrade = gameData.upgrades.get(resourceName).get(upgradeKey);
+            if(!upgrade.canBuy()) {
+                event.currentTarget.classList.add("cannot_buy");
+                event.currentTarget.innerHTML = "[Invalid]";
+            }
+        })
+
+        $(".upgrade_button").mouseleave((event) => {
+            event.currentTarget.classList.remove("cannot_buy");
+            event.currentTarget.innerHTML = "[Update]";
         })
     });
 }

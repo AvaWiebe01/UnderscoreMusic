@@ -8,12 +8,35 @@
     to { opacity: 0; }
 }
 
+@keyframes shake {
+    0%{transform:translate(1px,2px);}
+	10%{transform:translate(-1px,-1px);}
+	20%{transform:translate(2px,2px);}
+	30%{transform:translate(1px,-1px);}
+	40%{transform:translate(-1px,-2px);}
+	50%{transform:translate(-2px,1px);}
+	60%{transform:translate(1px,-1px);}
+	70%{transform:translate(-2px,1px);}
+	80%{transform:translate(-1px,-2px);}
+	90%{transform:translate(1px,2px);}
+	100%{transform:translate(2px,-1px);}
+}
+
+@keyframes click {
+	5%{transform:scale(1.30, 1.30);}
+	100%{transform:scale(1, 1);}
+}
+
 .fade-in {
     animation: fade 1s forwards;
 }
 
 .fade-out {
     animation: fade 1s backwards;
+}
+
+.shake {
+	animation: shake 0.25s forwards;
 }
 
 main {
@@ -199,8 +222,17 @@ main .game button:active {
 }
 
 main .game .generate_panel button:active {
-	transform: scale(1.25, 1.25);
+	transform: scale(1, 1);
 	transition-duration:0.04s;
+}
+
+main .game button.cannot_buy{
+	color:var(--deactivated-glow-color);
+	background:var(--deactivated-glow-color);
+	text-shadow: var(--deactivated-glow-color) 0 0 0.75rem;
+	border: 0.1rem solid var(--deactivated-glow-color);
+	box-shadow: 0 0 0.75rem var(--deactivated-glow-color),
+				inset 0 0 0.75rem var(--deactivated-glow-color);
 }
 
 main .game button.bought{
