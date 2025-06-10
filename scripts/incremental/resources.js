@@ -2,34 +2,48 @@ import { Constants } from "./constants.js";
 import { Utils } from "./utils.js";
 
 export class Resource {
+    //passed in constructor
     amt;
     delta;
-    deltaMult;
+    deltaBaseMult;  // For one-time multiplier changes, that never need to be re-calculated
     btnVal;
-    btnValMult;
+    btnValBaseMult;  // For one-time multiplier changes, that never need to be re-calculated
     htmlName;
     displayableName;
 
+    //private
     gain;
     lastAmt;
+    deltaMultSources;
+    btnValmultSources;
 
     constructor(amt, delta, btnVal, htmlName, displayableName) {
         this.amt = amt;
         this.delta = delta;
-        this.deltaMult = 1;
+        this.deltaBaseMult = 1;
         this.btnVal = btnVal;
-        this.btnValMult = 1;
+        this.btnValBaseMult = 1; 
         this.htmlName = htmlName; // Must be exactly as it appears in HTML, ex. "arcbits"
         this.displayableName = displayableName;
 
         this.gain = new Array(Constants.AVERAGING_SAMPLES).fill(0);
         this.lastAmt = amt;
+        this.deltaMultSources = new Set(); // For volatile multiplier changes, that need to be re-calculated based on game state each tick
+        this.btnValMultSources = new Set(); // For volatile multiplier changes, that need to be re-calculated based on game state each tick
 
         // Initialize Displays
         this.displayAmt();
         this.displayAverageGain();
         this.displayFinalDelta();
         this.displayFinalBtnVal();
+    }
+
+    addDeltaMultSource(sourceName) {
+        deltaMultSources.add(sourceName);
+    }
+
+    addBtnValMultSource(sourceName) {
+        btnValMultSources.add(sourceName);
     }
 
     calculateGain() {
@@ -57,7 +71,7 @@ export class Resource {
     }
 
     displayFinalDelta() {
-        const deltaDisplays = document.getElementsByClassName(this.htmlName + "delta_display");
+        const deltaDisplays = document.getElementsByClassName(this.htmlName + "_delta_display");
         for(let i = 0; i < deltaDisplays.length; i++) {
             deltaDisplays[i].innerHTML = Utils.getDisplayableNumber(this.getFinalDelta());
         }
@@ -70,39 +84,41 @@ export class Resource {
         }
     }
 
-    getDeltaMult() {
-        return this.deltaMult;
+    getDeltaTotalMult() {
+        let totalMult = 1;
+        totalMult *= this.deltaBaseMult;
+
+        deltaMultSources.forEach(() => {
+            
+        });
+
+        return totalMult;
     }
 
-    modifyDeltaMult(mult) {
-        this.deltaMult *= mult;
+    modifyDeltaBaseMult(mult) {
+        this.deltaBaseMult *= mult;
     }
 
     getFinalDelta() {
-        return this.delta * this.getDeltaMult();
+        return this.delta * this.getDeltaTotalMult();
     }
 
-    getBtnValMult() {
-        return this.btnValMult;
+    getBtnValTotalMult() {
+        return this.btnValBaseMult;
     }
 
-    modifyBtnValMult(mult) {
-        this.btnValMult *= mult;
+    modifyBtnValBaseMult(mult) {
+        this.btnValBaseMult *= mult;
         this.displayFinalBtnVal();
     }
 
     getFinalBtnValue() {
-        return this.btnVal * this.getBtnValMult();
+        return this.btnVal * this.getBtnValTotalMult();
     }
 
     modifyBtnValue(value) {
         this.btnVal += value;
         this.displayFinalBtnVal();
-    }
-
-    resourceTick(deltaTime) {
-        this.modifyAmt(((deltaTime/1000)*this.delta) * this.getDeltaMult());
-        this.displayAmt();
     }
 
     modifyAmt(value) {
@@ -115,6 +131,12 @@ export class Resource {
 
     btnClicked() {
         this.modifyAmt(this.getFinalBtnValue());
+    }
+
+    resourceTick(deltaTime, gameData) {
+
+        this.modifyAmt(((deltaTime/1000)*this.delta) * this.getDeltaTotalMult(gameData));
+        this.displayAmt();
     }
 }
 

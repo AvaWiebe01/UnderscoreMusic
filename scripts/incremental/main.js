@@ -63,7 +63,7 @@ function gameTick(currentTime, gameData = new GameData()) {
         
         // Perform all actions that must occur every tick
         gameData.resources.forEach((resource, key) => {
-            resource.resourceTick(deltaTime);
+            resource.resourceTick(deltaTime, gameData);
         });
         
         gameData.extraTimer += deltaTime;
