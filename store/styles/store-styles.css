@@ -1,0 +1,91 @@
+
+main h1 {
+	font-family:"spacemono", "Courier New", monospace;
+	background-color:var(--text-bg-color);
+	text-align:center;
+	font-size:4vw;
+	text-shadow: var(--text-glow-color) 0 0 0.75rem;
+	border:0.3rem solid var(--text-color);
+	box-shadow: 0 0 0.75rem var(--text-glow-color),
+				inset 0 0 0.75rem var(--text-glow-color);
+	padding:1rem;
+}
+
+main .body_content {
+	position:relative;
+	right:0;
+	font-family:"spacemono", "Courier New", monospace;
+	animation: 0.5s ease-in-out 1 reverse left-in;
+}
+
+main h2 {
+	text-align:center;
+	font-size: 2.5rem;
+	font-weight:normal;
+}
+
+h2 a:link, h2 a:visited {
+	color:var(--main-color);
+	text-shadow: var(--main-text-glow-color) 0 0 0.75rem;
+	transition-duration:0.2s;
+}
+
+h2 a:hover{
+	color:var(--accent-color);
+	text-shadow: var(--accent-text-glow-color) 0 0 0.75rem;
+	text-decoration:none;
+}
+
+.product-photos {
+	display:flex;
+	flex-flow: row wrap;
+	justify-content:space-evenly;
+	gap:1.5rem;
+}
+
+.photo {
+	display:flex;
+	flex-flow:column nowrap;
+	justify-content:space-evenly;
+	align-items:center;
+	
+	padding:0 auto;
+	width:16rem;
+	height:18rem;
+	border:0.1rem solid var(--main-color);
+	box-shadow: 0 0 0.75rem var(--main-text-glow-color),
+				inset 0 0 0.75rem var(--main-text-glow-color);
+	background-color:var(--main-bg-color);
+}
+
+.photo img {
+	background-color:var(--transparent);
+	text-align:center;
+	width:15rem;
+	height:15rem;
+}
+
+a.photo:link, a.photo:visited {
+	color:var(--main-color);
+	text-shadow: var(--main-text-glow-color) 0 0 0.75rem;
+	border:0.1rem solid var(--main-color);
+	box-shadow: 0 0 0.75rem var(--main-text-glow-color),
+				inset 0 0 0.75rem var(--main-text-glow-color);
+	background-color:var(--main-bg-color);
+	transition-duration:0.2s;
+}
+
+a.photo:hover{
+	color:var(--accent-color);
+	text-shadow: var(--accent-text-glow-color) 0 0 0.75rem;
+	border:0.1rem solid var(--accent-color);
+	box-shadow: 0 0 0.75rem var(--accent-text-glow-color),
+				inset 0 0 0.75rem var(--accent-text-glow-color);
+	background-color:var(--accent-bg-color);
+	text-decoration:none;
+}
+
+.photo-name {
+	background:var(--transparent);
+	text-align:center;
+}
