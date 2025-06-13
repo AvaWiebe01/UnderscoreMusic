@@ -1,0 +1,35 @@
+main h1 {
+	font-family:"spacemono", "Courier New", monospace;
+	background-color:var(--text-bg-color);
+	text-align:center;
+	font-size:4vw;
+	text-shadow: var(--text-glow-color) 0 0 0.75rem;
+	border:0.3rem solid var(--text-color);
+	box-shadow: 0 0 0.75rem var(--text-glow-color),
+				inset 0 0 0.75rem var(--text-glow-color);
+	padding:1rem;
+}
+
+main h2 {
+	color:var(--main-color);
+	text-shadow: var(--main-text-glow-color) 0 0 0.75rem;
+	text-align:center;
+	font-size: 3rem;
+	font-weight:normal;
+}
+
+main p {
+	font-size:1.5rem;
+	line-height:2.25rem;
+}
+
+main strong {
+	font-weight:normal;
+	color:var(--accent-color);
+	text-shadow: var(--accent-text-glow-color) 0 0 0.75rem;
+}
+
+main .body_content {
+	padding-left: 12vw;
+	padding-right: 12vw;
+}
