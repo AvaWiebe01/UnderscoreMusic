@@ -28,6 +28,14 @@
 	100% {opacity:1; transform:scale(1);}
 }
 
+@keyframes rainbow {
+	0% {bottom:-4px; color: #0aff91; text-shadow: #0aff91 0 0 0.75rem;}
+    25% {color: #0a64ff; text-shadow: #0a64ff 0 0 0.75rem;}
+	50% {bottom:4px; color: #5c0aff; text-shadow: #5c0aff 0 0 0.75rem;}
+    75% {color: #ff0a68; text-shadow: #ff0a68 0 0 0.75rem;}
+	100% {bottom:-4px; color: #0aff91; text-shadow: #0aff91 0 0 0.75rem;}
+}
+
 :root {
     --kyana-color: #D044FF;
     --kyana-glow-color: rgba(208,68,255,0.5);
@@ -148,6 +156,11 @@ main .shake {
     display:inline-block; animation: shake 0.3s linear -0.3s infinite;
 }
 
+main .boldshake {
+    font-weight:bold;
+    display:inline-block; animation: shake 0.3s linear -0.3s infinite;
+}
+
 main .wave {
 	position:relative; bottom:-8px; animation: 1.2s ease-in-out -1.35s infinite wave;
 }
@@ -155,4 +168,8 @@ main .wave {
 main .drop {
     font-weight:bold;
     display:inline-block; animation: drop 0.1s ease-in 0s forwards;
+}
+
+main .rainbow {
+    position:relative; bottom:-8px; animation: 1.2s ease-in-out -1.35s infinite rainbow;
 }
