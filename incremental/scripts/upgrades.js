@@ -1,6 +1,8 @@
 import { Constants } from "./constants.js";
 import { Utils } from "./utils.js";
 
+import { GameData } from "./gamedata.js";
+
 export class Upgrade {
     key;
     title;
@@ -8,15 +10,17 @@ export class Upgrade {
     flavorText;
     cost;
     resource; // Must be a Resource object
+    gameData;
     buyAction;
 
-    constructor(key, title, description, flavorText, cost, resource, buyAction) {
+    constructor(key, title, description, flavorText, cost, resource, gameData, buyAction) {
         this.key = key;
         this.title = title;
         this.description = description;
         this.flavorText = flavorText;
         this.cost = cost;
         this.resource = resource;
+        this.gameData = gameData;
         this.buyAction = buyAction;
         this.isBought= false;
     }
@@ -56,24 +60,24 @@ export class UnlockCondition {
 
 }
 
-export function initUpgrades(ALL_UPGRADES_INFO = new Map(), resources) {
+export function initUpgrades(ALL_UPGRADES_INFO = new Map(), resources, gameData) {
 
     let upgrades = new Map();
 
     const resourceNames = [...resources.keys()];
 
     resourceNames.forEach((resourceName) => {
-        upgrades.set(resourceName, getUpgradeMap(ALL_UPGRADES_INFO.get(resourceName), resources.get(resourceName)));
+        upgrades.set(resourceName, getUpgradeMap(ALL_UPGRADES_INFO.get(resourceName), resources.get(resourceName), gameData));
     });
 
     return upgrades;
 }
 
-function getUpgradeMap(upgradesInfo = [], resource = new Resource()) {
+function getUpgradeMap(upgradesInfo = [], resource = new Resource(), gameData = new GameData) {
     let upgradeMap = new Map();
 
     upgradesInfo.forEach((upgrade) => {
-        upgradeMap.set(upgrade[0], new Upgrade(upgrade[0], upgrade[1], upgrade[2], upgrade[3], upgrade[4], resource, upgrade[5]))
+        upgradeMap.set(upgrade[0], new Upgrade(upgrade[0], upgrade[1], upgrade[2], upgrade[3], upgrade[4], resource, gameData, upgrade[5]))
     });
 
     return upgradeMap;

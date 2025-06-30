@@ -1,6 +1,8 @@
 import { Constants } from "./constants.js";
 import { Utils } from "./utils.js";
 
+import { GameData } from "./gamedata.js";
+
 import { initEventHandlers } from "./events.js";
 
 import {  } from "./processes.js";
@@ -9,33 +11,21 @@ import { Resource, initResources } from "./resources.js";
 
 import { Upgrade, UnlockCondition, initUpgrades, displayUpgrades } from "./upgrades.js";
 
-
-export class GameData {
-    resources;
-    upgrades;
-
-    lastTime;
-    extraTimer;
-
-    constructor(resources, upgrades) {
-        this.resources = resources;
-        this.upgrades = upgrades;
-
-        this.lastTime = performance.now(); // To calculate deltaTime
-        this.extraTimer = 0;
-    }
-}
+import { Multiplier, initMultipliers } from "./multipliers.js";
 
 // ======== START ======== //
 window.onload = function() {
 
     // Initialize
-    //const CONSTS = new Constants();
-    //const utils = new Utils();
-    const resources = initResources(Constants.RESOURCE_INFO);
-    const upgrades = initUpgrades(Constants.ALL_UPGRADES_INFO, resources);
+    let gameData = new GameData();
 
-    let gameData = new GameData(resources, upgrades);
+    const resources = initResources(Constants.RESOURCE_INFO, gameData);
+    const upgrades = initUpgrades(Constants.ALL_UPGRADES_INFO, resources, gameData);
+    const multipliers = initMultipliers(gameData);
+
+    gameData.addResources(resources);
+    gameData.addUpgrades(upgrades);
+    gameData.addMultipliers(multipliers);
     initEventHandlers(gameData);
 
     //arcBits = new ArcBits(0, 0, 0.00000001, "arcbits", "ArcBits");
@@ -60,8 +50,12 @@ function gameTick(currentTime, gameData = new GameData()) {
     let deltaTime = currentTime - gameData.lastTime;
 
     if (deltaTime >= 1000/Constants.REFRESH_RATE) {
-        
+
         // Perform all actions that must occur every tick
+        gameData.multipliers.forEach((multiplier, key) => {
+            multiplier.multUpdate();
+        });
+
         gameData.resources.forEach((resource, key) => {
             resource.resourceTick(deltaTime, gameData);
         });
@@ -73,6 +67,7 @@ function gameTick(currentTime, gameData = new GameData()) {
     
     if (gameData.extraTimer >= Constants.AVERAGING_TIME/Constants.AVERAGING_SAMPLES) {
 
+        // Perform all actions that must occur every 1 second
         gameData.resources.forEach((resource, key) => {
             resource.calculateGain();
             resource.displayAverageGain();

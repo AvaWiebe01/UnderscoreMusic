@@ -10,14 +10,15 @@ export class Resource {
     btnValBaseMult;  // For one-time multiplier changes, that never need to be re-calculated
     htmlName;
     displayableName;
+    gameData;
 
     //private
     gain;
     lastAmt;
     deltaMultSources;
-    btnValmultSources;
+    btnValMultSources;
 
-    constructor(amt, delta, btnVal, htmlName, displayableName) {
+    constructor(amt, delta, btnVal, htmlName, displayableName, gameData) {
         this.amt = amt;
         this.delta = delta;
         this.deltaBaseMult = 1;
@@ -25,6 +26,7 @@ export class Resource {
         this.btnValBaseMult = 1; 
         this.htmlName = htmlName; // Must be exactly as it appears in HTML, ex. "arcbits"
         this.displayableName = displayableName;
+        this.gameData = gameData;
 
         this.gain = new Array(Constants.AVERAGING_SAMPLES).fill(0);
         this.lastAmt = amt;
@@ -39,11 +41,11 @@ export class Resource {
     }
 
     addDeltaMultSource(sourceName) {
-        deltaMultSources.add(sourceName);
+        this.deltaMultSources.add(this.gameData.multipliers.get(sourceName));
     }
 
     addBtnValMultSource(sourceName) {
-        btnValMultSources.add(sourceName);
+        this.btnValMultSources.add(this.gameData.multipliers.get(sourceName));
     }
 
     calculateGain() {
@@ -84,12 +86,14 @@ export class Resource {
         }
     }
 
+    // Final multiplier for passive resource gain
     getDeltaTotalMult() {
         let totalMult = 1;
         totalMult *= this.deltaBaseMult;
 
-        deltaMultSources.forEach(() => {
-            
+        this.deltaMultSources.forEach((multSource) => {
+            this.deltaMultSources = this.deltaMultSources;
+            totalMult *= multSource.getMult();
         });
 
         return totalMult;
@@ -99,12 +103,20 @@ export class Resource {
         this.deltaBaseMult *= mult;
     }
 
+    // Final value for passive resource gain
     getFinalDelta() {
         return this.delta * this.getDeltaTotalMult();
     }
 
     getBtnValTotalMult() {
-        return this.btnValBaseMult;
+        let totalMult = 1;
+        totalMult *= this.btnValBaseMult;
+
+        this.btnValMultSources.forEach((multSource) => {
+            totalMult *= multSource.getMult();
+        });
+
+        return totalMult;
     }
 
     modifyBtnValBaseMult(mult) {
@@ -134,17 +146,19 @@ export class Resource {
     }
 
     resourceTick(deltaTime, gameData) {
+        this.modifyAmt(((deltaTime/1000)*this.delta) * this.getDeltaTotalMult());
 
-        this.modifyAmt(((deltaTime/1000)*this.delta) * this.getDeltaTotalMult(gameData));
         this.displayAmt();
+        this.displayFinalBtnVal();
+        this.displayFinalDelta();
     }
 }
 
-export function initResources(RESOURCE_INFO = []) {
+export function initResources(RESOURCE_INFO = [], gameData) {
     let resources = new Map();
 
     RESOURCE_INFO.forEach((info) => {
-        resources.set(info[0], new Resource(info[1], info[2], info[3], info[0], info[4]));
+        resources.set(info[0], new Resource(info[1], info[2], info[3], info[0], info[4], gameData));
     });
 
     return resources;
