@@ -216,14 +216,9 @@ main .game button:hover {
     cursor:pointer;
 }
 
-main .game button:active {
+main .game .upgrade_panel button:active {
 	transform: scale(0.95, 0.95);
 	transition-duration:0.05s;
-}
-
-main .game .generate_panel button:active {
-	transform: scale(1, 1);
-	transition-duration:0.04s;
 }
 
 main .game button.cannot_buy{
