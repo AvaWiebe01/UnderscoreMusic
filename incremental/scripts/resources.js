@@ -4,7 +4,6 @@ import { Utils } from "./utils.js";
 export class Resource {
     //passed in constructor
     amt;
-    delta;
     deltaBaseMult;  // For one-time multiplier changes, that never need to be re-calculated
     btnVal;
     btnValBaseMult;  // For one-time multiplier changes, that never need to be re-calculated
@@ -18,9 +17,14 @@ export class Resource {
     deltaMultSources;
     btnValMultSources;
 
-    constructor(amt, delta, btnVal, htmlName, displayableName, gameData) {
+    // Display elements
+    amtDisplays;
+    gainDisplays;
+    deltaDisplays;
+    btnValDisplays;
+
+    constructor(amt, btnVal, htmlName, displayableName, gameData) {
         this.amt = amt;
-        this.delta = delta;
         this.deltaBaseMult = 1;
         this.btnVal = btnVal;
         this.btnValBaseMult = 1; 
@@ -32,8 +36,14 @@ export class Resource {
         this.lastAmt = amt;
         this.deltaMultSources = new Set(); // For volatile multiplier changes, that need to be re-calculated based on game state each tick
         this.btnValMultSources = new Set(); // For volatile multiplier changes, that need to be re-calculated based on game state each tick
+    }
 
-        // Initialize Displays
+    initDisplayElements() {
+        this.amtDisplays = document.getElementsByClassName(this.htmlName + "_display");
+        this.gainDisplays = document.getElementsByClassName(this.htmlName + "_gain_display");
+        this.deltaDisplays = document.getElementsByClassName(this.htmlName + "_delta_display");
+        this.btnValDisplays = document.getElementsByClassName(this.htmlName + "_btnval_display");
+
         this.displayAmt();
         this.displayAverageGain();
         this.displayFinalDelta();
@@ -59,30 +69,26 @@ export class Resource {
     }
 
     displayAverageGain() {
-        const gainDisplays = document.getElementsByClassName(this.htmlName + "_gain_display");
-        for(let i = 0; i < gainDisplays.length; i++) {
-            gainDisplays[i].innerHTML = Utils.getDisplayableNumber(this.getAverageGain()) + '/s';
+        for(let i = 0; i < this.gainDisplays.length; i++) {
+            this.gainDisplays[i].innerHTML = Utils.getDisplayableNumber(this.getAverageGain()) + '/s';
         }
     }
 
     displayAmt() {
-        const amtDisplays = document.getElementsByClassName(this.htmlName + "_display");
-        for(let i = 0; i < amtDisplays.length; i++) {
-            amtDisplays[i].innerHTML = Utils.getDisplayableNumber(this.amt);
+        for(let i = 0; i < this.amtDisplays.length; i++) {
+            this.amtDisplays[i].innerHTML = Utils.getDisplayableNumber(this.amt);
         }
     }
 
     displayFinalDelta() {
-        const deltaDisplays = document.getElementsByClassName(this.htmlName + "_delta_display");
-        for(let i = 0; i < deltaDisplays.length; i++) {
-            deltaDisplays[i].innerHTML = Utils.getDisplayableNumber(this.getFinalDelta());
+        for(let i = 0; i < this.deltaDisplays.length; i++) {
+            this.deltaDisplays[i].innerHTML = Utils.getDisplayableNumber(this.getFinalDelta());
         }
     }
 
     displayFinalBtnVal () {
-        const btnValDisplays = document.getElementsByClassName(this.htmlName + "_btnval_display");
-        for(let i = 0; i < btnValDisplays.length; i++) {
-            btnValDisplays[i].innerHTML = "+" + Utils.getDisplayableNumber(this.getFinalBtnValue());
+        for(let i = 0; i < this.btnValDisplays.length; i++) {
+            this.btnValDisplays[i].innerHTML = "+" + Utils.getDisplayableNumber(this.getFinalBtnValue());
         }
     }
 
@@ -105,7 +111,7 @@ export class Resource {
 
     // Final value for passive resource gain
     getFinalDelta() {
-        return this.delta * this.getDeltaTotalMult();
+        return this.getProcessDelta() * this.getDeltaTotalMult();
     }
 
     getBtnValTotalMult() {
@@ -137,16 +143,22 @@ export class Resource {
         this.amt += value;
     }
 
-    modifyDelta(value) {
-        this.delta += value;
-    }
-
     btnClicked() {
         this.modifyAmt(this.getFinalBtnValue());
     }
 
+    getBaseDelta() {
+        let totalDelta = 0;
+
+        this.gameData.processes.get(this.htmlName).forEach((process, key, processes) => {
+            totalDelta += process.getProductionDelta();
+        });
+
+        return totalDelta;
+    }
+
     resourceTick(deltaTime, gameData) {
-        this.modifyAmt(((deltaTime/1000)*this.delta) * this.getDeltaTotalMult());
+        this.modifyAmt(((deltaTime/1000)*this.getBaseDelta()) * this.getDeltaTotalMult());
 
         this.displayAmt();
         this.displayFinalBtnVal();
@@ -154,12 +166,70 @@ export class Resource {
     }
 }
 
+class Cores extends Resource {
+    // Display elements
+    maxDisplays;
+    progressBars;
+    usageBars;
+
+    // Additional parameters
+    delta;
+    maxCores;
+
+    constructor(amt, delta, btnVal, htmlName, displayableName, gameData, maxCores) {
+        super(amt, btnVal, htmlName, displayableName, gameData);
+
+        this.delta = delta;
+        this.maxCores = maxCores;
+    }
+
+    initDisplayElements() {
+
+        this.amtDisplays = document.getElementsByClassName(this.htmlName + "_display");
+        this.gainDisplays = document.getElementsByClassName(this.htmlName + "_gain_display");
+        this.deltaDisplays = document.getElementsByClassName(this.htmlName + "_delta_display");
+        this.btnValDisplays = document.getElementsByClassName(this.htmlName + "_btnval_display");
+
+        this.maxDisplays = document.getElementsByClassName("cores_max_display");
+        this.progressBars = document.getElementsByClassName("cores_progress_bar");
+        this.usageBars = document.getElementsByClassName("cores_usage_bar");
+
+        this.displayAmt();
+    }
+
+    getBaseDelta() {
+        return this.delta * this.deltaBaseMult;
+    }
+
+    modifyAmt(value) { // Do not go above core limit
+        this.amt = (this.amt < this.maxCores ? this.amt + value : this.maxCores);
+    }
+
+    displayAmt() { // Round down to nearest integer
+        for(let i = 0; i < this.amtDisplays.length; i++) {
+            this.amtDisplays[i].innerHTML = Utils.getDisplayableNumber(Math.floor(this.amt), false);
+        }
+        for(let i = 0; i < this.maxDisplays.length; i++) {
+            this.maxDisplays[i].innerHTML = Utils.getDisplayableNumber(Math.floor(this.maxCores), false);
+        }
+        for(let i = 0; i < this.progressBars.length; i++) {
+            this.progressBars[i].style.width = `${(this.amt % 1) * 100}%`;
+        }
+        for(let i = 0; i < this.usageBars.length; i++) {
+            this.usageBars[i].style.width = `${Math.min((Math.floor(this.amt) / this.maxCores) * 100, 100)}%`;
+        }
+    }
+}
+
 export function initResources(RESOURCE_INFO = [], gameData) {
     let resources = new Map();
 
     RESOURCE_INFO.forEach((info) => {
-        resources.set(info[0], new Resource(info[1], info[2], info[3], info[0], info[4], gameData));
+        resources.set(info[0], new Resource(info[1], info[2], info[0], info[3], gameData));
     });
+
+    resources.set(Constants.CORE_INFO[0], new Cores(Constants.CORE_INFO[1], Constants.CORE_INFO[2], Constants.CORE_INFO[3], Constants.CORE_INFO[0], Constants.CORE_INFO[4], gameData, Constants.CORE_INFO[5]));
+    resources.get("cores").initDisplayElements();
 
     return resources;
 }

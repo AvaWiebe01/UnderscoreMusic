@@ -5,7 +5,7 @@ import { GameData } from "./gamedata.js";
 
 import { initEventHandlers } from "./events.js";
 
-import {  } from "./processes.js";
+import { Process, initProcesses, displayProcesses } from "./processes.js";
 
 import { Resource, initResources } from "./resources.js";
 
@@ -22,23 +22,31 @@ window.onload = function() {
     const resources = initResources(Constants.RESOURCE_INFO, gameData);
     const upgrades = initUpgrades(Constants.ALL_UPGRADES_INFO, resources, gameData);
     const multipliers = initMultipliers(gameData);
+    const processes = initProcesses(Constants.ALL_PROCESSES_INFO, resources, gameData);
 
     gameData.addResources(resources);
     gameData.addUpgrades(upgrades);
     gameData.addMultipliers(multipliers);
+    gameData.addProcesses(processes);
     initEventHandlers(gameData);
-
-    //arcBits = new ArcBits(0, 0, 0.00000001, "arcbits", "ArcBits");
 
     // Make sure all displays are active at the start
     gameData.resources.forEach((resource, key) => {
-        resource.displayAmt();
-        resource.displayAverageGain();
-        resource.displayFinalBtnVal();
+        resource.initDisplayElements();
     });
 
-    gameData.upgrades.forEach((upgradeMap, key) => {
+    gameData.upgrades.forEach((upgradeMap, resourceName) => {
         displayUpgrades(upgradeMap);
+    });
+
+    gameData.processes.forEach((processMap, resourceName) => {
+        displayProcesses(processMap);
+    });
+
+    gameData.processes.forEach((processMap, resourceName) => {
+        processMap.forEach((process, key) => {
+            process.initDisplayElements();
+        });
     });
 
     // Start the game loop
@@ -47,6 +55,10 @@ window.onload = function() {
 
 // ======== MAIN GAME LOOP ======== //
 function gameTick(currentTime, gameData = new GameData()) {
+
+    // Performance metric
+    // let startTime, endTime; startTime = window.performance.now() * 1000; 
+
     let deltaTime = currentTime - gameData.lastTime;
 
     if (deltaTime >= 1000/Constants.REFRESH_RATE) {
@@ -58,6 +70,12 @@ function gameTick(currentTime, gameData = new GameData()) {
 
         gameData.resources.forEach((resource, key) => {
             resource.resourceTick(deltaTime, gameData);
+        });
+
+        gameData.processes.forEach((processMap, key) => {
+            processMap.forEach((process, key) => {
+                process.displayActiveProduction();
+            });
         });
         
         gameData.extraTimer += deltaTime;
@@ -76,6 +94,8 @@ function gameTick(currentTime, gameData = new GameData()) {
         gameData.extraTimer -= Constants.AVERAGING_TIME/Constants.AVERAGING_SAMPLES; // Reset the counter but keep leftover time
     }
 
+    // Performance metric
+    // endTime = window.performance.now() * 1000; console.log(`Unit: Microseconds >>> Start: ${startTime} > End: ${endTime} > GENERATION TIME: ${endTime - startTime} > ALLOTTED TIME/FRAME: ${1000000/Constants.REFRESH_RATE} > % OF TIME USED: ${((endTime - startTime) / (1000000/Constants.REFRESH_RATE)) * 100}`);
 
     requestAnimationFrame((currentTime) => gameTick(currentTime, gameData));
 }

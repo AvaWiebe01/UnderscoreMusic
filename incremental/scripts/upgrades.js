@@ -53,7 +53,7 @@ export class Upgrade {
             <button class="upgrade_button ${this.isBought ? 'bought' : ''}">${this.isBought ? '[Updated]' : '[Update]'}</button>`;
     let upgradeWrapper = document.querySelector(`[upgrade_key="${this.key}"]`);
     upgradeWrapper.innerHTML = upgradeHtml;
-}
+    }
 }
 
 export class UnlockCondition {
@@ -65,6 +65,7 @@ export function initUpgrades(ALL_UPGRADES_INFO = new Map(), resources, gameData)
     let upgrades = new Map();
 
     const resourceNames = [...resources.keys()];
+    //const resourceNames = ["arcBits"];
 
     resourceNames.forEach((resourceName) => {
         upgrades.set(resourceName, getUpgradeMap(ALL_UPGRADES_INFO.get(resourceName), resources.get(resourceName), gameData));
@@ -75,6 +76,8 @@ export function initUpgrades(ALL_UPGRADES_INFO = new Map(), resources, gameData)
 
 function getUpgradeMap(upgradesInfo = [], resource = new Resource(), gameData = new GameData) {
     let upgradeMap = new Map();
+
+    upgradesInfo.sort((a, b) => a[4] - b[4]); // Sort in ascending order by upgrade cost
 
     upgradesInfo.forEach((upgrade) => {
         upgradeMap.set(upgrade[0], new Upgrade(upgrade[0], upgrade[1], upgrade[2], upgrade[3], upgrade[4], resource, gameData, upgrade[5]))
@@ -98,5 +101,5 @@ export function displayUpgrades(upgradeMap) {
             </div>`
     });
 
-    upgradeList.innerHTML = upgradesHtml;
+    upgradeList.innerHTML += upgradesHtml;
 }

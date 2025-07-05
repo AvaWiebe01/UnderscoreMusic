@@ -38,16 +38,16 @@
                     <div class = "resource_panel">
                         <div class = "resource_display not_unlocked" id="resource2_display_main">
                             <span class="pink">Kyaners:<br></span>
-                            <span class="resource2_display"></span>
+                            <span class="resource2_display accent_suffix"></span>
                         </div>
                         <div class = "resource_display" id="arcbits_display_main">
                             <span class="pink">ArcBits:</span><br>
-                            <span class="arcbits_display"></span>
+                            <span class="arcbits_display accent_suffix"></span>
 							<p class="gain_display arcbits_gain_display"></p>
                         </div>
                         <div class = "resource_display not_unlocked" id="resource3_display_main">
                             <span class="pink">Lunas:<br></span>
-                            <span class="resource3_display"></span>
+                            <span class="resource3_display accent_suffix"></span>
                         </div>
                     </div>
 
@@ -67,26 +67,66 @@
 
 					<h2>>System_Processes</h2>
 					<div class="process_panel">
-						<div class="core_counter">
-							Utilization: 0/10 Cores
+						<div class="cores_panel">
+							<h3>CPU Resources:</h3>
+							<h4>Cores:</h4>
+							<span class="pink">Available:</span> <span class="cores_display"></span><br>
+							<span class="pink">Capacity:</span> <span class="cores_max_display"></span><br>
+							<div class="cores_usage_bar_wrapper wrapper_bar">
+								<span class="cores_usage_bar inner_bar"></span>
+							</div><br>
+							<span>Next Core:</span><br>
+							<div class="cores_progress_bar_wrapper wrapper_bar">
+								<span class="cores_progress_bar inner_bar"></span>
+							</div>
 						</div>
 						<div class="process_list">
-							<div class="process">
-								Decryptor
+							<!--
+							<div class="process" process_key="hyper_clicker" resource="arcbits">
+								<div class="process_info">
+									<h3>HyperClicker</h3>
+									<p class="description">Clicks links in the Codex to gather data.</p>
+									<p><span class="pink">Active Instances:</span> 3</p>
+									<p><span class="pink">Generation:</span> 0.005 ArcBits/s</p>
+									<p><span class="pink">Total:</span> 0.015 ArcBits/s</p>
+								</div>
+								<div class="process_buttons">
+									<button class="process_buy">
+										<span>New Instance</span><br>
+										<span>-1 Cores</span><br>
+										<span>-0.1 ArcBits</span>
+									</button>
+									<button class="process_sell">
+										<span>Terminate One</span><br>
+										<span>+1 Cores</span>
+									</button>
+									<button class="process_sellall">
+										<span>Terminate All</span><br>
+										<span>+3 Cores</span>
+									</button>
+								</div>
+							</div>-->
+						</div>
+					</div>
+
+					<div class="options_panel">
+							<h2>Options<br></h2>
+							<div class="options">
+								<div class="option notation_options">
+									<p>Notation Type</p>
+									<button class="notation_button" notation="0">Default</button>
+									<button class="notation_button" notation="1">Abbreviated</button>
+									<button class="notation_button" notation="2">Engineering</button>
+									<button class="notation_button" notation="3">Exponential</button>
+									<button class="notation_button" notation="4">L O N G</button>
+								</div>
+								<div class="option sticky_resources_options">
+									<p>Resource Panel Always Visible</p>
+									<button class="sticky_resources_button">Disable</button>
+								</div>
 							</div>
 						</div>
 					</div>
-                </div>
-
-                <div class="options">
-                    <h2>Options<br></h2>
-                    <div class="notation_options">
-                        <p>Notation Type</p>
-                        <button class="notation_button" notation="0">Default</button>
-                        <button class="notation_button" notation="1">Abbreviated</button>
-                        <button class="notation_button" notation="2">Engineering</button>
-                        <button class="notation_button" notation="3">Exponential</button>
-                    </div>
                 </div>
 			</div>
 			

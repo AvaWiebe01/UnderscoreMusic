@@ -77,6 +77,7 @@ main h1 img {
 main h2 {
 	text-align:center;
 	font-size: 2.5rem;
+	margin: 1rem 1rem;
 	font-weight:normal;
 }
 
@@ -105,7 +106,7 @@ main .game .main_panel {
 }
 
 main .game .resource_panel {
-    background:var(--text-bg-color);
+    background:var(--text-bg-color-solid-2);
     text-shadow: var(--text-glow-color) 0 0 0.75rem;
 	border:0.1rem solid var(--text-color);
 	box-shadow: 0 0 0.75rem var(--text-glow-color),
@@ -115,13 +116,15 @@ main .game .resource_panel {
 	text-align:center;
     justify-content: center;
     padding:1rem;
+	position:sticky;
+	top:1rem;
 }
 
 main .game .resource_display {
     text-align:center;
-    line-height:150%;
+    line-height:125%;
     font-size: 2rem;
-	padding:1rem;
+	padding:0rem 1rem;
     width:25%;
 }
 
@@ -144,13 +147,17 @@ main .game .generate_panel {
     flex-direction: row;
 	text-align:center;
     justify-content: center;
-    padding:2rem;
+    padding:1rem;
 }
 
 main .game .generate_panel .generate_button {
 	display:flex;
 	flex-direction: column;
 	text-align:center;
+}
+
+main .game .generate_panel .generate_button button {
+	font-size: 2rem;
 }
 
 main .game .generate_panel .generate_button .btnval_display {
@@ -265,13 +272,136 @@ main .game .main_panel .upgrade_panel p.cost {
 	margin-bottom: 0.25rem;
 }
 
+main .game .process_panel {
+	display:flex;
+	flex-direction:row;
+	gap:1rem;
+}
+
+main .game .cores_panel {
+	width:15%;
+	padding: 1rem;
+	background-color: var(--main-bg-color);
+	border: 0.1rem solid var(--main-color);
+	box-shadow: 0 0 0.75rem var(--main-box-glow-color),
+	inset 0 0 0.75rem var(--main-box-glow-color);
+}
+
+main .game .cores_panel h2 {
+	margin:1rem;
+}
+
+main .game .cores_panel h4 {
+	font-size: 1.25rem;
+	font-weight: normal;
+	margin: 0;
+}
+
+main .game .cores_panel .wrapper_bar {
+	width: 100%;
+	height: 1rem;
+	border: 0.1rem solid var(--main-color);
+	box-shadow: 0 0 0.75rem var(--main-box-glow-color),
+		inset 0 0 0.75rem var(--main-box-glow-color);
+}
+
+main .game .cores_panel .wrapper_bar .inner_bar {
+	margin:0;
+	padding:0;
+	display:inline-block;
+	transition-timing-function: ease-out;
+	transition-duration: 0.2s;
+	height:1rem;
+	width:0%;
+	background-color: var(--main-color);
+}
+
+main .game .process_list {
+	width:85%;
+	display:flex;
+	flex-direction:column;
+	align-items:stretch;
+	gap: 1rem;
+}
+
+main .game .process_list .process {
+	display:flex;
+	flex-direction:row;
+	justify-content:space-between;
+	gap:0.5rem;
+	padding: 0.5rem;
+	border: 0.1rem solid var(--text-color);
+	box-shadow: 0 0 0.75rem var(--text-glow-color),
+		inset 0 0 0.75rem var(--text-glow-color);
+}
+
+main .game .process_list .process .button_info {
+	font-size: 0.875rem;
+}
+
+main .game .process_list .process .button_title {
+	font-size: 1.25rem;
+}
+
+main .game .process_list .process .process_buttons {
+	display:flex;
+	flex-direction:row;
+	justify-content:flex-end;
+	gap: 0.5rem;
+	width:50%;
+}
+
+main .game .process_list .process .process_buttons button {
+	font-size: 1rem;
+	width:33%;
+}
+
+main .game .process_list .process .process_buttons button:active {
+	transform: scale(0.95, 0.95);
+	transition-duration:0.05s;
+}
+
+main .game .process_list .process .process_info {
+	display:flex;
+	flex-grow:1;
+	width:50%;
+	flex-direction:column;
+}
+
+main .game .process_list .process h3 {
+	margin:0;
+	font-size: 2rem;
+	text-align:left;
+	margin-left: 1rem;
+}
+
+main .game .process_list .process .description {
+	font-size: 0.75rem;
+	margin-left: 1rem;
+}
+
+main .game .process_list .process .process_info p {
+	margin-left: 1rem;
+}
+
+main .game .options {
+	display: flex;
+	flex-direction: row;
+	gap: 3rem;
+}
+
+main .game .options_panel .options button:active {
+	transform: scale(0.95, 0.95);
+	transition-duration:0.05s;
+}
+
 main .game p {
 	text-align:left;
 	font-size: 1rem;
 	margin: 0 0 0.5rem 0;
 }
 
-main span.suffix {
+main .game .accent_suffix span.suffix {
 	color: var(--accent-color);
 	font-weight: normal;
 	text-shadow: var(--accent-text-glow-color) 0 0 0.5rem;
