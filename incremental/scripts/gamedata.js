@@ -2,6 +2,8 @@ export class GameData {
     resources;
     upgrades;
     multipliers;
+    processes;
+    cores;
 
     lastTime;
     extraTimer;
@@ -21,5 +23,9 @@ export class GameData {
 
     addMultipliers(multipliers) {
         this.multipliers = multipliers;
+    }
+
+    addProcesses(processes) {
+        this.processes = processes;
     }
 }

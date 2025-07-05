@@ -5,10 +5,17 @@ import { Utils } from "./utils.js";
 export function initEventHandlers(gameData = new GameData()) {
 
     $(document).ready(() => {
+
+        // OPTIONS BUTTONS //
         $(".notation_button").click((event) => {
-            Utils.updateNotation = parseInt($(event.currentTarget).attr("notation"));
+            Utils.updateNotation(parseInt($(event.currentTarget).attr("notation")));
         })
 
+        $(".sticky_resources_button").click((event) => {
+            Utils.toggleStickyResources(event.currentTarget);
+        })
+
+        // RESOURCE BUTTONS //
         $(".resource_button").click((event) => {
             let resourceName = event.currentTarget.getAttribute("resource");
             //let btnValDisplay = document.getElementsByClassName(resourceName + "_btnval_display")[0];
@@ -20,7 +27,8 @@ export function initEventHandlers(gameData = new GameData()) {
             //btnValDisplay.style.animation = "shake 0.25s";
             gameData.resources.get(resourceName).btnClicked();
         })
-
+        
+        // UPGRADE BUTTONS //
         $(".upgrade_button").click((event) => {
             const parentDiv = event.currentTarget.closest("div");
             let upgradeKey = parentDiv.getAttribute("upgrade_key");
@@ -58,6 +66,90 @@ export function initEventHandlers(gameData = new GameData()) {
         $(".upgrade_button").mouseleave((event) => {
             event.currentTarget.classList.remove("cannot_buy");
             event.currentTarget.innerHTML = "[Update]";
+        })
+        
+        // PROCESS BUTTONS //
+        $(".process_list").on("click", ".process_button", function(event) {
+            let processKey = event.currentTarget.getAttribute("process_key");
+            let resourceName = event.currentTarget.getAttribute("resource");
+            let action = event.currentTarget.getAttribute("action");
+            let process = gameData.processes.get(resourceName).get(processKey);
+
+            if(action == "buy") {
+                if(process.canBuy(process.buyAmt)) {
+                    process.buy();
+                    process.displayAllFields();
+                }
+                else {
+                    event.currentTarget.classList.add("shake");
+                    event.currentTarget.addEventListener("animationend", () => {
+                    event.currentTarget.classList.remove("shake"); 
+                    }); 
+                }
+            }
+                
+            else if(action == "sell_one") {
+                if(process.canSell(1)) {
+                    process.sell(1);
+                    process.displayAllFields();
+                }
+                else {
+                    event.currentTarget.classList.add("shake");
+                    event.currentTarget.addEventListener("animationend", () => {
+                    event.currentTarget.classList.remove("shake"); 
+                    }); 
+                }
+            }
+
+            else if(action == "sell_all") {
+                if(process.canSell(process.numBought)) {
+                    process.sell(process.numBought);
+                    process.displayAllFields();
+                }
+                else {
+                    event.currentTarget.classList.add("shake");
+                    event.currentTarget.addEventListener("animationend", () => {
+                    event.currentTarget.classList.remove("shake"); 
+                    }); 
+                }
+            }
+        })
+
+        $(".process_list").on("mouseenter", ".process_button", function(event) {
+            let processKey = event.currentTarget.getAttribute("process_key");
+            let resourceName = event.currentTarget.getAttribute("resource");
+            let action = event.currentTarget.getAttribute("action");
+            let process = gameData.processes.get(resourceName).get(processKey);
+
+            if(action == "buy") {
+                if(!process.canBuy(process.buyAmt)) {
+                    event.currentTarget.classList.add("cannot_buy");
+                    process.displayInvalidButton(action);
+                }   
+            }
+                
+            else if(action == "sell_one") {
+                if(!process.canSell(1)) {
+                    event.currentTarget.classList.add("cannot_buy");
+                    process.displayInvalidButton(action);
+                }
+            }
+
+            else if(action == "sell_all") {
+                if(!process.canSell(process.numBought)) {
+                    event.currentTarget.classList.add("cannot_buy");
+                    process.displayInvalidButton(action);
+                }
+            }
+        })
+
+        $(".process_list").on("mouseleave", ".process_button", function(event) {
+            let processKey = event.currentTarget.getAttribute("process_key");
+            let resourceName = event.currentTarget.getAttribute("resource");
+            let process = gameData.processes.get(resourceName).get(processKey);
+            
+            event.currentTarget.classList.remove("cannot_buy");
+            process.removeInvalidButton();
         })
     });
 }
