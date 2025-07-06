@@ -30,7 +30,7 @@ export function initEventHandlers(gameData = new GameData()) {
         
         // UPGRADE BUTTONS //
         $(".upgrade_button").click((event) => {
-            const parentDiv = event.currentTarget.closest("div");
+            const parentDiv = event.currentTarget.closest(".upgrade");
             let upgradeKey = parentDiv.getAttribute("upgrade_key");
             let resourceName = parentDiv.getAttribute("resource");
             let upgrade = gameData.upgrades.get(resourceName).get(upgradeKey);
@@ -53,7 +53,7 @@ export function initEventHandlers(gameData = new GameData()) {
         })
 
         $(".upgrade_button").mouseenter((event) => {
-            const parentDiv = event.currentTarget.closest("div");
+            const parentDiv = event.currentTarget.closest(".upgrade");
             let upgradeKey = parentDiv.getAttribute("upgrade_key");
             let resourceName = parentDiv.getAttribute("resource");
             let upgrade = gameData.upgrades.get(resourceName).get(upgradeKey);
