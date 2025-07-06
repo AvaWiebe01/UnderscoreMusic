@@ -151,5 +151,34 @@ export function initEventHandlers(gameData = new GameData()) {
             event.currentTarget.classList.remove("cannot_buy");
             process.removeInvalidButton();
         })
+
+        $(".tab_buttons").on("click", "button", function(event) {
+
+            // Tab display
+            document.querySelectorAll(".tab").forEach((tabElement) => {
+                tabElement.classList.remove("active_tab");
+                tabElement.classList.add("inactive_tab");
+            })
+
+            let activeTab = document.querySelector(`.${event.currentTarget.getAttribute("tab")}`);
+            activeTab.classList.remove("inactive_tab");
+            activeTab.classList.add("active_tab");
+
+            // Button display
+            document.querySelectorAll(".tab_buttons button").forEach((tabButtonElement) => {
+                tabButtonElement.classList.remove("selected");
+            })
+            event.currentTarget.classList.add("selected")
+        })
+
+        // Calculate and assign upgrade list width
+        let resizeDebounce;
+        window.addEventListener("resize", function() {
+            clearTimeout(resizeDebounce);
+            resizeDebounce = setTimeout(function () {
+                console.log("resized!");
+                Utils.resizeUpgradeList();
+            }, 10);
+        });
     });
 }

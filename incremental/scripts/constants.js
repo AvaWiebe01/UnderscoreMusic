@@ -15,8 +15,6 @@ static AVERAGING_SAMPLES = 10;
 static DEFAULT_SUFFIXES = ["","Thousand","Million","Billion","Trillion","Quadrillion","Quintillion","Sextillion","Septillion","Octillion","Nonillion","Decillion"];
 static ABBREVIATED_SUFFIXES = ["","K","M","B","T","Q","Qi","Sx","Sp","Oc","No","Dc"];
 
-// The next two constants must have the same amount of entries
-
 static RESOURCE_INFO = [ // htmlName, amt, delta, btnVal, displayableName
     ["arcbits", 111111110, 0.00010, "ArcBits"],
     //["hyperkeys", 0, 0, 0, "HyperKeys"],

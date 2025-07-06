@@ -48,7 +48,7 @@ export class Upgrade {
     displayUpgrade() {
     let upgradeHtml = `
             <h3>${this.title}</h3>
-            <p>${this.description}</p>
+            <p class="description">${this.description}</p>
             <p class="cost"> ${this.isBought ? '[COST_DEDUCTED]' : Utils.getDisplayableNumber(this.cost)} ${this.isBought ? '' : this.resource.displayableName}</p>
             <button class="upgrade_button ${this.isBought ? 'bought' : ''}">${this.isBought ? '[Updated]' : '[Update]'}</button>`;
     let upgradeWrapper = document.querySelector(`[upgrade_key="${this.key}"]`);
@@ -91,15 +91,19 @@ export function displayUpgrades(upgradeMap) {
 
     let upgradeList = document.getElementsByClassName("upgrade_list")[0];
 
+    // Set width
+
     upgradeMap.forEach((value, key) => {
         upgradesHtml += `
             <div class="upgrade" upgrade_key="${key}" resource="${value.resource.htmlName}">
                 <h3>${value.title}</h3>
-                <p>${value.description}</p>
+                <p class="description">${value.description}</p>
                 <p class="cost"> ${value.isBought ? '[COST_DEDUCTED]' : Utils.getDisplayableNumber(value.cost)} ${value.isBought ? '' : value.resource.displayableName}</p>
                 <button class="upgrade_button ${value.isBought ? 'bought' : ''}">${value.isBought ? '[Updated]' : '[Update]'}</button>
             </div>`
     });
 
     upgradeList.innerHTML += upgradesHtml;
+
+    Utils.resizeUpgradeList();
 }

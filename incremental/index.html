@@ -29,29 +29,28 @@
 		
 		<main>			
 			<h1>
-				▶ Wrenn, Inc. ◀
+				▶ HyperClicker ◀
 			</h1>
 			
 			<div class="game">	
                 <div class="main_panel">
-                    <h2>Resources</h2>
-                    <div class = "resource_panel">
-                        <div class = "resource_display not_unlocked" id="resource2_display_main">
-                            <span class="pink">Kyaners:<br></span>
-                            <span class="resource2_display accent_suffix"></span>
-                        </div>
-                        <div class = "resource_display" id="arcbits_display_main">
-                            <span class="pink">ArcBits:</span><br>
-                            <span class="arcbits_display accent_suffix"></span>
-							<p class="gain_display arcbits_gain_display"></p>
-                        </div>
-                        <div class = "resource_display not_unlocked" id="resource3_display_main">
-                            <span class="pink">Lunas:<br></span>
-                            <span class="resource3_display accent_suffix"></span>
-                        </div>
-                    </div>
 
-					<h2>Generate</h2>
+					<div class = "resource_panel">
+						<div class = "resource_display not_unlocked" id="resource2_display_main">
+							<span class="pink">Kyaners:<br></span>
+							<span class="resource2_display accent_suffix"></span>
+						</div>
+						<div class = "resource_display" id="arcbits_display_main">
+							<span class="pink">ArcBits:</span><br>
+							<span class="arcbits_display accent_suffix"></span>
+							<p class="gain_display arcbits_gain_display"></p>
+						</div>
+						<div class = "resource_display not_unlocked" id="resource3_display_main">
+							<span class="pink">Lunas:<br></span>
+							<span class="resource3_display accent_suffix"></span>
+						</div>
+					</div>
+
 					<div class = "generate_panel">
 						<div class="generate_button">
 							<button class="resource_button" resource="arcbits">Decrypt</button>
@@ -59,73 +58,82 @@
 						</div>
 					</div>
 
-					<h2>>System_Updates</h2>
-					<div class = "upgrade_panel">
-						<div class="upgrade_list">
+					<div class="tabs_wrapper">
+						<div class="tab_buttons">
+							<button class="selected" tab="upgrade_panel_tab">System Updates</button>
+							<button class="" tab="process_panel_tab">CPU Processes</button>
+							<button class="Anot_unlocked" tab="hypermods_panel_tab">HyperMods</button>
+							<button class="Anot_unlocked" tab="beyond_panel_tab">[ BEYOND ]</button>
+							<button class="Anot_unlocked" tab="archive_panel_tab">The Archive</button>
+							<button class="" tab="options_panel_tab">Options</button>
 						</div>
-					</div>
 
-					<h2>>System_Processes</h2>
-					<div class="process_panel">
-						<div class="cores_panel">
-							<h3>CPU Resources:</h3>
-							<h4>Cores:</h4>
-							<span class="pink">Available:</span> <span class="cores_display"></span><br>
-							<span class="pink">Capacity:</span> <span class="cores_max_display"></span><br>
-							<div class="cores_usage_bar_wrapper wrapper_bar">
-								<span class="cores_usage_bar inner_bar"></span>
-							</div><br>
-							<span>Next Core:</span><br>
-							<div class="cores_progress_bar_wrapper wrapper_bar">
-								<span class="cores_progress_bar inner_bar"></span>
-							</div>
-						</div>
-						<div class="process_list">
-							<!--
-							<div class="process" process_key="hyper_clicker" resource="arcbits">
-								<div class="process_info">
-									<h3>HyperClicker</h3>
-									<p class="description">Clicks links in the Codex to gather data.</p>
-									<p><span class="pink">Active Instances:</span> 3</p>
-									<p><span class="pink">Generation:</span> 0.005 ArcBits/s</p>
-									<p><span class="pink">Total:</span> 0.015 ArcBits/s</p>
-								</div>
-								<div class="process_buttons">
-									<button class="process_buy">
-										<span>New Instance</span><br>
-										<span>-1 Cores</span><br>
-										<span>-0.1 ArcBits</span>
-									</button>
-									<button class="process_sell">
-										<span>Terminate One</span><br>
-										<span>+1 Cores</span>
-									</button>
-									<button class="process_sellall">
-										<span>Terminate All</span><br>
-										<span>+3 Cores</span>
-									</button>
-								</div>
-							</div>-->
-						</div>
-					</div>
-
-					<div class="options_panel">
-							<h2>Options<br></h2>
-							<div class="options">
-								<div class="option notation_options">
-									<p>Notation Type</p>
-									<button class="notation_button" notation="0">Default</button>
-									<button class="notation_button" notation="1">Abbreviated</button>
-									<button class="notation_button" notation="2">Engineering</button>
-									<button class="notation_button" notation="3">Exponential</button>
-									<button class="notation_button" notation="4">L O N G</button>
-								</div>
-								<div class="option sticky_resources_options">
-									<p>Resource Panel Always Visible</p>
-									<button class="sticky_resources_button">Disable</button>
+						<div class="tab upgrade_panel_tab active_tab">
+							<h2>&lt; Available System Updates &gt;</h2>
+							<h5>Increase decryption efficiency by updating the system.</h5>
+							<div class = "upgrade_panel">
+								<div class="upgrade_list">
 								</div>
 							</div>
 						</div>
+
+						<div class="tab process_panel_tab inactive_tab">
+							<h2>&lt; Available Programs &gt;</h2>
+							<h5>Decrypt ArcBits automatically using software resources.</h5>
+							<div class="process_panel">
+								<div class="cores_panel">
+									<h3>CPU Resources:</h3>
+									<h4>Cores:</h4>
+									<span class="pink">Available:</span> <span class="cores_display"></span><br>
+									<span class="pink">Capacity:</span> <span class="cores_max_display"></span><br>
+									<div class="cores_usage_bar_wrapper wrapper_bar">
+										<span class="cores_usage_bar inner_bar"></span>
+									</div><br>
+									<span>Next Core:</span><br>
+									<div class="cores_progress_bar_wrapper wrapper_bar">
+										<span class="cores_progress_bar inner_bar"></span>
+									</div>
+								</div>
+								<div class="process_list">
+								</div>
+							</div>
+						</div>
+
+						<div class="tab hypermods_panel_tab inactive_tab">
+
+						</div>
+
+						<div class="tab beyond_panel_tab inactive_tab">
+							
+						</div>
+
+						<div class="tab archive_panel_tab inactive_tab">
+							<h2>&lt; Data Archive &gt;</h2>
+							<h5>Use decrypted ArcBits to recover lost data.</h5>
+						</div>
+
+						<div class="tab options_panel_tab inactive_tab">
+							<div class="options_panel">
+									<h2>&lt; Optional Parameters &gt;</h2>
+									<h5>Customize the HyperClicker user experience.</h5>
+									<div class="options">
+										<div class="option notation_options">
+											<p>Notation Type</p>
+											<button class="notation_button" notation="0">Default</button>
+											<button class="notation_button" notation="1">Abbreviated</button>
+											<button class="notation_button" notation="2">Engineering</button>
+											<button class="notation_button" notation="3">Exponential</button>
+											<button class="notation_button" notation="4">L O N G</button>
+										</div>
+										<div class="option sticky_resources_options">
+											<p>Resource Panel Always Visible</p>
+											<button class="sticky_resources_button">Disable</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
 					</div>
                 </div>
 			</div>

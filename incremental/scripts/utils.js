@@ -55,4 +55,20 @@ export class Utils {
             target.innerHTML = "Enable";
         }
     }
+
+    static resizeUpgradeList() {
+        const upgradeList = document.getElementsByClassName("upgrade_list")[0];
+        const upgradeWidth = 27.125;
+        const gapWidth = 0.5;
+
+        let fullUpgradeWidth = upgradeWidth + gapWidth;
+
+        let upgradePanelWidth = (upgradeList.closest(".upgrade_panel").clientWidth) / 16;
+
+        let horizUpgrades = Math.floor((upgradePanelWidth + gapWidth) / fullUpgradeWidth);
+
+        let finalListWidth = (fullUpgradeWidth * horizUpgrades) - gapWidth;
+
+        upgradeList.style.width = `calc(${finalListWidth}rem)`;
+    }
 }
