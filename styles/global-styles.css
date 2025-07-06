@@ -108,6 +108,7 @@
 	--text-color: #FFFFFF;
 	--text-glow-color: rgba(255,255,255,0.3);
 	--text-bg-color: rgba(255,255,255,0.03);
+	--text-bg-color-solid: rgba(21,12,24,255);
 	--text-bg-color-solid-2: rgba(28,20,31,255);
 	
 	--deactivated-color: rgba(99,99,99,0.8);
