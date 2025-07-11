@@ -1,11 +1,26 @@
 import { Constants } from "./constants.js";
 
+import { Process, displayProcesses } from "./processes.js";
+
+import { Upgrade, displayUpgrades } from "./upgrades.js";
+
 export class Utils {
+    static gameData;
+
     static notationType = 0; // 0 = default, 1 = abbreviated, 2 = engineering, 3 = exponential, 4 = standard decimal
     static stickyResources = true;
+    static fxCounter = 0;
+
+    // Visual FX elements
+    static obfuscatedElements = document.getElementsByClassName("obfuscated");
+    static upgradeLists = document.getElementsByClassName("upgrade_list");
 
     constructor() {
-        this.notationType = 0; // 0 = default, 1 = abbreviated, 2 = engineering, 3 = exponential, 4 = standard decimal
+
+    }
+
+    static addGameData(gameData) {
+        this.gameData = gameData;
     }
 
     static getDisplayableNumber(num, hasDecimals = true) {
@@ -40,6 +55,9 @@ export class Utils {
 
     static updateNotation(newNotation) {
         this.notationType = newNotation
+
+        // Refresh displays
+        this.refreshAllDisplays();
     }
 
     static toggleStickyResources(target) {
@@ -56,19 +74,54 @@ export class Utils {
         }
     }
 
+    // Adjust width of upgrade list so it's centered
     static resizeUpgradeList() {
-        const upgradeList = document.getElementsByClassName("upgrade_list")[0];
         const upgradeWidth = 27.125;
         const gapWidth = 0.5;
-
         let fullUpgradeWidth = upgradeWidth + gapWidth;
 
-        let upgradePanelWidth = (upgradeList.closest(".upgrade_panel").clientWidth) / 16;
+        for(const upgradeList of this.upgradeLists) {
+            let upgradePanelWidth = (upgradeList.closest(".panel").clientWidth) / 16;
 
-        let horizUpgrades = Math.floor((upgradePanelWidth + gapWidth) / fullUpgradeWidth);
+            let horizUpgrades = Math.floor((upgradePanelWidth + gapWidth) / fullUpgradeWidth);
 
-        let finalListWidth = (fullUpgradeWidth * horizUpgrades) - gapWidth;
+            let finalListWidth = (fullUpgradeWidth * horizUpgrades) - gapWidth;
 
-        upgradeList.style.width = `calc(${finalListWidth}rem)`;
+            upgradeList.style.width = `calc(${finalListWidth}rem)`;
+        }
+    }
+
+    // Visual Fx that must be updated every frame
+    static visualFxTick() {
+
+        // Obfuscated elements
+        if(!(this.fxCounter%3)) {
+            for(const element of this.obfuscatedElements) {
+                let randomString ="";
+                for(let i=0; i<Constants.OBFUSCATION_LENGTH; i++) {
+                    randomString += Constants.OBFUSCATION_CHARS.charAt(Math.floor(Math.random() * Constants.OBFUSCATION_CHARS.length));
+                }
+                element.innerHTML = randomString;
+            }
+        }
+
+        (this.fxCounter >= Constants.REFRESH_RATE) ? this.fxCounter=0 : this.fxCounter++;
+    }
+
+    static refreshAllDisplays() {
+        // Refresh displays in a non-destructive way (no lost references)
+        this.gameData.upgrades.forEach((upgradeType, upgradeTypeTag) => {
+            upgradeType.forEach((upgradeMap, resourceName) => {
+                upgradeMap.forEach((upgrade, key) => {
+                    upgrade.displayAllFields();
+                });
+            });
+        });
+
+        this.gameData.processes.forEach((processMap, resourceName) => {
+            processMap.forEach((process, key) => {
+                process.displayAllFields();
+            });
+        });
     }
 }

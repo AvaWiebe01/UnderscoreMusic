@@ -207,6 +207,8 @@ export function displayProcesses(processMap) {
     });
 
     processList.innerHTML += processesHtml;
+
+    console.log("Process HTML initialized.");
 }
 
 export function initProcesses(ALL_PROCESSES_INFO = new Map(), resources, gameData) {
