@@ -4,6 +4,7 @@ export class GameData {
     multipliers;
     processes;
     cores;
+    archive;
 
     lastTime;
     extraTimer;
@@ -27,5 +28,9 @@ export class GameData {
 
     addProcesses(processes) {
         this.processes = processes;
+    }
+
+    addArchive(archive) {
+        this.archive = archive;
     }
 }

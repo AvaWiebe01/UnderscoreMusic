@@ -13,6 +13,10 @@ export class Upgrade {
     gameData;
     buyAction;
 
+    // Display elements
+    costDisplay;
+
+
     constructor(key, title, description, flavorText, cost, resource, gameData, buyAction) {
         this.key = key;
         this.title = title;
@@ -23,6 +27,11 @@ export class Upgrade {
         this.gameData = gameData;
         this.buyAction = buyAction;
         this.isBought= false;
+    }
+
+    initDisplayElements() {
+        let upgradeElement = document.querySelector(`main .game .upgrade[upgrade_key="${this.key}"]`);
+        this.costDisplay = upgradeElement.querySelector(`p.cost`);
     }
 
     canBuy() {
@@ -45,18 +54,8 @@ export class Upgrade {
         console.log(this.title + " bought!");
     }
 
-    displayUpgrade() {
-    let upgradeHtml = `
-            <div class="upgrade_info_wrapper">
-                <h3>${this.title}</h3>
-                <p class="description">${this.description}</p>
-            </div>
-            <div class="upgrade_button_wrapper">
-                <p class="cost"> ${this.isBought ? '[COST_DEDUCTED]' : Utils.getDisplayableNumber(this.cost)} ${this.isBought ? '' : this.resource.displayableName}</p>
-                <button class="upgrade_button ${this.isBought ? 'bought' : ''}">${this.isBought ? '[Updated]' : '[Update]'}</button>
-            </div>`;
-    let upgradeWrapper = document.querySelector(`[upgrade_key="${this.key}"]`);
-    upgradeWrapper.innerHTML = upgradeHtml;
+    displayAllFields() {
+        this.costDisplay.innerHTML = `${this.isBought ? '[COST_DEDUCTED]' : Utils.getDisplayableNumber(this.cost)} ${this.isBought ? '' : this.resource.displayableName}`;
     }
 }
 
@@ -71,8 +70,12 @@ export function initUpgrades(ALL_UPGRADES_INFO = new Map(), resources, gameData)
     const resourceNames = [...resources.keys()];
     //const resourceNames = ["arcBits"];
 
-    resourceNames.forEach((resourceName) => {
-        upgrades.set(resourceName, getUpgradeMap(ALL_UPGRADES_INFO.get(resourceName), resources.get(resourceName), gameData));
+    ALL_UPGRADES_INFO.forEach((upgradeType, listTag) => {
+        upgrades.set(listTag, new Map());
+
+        resourceNames.forEach((resourceName) => {
+            upgrades.get(listTag).set(resourceName, getUpgradeMap(upgradeType.get(resourceName), resources.get(resourceName), gameData));
+        });
     });
 
     return upgrades;
@@ -90,12 +93,10 @@ function getUpgradeMap(upgradesInfo = [], resource = new Resource(), gameData = 
     return upgradeMap;
 }
 
-export function displayUpgrades(upgradeMap) {
+export function displayUpgrades(upgradeMap, upgradeTypeTag) {
     let upgradesHtml = ""; 
 
-    let upgradeList = document.getElementsByClassName("upgrade_list")[0];
-
-    // Set width
+    let upgradeList = document.getElementsByClassName(`${upgradeTypeTag}`)[0];
 
     upgradeMap.forEach((value, key) => {
         upgradesHtml += `
@@ -106,7 +107,7 @@ export function displayUpgrades(upgradeMap) {
                 </div>
                 <div class="upgrade_button_wrapper">
                     <p class="cost"> ${value.isBought ? '[COST_DEDUCTED]' : Utils.getDisplayableNumber(value.cost)} ${value.isBought ? '' : value.resource.displayableName}</p>
-                    <button class="upgrade_button ${value.isBought ? 'bought' : ''}">${value.isBought ? '[Updated]' : '[Update]'}</button>
+                    <button class="upgrade_button ${value.isBought ? 'bought' : ''}">${Constants.UPGRADE_BUTTON_CONTENT.get(upgradeTypeTag).get("default")}</button>
                 </div>
             </div>`
     });
@@ -114,4 +115,6 @@ export function displayUpgrades(upgradeMap) {
     upgradeList.innerHTML += upgradesHtml;
 
     Utils.resizeUpgradeList();
+
+    console.log("Upgrade HTML initialized.");
 }

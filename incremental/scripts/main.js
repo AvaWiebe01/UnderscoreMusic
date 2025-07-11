@@ -13,30 +13,46 @@ import { Upgrade, UnlockCondition, initUpgrades, displayUpgrades } from "./upgra
 
 import { Multiplier, initMultipliers } from "./multipliers.js";
 
+import { Archive, initArchive } from "./archive.js";
+
 // ======== START ======== //
 window.onload = function() {
 
     // Initialize
     let gameData = new GameData();
 
+    // Initialize data structures from Constants
     const resources = initResources(Constants.RESOURCE_INFO, gameData);
     const upgrades = initUpgrades(Constants.ALL_UPGRADES_INFO, resources, gameData);
     const multipliers = initMultipliers(gameData);
     const processes = initProcesses(Constants.ALL_PROCESSES_INFO, resources, gameData);
+    const archive = initArchive();
 
+    // Initialize gameData variables
     gameData.addResources(resources);
     gameData.addUpgrades(upgrades);
     gameData.addMultipliers(multipliers);
     gameData.addProcesses(processes);
+    gameData.addArchive(archive);
     initEventHandlers(gameData);
 
-    // Make sure all displays are active at the start
+    // Initialize HTML and DOM content/references
     gameData.resources.forEach((resource, key) => {
         resource.initDisplayElements();
     });
 
-    gameData.upgrades.forEach((upgradeMap, resourceName) => {
-        displayUpgrades(upgradeMap);
+    gameData.upgrades.forEach((upgradeType, upgradeTypeTag) => {
+        upgradeType.forEach((upgradeMap, resourceName) => {
+            displayUpgrades(upgradeMap, upgradeTypeTag);
+        });
+    });
+
+    gameData.upgrades.forEach((upgradeType, upgradeTypeTag) => {
+        upgradeType.forEach((upgradeMap, resourceName) => {
+            upgradeMap.forEach((upgrade, key) => {
+                upgrade.initDisplayElements();
+            });
+        });
     });
 
     gameData.processes.forEach((processMap, resourceName) => {
@@ -48,6 +64,10 @@ window.onload = function() {
             process.initDisplayElements();
         });
     });
+
+    // Update all displays with initial content (non-destructive)
+    Utils.addGameData(gameData);
+    Utils.refreshAllDisplays();
 
     // Start the game loop
     requestAnimationFrame((currentTime) => gameTick(currentTime, gameData));
@@ -77,6 +97,8 @@ function gameTick(currentTime, gameData = new GameData()) {
                 process.displayActiveProduction();
             });
         });
+
+        Utils.visualFxTick();
         
         gameData.extraTimer += deltaTime;
         gameData.lastTime = currentTime;

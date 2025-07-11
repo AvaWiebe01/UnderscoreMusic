@@ -27,6 +27,30 @@
 	100%{transform:scale(1, 1);}
 }
 
+@keyframes rainbow {
+	0% {color: #0aefff; text-shadow: #0aefff 0 0 0.75rem;}
+    15% {color: #0a64ff; text-shadow: #0a64ff 0 0 0.75rem;}
+	30% {color: #5c0aff; text-shadow: #5c0aff 0 0 0.75rem;}
+    50% {color: #ff0a68; text-shadow: #ff0a68 0 0 0.75rem;}
+	70% {color: #5c0aff; text-shadow: #5c0aff 0 0 0.75rem;}
+	75% {color: #0a64ff; text-shadow: #0a64ff 0 0 0.75rem;}
+	100% {color: #0aefff; text-shadow: #0aefff 0 0 0.75rem;}
+}
+
+@keyframes error {
+    0%{transform:translate(1px,1px);}
+	10%{transform:translate(-1px,-1px);}
+	20%{transform:translate(1px,0px);}
+	30%{transform:translate(0px,-1px);}
+	40%{transform:translate(-1px,-1px);}
+	50%{transform:translate(0px,1px);}
+	60%{transform:translate(1px,-1px);}
+	70%{transform:translate(-1px,0px);}
+	80%{transform:translate(-1px,-1px);}
+	90%{transform:translate(0px,0px);}
+	100%{transform:translate(1px,-1px);}
+}
+
 .fade-in {
     animation: fade 1s forwards;
 }
@@ -37,6 +61,17 @@
 
 .shake {
 	animation: shake 0.25s forwards;
+}
+
+.error {
+	display:inline-block;
+	animation: error 0.25s infinite;
+	/* color: var(--main-color);
+	text-shadow: var(--main-text-glow-color) 0 0 0.75rem; */
+}
+
+.rainbow {
+	animation: rainbow 1.5s infinite;
 }
 
 main {
@@ -230,7 +265,7 @@ main .game .upgrade_panel {
 	align-items:center;
 }
 
-main .game .upgrade_panel .upgrade_list {
+main .game .upgrade_list {
     display:flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -243,7 +278,7 @@ main .game .upgrade_panel .upgrade_list {
 	gap:0.5rem;
 }
 
-main .game .upgrade_panel .upgrade_list .upgrade {
+main .game .upgrade_list .upgrade {
 	text-shadow: var(--text-glow-color) 0 0 0.75rem;
 	background:var(--text-bg-color);
 	border:0.1rem solid var(--text-color);
@@ -260,11 +295,11 @@ main .game .upgrade_panel .upgrade_list .upgrade {
 	width: 25rem;
 }
 
-main .game .upgrade_panel .upgrade_list .upgrade_button {
+main .game .upgrade_list .upgrade_button {
 	width:100%;
 }
 
-main .game .upgrade_panel .upgrade_list .description {
+main .game .upgrade_list .description {
 	font-size: 0.875rem;
 }
 
@@ -288,7 +323,7 @@ main .game button:hover {
     cursor:pointer;
 }
 
-main .game .upgrade_panel button:active {
+main .game button:active {
 	transform: scale(0.95, 0.95);
 	transition-duration:0.05s;
 }
@@ -316,11 +351,15 @@ main .game .not_unlocked {
     display: none;
 }
 
-main .game .upgrade_panel .upgrade_list .upgrade.hidden {
+main .game .hidden {
     display: none;
 }
 
-main .game .upgrade_panel h3 {
+main .game .upgrade_list .upgrade.hidden {
+    display: none;
+}
+
+main .game .upgrade_list h3 {
 	font-family:"spacemono", "Courier New", monospace;
 	font-weight:normal;
 	font-size: 1.25rem;
@@ -329,12 +368,19 @@ main .game .upgrade_panel h3 {
 	margin:0 0 0.5rem 0;
 }
 
-main .game .main_panel .upgrade_panel p.cost {
+main .game .main_panel p.cost {
 	color:var(--main-color);
     font-family:"spacemono", "Courier New", monospace;
     text-align:center;
     text-shadow: var(--main-text-glow-color) 0 0 0.75rem;
 	margin-bottom: 0.25rem;
+}
+
+main .game .main_panel span.suffix {
+	color:var(--main-color);
+    font-family:"spacemono", "Courier New", monospace;
+    text-align:center;
+    text-shadow: var(--main-text-glow-color) 0 0 0.75rem;
 }
 
 main .game .process_panel {
@@ -349,7 +395,7 @@ main .game .cores_panel {
 	background-color: var(--main-bg-color);
 	border: 0.1rem solid var(--main-color);
 	box-shadow: 0 0 0.75rem var(--main-box-glow-color),
-	inset 0 0 0.75rem var(--main-box-glow-color);
+		inset 0 0 0.75rem var(--main-box-glow-color);
 }
 
 main .game .cores_panel h2 {
@@ -459,6 +505,116 @@ main .game .process_list .process .process_info p {
 	margin-left: 1rem;
 }
 
+main .game .beyond_panel .beyond_menu {
+	height:10rem;
+	border: 0.1rem solid var(--text-color);
+	box-shadow: 0 0 0.75rem var(--text-glow-color),
+		inset 0 0 0.75rem var(--text-glow-color);
+	background: var(--text-bg-color);
+}
+
+main .game .archive_panel .archive_menu {
+	display:flex;
+	flex-direction:column;
+	justify-content: center;
+	align-items: center;
+	gap:1rem;
+}
+
+main .game .archive_panel .archive_menu h2 {
+	margin: 1rem 0 0 0;
+	font-weight: normal;
+	font-size: 1.75rem;
+	color: var(--main-color);
+	text-shadow: var(--main-text-glow-color) 0 0 0.75rem;
+}
+
+main .game .archive_panel .archive_menu h3 {
+	margin: 0 0 0.5rem 0;
+	font-weight: normal;
+	font-size: 1.25rem;
+	
+}
+
+main .game .archive_panel .unlocked_fragments {
+	width:100%;
+	text-align:center;
+}
+
+main .game .archive_panel .unlocked_fragments_list {
+	display:flex;
+	flex-direction:column;
+	justify-items:center;
+	align-items:center;
+	gap:0.5rem;
+	width:100%;
+}
+
+main .game .archive_panel .unlocked_fragments_list .fragment {
+	display:flex;
+	flex-direction:row;
+	gap:0.5rem;
+	border: 0.1rem solid var(--text-color);
+	box-shadow: 0 0 0.75rem var(--text-glow-color),
+		inset 0 0 0.75rem var(--text-glow-color);
+	padding:0.5rem;
+	text-align:left;
+	align-items:center;
+	justify-content:space-between;
+	background: var(--text-bg-color);
+	width:100%;
+}
+
+main .game .archive_panel .unlocked_fragments_list .fragment.not_unlocked {
+	display:none;
+}
+
+main .game .archive_panel .unlocked_fragments_list .fragment h3 {
+	color: var(--main-color);
+	text-shadow: var(--main-text-glow-color) 0 0 0.75rem;
+	text-align:left;
+	height:fit-content;
+	margin:0;
+	width:15%;
+}
+
+main .game .archive_panel .unlocked_fragments_list .fragment .fragment_description {
+	text-align:left;
+	height:fit-content;
+	margin:0;
+	width:55%
+}
+
+main .game .archive_panel a.fragment_link:link, main .game .archive_panel a.fragment_link:visited {
+	color: var(--main-color);
+	text-shadow: var(--main-text-glow-color) 0 0 0.75rem;
+    border: 0.1rem solid var(--main-color);
+    box-shadow: 0 0 0.75rem var(--main-box-glow-color),
+        inset 0 0 0.75rem var(--main-box-glow-color);
+    background-color:var(--main-bg-color-2);
+	text-shadow: var(--main-text-glow-color) 0 0 0.75rem;
+
+	text-decoration:none;
+	text-align:center;
+	padding:0.5rem;
+    transition-duration:0.15s;
+    font-size:1.25rem;
+	width:25%;
+}
+
+main .game .archive_panel a.fragment_link:hover {
+	color: var(--main-color);
+	background-color:var(--main-color);
+    color:var(--bg-color);
+    cursor:pointer;
+	width:25%;
+}
+
+main .game .archive_panel a.fragment_link:active {
+	transform: scale(0.95, 0.95);
+	width:25%;
+}
+
 main .game .options {
 	display: flex;
 	flex-direction: row;
@@ -488,13 +644,6 @@ main .game .accent_suffix span.suffix {
 	color: var(--accent-color);
 	font-weight: normal;
 	text-shadow: var(--accent-text-glow-color) 0 0 0.5rem;
-}
-
-main .game .main_panel .upgrade_panel span.suffix {
-	color:var(--main-color);
-    font-family:"spacemono", "Courier New", monospace;
-    text-align:center;
-    text-shadow: var(--main-text-glow-color) 0 0 0.75rem;
 }
 
 main span.pink {

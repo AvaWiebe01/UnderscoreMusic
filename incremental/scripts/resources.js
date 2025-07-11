@@ -202,7 +202,7 @@ class Cores extends Resource {
     }
 
     modifyAmt(value) { // Do not go above core limit
-        this.amt = (this.amt < this.maxCores ? this.amt + value : this.maxCores);
+        this.amt = ((this.amt + value) <= this.maxCores ? this.amt + value : this.maxCores);
     }
 
     displayAmt() { // Round down to nearest integer
