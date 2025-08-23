@@ -7,7 +7,7 @@ import { Upgrade, displayUpgrades } from "./upgrades.js";
 export class Utils {
     static gameData;
 
-    static notationType = 0; // 0 = default, 1 = abbreviated, 2 = engineering, 3 = exponential, 4 = standard decimal
+    static notationType = 0; // 0 = default, 1 = abbreviated, 2 = engineering, 3 = exponential, 4 = standard decimal, 5 = Abbreviated data size, 6 = data size
     static stickyResources = true;
     static fxCounter = 0;
 
@@ -40,6 +40,12 @@ export class Utils {
                 break;
             case 4: // fuck it, don't shorten it at all
                 return num.toFixed((num < 1000) ? 5 : 0);
+            case 5:
+                suffix = " " + Constants.DATA_SIZE_ABBREVIATED_SUFFIXES[num >= 1000 ? Math.floor(Math.log10(num)/3) : 0];
+                break;
+            case 6:
+                suffix = " " + Constants.DATA_SIZE_SUFFIXES[num >= 1000 ? Math.floor(Math.log10(num)/3) : 0];
+                break;
 
         }
         

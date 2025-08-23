@@ -197,8 +197,12 @@ class Cores extends Resource {
         this.displayAmt();
     }
 
+    modifyMaxCores(value) {
+        this.maxCores += value;
+    }
+
     getBaseDelta() {
-        return this.delta * this.deltaBaseMult;
+        return this.delta;
     }
 
     modifyAmt(value) { // Do not go above core limit
