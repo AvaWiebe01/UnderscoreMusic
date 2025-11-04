@@ -12,7 +12,7 @@
 		
 		<script src="/scripts/jquery-3.7.1.js"></script>
 		<!--<script src="scripts/incremental/incremental-script.js"></script>-->
-		<script src="scripts/incremental/main.js" type="module"></script>
+		<script src="/incremental/scripts/main.js" type="module"></script>
 	</head>
 	
 	<body>
@@ -29,64 +29,134 @@
 		
 		<main>			
 			<h1>
-				▶ Wrenn, Inc. ◀
+				▶ HyperClicker ◀
 			</h1>
 			
 			<div class="game">	
                 <div class="main_panel">
-                    <h2>Resources</h2>
-                    <div class = "resource_panel">
-                        <div class = "resource_display not_unlocked" id="resource2_display_main">
-                            <span class="pink">Kyaners:<br></span>
-                            <span class="resource2_display"></span>
-                        </div>
-                        <div class = "resource_display" id="arcbits_display_main">
-                            <span class="pink">ArcBits:</span><br>
-                            <span class="arcbits_display"></span>
-							<p class="gain_display arcbits_gain_display"></p>
-                        </div>
-                        <div class = "resource_display not_unlocked" id="resource3_display_main">
-                            <span class="pink">Lunas:<br></span>
-                            <span class="resource3_display"></span>
-                        </div>
-                    </div>
 
-					<h2>Generate</h2>
-					<div class = "generate_panel">
+					<div class = "resource_panel panel">
+						<div class = "resource_display not_unlocked" id="resource2_display_main">
+							<span class="pink">Kyaners:<br></span>
+							<span class="resource2_display accent_suffix"></span>
+						</div>
+						<div class = "resource_display" id="arcbits_display_main">
+							<span class="pink">ArcBits:</span><br>
+							<span class="arcbits_display accent_suffix"></span>
+							<p class="gain_display arcbits_gain_display"></p>
+						</div>
+						<div class = "resource_display not_unlocked" id="resource3_display_main">
+							<span class="pink">Lunas:<br></span>
+							<span class="resource3_display accent_suffix"></span>
+						</div>
+					</div>
+
+					<div class = "generate_panel panel">
 						<div class="generate_button">
 							<button class="resource_button" resource="arcbits">Decrypt</button>
 							<span class="btnval_display arcbits_btnval_display"></span>
 						</div>
 					</div>
 
-					<h2>>System_Updates</h2>
-					<div class = "upgrade_panel">
-						<div class="upgrade_list">
+					<div class="tabs_wrapper">
+						<div class="tab_buttons">
+							<button class="selected" tab="upgrade_panel_tab">System Updates</button>
+							<button class="" tab="process_panel_tab">CPU Processes</button>
+							<button class="Anot_unlocked" tab="hypermods_panel_tab">HyperMods</button>
+							<button class="Anot_unlocked" tab="beyond_panel_tab">[ BEYOND ]</button>
+							<button class="Anot_unlocked" tab="archive_panel_tab">The Archive</button>
+							<button class="" tab="options_panel_tab">Options</button>
 						</div>
-					</div>
 
-					<h2>>System_Processes</h2>
-					<div class="process_panel">
-						<div class="core_counter">
-							Utilization: 0/10 Cores
-						</div>
-						<div class="process_list">
-							<div class="process">
-								Decryptor
+						<div class="tab upgrade_panel_tab active_tab">
+							<h2>&lt; Available System Updates &gt;</h2>
+							<h5>Increase decryption efficiency by updating the system.</h5>
+							<div class = "upgrade_panel panel">
+								<div class="upgrade_list normal_upgrades_list" upgrade_type="normal_upgrades_list">
+								</div>
 							</div>
 						</div>
-					</div>
-                </div>
 
-                <div class="options">
-                    <h2>Options<br></h2>
-                    <div class="notation_options">
-                        <p>Notation Type</p>
-                        <button class="notation_button" notation="0">Default</button>
-                        <button class="notation_button" notation="1">Abbreviated</button>
-                        <button class="notation_button" notation="2">Engineering</button>
-                        <button class="notation_button" notation="3">Exponential</button>
-                    </div>
+						<div class="tab process_panel_tab inactive_tab">
+							<h2>&lt; Available Programs &gt;</h2>
+							<h5>Decrypt ArcBits automatically using software resources.</h5>
+							<div class="process_panel panel">
+								<div class="cores_panel">
+									<h3>CPU Resources:</h3>
+									<h4>Cores:</h4>
+									<span class="pink">Available:</span> <span class="cores_display"></span><br>
+									<span class="pink">Capacity:</span> <span class="cores_max_display"></span><br>
+									<div class="cores_usage_bar_wrapper wrapper_bar">
+										<span class="cores_usage_bar inner_bar"></span>
+									</div><br>
+									<span>Next Core:</span><br>
+									<div class="cores_progress_bar_wrapper wrapper_bar">
+										<span class="cores_progress_bar inner_bar"></span>
+									</div>
+								</div>
+								<div class="process_list">
+								</div>
+							</div>
+						</div>
+
+						<div class="tab hypermods_panel_tab inactive_tab">
+							<h2>&lt; Available HyperMod Architectures &gt;</h2>
+							<h5>Alter the system architecture to unlock unique and powerful effects.</h5>
+						</div>
+
+						<div class="tab beyond_panel_tab inactive_tab">
+							<div class="beyond_panel panel">
+								<h2><span class="rainbow">&gt;&gt;&gt; BEYOND &lt;&lt;&lt;</span></h2>
+								<h5><span class="error">ERR: 0x<span class="obfuscated"></span> IS INVALID MEMORY ADDRESS - USER OUTSIDE OF ALLOCATION ZONE</span></h5>
+								<div class="beyond_menu">
+
+								</div>
+							</div>
+						</div>
+
+						<div class="tab archive_panel_tab inactive_tab">
+							<div class="archive_panel panel">
+								<h2>&lt; Data Archive &gt;</h2>
+								<h5>Use decrypted data to unlock fragmented information.</h5>
+								<div class="archive_menu">
+									<h2>Recovered Fragments</h2>
+									<div class="unlocked_fragments">
+										<span class="no_fragments_display"></span>
+										<div class="unlocked_fragments_list">
+
+										</div>
+									</div>
+
+									<h2>Detected Fragments</h2>
+									<div class="upgrade_list archive_unlocks_list" upgrade_type="archive_unlocks_list">
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="tab options_panel_tab inactive_tab">
+							<div class="options_panel">
+									<h2>&lt; Optional Parameters &gt;</h2>
+									<h5>Customize the HyperClicker user experience.</h5>
+									<div class="options">
+										<div class="option notation_options">
+											<p>Notation Type</p>
+											<button class="notation_button" notation="0">Default</button>
+											<button class="notation_button" notation="1">Abbreviated</button>
+											<button class="notation_button" notation="2">Engineering</button>
+											<button class="notation_button" notation="3">Exponential</button>
+											<button class="notation_button" notation="4">L O N G</button>
+										</div>
+										<div class="option sticky_resources_options">
+											<p>Resource Panel Always Visible</p>
+											<button class="sticky_resources_button">Disable</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
                 </div>
 			</div>
 			
