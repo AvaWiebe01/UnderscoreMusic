@@ -23,7 +23,7 @@ export class Multiplier {
 
     // Called each frame
     multUpdate() {
-        throw new Error("getMult must be implemented by subclass.");
+        throw new Error("getMult and multUpdate must be implemented by subclass.");
     }
 }
 
@@ -54,9 +54,63 @@ class MultArcMult extends Multiplier {
     }
 }
 
+class MultUltraboost extends Multiplier {
+    perCoreMult;
+
+    constructor(name, gameData = new GameData) {
+        super(name, gameData);
+
+        this.perCoreMult = 0.01;
+    }
+
+    getMult() {
+        return this.mult;
+    }
+
+    multUpdate() {
+        
+    }
+}
+
+class MultProximityComputing extends Multiplier {
+    perCoreMult;
+
+    constructor(name, gameData = new GameData) {
+        super(name, gameData);
+
+        this.perCoreMult = 1.05;
+    }
+
+    getMult() {
+        return this.mult;
+    }
+
+    multUpdate() {
+        this.mult = Math.floor(this.gameData.resources.get("cores").amt) * this.perCoreMult;
+    }
+}
+
+/*
+class MultTemp extends Multiplier {
+    constructor(name, gameData = new GameData) {
+        super(name, gameData);
+    }
+
+    getMult() {
+        return this.mult;
+    }
+
+    multUpdate() {
+
+    }
+}
+*/
+
 export function initMultipliers(gameData = new GameData) {
     let multipliers = new Map([
         ["arcMult", new MultArcMult("arcMult", gameData)],
+        ["ultraboost", new MultUltraboost("ultraboost", gameData)],
+        ["proximityComputing", new MultProximityComputing("proximityComputing", gameData)],
     ]);
 
     return multipliers;

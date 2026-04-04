@@ -10,28 +10,40 @@ export class Upgrade {
     flavorText;
     cost;
     resource; // Must be a Resource object
+    unlockUpgrades;
     gameData;
     buyAction;
 
     // Display elements
+    upgradeElement;
     costDisplay;
 
-
-    constructor(key, title, description, flavorText, cost, resource, gameData, buyAction) {
+    constructor(key, title, description, flavorText, cost, unlockUpgrades, upgradeTypeTag, resource, gameData, buyAction) {
         this.key = key;
         this.title = title;
         this.description = description;
         this.flavorText = flavorText;
         this.cost = cost;
+        this.upgradeTypeTag = upgradeTypeTag;
         this.resource = resource;
+        this.unlockUpgrades = unlockUpgrades;
         this.gameData = gameData;
         this.buyAction = buyAction;
-        this.isBought= false;
+
+        this.isBought = false;
+
+        // unlock if this is an initial upgrade
+        this.isUnlocked = (Constants.INITIAL_UPGRADES?.get(upgradeTypeTag)?.get(resource.htmlName) ?? []).includes(this.key);
     }
 
     initDisplayElements() {
-        let upgradeElement = document.querySelector(`main .game .upgrade[upgrade_key="${this.key}"]`);
-        this.costDisplay = upgradeElement.querySelector(`p.cost`);
+        this.upgradeElement = document.querySelector(`main .game .upgrade[upgrade_key="${this.key}"]`);
+        this.costDisplay = this.upgradeElement.querySelector(`p.cost`);
+    }
+
+    unlock() {
+        this.isUnlocked = true;
+        this.upgradeElement.classList.remove("not_unlocked");
     }
 
     canBuy() {
@@ -59,35 +71,30 @@ export class Upgrade {
     }
 }
 
-export class UnlockCondition {
-
-}
-
 export function initUpgrades(ALL_UPGRADES_INFO = new Map(), resources, gameData) {
 
     let upgrades = new Map();
 
     const resourceNames = [...resources.keys()];
-    //const resourceNames = ["arcBits"];
 
     ALL_UPGRADES_INFO.forEach((upgradeType, listTag) => {
         upgrades.set(listTag, new Map());
 
         resourceNames.forEach((resourceName) => {
-            upgrades.get(listTag).set(resourceName, getUpgradeMap(upgradeType.get(resourceName), resources.get(resourceName), gameData));
+            upgrades.get(listTag).set(resourceName, getUpgradeMap(upgradeType.get(resourceName), listTag, resources.get(resourceName), gameData));
         });
     });
 
     return upgrades;
 }
 
-function getUpgradeMap(upgradesInfo = [], resource = new Resource(), gameData = new GameData) {
+function getUpgradeMap(upgradesInfo = [], upgradeTypeTag = "", resource = new Resource(), gameData = new GameData) {
     let upgradeMap = new Map();
 
     upgradesInfo.sort((a, b) => a[4] - b[4]); // Sort in ascending order by upgrade cost
 
     upgradesInfo.forEach((upgrade) => {
-        upgradeMap.set(upgrade[0], new Upgrade(upgrade[0], upgrade[1], upgrade[2], upgrade[3], upgrade[4], resource, gameData, upgrade[5]))
+        upgradeMap.set(upgrade[0], new Upgrade(upgrade[0], upgrade[1], upgrade[2], upgrade[3], upgrade[4], upgrade[5], upgradeTypeTag, resource, gameData, upgrade[6]))
     });
 
     return upgradeMap;
@@ -100,7 +107,7 @@ export function displayUpgrades(upgradeMap, upgradeTypeTag) {
 
     upgradeMap.forEach((value, key) => {
         upgradesHtml += `
-            <div class="upgrade" upgrade_key="${key}" resource="${value.resource.htmlName}">
+            <div class="upgrade ${value.isUnlocked ? '' : 'not_unlocked'}" upgrade_key="${key}" resource="${value.resource.htmlName}">
                 <div class="upgrade_info_wrapper">
                     <h3>${value.title}</h3>
                     <p class="description">${value.description}</p>
