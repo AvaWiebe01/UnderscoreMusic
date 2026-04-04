@@ -19,17 +19,56 @@ class Line {
 
 const BASE_TEXT_SPEED = 25;
 
-let DIALOGUE_01 = [
-    new Line("...Luna, are you there?", "kyana", 1, "...fffff.fff fff ffffff"),
-    new Line("Lunaaaaaaaaaaaaaaaaaaaaaaa~!", "kyana", 1.5, "rrrrrrrrrrrrrrrrrrrrrrrrrrrr"),
-    new Line("I'm here, dumbass.", "luna", 0.25, "___ wwwww.ssssssss"),
-    new Line("Ah, there you are. Enough with that attitude, missy.", "kyana", 1, "__, wwwww ___ ___. _____ ____ ____ iiiiiiiii,______"),
-    new Line("Hmph, fine.", "luna", 0.4, "_____.dddd_"),
-    new Line(".....", "kyana", 1, "....."),
-    new Line("Why is your phone destroyed?", "kyana", 0.65, "www __ ____ ppppp-dddddddddd"),
-    new Line("DON'T. ASK.", "luna", 0.4, "tttttt-tttt"),
-    new Line("Okay.......", "kyana", 0.2, "ffffffffffffff"),
-];
+const DIALOGUE = new Map([
+    [
+        "A-CNTRL0",
+        [
+            new Line("HyperI/O Voice Transmission #1A70032E - Central District, 08:49 PM", "system", 2, null),
+        ]
+    ],
+
+    [
+        "B-0NYX01",
+        [
+            new Line("Unused.", "nyx", 1, "_______"),
+        ]
+    ],
+
+    [
+        "C-LEVEL0",
+        [
+            new Line("HyperI/O Camera #3E9EFFF4 Audio Feed - Hyper Beam HQ,  12:41 AM", "system", 2, null),
+        ]
+    ],
+
+    [
+        "D-MSG010",
+        [
+            new Line("HyperI/O Voice Transmission #1A7F327E - Hyper Beam HQ, 10:22 PM", "system", 2, null),
+        ]
+    ],
+
+    [
+        "E-KL32FA",
+        [
+            new Line("New Archon Camera #112D8A39 Audio Feed - Lotus Apartment Complex, 12:37 AM", "system", 2, null),
+        ]
+    ],
+
+    [
+        "F-020NYX",
+        [
+            new Line("Unused.", "nyx", 1, "_______"),
+        ]
+    ],
+
+    [
+        "G-ADMIN1",
+        [
+            new Line("HyperI/O Camera #34C1D859 Audio Feed - Hyper Beam HQ Admin Office,  6:00 AM", "system", 2, null),
+        ]
+    ],
+]);
 
 function displayLine(textbox, line = new Line("content not specified.", null, 1, null), speakerDisplay, voices) {
     return new Promise(resolve => {
@@ -111,9 +150,9 @@ function waitForInput() {
 }
 
 window.onload = async function() {
-    dialogue = DIALOGUE_01;
-    textbox = document.getElementById("text_box");
-    speakerDisplay = document.getElementById("speaker_display");
+    const textbox = document.getElementById("text_box");
+    const dialogue = DIALOGUE.get(textbox.getAttribute("fragment_name"));
+    const speakerDisplay = document.getElementById("speaker_display");
 
     const kyanaSpeech = document.getElementById("kyana_speech");
     const lunaSpeech = document.getElementById("luna_speech");
@@ -143,3 +182,15 @@ window.onload = async function() {
         await waitForInput();
     }
 }
+
+/* test dialogue
+new Line("...Luna, are you there?", "kyana", 1, "...fffff.fff fff ffffff"),
+new Line("Lunaaaaaaaaaaaaaaaaaaaaaaa~!", "kyana", 1.5, "rrrrrrrrrrrrrrrrrrrrrrrrrrrr"),
+new Line("I'm here, dumbass.", "luna", 0.25, "___ wwwww.ssssssss"),
+new Line("Ah, there you are. Enough with that attitude, missy.", "kyana", 1, "__, wwwww ___ ___. _____ ____ ____ iiiiiiiii,______"),
+new Line("Hmph, fine.", "luna", 0.4, "_____.dddd_"),
+new Line(".....", "kyana", 1, "....."),
+new Line("Why is your phone destroyed?", "kyana", 0.65, "www __ ____ ppppp-dddddddddd"),
+new Line("DON'T. ASK.", "luna", 0.4, "tttttt-tttt"),
+new Line("Okay.......", "kyana", 0.2, "ffffffffffffff"),
+*/
