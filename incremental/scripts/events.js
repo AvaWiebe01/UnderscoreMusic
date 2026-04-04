@@ -39,12 +39,24 @@ export function initEventHandlers(gameData = new GameData()) {
                 upgrade.buy();
                 event.currentTarget.innerHTML = `${Constants.UPGRADE_BUTTON_CONTENT.get(upgradeTypeTag).get("purchased")}`;
                 event.currentTarget.classList.add("bought");
-                //upgrade.displayUpgrade(upgradeTypeTag);
+
                 // Remove upgrade from UI
                 parentDiv.classList.add("fade-out");
                 parentDiv.addEventListener("animationend", () => {
-                parentDiv.classList.remove("fade-out"); 
-                parentDiv.classList.add("hidden"); 
+                    parentDiv.classList.remove("fade-out"); 
+                    parentDiv.classList.add("hidden");
+                    
+                    // unlock subsequent upgrades
+                    for (const unlockUpgradeKey of upgrade.unlockUpgrades) {
+                        upgrade.gameData.upgrades?.get(upgrade.upgradeTypeTag)?.get(upgrade.resource.htmlName)?.get(unlockUpgradeKey).unlock();
+
+                        const unlockedDiv = event.currentTarget.closest(".upgrade_list").querySelector(`[upgrade_key="${unlockUpgradeKey}"]`)
+                        unlockedDiv.classList.add("appear");
+
+                        unlockedDiv.addEventListener("animationend", () => {
+                            unlockedDiv.classList.remove("appear");
+                        });
+                    }
                 }); 
             }
             else {

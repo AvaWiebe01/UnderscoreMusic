@@ -9,7 +9,7 @@ import { Process, initProcesses, displayProcesses } from "./processes.js";
 
 import { Resource, initResources } from "./resources.js";
 
-import { Upgrade, UnlockCondition, initUpgrades, displayUpgrades } from "./upgrades.js";
+import { Upgrade, initUpgrades, displayUpgrades } from "./upgrades.js";
 
 import { Multiplier, initMultipliers } from "./multipliers.js";
 
