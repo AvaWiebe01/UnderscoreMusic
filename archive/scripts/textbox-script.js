@@ -17,13 +17,52 @@ class Line {
     }
 }
 
-const BASE_TEXT_SPEED = 25;
+const BASE_TEXT_SPEED = 15;
 
 const DIALOGUE = new Map([
     [
         "A-CNTRL0",
         [
-            new Line("HyperI/O Voice Transmission #1A70032E - Central District, 08:49 PM", "system", 2, null),
+            new Line(   "HyperI/O Voice Transmission #1A70032E - Central District, 08:49 PM", "system", 2, 
+                        "pppppppp ppppp pppppppppppp _________ _ aaaaaaa aaaaaaaa_ ppppp pp"),
+
+            new Line(   "We’re detecting a heat signature around that corner, Kyana. I’d be cautious.", "luna", 1,
+                        "_____ _________ _ ____ _________ ______ ____ ______, _____. ___ __ ________."),
+
+            new Line(   "Thanks. Any idea who?", "kyana", 1,
+                        "______. ___ ____ ____"),
+
+            new Line(   "Looks like their guns are emitting typical Axiom signals, so it could be anyone.", "luna", 1,
+                        "_____ ____ _____ ____ ___ ________ _______ _____ _______, __ __ _____ __ ______."),
+            
+            new Line(   "That’s okay. I’ll be right back, hold on.", "kyana", 1, "______ ____- ____ __ _____ ____, ____ __."),
+
+            new Line(   "Agh-!", "unknown", 1,
+                        "ttttt"),
+
+            new Line(   "Alright Luna, I’ve got them by the neck... and... there we go, their DNA should be sent over now.", "kyana", 1,
+                        "_______ ____, ____ ___ ____ __ ___ ____,,, www,,,-_____ __ __, _____ ___ ______ __ ____ ____ ___."),
+
+            new Line(   "*Sigh...* Stop resisting me. If you’re innocent, then I’m not going to hurt you.", "kyana", 1,
+                        "wwwwwwwww-____ _________ __. __ ______ ________, ____ ___ ___ _____ __ ____ ___."),
+
+            new Line(   "I’m checking it...", "luna", 1,
+                        "___ ________ __,,,"),
+
+            new Line(   "Okay, they’re good to go. Not associated with any of our targets, just some loser that pretends to be a fighter for looks.", "luna", 1,
+                        "____, _______ ____ __ __. ___ __________ ____ ___ __ ___ _______, ____ ____ iiiii ____ ________ __ __ _ _______ ___ _____."),
+
+            new Line(   "Sounds kind of like you, hm?", "kyana", 1,
+                        "______ ____ __ ____ iii, rrr"),
+
+            new Line(   "Ughh, shut up... and keep moving, or you’re going to fall behind pace. The rest of the team will be reaching the rendezvous in forty-five seconds!", "luna", 1,
+                        "dddd- ____ __,,, ___ ____ ______, __ ______ _____ __ ____ ______ ____. ___ ____ __ ___ ____ ____ __ ________ ___ __________ __ __________________!"),
+
+            new Line(   "I’ll be there in thirty, don’t worry.", "kyana", 1,
+                        "____ __ _____ __ ______, _____ _____."),
+
+            new Line(   "- END OF RECOVERED DATA -", "system", 2,
+                        "p ppp pp ppppppppp pppp p"),
         ]
     ],
 
@@ -37,21 +76,42 @@ const DIALOGUE = new Map([
     [
         "C-LEVEL0",
         [
-            new Line("HyperI/O Camera #3E9EFFF4 Audio Feed - Hyper Beam HQ,  12:41 AM", "system", 2, null),
+            new Line(   "HyperI/O Camera #3E9EFFF4 Audio Feed - Hyper Beam HQ,  12:41 AM", "system", 2,
+                        null),
+
+            new Line(   "", "", 1,
+                        ""),
+
+            new Line(   "- END OF RECOVERED DATA -", "system", 2,
+                        "p ppp pp ppppppppp pppp p"),
         ]
     ],
 
     [
         "D-MSG010",
         [
-            new Line("HyperI/O Voice Transmission #1A7F327E - Hyper Beam HQ, 10:22 PM", "system", 2, null),
+            new Line(   "HyperI/O Voice Transmission #1A7F327E - Hyper Beam HQ, 10:22 PM", "system", 2,
+                        null),
+
+            new Line(   "", "", 1,
+                        ""),
+
+            new Line(   "- END OF RECOVERED DATA -", "system", 2,
+                        "p ppp pp ppppppppp pppp p"),
         ]
     ],
 
     [
         "E-KL32FA",
         [
-            new Line("New Archon Camera #112D8A39 Audio Feed - Lotus Apartment Complex, 12:37 AM", "system", 2, null),
+            new Line(   "New Archon Camera #112D8A39 Audio Feed - Lotus Apartment Complex, 12:37 AM", "system", 2,
+                        null),
+
+            new Line(   "", "", 1,
+                        ""),
+
+            new Line(   "- END OF RECOVERED DATA -", "system", 2,
+                        "p ppp pp ppppppppp pppp p"),
         ]
     ],
 
@@ -65,7 +125,14 @@ const DIALOGUE = new Map([
     [
         "G-ADMIN1",
         [
-            new Line("HyperI/O Camera #34C1D859 Audio Feed - Hyper Beam HQ Admin Office,  6:00 AM", "system", 2, null),
+            new Line(   "HyperI/O Camera #34C1D859 Audio Feed - Hyper Beam HQ Admin Office,  6:00 AM", "system", 2,
+                        null),
+
+            new Line(   "", "", 1,
+                        ""),
+
+            new Line(   "- END OF RECOVERED DATA -", "system", 2,
+                        "p ppp pp ppppppppp pppp p"),
         ]
     ],
 ]);
@@ -91,10 +158,10 @@ function displayLine(textbox, line = new Line("content not specified.", null, 1,
                 case "t": nxtChar.classList.add("boldshake"); break; // bold shaky
                 case "f": nxtChar.classList.add("fade"); break; // fade in
                 case "d": nxtChar.classList.add("drop"); break; // drop in
-                case "r": nxtChar.classList.add("rainbow"); break; // massive
-                case ",": delay = BASE_TEXT_SPEED * 4; break;
-                case ".": delay = BASE_TEXT_SPEED * 8; break;
-                case "-": delay = BASE_TEXT_SPEED * 16; break;
+                case "r": nxtChar.classList.add("rainbow"); break; // rainow
+                case ",": delay = BASE_TEXT_SPEED * 16; break;
+                case ".": delay = BASE_TEXT_SPEED * 24; break;
+                case "-": delay = BASE_TEXT_SPEED * 32; break;
             }
 
             // Add the character ascii
@@ -153,6 +220,7 @@ window.onload = async function() {
     const textbox = document.getElementById("text_box");
     const dialogue = DIALOGUE.get(textbox.getAttribute("fragment_name"));
     const speakerDisplay = document.getElementById("speaker_display");
+    const portraitDisplay = document.getElementById("portrait");
 
     const kyanaSpeech = document.getElementById("kyana_speech");
     const lunaSpeech = document.getElementById("luna_speech");
@@ -166,6 +234,16 @@ window.onload = async function() {
 
     const voices = [kyanaSpeech, lunaSpeech, nyxSpeech];
 
+    const portraitRoot = "/images/archive/";
+    const portraits = new Map([ // speaker, portraitFilename
+        ["kyana", "kyana-portrait-256.png"],
+        ["luna", "luna-portrait-256.png"],
+        ["nyx", "nyx-portrait-256.png"],
+        ["arin", "arin-portrait-256.png"],
+        ["system", "system-portrait-256.png"],
+        ["unknown", "unknown-portrait-256.png"],
+    ]);
+
     // Force a click to resume the AudioContext
     await waitForInput();
 
@@ -174,6 +252,9 @@ window.onload = async function() {
 
         // Reset displayed line
         textbox.innerHTML = "";
+
+        // Display speaker portrait
+        portraitDisplay.src = `${portraitRoot}${portraits.get(dialogue[i].speaker)}`;
 
         // Display the current line
         await displayLine(textbox, dialogue[i], speakerDisplay, voices);

@@ -54,8 +54,19 @@ main {
 }
 
 main .display {
-    flex-grow: 1;
+    flex-grow:1;
+
+    display:flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: flex-end;
     margin:0.25rem 8rem;
+}
+
+main .display img {
+    display:block;
+    left:0;
+    bottom:0;
 }
 
 main .text_box_wrapper {
@@ -112,22 +123,6 @@ main .text_box_wrapper .text_box {
 main .text_box_wrapper .text_box span{
     background:var(--transparent);
 } 
-
-/* SPEAKER */
-fmain .text_box .kyana {
-    color: var(--kyana-color);
-    text-shadow: var(--kyana-glow-color) 0 0 0.75rem;
-}
-
-fmain .text_box .luna {
-    color: var(--luna-color);
-    text-shadow: var(--luna-glow-color) 0 0 0.75rem;
-}
-
-fmain .text_box .nyx {
-    color: var(--nyx-color);
-    text-shadow: var(--nyx-glow-color) 0 0 0.75rem;
-}
 
 /* STYLING */
 main .bold {
