@@ -69,7 +69,7 @@ const DIALOGUE = new Map([
     [
         "B-0NYX01",
         [
-            new Line("Unused.", "nyx", 1, "_______"),
+            new Line("Unused.", "onyx", 1, "_______"),
         ]
     ],
 
@@ -79,8 +79,50 @@ const DIALOGUE = new Map([
             new Line(   "HyperI/O Camera #3E9EFFF4 Audio Feed - Hyper Beam HQ,  12:41 AM", "system", 2,
                         null),
 
-            new Line(   "", "", 1,
-                        ""),
+            new Line(   "Oh, hey Kyana! Didn't expect you to drop by today.", "onyx", 1,
+                        "Oh, hey Kyana! Didn't expect you to drop by today."),
+
+            new Line(   "Good afternoon, Nyx. I wasn't expecting it either, but I came to ask you for a favor.", "kyana", 1,
+                        "Good afternoon, Nyx. I wasn't expecting it either, but I came to ask you for a favor."),
+                        
+            new Line(   "As always. What can I do for you?", "onyx", 1,
+                        "As always. What can I do for you?"),
+
+            new Line(   "It would be better to talk elsewhere. Can you come to my office, or are you busy with your… ahem, computer stuff?", "kyana", 1,
+                        "It would be better to talk elsewhere. Can you come to my office, or are you busy with your… ahem, computer stuff?"),
+
+            new Line(   "I am a *little* busy, but I can always make time for you. Make it quick, though.", "onyx", 1,
+                        "I am a *little* busy, but I can always make time for you. Make it quick, though."),
+
+            new Line(   "I'm always quick.", "kyana", 1,
+                        "I'm always quick."),
+
+            new Line(   "Well, that's definitely true. Silly me. Let's get going...", "onyx", 1,
+                        "Well, that's definitely true. Silly me. Let's get going..."),
+
+            new Line(   "HyperI/O Camera #46FFA910 Audio Feed - Hyper Beam HQ,  12:45 AM", "system", 2,
+                        "HyperI/O Camera #46FFA910 Audio Feed - Hyper Beam HQ,  12:45 AM"),
+
+            new Line(   "Okay... so, update on our project.", "kyana", 1,
+                        "Okay... so, update on our project."),
+
+            new Line(   "I've been searching through my hyperI/O access, and I think I found something.", "kyana", 1,
+                        "I've been searching through my hyperI/O access, and I think I found something."),
+
+            new Line(   "There's some kind of 'restricted level' that the Admins have referred to, and I don't think they were talking about the usual access restrictions that get lifted as you're promoted.", "kyana", 1,
+                        "There's some kind of 'restricted level' that the Admins have referred to, and I don't think they were talking about the usual access restrictions that get lifted as you're promoted."),
+
+            new Line(   "I won't say that I doubt it, it would be trivial to obscure parts of the system.", "onyx", 1,
+                        "I won't say that I doubt it, it would be trivial to obscure parts of the system."),
+
+            new Line(   "Good, so you're still with me, then.", "kyana", 1,
+                        "Good, so you're still with me, then."),
+
+            new Line(   "I need you to develop a program, or something, that I can use to see the hidden layer and check what the Admins are up to.", "kyana", 1,
+                        "I need you to develop a program, or something, that I can use to see the hidden layer and check what the Admins are up to."),
+
+            new Line(   "I'm on it, Kyana. I'm just as curious as you are to get to the bottom of this.", "onyx", 1,
+                        "I'm on it, Kyana. I'm just as curious as you are to get to the bottom of this."),
 
             new Line(   "- END OF RECOVERED DATA -", "system", 2,
                         "p ppp pp ppppppppp pppp p"),
@@ -93,8 +135,35 @@ const DIALOGUE = new Map([
             new Line(   "HyperI/O Voice Transmission #1A7F327E - Hyper Beam HQ, 10:22 PM", "system", 2,
                         null),
 
-            new Line(   "", "", 1,
-                        ""),
+            new Line(   "*RING… RING… RING… RING…*", "system", 1,
+                        "*RING… RING… RING… RING…*"),
+
+            new Line(   "C’mon, pick up already…", "onyx", 1,
+                        "C’mon, pick up already…"),
+
+            new Line(   "*BEEP*", "system", 1,
+                        "*BEEP*"),
+
+            new Line(   "Oh, you’re not answering…", "onyx", 1,
+                        "Oh, you’re not answering…"),
+
+            new Line(   "Well, in that case, don't listen to the rest of this unless you're somewhere private.", "onyx", 1,
+                        "Well, in that case, don't listen to the rest of this unless you're somewhere private."),
+
+            new Line(   "...", "onyx", 1,
+                        "..."),
+
+            new Line(   "Check your secure drive when you're done with whatever it is that you *do* after operations. I sent a transfer request with the tool you asked for.", "onyx", 1,
+                        "Check your secure drive when you're done with whatever it is that you *do* after operations. I sent a transfer request with the tool you asked for."),
+
+            new Line(   "...you can ask me if anything confuses you. I know you're not the most up-to-date with tech.", "onyx", 1,
+                        "...you can ask me if anything confuses you. I know you're not the most up-to-date with tech."),
+
+            new Line(   "But there IS a readme, so consult that first, if you please.", "onyx", 1,
+                        "But there IS a readme, so consult that first, if you please."),
+
+            new Line(   "Talk later.", "onyx", 1,
+                        "Talk later."),
 
             new Line(   "- END OF RECOVERED DATA -", "system", 2,
                         "p ppp pp ppppppppp pppp p"),
@@ -107,8 +176,257 @@ const DIALOGUE = new Map([
             new Line(   "New Archon Camera #112D8A39 Audio Feed - Lotus Apartment Complex, 12:37 AM", "system", 2,
                         null),
 
-            new Line(   "", "", 1,
-                        ""),
+            new Line(   "Kyana, I’m going to bed~!", "luna", 1,
+                        "Kyana, I’m going to bed~!"),
+
+            new Line(   "<silence>", "kyana", 1,
+                        "<silence>"),
+
+            new Line(   "I’ll see you in the morning…", "luna", 1,
+                        "I’ll see you in the morning…"),
+
+            new Line(   "<louder silence?>", "kyana", 1,
+                        "<louder silence?>"),
+
+            new Line(   "Hey, what the hell… say something!!", "luna", 1,
+                        "Hey, what the hell… say something!!"),
+
+            new Line(   "<deafening silence>", "kyana", 1,
+                        "<deafening silence>"),
+
+            new Line(   "Where’d she run off to…...", "luna", 1,
+                        "Where’d she run off to…..."),
+
+            new Line(   "Oh! You *are* in h-", "luna", 1,
+                        "Oh! You *are* in h-"),
+
+            new Line(   "Luna, get over here.", "kyana", 1,
+                        "Luna, get over here."),
+
+            new Line(   "Huh?", "luna", 1,
+                        "Huh?"),
+
+            new Line(   "Just look.", "kyana", 1,
+                        "Just look."),
+
+            new Line(   "Alright, fine... why are you acting so weird?", "luna", 1,
+                        "Alright, fine... why are you acting so weird?"),
+
+            new Line(   "...what's this?", "luna", 1,
+                        "...what's this?"),
+
+            new Line(   "It's the hyperI/O records.", "kyana", 1,
+                        "It's the hyperI/O records."),
+
+            new Line(   "I've had a program running to scour the Codex for an entryway. To brute force my way in.", "kyana", 1,
+                        "I've had a program running to scour the Codex for an entryway. To brute force my way in."),
+
+            new Line(   "...Nyx wrote it for me. Obviously.", "kyana", 1,
+                        "...Nyx wrote it for me. Obviously."),
+
+            new Line(   "I thought you already had access, though.", "luna", 1,
+                        "I thought you already had access, though."),
+
+            new Line(   "So did I. Turns out there's another layer.", "kyana", 1,
+                        "So did I. Turns out there's another layer."),
+
+            new Line(   "...", "luna", 1,
+                        "..."),
+
+            new Line(   "...I don't understand what this is, Kyana. Why are you showing me?", "luna", 1,
+                        "...I don't understand what this is, Kyana. Why are you showing me?"),
+
+            new Line(   "Because they're hiding something from me, Luna. And you, too. Everyone.", "kyana", 1,
+                        "Because they're hiding something from me, Luna. And you, too. Everyone."),
+
+            new Line(   "You're like, the best Operator we have. Why would Hyper Beam want to hide something from you?", "luna", 1,
+                        "You're like, the best Operator we have. Why would Hyper Beam want to hide something from you?"),
+
+            new Line(   "Because they knew that if I was kept informed, I would *do* something, instead of sitting back and waiting.", "kyana", 1,
+                        "Because they knew that if I was kept informed, I would *do* something, instead of sitting back and waiting."),
+
+            new Line(   "...I think... that you need to tell me what you found.", "luna", 1,
+                        "...I think... that you need to tell me what you found."),
+
+            new Line(   "I will, but you're not going to like it, Luna.", "kyana", 1,
+                        "I will, but you're not going to like it, Luna."),
+
+            new Line(   "Sit closer, I need you to pay attention.", "kyana", 1,
+                        "Sit closer, I need you to pay attention."),
+
+            new Line(   "Um, okay. Like this?", "luna", 1,
+                        "Um, okay. Like this?"),
+
+            new Line(   "Mhm, like that.", "kyana", 1,
+                        "Mhm, like that."),
+
+            new Line(   "Anyways. They figured out why the Divergence happened.", "kyana", 1,
+                        "Anyways. They figured out why the Divergence happened."),
+
+            new Line(   "What??", "luna", 1,
+                        "What??"),
+
+            new Line(   "Months ago. I'm not sure exactly how long. But they solved it.", "kyana", 1,
+                        "Months ago. I'm not sure exactly how long. But they solved it."),
+
+            new Line(   "Turns out, those rumors about an object in the outer reaches of the solar system...", "kyana", 1,
+                        "Turns out, those rumors about an object in the outer reaches of the solar system..."),
+
+            new Line(   "They weren't rumors after all, I guess. I feel like an idiot for doubting them now.", "kyana", 1,
+                        "They weren't rumors after all, I guess. I feel like an idiot for doubting them now."),
+
+            new Line(   "You *are* an idiot sometimes, but you couldn't have known if people were making stuff up like usual...", "luna", 1,
+                        "You *are* an idiot sometimes, but you couldn't have known if people were making stuff up like usual..."),
+
+            new Line(   "And why are you acting like this is such an awful thing, anyways? If we know the origin of the Divergence, that's good, isn't it?", "luna", 1,
+                        "And why are you acting like this is such an awful thing, anyways? If we know the origin of the Divergence, that's good, isn't it?"),
+
+            new Line(   "You’d think. They studied the object to find out how it caused the whole timeline-splitting phenomenon.", "kyana", 1,
+                        "You’d think. They studied the object to find out how it caused the whole timeline-splitting phenomenon."),
+
+            new Line(   "I’ll summarize.", "kyana", 1,
+                        "I’ll summarize."),
+
+            new Line(   "It first appeared when-", "kyana", 1,
+                        "It first appeared when-"),
+
+            new Line(   "...", "kyana", 1,
+                        "..."),
+
+            new Line(   "It can't be that bad, Kyana. Just tell me.", "luna", 1,
+                        "It can't be that bad, Kyana. Just tell me."),
+
+            new Line(   "…It first appeared during the Divergence. In the blink of an eye, its existence in our world began.", "kyana", 1,
+                        "…It first appeared during the Divergence. In the blink of an eye, its existence in our world began."),
+
+            new Line(   "It emitted a powerful wave to sweep the universe, scanning our entire world. Everything we’ve ever known, ever could know, captured inside its epicenter.", "kyana", 1,
+                        "It emitted a powerful wave to sweep the universe, scanning our entire world. Everything we’ve ever known, ever could know, captured inside its epicenter."),
+
+            new Line(   "The universe was split into countless timelines, each one different from the last, the initial parameters varied ever so slightly, but the outcome immeasurably altered.", "kyana", 1,
+                        "The universe was split into countless timelines, each one different from the last, the initial parameters varied ever so slightly, but the outcome immeasurably altered."),
+
+            new Line(   "It collected all of this data, processing the incomprehensible scale of it at unbelievable speed.", "kyana", 1,
+                        "It collected all of this data, processing the incomprehensible scale of it at unbelievable speed."),
+
+            new Line(   "With the power of nearly unlimited knowledge of all possible branching outcomes, it can control the very world that we’re in right now.", "kyana", 1,
+                        "With the power of nearly unlimited knowledge of all possible branching outcomes, it can control the very world that we’re in right now."),
+
+            new Line(   "Every moment in time, every person, able to be manipulated, recreated...", "kyana", 1,
+                        "Every moment in time, every person, able to be manipulated, recreated..."),
+
+            new Line(   "or destroyed.", "kyana", 1,
+                        "or destroyed."),
+
+            new Line(   "...they’ve named it the Frequency Annihilator.", "kyana", 1,
+                        "...they’ve named it the Frequency Annihilator."),
+
+            new Line(   "...", "luna", 1,
+                        "..."),
+
+            new Line(   "You’re... are you *sure* that's the truth?", "luna", 1,
+                        "You’re... are you *sure* that's the truth?"),
+
+            new Line(   "Yes, Luna. I wouldn’t tell you unless I was a hundred percent confident. You don’t need the extra stress.", "kyana", 1,
+                        "Yes, Luna. I wouldn’t tell you unless I was a hundred percent confident. You don’t need the extra stress."),
+
+            new Line(   "Okay...", "luna", 1,
+                        "Okay..."),
+
+            new Line(   "I trust you.", "luna", 1,
+                        "I trust you."),
+
+            new Line(   "...but I still don’t get *anything*. Who created it? Who controls it? How did it appear from nowhere??", "luna", 1,
+                        "...but I still don’t get *anything*. Who created it? Who controls it? How did it appear from nowhere??"),
+
+            new Line(   "And, um, what does it mean for us?", "luna", 1,
+                        "And, um, what does it mean for us?"),
+
+            new Line(   "I don't know.", "kyana", 1,
+                        "I don't know."),
+
+            new Line(   "...I don’t know...", "kyana", 1,
+                        "...I don’t know..."),
+
+            new Line(   "But we have to do something. We can’t let anyone use it. If that’s even possible.", "kyana", 1,
+                        "But we have to do something. We can’t let anyone use it. If that’s even possible."),
+
+            new Line(   "We can be certain that LIMIT is going to try to travel to it.", "kyana", 1,
+                        "We can be certain that LIMIT is going to try to travel to it."),
+
+            new Line(   "Nobody should be allowed the power to tear apart our universe. It needs to be disabled forever.", "kyana", 1,
+                        "Nobody should be allowed the power to tear apart our universe. It needs to be disabled forever."),
+
+            new Line(   "What the hell are *we* supposed to do, Kyana?? We might be unstoppable in New Archon, but do you realize how insane you sound? It’s in space, a million kilometers away. We can’t fucking *do* anything.", "luna", 1,
+                        "What the hell are *we* supposed to do, Kyana?? We might be unstoppable in New Archon, but do you realize how insane you sound? It’s in space, a million kilometers away. We can’t fucking *do* anything."),
+
+            new Line(   "...", "kyana", 1,
+                        "..."),
+
+            new Line(   "I knew you would say that...", "kyana", 1,
+                        "I knew you would say that..."),
+
+            new Line(   "I-I’m sorry, I didn’t mean to sound angry-", "luna", 1,
+                        "I-I’m sorry, I didn’t mean to sound angry-"),
+
+            new Line(   "No... no, it’s okay. I get it.", "kyana", 1,
+                        "No... no, it’s okay. I get it."),
+
+            new Line(   "This isn’t easy for me either. Honestly, I'm-", "kyana", 1,
+                        "This isn’t easy for me either. Honestly, I'm-"),
+
+            new Line(   "I’m scared, Luna. I've never felt this helpless before.", "kyana", 1,
+                        "I’m scared, Luna. I've never felt this helpless before."),
+
+            new Line(   "...", "luna", 1,
+                        "..."),
+
+            new Line(   "I a-am too...", "luna", 1,
+                        "I a-am too..."),
+
+            new Line(   "You’ve never acted like this before... I don’t know what to say...", "luna", 1,
+                        "You’ve never acted like this before... I don’t know what to say..."),
+
+            new Line(   "Then come even closer.", "kyana", 1,
+                        "Then come even closer."),
+
+            new Line(   "Mhm.", "kyana", 1,
+                        "Mhm."),
+
+            new Line(   "No matter what happens, Luna… at least we've had our time together, right?", "kyana", 1,
+                        "No matter what happens, Luna… at least we've had our time together, right?"),
+
+            new Line(   "Don’t say that. You’re talking like we’re gonna die…", "luna", 1,
+                        "Don’t say that. You’re talking like we’re gonna die…"),
+
+            new Line(   "Well-", "kyana", 1,
+                        "Well-"),
+
+            new Line(   "Just remember it, okay?", "kyana", 1,
+                        "Just remember it, okay?"),
+
+            new Line(   "I won’t ever forget about you, I promise.", "kyana", 1,
+                        "I won’t ever forget about you, I promise."),
+
+            new Line(   "Okay...", "luna", 1,
+                        "Okay..."),
+
+            new Line(   "I guess... I promise that I’ll remember you, too.", "luna", 1,
+                        "I guess... I promise that I’ll remember you, too."),
+
+            new Line(   "Good.", "kyana", 1,
+                        "Good."),
+
+            new Line(   "...", "luna", 1,
+                        "..."),
+
+            new Line(   "well, um... what do we do now?", "luna", 1,
+                        "well, um... what do we do now?"),
+
+            new Line(   "We sit here and think, Luna. Me in your arms, and you in mine.", "kyana", 1,
+                        "We sit here and think, Luna. Me in your arms, and you in mine."),
+
+            new Line(   "We’ll think of something, together.", "kyana", 1,
+                        "We’ll think of something, together."),
 
             new Line(   "- END OF RECOVERED DATA -", "system", 2,
                         "p ppp pp ppppppppp pppp p"),
@@ -118,7 +436,7 @@ const DIALOGUE = new Map([
     [
         "F-020NYX",
         [
-            new Line("Unused.", "nyx", 1, "_______"),
+            new Line("Unused.", "onyx", 1, "_______"),
         ]
     ],
 
@@ -127,6 +445,93 @@ const DIALOGUE = new Map([
         [
             new Line(   "HyperI/O Camera #34C1D859 Audio Feed - Hyper Beam HQ Admin Office,  6:00 AM", "system", 2,
                         null),
+
+            new Line(   "Good morning, Arin. I think it’s time for us to have a little chat, hm?", "kyana", 1,
+                        "Good morning, Arin. I think it’s time for us to have a little chat, hm?"),
+
+            new Line(   "What the... what do you think you're doing??", "arin", 1,
+                        "What the... what do you think you're doing??"),
+
+            new Line(   "", "", 1,
+                        ""),
+
+            new Line(   "", "", 1,
+                        ""),
+
+            new Line(   "", "", 1,
+                        ""),
+
+            new Line(   "", "", 1,
+                        ""),
+
+            new Line(   "", "", 1,
+                        ""),
+
+            new Line(   "", "", 1,
+                        ""),
+
+            new Line(   "", "", 1,
+                        ""),
+
+            new Line(   "", "", 1,
+                        ""),
+
+            new Line(   "", "", 1,
+                        ""),
+
+            new Line(   "", "", 1,
+                        ""),
+
+            new Line(   "", "", 1,
+                        ""),
+
+            new Line(   "", "", 1,
+                        ""),
+
+            new Line(   "", "", 1,
+                        ""),
+
+            new Line(   "", "", 1,
+                        ""),
+
+            new Line(   "", "", 1,
+                        ""),
+
+            new Line(   "", "", 1,
+                        ""),
+
+            new Line(   "", "", 1,
+                        ""),
+
+            new Line(   "", "", 1,
+                        ""),
+
+            new Line(   "", "", 1,
+                        ""),
+
+            new Line(   "", "", 1,
+                        ""),
+
+            new Line(   "", "", 1,
+                        ""),
+
+            new Line(   "", "", 1,
+                        ""),
+
+            new Line(   "", "", 1,
+                        ""),
+
+            new Line(   "", "", 1,
+                        ""),
+
+            new Line(   "", "", 1,
+                        ""),
+
+            new Line(   "", "", 1,
+                        ""),
+
+            new Line(   "", "", 1,
+                        ""),
 
             new Line(   "", "", 1,
                         ""),
@@ -180,7 +585,7 @@ function displayLine(textbox, line = new Line("content not specified.", null, 1,
                         voices[1].pause();
                         voices[1].play();
                         break;
-                    case "nyx":
+                    case "onyx":
                         voices[2].pause();
                         voices[2].play();
                         break;
@@ -238,7 +643,7 @@ window.onload = async function() {
     const portraits = new Map([ // speaker, portraitFilename
         ["kyana", "kyana-portrait-256.png"],
         ["luna", "luna-portrait-256.png"],
-        ["nyx", "nyx-portrait-256.png"],
+        ["onyx", "nyx-portrait-256.png"],
         ["arin", "arin-portrait-256.png"],
         ["system", "system-portrait-256.png"],
         ["unknown", "unknown-portrait-256.png"],
