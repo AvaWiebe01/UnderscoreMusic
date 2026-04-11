@@ -24,7 +24,7 @@ const DIALOGUE = new Map([
         "A-CNTRL0",
         [
             new Line(   "HyperI/O Voice Transmission #1A70032E - Central District, 08:49 PM", "system", 2, 
-                        "pppppppp ppppp pppppppppppp _________ . aaaaaaa aaaaaaaa, ppppp pp"),
+                        "pppppppp ppppp pppppppppppp _________ , aaaaaaa aaaaaaaa, ppppp pp"),
 
             new Line(   "We’re detecting a heat signature around that corner, Kyana. I’d be cautious.", "luna", 1,
                         "_____ _________ _ ____ _________ ______ ____ ______, _____. ___ __ ________."),
@@ -77,7 +77,7 @@ const DIALOGUE = new Map([
         "C-LEVEL0",
         [
             new Line(   "HyperI/O Camera #3E9EFFF4 Audio Feed - Hyper Beam HQ, 12:41 AM", "system", 2,
-                        "pppppppp pppppp _________ ppppp pppp . aaaaa aaaa aa, ppppp pp"),
+                        "pppppppp pppppp _________ ppppp pppp , aaaaa aaaa aa, ppppp pp"),
 
             new Line(   "Oh, hey Kyana! Didn't expect you to drop by today.", "onyx", 1,
                         "__, ___ _____. ______ ______ ___ __ ____ __ _____."),
@@ -101,7 +101,7 @@ const DIALOGUE = new Map([
                         "____, ______ __________ ____. _____ __. _____ ___ _____,,,"),
 
             new Line(   "HyperI/O Camera #46FFA910 Audio Feed - Hyper Beam HQ, 12:45 AM", "system", 2,
-                        "pppppppp pppppp _________ ppppp pppp . aaaaa aaaa aa, ppppp pp"),
+                        "pppppppp pppppp _________ ppppp pppp , aaaaa aaaa aa, ppppp pp"),
 
             new Line(   "Okay... so, update on our project.", "kyana", 1,
                         "____,,, __, ______ __ ___ _______."),
@@ -133,7 +133,7 @@ const DIALOGUE = new Map([
         "D-MSG010",
         [
             new Line(   "HyperI/O Voice Transmission #1A7F327E - Hyper Beam HQ, 10:22 PM", "system", 2,
-                        "pppppppp ppppp pppppppppppp _________ . aaaaa aaaa aa, ppppp pp"),
+                        "pppppppp ppppp pppppppppppp _________ , aaaaa aaaa aa, ppppp pp"),
 
             new Line(   "RING... RING... RING... RING...", "system", 0.5,
                         "rrrrrrr.rrrrrrr.rrrrrrr.rrrrrrr"),
@@ -174,7 +174,7 @@ const DIALOGUE = new Map([
         "E-KL32FA",
         [
             new Line(   "New Archon Camera #112D8A39 Audio Feed - Lotus Apartment Complex, 12:37 AM", "system", 2,
-                        "ppp pppppp pppppp _________ ppppp pppp . aaaaa aaaaaaaaa aaaaaaa, ppppp pp"),
+                        "ppp pppppp pppppp _________ ppppp pppp , aaaaa aaaaaaaaa aaaaaaa, ppppp pp"),
 
             new Line(   "Kyana, I’m going to bed~!", "luna", 1,
                         "_____, ___ _____ __ ____."),
@@ -444,7 +444,7 @@ const DIALOGUE = new Map([
         "G-ADMIN1",
         [
             new Line(   "HyperI/O Camera #34C1D859 Audio Feed - Hyper Beam HQ Admin Office, 6:00 AM", "system", 2,
-                        "pppppppp pppppp _________ ppppp pppp . aaaaa aaaa aa aaaaa aaaaaa, pppp pp"),
+                        "pppppppp pppppp _________ ppppp pppp , aaaaa aaaa aa aaaaa aaaaaa, pppp pp"),
 
             new Line(   "Good morning, Arin. I think it’s time for us to have a little chat, hm?", "kyana", 1,
                         "____ _______, ____. _ _____ ____ ____ ___ __ __ ____ _ ______ iiii, www"),
