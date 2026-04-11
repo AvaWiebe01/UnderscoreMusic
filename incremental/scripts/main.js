@@ -95,6 +95,7 @@ function gameTick(currentTime, gameData = new GameData()) {
         gameData.processes.forEach((processMap, key) => {
             processMap.forEach((process, key) => {
                 process.displayActiveProduction();
+                process.displayBaseGeneration();
             });
         });
 

@@ -27,6 +27,7 @@ export class Multiplier {
     }
 }
 
+// multiplier based on clicking arcbit generation fast
 class MultArcMult extends Multiplier {
     decayFactor;
     increaseFactor;
@@ -54,24 +55,29 @@ class MultArcMult extends Multiplier {
     }
 }
 
+// multiplier based on total cores ever generated
 class MultUltraboost extends Multiplier {
+    totalCoresGenerated;
     perCoreMult;
 
     constructor(name, gameData = new GameData) {
         super(name, gameData);
 
         this.perCoreMult = 0.01;
+        this.totalCoresGenerated = 0;
     }
 
     getMult() {
+        this.mult = 1 + (Math.floor(this.totalCoresGenerated) * this.perCoreMult);
         return this.mult;
     }
 
     multUpdate() {
-        
+        this.totalCoresGenerated += this.gameData.resources.get("cores").lastTickDelta;
     }
 }
 
+// multiplier based on unused cores
 class MultProximityComputing extends Multiplier {
     perCoreMult;
 

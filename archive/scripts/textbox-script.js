@@ -154,7 +154,7 @@ const DIALOGUE = new Map([
                         ",,,"),
 
             new Line(   "Check your secure drive when you're done with whatever it is that you do after operations. I sent a transfer request with the tool you asked for.", "onyx", 1,
-                        "_____ ____ ______ _____ ____ ______ ____ ____ ________ __ __ ____ ___ rr _____ __________. _ ____ _ ________ _______ ____ ___ ____ ___ _____ ___."),
+                        "_____ ____ ______ _____ ____ ______ ____ ____ ________ __ __ ____ ___ ii _____ __________. _ ____ _ ________ _______ ____ ___ ____ ___ _____ ___."),
 
             new Line(   "...you can ask me if anything confuses you. I know you're not the most... up-to-date with tech.", "onyx", 1,
                         ",,,___ ___ ___ __ __ ________ ________ ___. _ ____ ______ ___ ___ ____,,, iiiiiiiiii ____ ____."),
@@ -336,7 +336,7 @@ const DIALOGUE = new Map([
                         "_ _____ ___."),
 
             new Line(   "...but I still don’t get anything. Who created it? Who controls it? How did it appear from nowhere??", "luna", 1,
-                        ",,,___ _ _____ _____ ___ iiiiiiii. ___ _______ __. ___ iiiiiiii __. ___ ___ __ ______ ____ sssssssss"),
+                        "fff___ _ _____ _____ ___ iiiiiiii. ___ _______ __. ___ iiiiiiii __. ___ ___ __ ______ ____ sssssssss"),
 
             new Line(   "And what does it mean for us??", "luna", 1,
                         "___ ____ ____ __ ____ ___ ssss"),
@@ -345,7 +345,7 @@ const DIALOGUE = new Map([
                         "_ _____ ____."),
 
             new Line(   "...I don’t know...", "kyana", 0.5,
-                        ",,,f fffff ffff,,,"),
+                        "ffff fffff ffff,,,"),
 
             new Line(   "But we have to do something. We can’t let anyone use it. If that’s even possible.", "kyana", 1,
                         "___ __ ____ __ __ _________. __ _____ ___ ______ ___ __. __ ______ ____ ________."),
@@ -363,7 +363,7 @@ const DIALOGUE = new Map([
                         ",,,"),
 
             new Line(   "I knew you would say that...", "kyana", 1,
-                        "_ ____ ___ _____ ___ ____,,,"),
+                        "f ffff fff fffff fff ffff,,,"),
 
             new Line(   "I-I’m sorry, I didn’t mean to sound angry-", "luna", 1,
                         "_,___ _____, _ ______ ____ __ _____ _____."),
@@ -381,7 +381,7 @@ const DIALOGUE = new Map([
                         ",,,"),
 
             new Line(   "I am, too.", "luna", 1,
-                        "_ __, ___."),
+                        "f ff, fff."),
 
             new Line(   "You’ve never acted like this before... I don’t know what to say...", "luna", 1,
                         "______ _____ _____ ____ ____ ______,,, _ _____ ____ ____ __ ___,,,"),
@@ -467,8 +467,8 @@ const DIALOGUE = new Map([
             new Line(   "I don’t know what you’re talking about. I haven’t lied to you.", "arin", 1,
                         "_ _____ ____ ____ ______ _______ _____. _ _______ ____ __ ___."),
 
-            new Line(   "God, enough with the excuses. Do I need to force it out of you?", "kyana", 1,
-                        "___, iiiiii ____ ___ _______. __ _ ____ __ bbbbb __ ___ __ ___."),
+            new Line(   "God, stop pretending. Do I need to force it out of you?", "kyana", 1,
+                        "iii, ____ __________. __ _ ____ __ bbbbb __ ___ __ ___."),
 
             new Line(   "...say what you mean, Kyana. What do you think I’ve lied about?", "arin", 1,
                         ",,,___ ____ ___ ____, _____. ____ __ ___ _____ ____ ____ _____."),

@@ -103,8 +103,10 @@ export class Utils {
         // Obfuscated elements
         if(!(this.fxCounter%3)) {
             for(const element of this.obfuscatedElements) {
+                let obfuscation_length = element.textContent.length;
+
                 let randomString ="";
-                for(let i=0; i<Constants.OBFUSCATION_LENGTH; i++) {
+                for(let i=0; i<obfuscation_length; i++) {
                     randomString += Constants.OBFUSCATION_CHARS.charAt(Math.floor(Math.random() * Constants.OBFUSCATION_CHARS.length));
                 }
                 element.innerHTML = randomString;
@@ -129,5 +131,9 @@ export class Utils {
                 process.displayAllFields();
             });
         });
+    }
+
+    static unlockTab(tabValue) {
+        document.querySelector(`.tab_buttons button[tab="${tabValue}"]`).classList.remove("locked_tab");
     }
 }

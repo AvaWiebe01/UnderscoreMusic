@@ -130,6 +130,10 @@ export class Process {
         this.activeGenerationDisplay.innerHTML = `${Utils.getDisplayableNumber(this.getProductionDelta() * this.resource.getDeltaTotalMult())} ${this.resource.displayableName}/s`; 
     }
 
+    displayBaseGeneration() {
+        this.baseGenerationDisplay.innerHTML = `${Utils.getDisplayableNumber(this.baseProduction * this.baseProductionMult * this.resource.deltaBaseMult)} ${this.resource.displayableName}/s`; 
+    }
+
     displayAllFields() {
         this.numBoughtDisplay.innerHTML = `${Utils.getDisplayableNumber(this.numBought, false)}`; 
         this.baseGenerationDisplay.innerHTML = `${Utils.getDisplayableNumber(this.baseProduction * this.baseProductionMult * this.resource.deltaBaseMult)} ${this.resource.displayableName}/s`; 

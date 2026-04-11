@@ -40,7 +40,16 @@ export function initEventHandlers(gameData = new GameData()) {
                 event.currentTarget.innerHTML = `${Constants.UPGRADE_BUTTON_CONTENT.get(upgradeTypeTag).get("purchased")}`;
                 event.currentTarget.classList.add("bought");
 
-                // Remove upgrade from UI
+                // add upgrade to purchased list (newest at the top)
+                let purchasedUpgradeList = document.querySelector(`.purchased_upgrade_list[upgrade_type="${upgradeTypeTag}"]`);
+                purchasedUpgradeList.innerHTML = `
+                    <div class="purchased_upgrade">
+                        <h3>${upgrade.title}</h3>
+                        <span class="description">${upgrade.description}</span>
+                    </div>
+                ` + purchasedUpgradeList.innerHTML;
+
+                // Remove upgrade from UI  
                 parentDiv.classList.add("fade-out");
                 parentDiv.addEventListener("animationend", () => {
                     parentDiv.classList.remove("fade-out"); 

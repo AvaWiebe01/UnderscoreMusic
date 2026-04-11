@@ -11,6 +11,9 @@ export class Resource {
     displayableName;
     gameData;
 
+    //reduce other classes having to calculate delta again
+    lastTickDelta;
+
     //private
     gain;
     lastAmt;
@@ -31,6 +34,8 @@ export class Resource {
         this.htmlName = htmlName; // Must be exactly as it appears in HTML, ex. "arcbits"
         this.displayableName = displayableName;
         this.gameData = gameData;
+
+        this.lastTickDelta = 0;
 
         this.gain = new Array(Constants.AVERAGING_SAMPLES).fill(0);
         this.lastAmt = amt;
@@ -158,7 +163,8 @@ export class Resource {
     }
 
     resourceTick(deltaTime, gameData) {
-        this.modifyAmt(((deltaTime/1000)*this.getBaseDelta()) * this.getDeltaTotalMult());
+        this.lastTickDelta = ((deltaTime/1000)*this.getBaseDelta()) * this.getDeltaTotalMult()
+        this.modifyAmt(this.lastTickDelta);
 
         this.displayAmt();
         this.displayFinalBtnVal();
