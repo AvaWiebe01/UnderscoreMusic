@@ -1,0 +1,95 @@
+.doc {
+    border:0.25rem solid var(--text-color);
+	box-shadow: 0 0 1.25rem var(--text-glow-color),
+    inset 0 0 1.25rem var(--text-glow-color);
+    padding:1rem;
+    margin-bottom: 4rem;
+    background-color:var(--text-bg-color);
+}
+
+.doc h2 {
+    background-color:var(--transparent);
+	font-family: 'Zector', 'Courier New', monospace;
+	font-weight: bold;
+	font-size: 3rem;
+	color: var(--main-color);
+    text-shadow: var(--main-text-glow-color) 0 0 0.75rem;
+	text-align:left;
+	position:relative;
+	margin:0 0 1rem 0;
+}
+
+.doc h2 .sub {
+    background-color:var(--transparent);
+    font-size: 2rem;
+    color: var(--text-color);
+    text-shadow: var(--text-glow-color) 0 0 0.75rem;
+}
+
+.doc h3 {
+    background-color:var(--transparent);
+    font-family: "spacemono", 'Courier New', monospace;
+    text-shadow: var(--text-glow-color) 0 0 0.75rem;
+    font-weight: bold;
+	font-size: 1.5rem;
+}
+
+.doc p {
+    background-color:var(--transparent);
+    text-align:left;
+    font-family: "spacemono", 'Courier New', monospace;
+}
+
+.credits {
+    text-align:center;
+    float:center;
+}
+
+h2 {
+    background-color:var(--transparent);
+    font-family: "spacemono", 'Courier New', monospace;
+	font-weight: normal;
+	font-size: 3rem;
+	color: var(--main-color);
+    text-shadow: var(--main-text-glow-color) 0 0 0.75rem;
+    text-align:center;
+	margin:1rem;
+}
+
+.message {
+    font-family: "spacemono", 'Courier New', monospace;
+    font-size: 1.25rem;
+    text-align:center;
+}
+
+h4 {
+    text-align:center;
+    font-size: 1.25rem;
+    font-family: "spacemono", 'Courier New', monospace;
+}
+
+p {
+    text-align:center;
+    font-size: 1rem;
+    font-family: "spacemono", 'Courier New', monospace;
+}
+
+.ending {
+    margin-top:4rem;
+    font-size: 2.5rem;
+    font-family: "spacemono", 'Courier New', monospace;
+    font-weight: bold;
+    text-align:center;
+}
+
+.accent {
+    background-color:var(--transparent);
+    color: var(--accent-color);
+    text-shadow: var(--accent-text-glow-color) 0 0 0.75rem;
+}
+
+.accent2 {
+    background-color:var(--transparent);
+    color: var(--main-color);
+    text-shadow: var(--main-text-glow-color) 0 0 0.75rem;
+}

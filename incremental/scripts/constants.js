@@ -11,7 +11,7 @@ static DATA_SIZE_ABBREVIATED_SUFFIXES = ["b","Kb","Mb","Gb","Tb","Pb","Eb","Zb",
 static DATA_SIZE_SUFFIXES = ["Bits","Kilobits","Megabits","Gigabits","Terabits","Petabits","Exabits","Zettabits","Yottabits","Ronnabits","Quettabits","Wrennbits"];
 
 static RESOURCE_INFO = [ // htmlName, amt, delta, btnVal, displayableName
-    ["arcbits", 1111110, 0.00010, "ArcBits"],
+    ["arcbits", 1111110_000000_00000000_000000, 0.00010, "ArcBits"],
     //["hyperkeys", 0, 0, 0, "HyperKeys"],
 ];
 
@@ -161,14 +161,14 @@ static ALL_UPGRADES_INFO = new Map([
             [
                 "arcbits",
                 [
-                    ["fragment1", "Fragment 0", "HyperI/O Voice Transmission #1A70032E", "", 1_000, ["fragment2", "fragment3", "fragment4", "fragment5"], (resource) => resource.gameData.archive.unlockFragment("fragment_0")],
+                    ["fragment1", "Fragment 0", "HyperI/O Voice Transmission #1A70032E", "", 1_000, ["fragment2", "fragment3", "fragment4"], (resource) => resource.gameData.archive.unlockFragment("fragment_0")],
                     ["fragment2", "Fragment 0.5", "Codex Partition #2E830AB4", "", 1_000_000, [], (resource) => resource.gameData.archive.unlockFragment("fragment_0.5")],
                     ["fragment3", "Fragment 1", "HyperI/O Camera #3E9EFFF4 Audio Feed", "", 1_000_000_000, [], (resource) => resource.gameData.archive.unlockFragment("fragment_1")],
-                    ["fragment4", "Fragment 2", "HyperI/O Voice Transmission #1A7F327E", "", 1_000_000_000_000, [], (resource) => resource.gameData.archive.unlockFragment("fragment_2")],
-                    ["fragment5", "Fragment 3", "New Archon Camera #112D8A39 Audio Feed", "", 1_000_000_000_000_000, ["fragment6"], (resource) => resource.gameData.archive.unlockFragment("fragment_3")],
-                    ["fragment6", "Fragment 3.5", "Codex Partition #448A120F", "", 1_000_000_000_000_000_000, ["fragment7"], (resource) => resource.gameData.archive.unlockFragment("fragment_3.5")],
+                    ["fragment4", "Fragment 2", "HyperI/O Voice Transmission #1A7F327E", "", 1_000_000_000_000, ["fragment5"], (resource) => resource.gameData.archive.unlockFragment("fragment_2")],
+                    ["fragment5", "Fragment 3", "New Archon Camera #112D8A39 Audio Feed", "", 1_000_000_000_000_000, ["fragment6", "fragment7"], (resource) => resource.gameData.archive.unlockFragment("fragment_3")],
+                    ["fragment6", "Fragment 3.5", "Codex Partition #448A120F", "", 1_000_000_000_000_000_000, [], (resource) => resource.gameData.archive.unlockFragment("fragment_3.5")],
                     ["fragment7", "Fragment 4", "HyperI/O Camera #34C1D859 Audio Feed", "", 1_000_000_000_000_000_000_000, ["fragment8"], (resource) => resource.gameData.archive.unlockFragment("fragment_4")],
-                    ["fragment8", "Credits", "The End.", "", 1_000_000_000_000_000_000_000_000, [], (resource) => resource.gameData.archive.unlockFragment("fragment_credits")],
+                    ["fragment8", "Final Fragment", "The End.", "", 1_000_000_000_000_000_000_000_000, [], (resource) => resource.gameData.archive.unlockFragment("fragment_final")],
                 ]
             ],
         ])
@@ -266,8 +266,8 @@ static FRAGMENTS_INFO = new Map([
     ],
 
     [  
-        "fragment_credits",
-        ["Credits", "Thank you for playing HyperClicker!", "/archive/Z-TY4PLAY"]
+        "fragment_final",
+        ["Final Fragment", "HyperI/O Document #492133AE - Assault Phases [Restricted]", "/archive/Z-PHASES"]
     ],
 ]);
 

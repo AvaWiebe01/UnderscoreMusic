@@ -9,6 +9,11 @@
 	100% {opacity:1;}
 }
 
+@keyframes fade_slightly {
+	0% {opacity:0;}
+	100% {opacity:1;}
+}
+
 @keyframes shake {
     0%{transform:translate(1px,1px);}
 	10%{transform:translate(-1px,-1px);}
@@ -54,8 +59,19 @@ main {
 }
 
 main .display {
-    flex-grow: 1;
+    flex-grow:1;
+
+    display:flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: flex-end;
     margin:0.25rem 8rem;
+}
+
+main .display img {
+    display:block;
+    left:0;
+    bottom:0;
 }
 
 main .text_box_wrapper {
@@ -66,6 +82,7 @@ main .text_box_wrapper {
         inset 0 0 1.25rem var(--text-glow-color);
     margin:0.25rem 8rem;
     height:13.5rem;
+    position:relative;
 }
 
 main .top_text {
@@ -113,20 +130,19 @@ main .text_box_wrapper .text_box span{
     background:var(--transparent);
 } 
 
-/* SPEAKER */
-fmain .text_box .kyana {
-    color: var(--kyana-color);
-    text-shadow: var(--kyana-glow-color) 0 0 0.75rem;
+main .text_box_wrapper .arrow {
+    background:var(--transparent);
+    font-size: 2rem;
+    text-shadow: var(--text-glow-color) 0 0 0.75rem;
+    animation: fade_slightly 0.75s ease-in-out infinite alternate;
+    position: absolute;
+    display:block;
+    right:1rem;
+    bottom:0.25rem;
 }
 
-fmain .text_box .luna {
-    color: var(--luna-color);
-    text-shadow: var(--luna-glow-color) 0 0 0.75rem;
-}
-
-fmain .text_box .nyx {
-    color: var(--nyx-color);
-    text-shadow: var(--nyx-glow-color) 0 0 0.75rem;
+main .text_box_wrapper .arrow.hidden {
+    display:none;
 }
 
 /* STYLING */
