@@ -1,3 +1,45 @@
+.log {
+    border:0.25rem solid var(--text-color);
+	box-shadow: 0 0 1.25rem var(--text-glow-color),
+    inset 0 0 1.25rem var(--text-glow-color);
+    padding:1rem;
+    margin-bottom: 4rem;
+    background-color:var(--text-bg-color);
+}
+
+.log h2 {
+    background-color:var(--transparent);
+	font-family: 'Zector', 'Courier New', monospace;
+	font-weight: bold;
+	font-size: 3rem;
+	color: var(--main-color);
+    text-shadow: var(--main-text-glow-color) 0 0 0.75rem;
+	text-align:left;
+	position:relative;
+	margin:0 0 1rem 0;
+}
+
+.log h2 .sub {
+    background-color:var(--transparent);
+    font-size: 2rem;
+    color: var(--text-color);
+    text-shadow: var(--text-glow-color) 0 0 0.75rem;
+}
+
+.log h3 {
+    background-color:var(--transparent);
+    font-family: "spacemono", 'Courier New', monospace;
+    text-shadow: var(--text-glow-color) 0 0 0.75rem;
+    font-weight: bold;
+	font-size: 1.5rem;
+}
+
+.log p {
+    background-color:var(--transparent);
+    text-align:left;
+    font-family: "spacemono", 'Courier New', monospace;
+}
+
 p {
 	background-color:var(--transparent);
 	font-family: 'spacemono', 'Courier New', monospace;
@@ -12,6 +54,7 @@ p {
 
 p.message {
 	color: var(--main-color);
+	text-shadow: var(--main-text-glow-color) 0 0 0.75rem;
 }
 
 h4 {
@@ -20,6 +63,7 @@ h4 {
 	font-weight: bold;
 	font-size: 2rem;
 	color: var(--text-color);
+    text-shadow: var(--text-glow-color) 0 0 0.75rem;
 	text-align:left;
 	position:relative;
 	float:center;

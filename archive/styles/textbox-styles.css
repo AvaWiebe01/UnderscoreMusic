@@ -9,6 +9,11 @@
 	100% {opacity:1;}
 }
 
+@keyframes fade_slightly {
+	0% {opacity:0;}
+	100% {opacity:1;}
+}
+
 @keyframes shake {
     0%{transform:translate(1px,1px);}
 	10%{transform:translate(-1px,-1px);}
@@ -77,6 +82,7 @@ main .text_box_wrapper {
         inset 0 0 1.25rem var(--text-glow-color);
     margin:0.25rem 8rem;
     height:13.5rem;
+    position:relative;
 }
 
 main .top_text {
@@ -123,6 +129,21 @@ main .text_box_wrapper .text_box {
 main .text_box_wrapper .text_box span{
     background:var(--transparent);
 } 
+
+main .text_box_wrapper .arrow {
+    background:var(--transparent);
+    font-size: 2rem;
+    text-shadow: var(--text-glow-color) 0 0 0.75rem;
+    animation: fade_slightly 0.75s ease-in-out infinite alternate;
+    position: absolute;
+    display:block;
+    right:1rem;
+    bottom:0.25rem;
+}
+
+main .text_box_wrapper .arrow.hidden {
+    display:none;
+}
 
 /* STYLING */
 main .bold {
