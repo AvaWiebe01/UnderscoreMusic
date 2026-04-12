@@ -35,18 +35,20 @@
                 <div class="main_panel">
 
 					<div class = "resource_panel panel">
-						<div class = "resource_display not_unlocked" id="resource2_display_main">
-							<span class="pink">Kyaners:<br></span>
-							<span class="resource2_display accent_suffix"></span>
-						</div>
 						<div class = "resource_display" id="arcbits_display_main">
 							<span class="pink">ArcBits:</span><br>
 							<span class="arcbits_display accent_suffix"></span>
 							<p class="gain_display arcbits_gain_display"></p>
 						</div>
-						<div class = "resource_display not_unlocked" id="resource3_display_main">
-							<span class="pink">Lunas:<br></span>
-							<span class="resource3_display accent_suffix"></span>
+						<div class = "resource_display not_unlocked" id="hyperkeys_display_main">
+							<span class="pink">HyperKeys:<br></span>
+							<span class="hyperkeys_display accent_suffix"></span>
+							<p class="gain_display hyperkeys_gain_display"></p>
+						</div>
+						<div class = "resource_display not_unlocked" id="nullpointers_display_main">
+							<span class="pink">NullPointers:<br></span>
+							<span class="nullpointers_display accent_suffix"></span>
+							<p class="gain_display nullpointers_gain_display"></p>
 						</div>
 					</div>
 
@@ -54,6 +56,14 @@
 						<div class="generate_button">
 							<button class="resource_button" resource="arcbits">Decrypt</button>
 							<span class="btnval_display arcbits_btnval_display"></span>
+						</div>
+						<div class="generate_button not_unlocked" id="hyperkeys_btn_main">
+							<button class="resource_button" resource="hyperkeys">Construct</button>
+							<span class="btnval_display hyperkeys_btnval_display"></span>
+						</div>
+						<div class="generate_button not_unlocked" id="nullpointers_btn_main">
+							<button class="resource_button" resource="nullpointers">Locate</button>
+							<span class="btnval_display nullpointers_btnval_display"></span>
 						</div>
 					</div>
 
@@ -108,6 +118,10 @@
 						<div class="tab hypermods_panel_tab inactive_tab">
 							<h2>&lt; Available HyperMod Architectures &gt;</h2>
 							<h5>Alter the system architecture to unlock unique and powerful effects.</h5>
+							<div class = "hypermods_panel panel">
+								<div class="upgrade_list hypermod_upgrades_list" upgrade_type="hypermod_upgrades_list">
+								</div>
+							</div>
 						</div>
 
 						<div class="tab beyond_panel_tab inactive_tab">

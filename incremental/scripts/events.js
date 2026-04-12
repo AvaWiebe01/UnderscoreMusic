@@ -42,12 +42,14 @@ export function initEventHandlers(gameData = new GameData()) {
 
                 // add upgrade to purchased list (newest at the top)
                 let purchasedUpgradeList = document.querySelector(`.purchased_upgrade_list[upgrade_type="${upgradeTypeTag}"]`);
-                purchasedUpgradeList.innerHTML = `
-                    <div class="purchased_upgrade">
-                        <h3>${upgrade.title}</h3>
-                        <span class="description">${upgrade.description}</span>
-                    </div>
-                ` + purchasedUpgradeList.innerHTML;
+                if(purchasedUpgradeList) {
+                    purchasedUpgradeList.innerHTML = `
+                        <div class="purchased_upgrade">
+                            <h3>${upgrade.title}</h3>
+                            <span class="description">${upgrade.description}</span>
+                        </div>
+                    ` + purchasedUpgradeList.innerHTML;
+                }
 
                 // Remove upgrade from UI  
                 parentDiv.classList.add("fade-out");

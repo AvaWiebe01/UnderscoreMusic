@@ -231,6 +231,11 @@ class Cores extends Resource {
     }
 }
 
+export function unlockResource(htmlName) {
+    document.getElementById(`${htmlName}_display_main`).classList.remove("not_unlocked");
+    document.getElementById(`${htmlName}_btn_main`).classList.remove("not_unlocked");
+}
+
 export function initResources(RESOURCE_INFO = [], gameData) {
     let resources = new Map();
 

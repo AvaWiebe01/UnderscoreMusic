@@ -215,6 +215,12 @@ main .game .generate_panel .generate_button {
 	display:flex;
 	flex-direction: column;
 	text-align:center;
+	padding: 0 1rem;
+	width:25%;
+}
+
+main .game .generate_panel .generate_button.not_unlocked {
+	display:none;
 }
 
 main .game .generate_panel .generate_button button {

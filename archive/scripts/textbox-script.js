@@ -3,15 +3,17 @@ const speechContext = new AudioContext();
 class Line {
     content;
     speaker;
-    styling;
     speed;
+    styling;
+    musicTrigger;
     cursor;
 
-    constructor (content = "", speaker = null, speed = 1, styling = null) {
+    constructor (content = "", speaker = null, speed = 1, styling = null, musicTrigger = null) {
         this.content = content;
         this.speaker = speaker;
-        this.styling = styling;
         this.speed = speed;
+        this.styling = styling;
+        this.musicTrigger = musicTrigger;
 
         this.cursor = 0;
     }
@@ -24,7 +26,8 @@ const DIALOGUE = new Map([
         "A-CNTRL0",
         [
             new Line(   "HyperI/O Voice Transmission #1A70032E - Central District, 08:49 PM", "system", 2, 
-                        "pppppppp ppppp pppppppppppp _________ , aaaaaaa aaaaaaaa, ppppp pp"),
+                        "pppppppp ppppp pppppppppppp _________ , aaaaaaa aaaaaaaa, ppppp pp",
+                        "ambient"),
 
             new Line(   "We’re detecting a heat signature around that corner, Kyana. I’d be cautious.", "luna", 1,
                         "_____ _________ _ ____ _________ ______ ____ ______, _____. ___ __ ________."),
@@ -62,7 +65,8 @@ const DIALOGUE = new Map([
                         "____ __ _____ __ ______, _____ _____."),
 
             new Line(   "- END OF RECOVERED DATA -", "system", 2,
-                        "p ppp pp ppppppppp pppp p"),
+                        "p ppp pp ppppppppp pppp p",
+                        "stop"),
         ]
     ],
 
@@ -573,23 +577,12 @@ function displayLine(textbox, line = new Line("content not specified.", null, 1,
 
             // play voice
             if((line.cursor % Math.ceil(line.speed * 3) == 0 || line.content[line.cursor] == ".") && line.content[line.cursor] != " ") {
-                switch(line.speaker) {
-                    case "kyana":
-                        voices[0].pause();
-                        voices[0].play();
-                        break;
-                    case "luna":
-                        voices[1].pause();
-                        voices[1].play();
-                        break;
-                    case "onyx":
-                        voices[2].pause();
-                        voices[2].play();
-                        break;
-                    case "arin":
-                        voices[2].pause();
-                        voices[2].play();
-                        break;
+                
+                currentVoice = voices?.get(line.speaker);
+                
+                if(currentVoice) {
+                    voices.get(line.speaker).pause();
+                    voices.get(line.speaker).play();
                 }
             }
 
@@ -632,14 +625,22 @@ window.onload = async function() {
     const kyanaSpeech = document.getElementById("kyana_speech");
     const lunaSpeech = document.getElementById("luna_speech");
     const nyxSpeech = document.getElementById("nyx_speech");
+    const arinSpeech = document.getElementById("arin_speech");
     const kyanaTrack = speechContext.createMediaElementSource(kyanaSpeech);
     const lunaTrack = speechContext.createMediaElementSource(lunaSpeech);
     const nyxTrack = speechContext.createMediaElementSource(nyxSpeech);
+    const arinTrack = speechContext.createMediaElementSource(arinSpeech);
     kyanaTrack.connect(speechContext.destination);
     lunaTrack.connect(speechContext.destination);
     nyxTrack.connect(speechContext.destination);
+    arinTrack.connect(speechContext.destination);
 
-    const voices = [kyanaSpeech, lunaSpeech, nyxSpeech];
+    const voices = new Map([
+        ["kyana", kyanaSpeech],
+        ["luna", lunaSpeech],
+        ["nyx", nyxSpeech],
+        ["arin", arinSpeech],
+    ]);
 
     const portraitRoot = "/images/archive/";
     const portraits = new Map([ // speaker, portraitFilename
@@ -650,6 +651,23 @@ window.onload = async function() {
         ["system", "system-portrait-256.png"],
         ["unknown", "unknown-portrait-256.png"],
     ]);
+
+    const musicContext = new AudioContext();
+
+    const ambientResp = await fetch("/archive/music/ambient.wav");
+    ambientBuffer = await musicContext.decodeAudioData(await ambientResp.arrayBuffer());
+    const delicateResp = await fetch("/archive/music/delicate.wav");
+    delicateBuffer = await musicContext.decodeAudioData(await delicateResp.arrayBuffer());
+    const strongResp = await fetch("/archive/music/strong.wav");
+    strongBuffer = await musicContext.decodeAudioData(await strongResp.arrayBuffer());
+
+    const music = new Map([
+        ["ambient", ambientBuffer],   // Name:
+        ["delicate", delicateBuffer], // Name:
+        ["strong", strongBuffer],     // Name:
+    ])
+
+    var currentMusic = null;
 
     // Force a click to resume the AudioContext
     await waitForInput();
@@ -663,11 +681,28 @@ window.onload = async function() {
         // Display speaker portrait
         portraitDisplay.src = `${portraitRoot}${portraits.get(dialogue[i].speaker)}`;
 
+        // Trigger music
+        trigger = dialogue[i].musicTrigger;
+        if(trigger) {
+            currentMusic?.stop();
+            
+            // only play another track if we don't want music to be stopped
+            if(trigger != "stop") {
+                currentMusic = musicContext.createBufferSource();
+                currentMusic.buffer = music.get(trigger);
+                currentMusic.connect(musicContext.destination);
+                currentMusic.loop = true;
+                currentMusic.start();
+            }
+        }
+
         // Display the current line
         await displayLine(textbox, dialogue[i], speakerDisplay, voices);
 
-        // show the arrow icon
-        arrowDisplay.classList.remove("hidden");
+        // show the arrow icon unless this is the last dialogue
+        if (i != (dialogue.length-1)) {
+            arrowDisplay.classList.remove("hidden");
+        }
 
         // Wait until click/spacebar to display next line
         await waitForInput();

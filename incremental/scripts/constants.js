@@ -1,4 +1,5 @@
 import { Utils } from "./utils.js";
+import { unlockResource } from "./resources.js";
 
 export class Constants {
 
@@ -13,7 +14,9 @@ static DATA_SIZE_ABBREVIATED_SUFFIXES = ["b","Kb","Mb","Gb","Tb","Pb","Eb","Zb",
 static DATA_SIZE_SUFFIXES = ["Bits","Kilobits","Megabits","Gigabits","Terabits","Petabits","Exabits","Zettabits","Yottabits","Ronnabits","Quettabits","Wrennbits"];
 
 static RESOURCE_INFO = [ // htmlName, amt, delta, btnVal, displayableName
-    ["arcbits", 0, 0.00010, "ArcBits"],
+    ["arcbits", 111111111110, 0.00010, "ArcBits"],
+    ["hyperkeys", 0, 0.00001, "HyperKeys"],
+    ["nullpointers", 0, 0, "NullPointers"],
     //["arcbits", 1111110_000000_00000000_000000, 0.00010, "ArcBits"],
     //["hyperkeys", 0, 0, 0, "HyperKeys"],
 ];
@@ -27,15 +30,18 @@ static INITIAL_UPGRADES = new Map([
         new Map([
             [   
                 "arcbits",
-                ["arcKeys1", "clockSpeed1", "tab1"],
+                ["arcbitBtn1", "arcbitProc1", "tab1"],
             ],
+        ])
+    ],
 
-            /*
+    [
+        "hypermod_upgrades_list",
+        new Map([
             [
-                "resource2",
-                []
+                "hyperkeys",
+                ["hypermod1", "hypermod2"],
             ],
-            */
         ])
     ],
 
@@ -60,29 +66,31 @@ static ALL_UPGRADES_INFO = new Map([
 
                     // ArcBit Decryption
                     
-                        /* initial upgrade */ ["arcKeys1", "More ArcKeys", "<strong>Decrypting</strong> ArcBits yields <strong>1.25x</strong> more.", "", 0.001, ["arcKeys2"], (resource) => {resource.modifyBtnValBaseMult(1.25);}],
-                        ["arcKeys2", "Improved ArcKeys", "<strong>Decrypting</strong> ArcBits yields an additional <strong>1.50x</strong> more.", "", 0.004, ["arcKeys3", "arcMult1"], (resource) => {resource.modifyBtnValBaseMult(1.5);}],
-                        ["arcKeys3", "Optimized ArcKeys", "<strong>Decrypting</strong> ArcBits yields an additional <strong>2x</strong> more.", "", 0.02, ["arcKeys4"], (resource) => {resource.modifyBtnValBaseMult(2);}],
-                        ["arcKeys4", "Optimal ArcKeys", "<strong>Decrypting</strong> ArcBits yields an additional <strong>3x</strong> more.", "", 0.1, ["arcKeys5"], (resource) => {resource.modifyBtnValBaseMult(3);}],
-                        ["arcKeys5", "Over-Optimal ArcKeys", "<strong>Decrypting</strong> ArcBits yields an additional <strong>5x</strong> more.", "", 2.42, ["arcKeys6"], (resource) => {resource.modifyBtnValBaseMult(5);}],
+                        /* initial upgrade */ ["arcbitBtn1", "More ArcBits", "<strong>Decrypting</strong> ArcBits yields <strong>1.25x</strong> more.", "", 0.001, ["arcbitBtn2"], (resource) => {resource.modifyBtnValBaseMult(1.25);}],
+                        ["arcbitBtn2", "Improved ArcBits", "<strong>Decrypting</strong> ArcBits yields an additional <strong>1.50x</strong> more.", "", 0.004, ["arcbitBtn3", "arcMult1"], (resource) => {resource.modifyBtnValBaseMult(1.5);}],
+                        ["arcbitBtn3", "Optimized ArcBits", "<strong>Decrypting</strong> ArcBits yields an additional <strong>2x</strong> more.", "", 0.02, ["arcbitBtn4"], (resource) => {resource.modifyBtnValBaseMult(2);}],
+                        ["arcbitBtn4", "Optimal ArcBits", "<strong>Decrypting</strong> ArcBits yields an additional <strong>3x</strong> more.", "", 0.1, ["arcbitBtn5"], (resource) => {resource.modifyBtnValBaseMult(3);}],
+                        ["arcbitBtn5", "Hyper-Optimal ArcBits", "<strong>Decrypting</strong> ArcBits yields an additional <strong>5x</strong> more.", "", 2.42, ["arcbitBtn6"], (resource) => {resource.modifyBtnValBaseMult(5);}],
                         
-                        ["arcKeys6", "Over-Optimal ArcKeys", "<strong>Decrypting</strong> ArcBits yields an additional <strong>10x</strong> more.", "", 12, ["arcKeys7"], (resource) => {resource.modifyBtnValBaseMult(10);}],
-                        ["arcKeys7", "Over-Optimal ArcKeys", "<strong>Decrypting</strong> ArcBits yields an additional <strong>20x</strong> more.", "", 101, ["arcKeys8"], (resource) => {resource.modifyBtnValBaseMult(20);}],
-                        ["arcKeys8", "Over-Optimal ArcKeys", "<strong>Decrypting</strong> ArcBits yields an additional <strong>50x</strong> more.", "", 520, ["arcKeys9"], (resource) => {resource.modifyBtnValBaseMult(50);}],
-                        ["arcKeys9", "Over-Optimal ArcKeys", "<strong>Decrypting</strong> ArcBits yields an additional <strong>250x</strong> more.", "", 3210, [], (resource) => {resource.modifyBtnValBaseMult(250);}],
-                        
+                        ["arcbitBtn6", "Fast Decryptor", "<strong>Decrypting</strong> ArcBits yields an additional <strong>10x</strong> more.", "", 12, ["arcbitBtn7"], (resource) => {resource.modifyBtnValBaseMult(10);}],
+                        ["arcbitBtn7", "Efficient Decryptor", "<strong>Decrypting</strong> ArcBits yields an additional <strong>20x</strong> more.", "", 101, ["arcbitBtn8"], (resource) => {resource.modifyBtnValBaseMult(20);}],
+                        ["arcbitBtn8", "Threaded Decryptor", "<strong>Decrypting</strong> ArcBits yields an additional <strong>50x</strong> more.", "", 520, ["arcbitBtn9"], (resource) => {resource.modifyBtnValBaseMult(50);}],
+                        ["arcbitBtn9", "Accelerated Decryptor", "<strong>Decrypting</strong> ArcBits yields an additional <strong>250x</strong> more.", "", 3210, ["arcbitBtn10"], (resource) => {resource.modifyBtnValBaseMult(250);}],
+                        ["arcbitBtn10", "Quantum Decryptor", "<strong>Decrypting</strong> ArcBits yields an additional <strong>500x</strong> more.", "", 3210, [], (resource) => {resource.modifyBtnValBaseMult(500);}],
+
                     // ArcBit Processes
 
-                        /* initial upgrade */ ["clockSpeed1", "Clock Speed I", "<strong>Processes</strong> generate <strong>1.2x</strong> more ArcBits/s.", "", 0.05, ["clockSpeed2", "coreGen1"], (resource) => {resource.modifyDeltaBaseMult(1.2);}],
-                        ["clockSpeed2", "Clock Speed II", "<strong>Processes</strong> generate an additional <strong>1.6x</strong> more ArcBits/s.", "", 0.5, ["clockSpeed3"], (resource) => {resource.modifyDeltaBaseMult(1.6);}],
-                        ["clockSpeed3", "Clock Speed III", "<strong>Processes</strong> generate an additional <strong>2.0x</strong> more ArcBits/s.", "", 5, ["clockSpeed4"], (resource) => {resource.modifyDeltaBaseMult(2);}],
-                        ["clockSpeed4", "Clock Speed IV", "<strong>Processes</strong> generate an additional <strong>2.4x</strong> more ArcBits/s.", "", 5, ["clockSpeed5"], (resource) => {resource.modifyDeltaBaseMult(2.4);}],
-                        ["clockSpeed5", "Clock Speed V", "<strong>Processes</strong> generate an additional <strong>2.8x</strong> more ArcBits/s.", "", 5, ["clockSpeed6"], (resource) => {resource.modifyDeltaBaseMult(2.8);}],
+                        /* initial upgrade */ ["arcbitProc1", "Clock Speed I", "<strong>Processes</strong> generate <strong>1.2x</strong> more ArcBits/s.", "", 0.05, ["arcbitProc2", "coreGen1"], (resource) => {resource.modifyDeltaBaseMult(1.2);}],
+                        ["arcbitProc2", "Clock Speed II", "<strong>Processes</strong> generate an additional <strong>1.6x</strong> more ArcBits/s.", "", 0.5, ["arcbitProc3"], (resource) => {resource.modifyDeltaBaseMult(1.6);}],
+                        ["arcbitProc3", "Clock Speed III", "<strong>Processes</strong> generate an additional <strong>2.0x</strong> more ArcBits/s.", "", 5, ["arcbitProc4"], (resource) => {resource.modifyDeltaBaseMult(2);}],
+                        ["arcbitProc4", "Clock Speed IV", "<strong>Processes</strong> generate an additional <strong>2.4x</strong> more ArcBits/s.", "", 5, ["arcbitProc5"], (resource) => {resource.modifyDeltaBaseMult(2.4);}],
+                        ["arcbitProc5", "Clock Speed V", "<strong>Processes</strong> generate an additional <strong>2.8x</strong> more ArcBits/s.", "", 5, ["arcbitProc6"], (resource) => {resource.modifyDeltaBaseMult(2.8);}],
                         
-                        ["clockSpeed6", "Clock Speed III", "<strong>Processes</strong> generate an additional <strong>3.2x</strong> more ArcBits/s.", "", 5, ["clockSpeed7"], (resource) => {resource.modifyDeltaBaseMult(3.2);}],
-                        ["clockSpeed7", "Clock Speed III", "<strong>Processes</strong> generate an additional <strong>3.6x</strong> more ArcBits/s.", "", 5, ["clockSpeed8"], (resource) => {resource.modifyDeltaBaseMult(3.6);}],
-                        ["clockSpeed8", "Clock Speed III", "<strong>Processes</strong> generate an additional <strong>4.0x</strong> more ArcBits/s.", "", 5, ["clockSpeed9"], (resource) => {resource.modifyDeltaBaseMult(4);}],
-                        ["clockSpeed9", "Clock Speed III", "<strong>Processes</strong> generate an additional <strong>10x</strong> more ArcBits/s.", "", 5, [], (resource) => {resource.modifyDeltaBaseMult(10);}],
+                        ["arcbitProc6", "Overhead Reduction I", "<strong>Processes</strong> generate an additional <strong>3.2x</strong> more ArcBits/s.", "", 5, ["arcbitProc7"], (resource) => {resource.modifyDeltaBaseMult(3.2);}],
+                        ["arcbitProc7", "Overhead Reduction II", "<strong>Processes</strong> generate an additional <strong>3.6x</strong> more ArcBits/s.", "", 5, ["arcbitProc8"], (resource) => {resource.modifyDeltaBaseMult(3.6);}],
+                        ["arcbitProc8", "Overhead Reduction III", "<strong>Processes</strong> generate an additional <strong>4.0x</strong> more ArcBits/s.", "", 5, ["arcbitProc9"], (resource) => {resource.modifyDeltaBaseMult(4);}],
+                        ["arcbitProc9", "Overhead Reduction IV", "<strong>Processes</strong> generate an additional <strong>10x</strong> more ArcBits/s.", "", 5, ["arcbitProc10"], (resource) => {resource.modifyDeltaBaseMult(10);}],
+                        ["arcbitProc10", "Overhead Reduction V", "<strong>Processes</strong> generate an additional <strong>25x</strong> more ArcBits/s.", "", 5, [], (resource) => {resource.modifyDeltaBaseMult(25);}],
 
                     // Cores
 
@@ -101,7 +109,7 @@ static ALL_UPGRADES_INFO = new Map([
                         ["coreCap6", "MultiProcessing", "Increase <strong>Cores</strong> capacity by <strong>200</strong>.", "", 1_500_000, ["coreCap7"], (resource) => {resource.gameData.resources.get("cores").modifyMaxCores(200);}],
                         ["coreCap7", "MegaProcessing", "Increase <strong>Cores</strong> capacity by <strong>400</strong>.", "", 75_000_000, ["coreCap8"], (resource) => {resource.gameData.resources.get("cores").modifyMaxCores(400);}],
                         ["coreCap8", "HyperProcessing", "Increase <strong>Cores</strong> capacity by <strong>800</strong>.", "", 1_000_000_000, ["coreCap9"], (resource) => {resource.gameData.resources.get("cores").modifyMaxCores(800);}],
-                        ["coreCap9", "Quantum Processing", "Increase <strong>Cores</strong> capacity by <strong>2000</strong>.", "", 64_000_000_000, [], (resource) => {resource.gameData.resources.get("cores").modifyMaxCores(2000);}],
+                        ["coreCap9", "QuantumProcessing", "Increase <strong>Cores</strong> capacity by <strong>2000</strong>.", "", 64_000_000_000, [], (resource) => {resource.gameData.resources.get("cores").modifyMaxCores(2000);}],
 
                     // Unlockable Multipliers
 
@@ -129,8 +137,8 @@ static ALL_UPGRADES_INFO = new Map([
                     
                     // Unlockable Tabs
                     /* initial upgrade */ ["tab1", "Expansion: Archive", "Unlock an <strong class='rainbow'>Archive</strong> of fragmented data.", "", 0.32, ["tab2"], () => {Utils.unlockTab("archive_panel_tab");}],
-                    ["tab2", "Expansion: HyperMods", "Unlock the <strong class='rainbow'>HyperMod</strong> interface.", "", 32_000, ["tab3"], () => {Utils.unlockTab("hypermods_panel_tab");}],
-                    ["tab3", "Expansion: BEYOND", "Un<span class='obfuscated'>l</span>ock ref<span class='obfuscated'>e</span>rences t<span class='obfuscated'>o</span> <strong class='rainbow'>out-of-b<span class='obfuscated'>o</span>unds</strong> memory ad<span class='obfuscated'>d</span>resses.", "", 32_000_000_000, [], () => {Utils.unlockTab("beyond_panel_tab");}],
+                    ["tab2", "Expansion: HyperMods", "Unlock the <strong class='rainbow'>HyperMod</strong> interface.", "", 32_000, ["tab3"], () => {Utils.unlockTab("hypermods_panel_tab"); unlockResource("hyperkeys");}],
+                    ["tab3", "Expansion: BEYOND", "Un<span class='obfuscated'>l</span>ock ref<span class='obfuscated'>e</span>rences t<span class='obfuscated'>o</span> <strong class='rainbow'>out-of-b<span class='obfuscated'>o</span>unds</strong> memory addres<span class='obfuscated'>s</span>es.", "", 32_000_000_000, [], () => {Utils.unlockTab("beyond_panel_tab"); unlockResource("nullpointers");}],
 
                     // Unlockable Systems (new UI elements in existing tabs)
                 ]
@@ -138,7 +146,7 @@ static ALL_UPGRADES_INFO = new Map([
 
             /*
             [
-                "resource2",
+                "hyperkeys",
                 [
 
                 ]
@@ -147,31 +155,20 @@ static ALL_UPGRADES_INFO = new Map([
         ])
     ],
 
-    /*
+    
     [
         "hypermod_upgrades_list",
         new Map([ // resourceName, upgradesList
             [
-                "arcbits",
+                "hyperkeys",
                 [
-                    ["archive1", "Archive 01", "Hi!", "", 1_000, (resource) => console.log("Unlock Archive 01")],
-                    ["archive2", "Archive 02", "", "", 1_000_000, (resource) => console.log("Unlock Archive 02")],
-                    ["archive3", "Archive 03", "", "", 1_000_000_000, (resource) => console.log("Unlock Archive 03")],
-                    ["archive4", "Archive 04", "", "", 1_000_000_000_000, (resource) => console.log("Unlock Archive 04")],
+                    /*initial upgrade*/["hypermod1", "HyperCore Architecture", "<strong>Core</strong> generation rate is multiplied by your <strong>HyperKey</strong> amount.", "", 0.0005, ["hypermod2"], (resource) => {resource.modifyBtnValBaseMult(1.5);}],
+                    /*initial upgrade*/["hypermod2", "HyperMult Architecture", "<strong>Constructing</strong> HyperKeys provides a temporary multiplier to decryption and process ArcBit generation.", "", 0.0006, [], (resource) => {resource.modifyBtnValBaseMult(1.5);}],
                 ]
             ],
-
-            
-            [
-                "resource2",
-                [
-
-                ]
-            ],
-            
         ])
     ],
-    */
+    
 
     [
         "archive_unlocks_list",
@@ -179,14 +176,14 @@ static ALL_UPGRADES_INFO = new Map([
             [
                 "arcbits",
                 [
-                    ["fragment1", "Fragment 0", "HyperI/O Voice Transmission #1A70032E", "", 1_000, ["fragment2", "fragment3", "fragment4"], (resource) => resource.gameData.archive.unlockFragment("fragment_0")],
-                    ["fragment2", "Fragment 0.5", "Codex Partition #2E830AB4", "", 1_000_000, [], (resource) => resource.gameData.archive.unlockFragment("fragment_0.5")],
-                    ["fragment3", "Fragment 1", "HyperI/O Camera #3E9EFFF4 Audio Feed", "", 1_000_000_000, [], (resource) => resource.gameData.archive.unlockFragment("fragment_1")],
-                    ["fragment4", "Fragment 2", "HyperI/O Voice Transmission #1A7F327E", "", 1_000_000_000_000, ["fragment5"], (resource) => resource.gameData.archive.unlockFragment("fragment_2")],
-                    ["fragment5", "Fragment 3", "New Archon Camera #112D8A39 Audio Feed", "", 1_000_000_000_000_000, ["fragment6", "fragment7"], (resource) => resource.gameData.archive.unlockFragment("fragment_3")],
-                    ["fragment6", "Fragment 3.5", "Codex Partition #448A120F", "", 1_000_000_000_000_000_000, [], (resource) => resource.gameData.archive.unlockFragment("fragment_3.5")],
+                    ["fragment1", "Fragment 0", "HyperI/O Voice Transmission #1A70032E", "", 1.25, ["fragment2", "fragment3", "fragment4"], (resource) => resource.gameData.archive.unlockFragment("fragment_0")],
+                    ["fragment2", "Fragment 0.5", "Codex Partition #2E830AB4", "", 45, [], (resource) => resource.gameData.archive.unlockFragment("fragment_0.5")],
+                    ["fragment3", "Fragment 1", "HyperI/O Camera #3E9EFFF4 Audio Feed", "", 999, [], (resource) => resource.gameData.archive.unlockFragment("fragment_1")],
+                    ["fragment4", "Fragment 2", "HyperI/O Voice Transmission #1A7F327E", "", 45_000, ["fragment5"], (resource) => resource.gameData.archive.unlockFragment("fragment_2")],
+                    ["fragment5", "Fragment 3", "New Archon Camera #112D8A39 Audio Feed", "", 1_000_000_000, ["fragment6", "fragment7"], (resource) => resource.gameData.archive.unlockFragment("fragment_3")],
+                    ["fragment6", "Fragment 3.5", "Codex Partition #448A120F", "", 1_000_000_000_000_000, [], (resource) => resource.gameData.archive.unlockFragment("fragment_3.5")],
                     ["fragment7", "Fragment 4", "HyperI/O Camera #34C1D859 Audio Feed", "", 1_000_000_000_000_000_000_000, ["fragment8"], (resource) => resource.gameData.archive.unlockFragment("fragment_4")],
-                    ["fragment8", "Final Fragment", "The End.", "", 1_000_000_000_000_000_000_000_000, [], (resource) => resource.gameData.archive.unlockFragment("fragment_final")],
+                    ["fragment8", "Final Fragment", "The End.", "", 1_000_000_000_000_000_000_000_000_000, [], (resource) => resource.gameData.archive.unlockFragment("fragment_final")],
                 ]
             ],
         ])
@@ -203,16 +200,23 @@ static UPGRADE_BUTTON_CONTENT = new Map([
         ])
     ],
 
-    /*
     [
         "hypermod_upgrades_list",
         new Map([
-            ["default", "[Apply HyperMod]"],
-            ["cannot_buy", "[Invalid]"],
-            ["purchased", "[HyperMod Successful]"],
+            ["default", "[Unlock]"],
+            ["cannot_buy", "[Invalid Keys]"],
+            ["purchased", "[Unlocked]"],
         ])
     ],
-    */
+
+    [
+        "beyond_upgrades_list",
+        new Map([
+            ["default", "[Reference]"],
+            ["cannot_buy", "[<span class='obfuscated'>xxxxxxxx</span>]"],
+            ["purchased", "[Referenced]"],
+        ])
+    ],
 
     [
         "archive_unlocks_list",
@@ -231,9 +235,9 @@ static ALL_PROCESSES_INFO = new Map([
             ["linkCrawler", "Link Crawler", "Follows links in the Codex to gather surface data.", "", 0.01, 1, 0.002],
             ["hyperReader", "HyperReader++", "Reads hidden hypertext to parse deeper data.", "", 2, 3, 0.04],
             ["infiltrator", "1nfiltr4t0r", "Brute forces passwords to read hidden files.", "", 128, 8, 1],
-            ["keyBreak", "KeyBreak v0.7-internaluse", "Uses advanced decryption to breach secure servers.", "", 24000, 15, 236],
-            ["uberhack", "[-UBERHACK-]", "Combines several attacks into a single devastating payload.", "", 306500, 36, 8421],
-            ["bladeSys", "BladeSys by Wrenn Software", "Strikes a blade through any cryptography issue with dominating precision.", "", 3200000, 80, 8],
+            ["keyBreak", "KeyBreak v0.7-internaluse", "Uses advanced decryption to breach secure servers.", "", 24_000, 15, 236],
+            ["uberhack", "[-UBERHACK-]", "Combines several attacks into a single devastating payload.", "", 306_500, 36, 8421],
+            ["bladeSys", "BladeSys by Wrenn Software", "Strikes a blade through any cryptography issue with dominating precision.", "", 3_200_000, 80, 8],
         ]
     ],
 
