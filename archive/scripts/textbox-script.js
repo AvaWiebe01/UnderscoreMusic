@@ -3,15 +3,17 @@ const speechContext = new AudioContext();
 class Line {
     content;
     speaker;
-    styling;
     speed;
+    styling;
+    musicTrigger;
     cursor;
 
-    constructor (content = "", speaker = null, speed = 1, styling = null) {
+    constructor (content = "", speaker = null, speed = 1, styling = null, musicTrigger = null) {
         this.content = content;
         this.speaker = speaker;
-        this.styling = styling;
         this.speed = speed;
+        this.styling = styling;
+        this.musicTrigger = musicTrigger;
 
         this.cursor = 0;
     }
@@ -24,7 +26,8 @@ const DIALOGUE = new Map([
         "A-CNTRL0",
         [
             new Line(   "HyperI/O Voice Transmission #1A70032E - Central District, 08:49 PM", "system", 2, 
-                        "pppppppp ppppp pppppppppppp _________ . aaaaaaa aaaaaaaa, ppppp pp"),
+                        "pppppppp ppppp pppppppppppp _________ , aaaaaaa aaaaaaaa, ppppp pp",
+                        "ambient"),
 
             new Line(   "We’re detecting a heat signature around that corner, Kyana. I’d be cautious.", "luna", 1,
                         "_____ _________ _ ____ _________ ______ ____ ______, _____. ___ __ ________."),
@@ -62,7 +65,8 @@ const DIALOGUE = new Map([
                         "____ __ _____ __ ______, _____ _____."),
 
             new Line(   "- END OF RECOVERED DATA -", "system", 2,
-                        "p ppp pp ppppppppp pppp p"),
+                        "p ppp pp ppppppppp pppp p",
+                        "stop"),
         ]
     ],
 
@@ -77,7 +81,7 @@ const DIALOGUE = new Map([
         "C-LEVEL0",
         [
             new Line(   "HyperI/O Camera #3E9EFFF4 Audio Feed - Hyper Beam HQ, 12:41 AM", "system", 2,
-                        "pppppppp pppppp _________ ppppp pppp . aaaaa aaaa aa, ppppp pp"),
+                        "pppppppp pppppp _________ ppppp pppp , aaaaa aaaa aa, ppppp pp"),
 
             new Line(   "Oh, hey Kyana! Didn't expect you to drop by today.", "onyx", 1,
                         "__, ___ _____. ______ ______ ___ __ ____ __ _____."),
@@ -101,7 +105,7 @@ const DIALOGUE = new Map([
                         "____, ______ __________ ____. _____ __. _____ ___ _____,,,"),
 
             new Line(   "HyperI/O Camera #46FFA910 Audio Feed - Hyper Beam HQ, 12:45 AM", "system", 2,
-                        "pppppppp pppppp _________ ppppp pppp . aaaaa aaaa aa, ppppp pp"),
+                        "pppppppp pppppp _________ ppppp pppp , aaaaa aaaa aa, ppppp pp"),
 
             new Line(   "Okay... so, update on our project.", "kyana", 1,
                         "____,,, __, ______ __ ___ _______."),
@@ -133,7 +137,7 @@ const DIALOGUE = new Map([
         "D-MSG010",
         [
             new Line(   "HyperI/O Voice Transmission #1A7F327E - Hyper Beam HQ, 10:22 PM", "system", 2,
-                        "pppppppp ppppp pppppppppppp _________ . aaaaa aaaa aa, ppppp pp"),
+                        "pppppppp ppppp pppppppppppp _________ , aaaaa aaaa aa, ppppp pp"),
 
             new Line(   "RING... RING... RING... RING...", "system", 0.5,
                         "rrrrrrr.rrrrrrr.rrrrrrr.rrrrrrr"),
@@ -154,7 +158,7 @@ const DIALOGUE = new Map([
                         ",,,"),
 
             new Line(   "Check your secure drive when you're done with whatever it is that you do after operations. I sent a transfer request with the tool you asked for.", "onyx", 1,
-                        "_____ ____ ______ _____ ____ ______ ____ ____ ________ __ __ ____ ___ rr _____ __________. _ ____ _ ________ _______ ____ ___ ____ ___ _____ ___."),
+                        "_____ ____ ______ _____ ____ ______ ____ ____ ________ __ __ ____ ___ ii _____ __________. _ ____ _ ________ _______ ____ ___ ____ ___ _____ ___."),
 
             new Line(   "...you can ask me if anything confuses you. I know you're not the most... up-to-date with tech.", "onyx", 1,
                         ",,,___ ___ ___ __ __ ________ ________ ___. _ ____ ______ ___ ___ ____,,, iiiiiiiiii ____ ____."),
@@ -174,7 +178,7 @@ const DIALOGUE = new Map([
         "E-KL32FA",
         [
             new Line(   "New Archon Camera #112D8A39 Audio Feed - Lotus Apartment Complex, 12:37 AM", "system", 2,
-                        "ppp pppppp pppppp _________ ppppp pppp . aaaaa aaaaaaaaa aaaaaaa, ppppp pp"),
+                        "ppp pppppp pppppp _________ ppppp pppp , aaaaa aaaaaaaaa aaaaaaa, ppppp pp"),
 
             new Line(   "Kyana, I’m going to bed~!", "luna", 1,
                         "_____, ___ _____ __ ____."),
@@ -336,7 +340,7 @@ const DIALOGUE = new Map([
                         "_ _____ ___."),
 
             new Line(   "...but I still don’t get anything. Who created it? Who controls it? How did it appear from nowhere??", "luna", 1,
-                        ",,,___ _ _____ _____ ___ iiiiiiii. ___ _______ __. ___ iiiiiiii __. ___ ___ __ ______ ____ sssssssss"),
+                        "fff___ _ _____ _____ ___ iiiiiiii. ___ _______ __. ___ iiiiiiii __. ___ ___ __ ______ ____ sssssssss"),
 
             new Line(   "And what does it mean for us??", "luna", 1,
                         "___ ____ ____ __ ____ ___ ssss"),
@@ -345,7 +349,7 @@ const DIALOGUE = new Map([
                         "_ _____ ____."),
 
             new Line(   "...I don’t know...", "kyana", 0.5,
-                        ",,,f fffff ffff,,,"),
+                        "ffff fffff ffff,,,"),
 
             new Line(   "But we have to do something. We can’t let anyone use it. If that’s even possible.", "kyana", 1,
                         "___ __ ____ __ __ _________. __ _____ ___ ______ ___ __. __ ______ ____ ________."),
@@ -363,7 +367,7 @@ const DIALOGUE = new Map([
                         ",,,"),
 
             new Line(   "I knew you would say that...", "kyana", 1,
-                        "_ ____ ___ _____ ___ ____,,,"),
+                        "f ffff fff fffff fff ffff,,,"),
 
             new Line(   "I-I’m sorry, I didn’t mean to sound angry-", "luna", 1,
                         "_,___ _____, _ ______ ____ __ _____ _____."),
@@ -381,7 +385,7 @@ const DIALOGUE = new Map([
                         ",,,"),
 
             new Line(   "I am, too.", "luna", 1,
-                        "_ __, ___."),
+                        "f ff, fff."),
 
             new Line(   "You’ve never acted like this before... I don’t know what to say...", "luna", 1,
                         "______ _____ _____ ____ ____ ______,,, _ _____ ____ ____ __ ___,,,"),
@@ -444,7 +448,7 @@ const DIALOGUE = new Map([
         "G-ADMIN1",
         [
             new Line(   "HyperI/O Camera #34C1D859 Audio Feed - Hyper Beam HQ Admin Office, 6:00 AM", "system", 2,
-                        "pppppppp pppppp _________ ppppp pppp . aaaaa aaaa aa aaaaa aaaaaa, pppp pp"),
+                        "pppppppp pppppp _________ ppppp pppp , aaaaa aaaa aa aaaaa aaaaaa, pppp pp"),
 
             new Line(   "Good morning, Arin. I think it’s time for us to have a little chat, hm?", "kyana", 1,
                         "____ _______, ____. _ _____ ____ ____ ___ __ __ ____ _ ______ iiii, www"),
@@ -467,8 +471,8 @@ const DIALOGUE = new Map([
             new Line(   "I don’t know what you’re talking about. I haven’t lied to you.", "arin", 1,
                         "_ _____ ____ ____ ______ _______ _____. _ _______ ____ __ ___."),
 
-            new Line(   "God, enough with the excuses. Do I need to force it out of you?", "kyana", 1,
-                        "___, iiiiii ____ ___ _______. __ _ ____ __ bbbbb __ ___ __ ___."),
+            new Line(   "God, stop pretending. Do I need to force it out of you?", "kyana", 1,
+                        "iii, ____ __________. __ _ ____ __ bbbbb __ ___ __ ___."),
 
             new Line(   "...say what you mean, Kyana. What do you think I’ve lied about?", "arin", 1,
                         ",,,___ ____ ___ ____, _____. ____ __ ___ _____ ____ ____ _____."),
@@ -573,23 +577,12 @@ function displayLine(textbox, line = new Line("content not specified.", null, 1,
 
             // play voice
             if((line.cursor % Math.ceil(line.speed * 3) == 0 || line.content[line.cursor] == ".") && line.content[line.cursor] != " ") {
-                switch(line.speaker) {
-                    case "kyana":
-                        voices[0].pause();
-                        voices[0].play();
-                        break;
-                    case "luna":
-                        voices[1].pause();
-                        voices[1].play();
-                        break;
-                    case "onyx":
-                        voices[2].pause();
-                        voices[2].play();
-                        break;
-                    case "arin":
-                        voices[2].pause();
-                        voices[2].play();
-                        break;
+                
+                currentVoice = voices?.get(line.speaker);
+                
+                if(currentVoice) {
+                    voices.get(line.speaker).pause();
+                    voices.get(line.speaker).play();
                 }
             }
 
@@ -632,14 +625,22 @@ window.onload = async function() {
     const kyanaSpeech = document.getElementById("kyana_speech");
     const lunaSpeech = document.getElementById("luna_speech");
     const nyxSpeech = document.getElementById("nyx_speech");
+    const arinSpeech = document.getElementById("arin_speech");
     const kyanaTrack = speechContext.createMediaElementSource(kyanaSpeech);
     const lunaTrack = speechContext.createMediaElementSource(lunaSpeech);
     const nyxTrack = speechContext.createMediaElementSource(nyxSpeech);
+    const arinTrack = speechContext.createMediaElementSource(arinSpeech);
     kyanaTrack.connect(speechContext.destination);
     lunaTrack.connect(speechContext.destination);
     nyxTrack.connect(speechContext.destination);
+    arinTrack.connect(speechContext.destination);
 
-    const voices = [kyanaSpeech, lunaSpeech, nyxSpeech];
+    const voices = new Map([
+        ["kyana", kyanaSpeech],
+        ["luna", lunaSpeech],
+        ["nyx", nyxSpeech],
+        ["arin", arinSpeech],
+    ]);
 
     const portraitRoot = "/images/archive/";
     const portraits = new Map([ // speaker, portraitFilename
@@ -650,6 +651,23 @@ window.onload = async function() {
         ["system", "system-portrait-256.png"],
         ["unknown", "unknown-portrait-256.png"],
     ]);
+
+    const musicContext = new AudioContext();
+
+    const ambientResp = await fetch("/archive/music/ambient.wav");
+    ambientBuffer = await musicContext.decodeAudioData(await ambientResp.arrayBuffer());
+    const delicateResp = await fetch("/archive/music/delicate.wav");
+    delicateBuffer = await musicContext.decodeAudioData(await delicateResp.arrayBuffer());
+    const strongResp = await fetch("/archive/music/strong.wav");
+    strongBuffer = await musicContext.decodeAudioData(await strongResp.arrayBuffer());
+
+    const music = new Map([
+        ["ambient", ambientBuffer],   // Name:
+        ["delicate", delicateBuffer], // Name:
+        ["strong", strongBuffer],     // Name:
+    ])
+
+    var currentMusic = null;
 
     // Force a click to resume the AudioContext
     await waitForInput();
@@ -663,11 +681,28 @@ window.onload = async function() {
         // Display speaker portrait
         portraitDisplay.src = `${portraitRoot}${portraits.get(dialogue[i].speaker)}`;
 
+        // Trigger music
+        trigger = dialogue[i].musicTrigger;
+        if(trigger) {
+            currentMusic?.stop();
+            
+            // only play another track if we don't want music to be stopped
+            if(trigger != "stop") {
+                currentMusic = musicContext.createBufferSource();
+                currentMusic.buffer = music.get(trigger);
+                currentMusic.connect(musicContext.destination);
+                currentMusic.loop = true;
+                currentMusic.start();
+            }
+        }
+
         // Display the current line
         await displayLine(textbox, dialogue[i], speakerDisplay, voices);
 
-        // show the arrow icon
-        arrowDisplay.classList.remove("hidden");
+        // show the arrow icon unless this is the last dialogue
+        if (i != (dialogue.length-1)) {
+            arrowDisplay.classList.remove("hidden");
+        }
 
         // Wait until click/spacebar to display next line
         await waitForInput();

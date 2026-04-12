@@ -215,6 +215,12 @@ main .game .generate_panel .generate_button {
 	display:flex;
 	flex-direction: column;
 	text-align:center;
+	padding: 0 1rem;
+	width:25%;
+}
+
+main .game .generate_panel .generate_button.not_unlocked {
+	display:none;
 }
 
 main .game .generate_panel .generate_button button {
@@ -262,6 +268,10 @@ main .game .tabs_wrapper .tab_buttons button.selected {
 	background:var(--main-color);
 	color:var(--bg-color);
 	transition-duration:0.1s;
+}
+
+main .game .tab_buttons .locked_tab {
+	display:none;
 }
 
 main .game .tabs_wrapper .inactive_tab {
@@ -410,6 +420,31 @@ main .game .main_panel span.suffix {
     font-family:"spacemono", "Courier New", monospace;
     text-align:center;
     text-shadow: var(--main-text-glow-color) 0 0 0.75rem;
+}
+
+main .game .purchased_upgrade_list {
+	display:flex;
+	gap:0.5rem;
+	flex-direction:column;
+}
+
+main .game .purchased_upgrade_list .purchased_upgrade {
+	background:var(--text-bg-color);
+	border:0.1rem solid var(--text-color);
+	box-shadow: 0 0 0.75rem var(--text-glow-color),
+		inset 0 0 0.75rem var(--text-glow-color);
+	padding:0.5rem;
+}
+
+main .game .purchased_upgrade_list h3 {
+	font-size: 1.25rem;
+	font-weight:normal;
+	margin:0;
+}
+
+main .game .purchased_upgrade_list .description {
+	font-size: 0.875rem;
+	font-weight:normal;
 }
 
 main .game .process_panel {

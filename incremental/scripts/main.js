@@ -77,7 +77,7 @@ window.onload = function() {
 function gameTick(currentTime, gameData = new GameData()) {
 
     // Performance metric
-    // let startTime, endTime; startTime = window.performance.now() * 1000; 
+    //let startTime, endTime; startTime = window.performance.now() * 1000; 
 
     let deltaTime = currentTime - gameData.lastTime;
 
@@ -95,6 +95,7 @@ function gameTick(currentTime, gameData = new GameData()) {
         gameData.processes.forEach((processMap, key) => {
             processMap.forEach((process, key) => {
                 process.displayActiveProduction();
+                process.displayBaseGeneration();
             });
         });
 
@@ -117,7 +118,7 @@ function gameTick(currentTime, gameData = new GameData()) {
     }
 
     // Performance metric
-    // endTime = window.performance.now() * 1000; console.log(`Unit: Microseconds >>> Start: ${startTime} > End: ${endTime} > GENERATION TIME: ${endTime - startTime} > ALLOTTED TIME/FRAME: ${1000000/Constants.REFRESH_RATE} > % OF TIME USED: ${((endTime - startTime) / (1000000/Constants.REFRESH_RATE)) * 100}`);
+    //endTime = window.performance.now() * 1000; console.log(`Unit: Microseconds >>> Start: ${startTime} > End: ${endTime} > GENERATION TIME: ${endTime - startTime} > ALLOTTED TIME/FRAME: ${1000000/Constants.REFRESH_RATE} > % OF TIME USED: ${((endTime - startTime) / (1000000/Constants.REFRESH_RATE)) * 100}`);
 
     requestAnimationFrame((currentTime) => gameTick(currentTime, gameData));
 }

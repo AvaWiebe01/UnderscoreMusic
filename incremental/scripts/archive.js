@@ -25,7 +25,7 @@ export class Archive {
                 <div class="fragment not_unlocked" fragment_key="${key}">
                     <h3>${fragmentInfo[0]}</h3>
                     <span class="fragment_description">${fragmentInfo[1]}</span>
-                    <a class="fragment_link" href="${fragmentInfo[2]}">[View ${fragmentInfo[0]}]</a>
+                    <a class="fragment_link" href="${fragmentInfo[2]}" target="_blank">[View ${fragmentInfo[0]}]</a>
                 </div>
             `;
         });
