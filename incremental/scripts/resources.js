@@ -59,8 +59,16 @@ export class Resource {
         this.deltaMultSources.add(this.gameData.multipliers.get(sourceName));
     }
 
+    removeDeltaMultSource(sourceName) {
+        this.deltaMultSources.delete(this.gameData.multipliers.get(sourceName));
+    }
+
     addBtnValMultSource(sourceName) {
         this.btnValMultSources.add(this.gameData.multipliers.get(sourceName));
+    }
+
+    removeBtnValMultSource(sourceName) {
+        this.btnValMultSources.delete(this.gameData.multipliers.get(sourceName));
     }
 
     calculateGain() {

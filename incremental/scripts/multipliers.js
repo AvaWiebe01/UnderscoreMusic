@@ -37,7 +37,7 @@ class MultArcMult extends Multiplier {
         this.decayFactor = 1;
         this.increaseFactor = 1;
 
-        $(".resource_button").click((event) => {
+        $(".resource_button[resource='arcbits']").click((event) => {
             this.mult += this.increaseFactor * 0.2;
         })
     }
@@ -96,6 +96,36 @@ class MultProximityComputing extends Multiplier {
     }
 }
 
+// multiplier based on clicking hyperkey generation fast
+class MultHyperMult extends Multiplier {
+    decayFactor;
+    increaseFactor;
+
+    constructor(name, gameData = new GameData) {
+        super(name, gameData);
+        this.decayFactor = 1;
+        this.increaseFactor = 1;
+
+        // less mult is granted the higher the current mult, to balance the longer decay
+        $(".resource_button[resource='hyperkeys']").click((event) => {
+            this.mult += this.increaseFactor * 0.4 / this.mult;
+        })
+    }
+
+    getMult() {
+        return this.mult;
+    }
+
+    multUpdate() {
+        this.decay();
+    }
+
+    // this multiplier lasts much longer than arcMult
+    decay() {
+        this.mult -= this.decayFactor * 0.007 * (2**(3*(this.mult-2)) - 0.125); // decay approaches 0 as mult approaches 1
+    }
+}
+
 /*
 class MultTemp extends Multiplier {
     constructor(name, gameData = new GameData) {
@@ -117,6 +147,7 @@ export function initMultipliers(gameData = new GameData) {
         ["arcMult", new MultArcMult("arcMult", gameData)],
         ["ultraboost", new MultUltraboost("ultraboost", gameData)],
         ["proximityComputing", new MultProximityComputing("proximityComputing", gameData)],
+        ["hyperMult", new MultHyperMult("hyperMult", gameData)],
     ]);
 
     return multipliers;

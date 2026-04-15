@@ -3,15 +3,18 @@ export class GameData {
     upgrades;
     multipliers;
     processes;
+    hypermods;
     cores;
     archive;
 
     lastTime;
     extraTimer;
+    autoSaveTimer;
 
     constructor() {
         this.lastTime = performance.now(); // To calculate deltaTime
         this.extraTimer = 0;
+        this.autoSaveTimer = 0;
     }
 
     addResources(resources) {
@@ -28,6 +31,10 @@ export class GameData {
 
     addProcesses(processes) {
         this.processes = processes;
+    }
+
+    addHyperMods(hypermods) {
+        this.hypermods = hypermods;
     }
 
     addArchive(archive) {

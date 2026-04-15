@@ -569,6 +569,17 @@ main .game .process_list .process .process_info p {
 	margin-left: 1rem;
 }
 
+main .game .architectures_panel .architecture_list {
+	display: flex;
+	flex-direction:column;
+	justify-content:flex-start;
+	align-items:center;
+}
+
+main .game .architectures_panel .architecture_list .no_hypermods_display {
+	text-align:center;
+}
+
 main .game .beyond_panel .beyond_menu {
 	height:10rem;
 	border: 0.1rem solid var(--text-color);

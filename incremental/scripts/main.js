@@ -13,7 +13,11 @@ import { Upgrade, initUpgrades, displayUpgrades } from "./upgrades.js";
 
 import { Multiplier, initMultipliers } from "./multipliers.js";
 
+import { HyperMod, initHyperMods } from "./hypermods.js";
+
 import { Archive, initArchive } from "./archive.js";
+
+import { saveGame, loadGame } from "./save.js";
 
 // ======== START ======== //
 window.onload = function() {
@@ -26,6 +30,7 @@ window.onload = function() {
     const upgrades = initUpgrades(Constants.ALL_UPGRADES_INFO, resources, gameData);
     const multipliers = initMultipliers(gameData);
     const processes = initProcesses(Constants.ALL_PROCESSES_INFO, resources, gameData);
+    const hypermods = initHyperMods(gameData);
     const archive = initArchive();
 
     // Initialize gameData variables
@@ -33,6 +38,7 @@ window.onload = function() {
     gameData.addUpgrades(upgrades);
     gameData.addMultipliers(multipliers);
     gameData.addProcesses(processes);
+    gameData.addHyperMods(hypermods);
     gameData.addArchive(archive);
     initEventHandlers(gameData);
 
@@ -69,6 +75,9 @@ window.onload = function() {
     Utils.addGameData(gameData);
     Utils.refreshAllDisplays();
 
+    // if the player has a save file in localStorage, load it
+    if (localStorage.getItem("playerSave") !== null) {loadGame(gameData);}
+
     // Start the game loop
     requestAnimationFrame((currentTime) => gameTick(currentTime, gameData));
 }
@@ -103,6 +112,10 @@ function gameTick(currentTime, gameData = new GameData()) {
         
         gameData.extraTimer += deltaTime;
         gameData.lastTime = currentTime;
+
+        // autosave
+        if (gameData.autoSaveTimer >= Constants.AUTOSAVE_TICKS) {saveGame(gameData); gameData.autoSaveTimer=0}
+        gameData.autoSaveTimer++;
     }
 
     

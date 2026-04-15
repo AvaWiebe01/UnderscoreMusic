@@ -1,5 +1,6 @@
 import { Utils } from "./utils.js";
 import { unlockResource } from "./resources.js";
+import { unlockHyperMod } from "./hypermods.js";
 
 export class Constants {
 
@@ -7,6 +8,8 @@ static REFRESH_RATE = 60;
 
 static AVERAGING_TIME = 1000; // in milliseconds
 static AVERAGING_SAMPLES = 10;
+
+static AUTOSAVE_TICKS = 3600 // save every 3600 game ticks
 
 static DEFAULT_SUFFIXES = ["","Thousand","Million","Billion","Trillion","Quadrillion","Quintillion","Sextillion","Septillion","Octillion","Nonillion","Decillion"];
 static ABBREVIATED_SUFFIXES = ["","K","M","B","T","Q","Qi","Sx","Sp","Oc","No","Dc"];
@@ -162,8 +165,8 @@ static ALL_UPGRADES_INFO = new Map([
             [
                 "hyperkeys",
                 [
-                    /*initial upgrade*/["hypermod1", "HyperCore Architecture", "<strong>Core</strong> generation rate is multiplied by your <strong>HyperKey</strong> amount.", "", 0.0005, ["hypermod2"], (resource) => {resource.modifyBtnValBaseMult(1.5);}],
-                    /*initial upgrade*/["hypermod2", "HyperMult Architecture", "<strong>Constructing</strong> HyperKeys provides a temporary multiplier to decryption and process ArcBit generation.", "", 0.0006, [], (resource) => {resource.modifyBtnValBaseMult(1.5);}],
+                    /*initial upgrade*/["hypermod1", "HyperMult Architecture", "<strong>Constructing</strong> HyperKeys provides a lengthy temporary multiplier to <strong>decryption</strong> and <strong>process</strong> ArcBit generation.", "", 0.0005, ["hypermod2"], (resource) => {unlockHyperMod("hyperMultArch");}],
+                    /*initial upgrade*/["hypermod2", "HyperCore Architecture", "<strong>Core</strong> generation rate is multiplied by your <strong>HyperKey</strong> amount.", "", 0.001, [], (resource) => {unlockHyperMod("hyperCoreArch");}],
                 ]
             ],
         ])
@@ -237,7 +240,7 @@ static ALL_PROCESSES_INFO = new Map([
             ["infiltrator", "1nfiltr4t0r", "Brute forces passwords to read hidden files.", "", 128, 8, 1],
             ["keyBreak", "KeyBreak v0.7-internaluse", "Uses advanced decryption to breach secure servers.", "", 24_000, 15, 236],
             ["uberhack", "[-UBERHACK-]", "Combines several attacks into a single devastating payload.", "", 306_500, 36, 8421],
-            ["bladeSys", "BladeSys by Wrenn Software", "Strikes a blade through any cryptography issue with dominating precision.", "", 3_200_000, 80, 8],
+            ["bladeSys", "BladeSys by Crysen Software", "Strikes a blade through any cryptography issue with dominating precision.", "", 3_200_000, 80, 8],
         ]
     ],
 

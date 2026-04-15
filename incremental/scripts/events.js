@@ -210,6 +210,11 @@ export function initEventHandlers(gameData = new GameData()) {
             Utils.resizeUpgradeList();
         })
 
+        // HYPERMOD BUTTONS //
+        $(".hypermod_toggle").on("click", "button", function(event) {
+            console.log(`HyperMod Enabled`)
+        })
+
         // Events that occur when window is resized (for dynamic UI changes that css can't do)
         let resizeDebounce;
         window.addEventListener("resize", function() {
