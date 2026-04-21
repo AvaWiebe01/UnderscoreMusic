@@ -72,6 +72,9 @@ main .display img {
     display:block;
     left:0;
     bottom:0;
+
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
 }
 
 main .text_box_wrapper {
