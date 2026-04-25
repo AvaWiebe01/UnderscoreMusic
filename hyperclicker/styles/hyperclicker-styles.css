@@ -693,6 +693,7 @@ main .game .archive_panel a.fragment_link:active {
 main .game .options {
 	display: flex;
 	flex-direction: row;
+	flex-wrap:wrap;
 	gap: 1rem;
 }
 
@@ -702,6 +703,10 @@ main .game .options .option {
 		inset 0 0 0.75rem var(--text-glow-color);
 	background: var(--text-bg-color);
 	padding:1rem;
+}
+
+main .game .options_panel .options button {
+	margin-bottom:1rem;
 }
 
 main .game .options_panel .options button:active {

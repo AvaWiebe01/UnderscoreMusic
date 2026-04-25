@@ -19,6 +19,8 @@ import { Archive, initArchive } from "./archive.js";
 
 import { saveGame, loadGame } from "./save.js";
 
+import { initAudio, GameAudio } from "./audio.js";
+
 // ======== START ======== //
 window.onload = function() {
 
@@ -32,6 +34,7 @@ window.onload = function() {
     const processes = initProcesses(Constants.ALL_PROCESSES_INFO, resources, gameData);
     const hypermods = initHyperMods(gameData);
     const archive = initArchive();
+    const audio = initAudio();
 
     // Initialize gameData variables
     gameData.addResources(resources);
@@ -40,6 +43,7 @@ window.onload = function() {
     gameData.addProcesses(processes);
     gameData.addHyperMods(hypermods);
     gameData.addArchive(archive);
+    gameData.addAudio(audio);
     initEventHandlers(gameData);
 
     // Initialize HTML and DOM content/references

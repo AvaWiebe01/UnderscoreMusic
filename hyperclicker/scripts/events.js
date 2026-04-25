@@ -15,17 +15,25 @@ export function initEventHandlers(gameData = new GameData()) {
             Utils.toggleStickyResources(event.currentTarget);
         })
 
+        $(".mute_music_button").click((event) => {
+            Utils.gameData.audio.toggleMusic(event.currentTarget);
+        })
+
+        $(".mute_sfx_button").click((event) => {
+            Utils.gameData.audio.toggleSfx(event.currentTarget);
+        })
+
         // RESOURCE BUTTONS //
         $(".resource_button").click((event) => {
             let resourceName = event.currentTarget.getAttribute("resource");
-            //let btnValDisplay = document.getElementsByClassName(resourceName + "_btnval_display")[0];
             event.currentTarget.style.animation = "none";
-            //btnValDisplay.style.animation = "none";
             event.currentTarget.offsetHeight; // Force browser to reset animation
-            //btnValDisplay.offsetHeight;
             event.currentTarget.style.animation = "click 0.25s";
-            //btnValDisplay.style.animation = "shake 0.25s";
+
             gameData.resources.get(resourceName).btnClicked();
+
+            // trigger audio
+            Utils.gameData.audio.playSfxDecrypt();
         })
         
         // UPGRADE BUTTONS //

@@ -565,6 +565,7 @@ function displayLine(textbox, line = new Line("content not specified.", null, 1,
                 case "f": nxtChar.classList.add("fade"); break; // fade in
                 case "d": nxtChar.classList.add("drop"); break; // drop in
                 case "r": nxtChar.classList.add("rainbow"); break; // rainbow
+                case "l": nxtChar.classList.add("little"); break; // small text
                 case ",": delay = BASE_TEXT_SPEED * 8; break;
                 case ".": delay = BASE_TEXT_SPEED * 24; break;
                 case "-": delay = BASE_TEXT_SPEED * 32; break;

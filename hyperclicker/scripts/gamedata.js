@@ -4,8 +4,8 @@ export class GameData {
     multipliers;
     processes;
     hypermods;
-    cores;
     archive;
+    audio;
 
     lastTime;
     extraTimer;
@@ -39,5 +39,9 @@ export class GameData {
 
     addArchive(archive) {
         this.archive = archive;
+    }
+
+    addAudio(audio) {
+        this.audio = audio;
     }
 }
