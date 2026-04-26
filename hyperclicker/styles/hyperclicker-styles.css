@@ -519,6 +519,10 @@ main .game .process_list .process {
 		inset 0 0 0.75rem var(--text-glow-color);
 }
 
+main .game .process_list .process.not_unlocked {
+	display:none;
+}
+
 main .game .process_panel h3 {
 	font-family:"spacemono", "Courier New", monospace;
 	font-weight:normal;

@@ -299,6 +299,8 @@ static UPGRADE_BUTTON_CONTENT = new Map([
     ],
 ]);
 
+static NUM_INITIAL_PROCESSES = 1;
+
 static ALL_PROCESSES_INFO = new Map([
     [
         "arcbits",
