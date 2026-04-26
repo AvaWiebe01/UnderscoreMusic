@@ -126,28 +126,30 @@ class MultHyperMult extends Multiplier {
     }
 }
 
-/*
-class MultTemp extends Multiplier {
-    constructor(name, gameData = new GameData) {
-        super(name, gameData);
-    }
-
+// multiplier based on current HyperKey amount
+class MultHyperCore extends Multiplier {
     getMult() {
         return this.mult;
     }
 
     multUpdate() {
-
+        this.mult = Utils.gameData.resources.get("hyperkeys").amt;
     }
 }
-*/
+
+
 
 export function initMultipliers(gameData = new GameData) {
     let multipliers = new Map([
+
+        // arcbit mults
         ["arcMult", new MultArcMult("arcMult", gameData)],
         ["ultraboost", new MultUltraboost("ultraboost", gameData)],
         ["proximityComputing", new MultProximityComputing("proximityComputing", gameData)],
+
+        // hypermod mults
         ["hyperMult", new MultHyperMult("hyperMult", gameData)],
+        ["hyperCore", new MultHyperCore("hyperCore", gameData)],
     ]);
 
     return multipliers;

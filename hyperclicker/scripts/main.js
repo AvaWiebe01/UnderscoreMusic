@@ -75,6 +75,8 @@ window.onload = function() {
         });
     });
 
+    gameData.hypermods.initDisplayElements();
+
     // Update all displays with initial content (non-destructive)
     Utils.addGameData(gameData);
     Utils.refreshAllDisplays();

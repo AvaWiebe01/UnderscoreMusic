@@ -79,6 +79,10 @@
     animation: fade 0.5s backwards;
 }
 
+.fade-out-slow {
+    animation: fade 2s backwards;
+}
+
 .appear {
 	animation: appear 0.5s forwards,
 		appear-shake 0.5s;
@@ -232,6 +236,10 @@ main .game .generate_panel .generate_button .btnval_display {
 	color: var(--accent-color);
 	text-shadow: var(--accent-text-glow-color) 0 0 0.75rem;
 	text-align: center;
+}
+
+main .game .generate_panel .generate_button .btnval_display .white {
+	color: var(--text-color);
 }
 
 main .game .tabs_wrapper {
@@ -569,15 +577,52 @@ main .game .process_list .process .process_info p {
 	margin-left: 1rem;
 }
 
+main .game .architectures_panel .max_enabled_display {
+	text-align:center;
+	font-size:1.5rem;
+	margin-bottom:1rem;
+}
+
 main .game .architectures_panel .architecture_list {
 	display: flex;
 	flex-direction:column;
 	justify-content:flex-start;
-	align-items:center;
+	align-items:stretch;
+	gap:1rem;
 }
 
 main .game .architectures_panel .architecture_list .no_hypermods_display {
 	text-align:center;
+}
+
+main .game .architectures_panel .architecture_list .hypermod {
+	padding:1rem;
+	text-align: left;
+	border: 0.1rem solid var(--text-color);
+	box-shadow: 0 0 0.75rem var(--text-glow-color),
+		inset 0 0 0.75rem var(--text-glow-color);
+	background: var(--text-bg-color);
+
+	transition-duration:0.5s;
+}
+
+main .game .architectures_panel .architecture_list .hypermod.enabled {
+	border: 0.1rem solid var(--main-color);
+	box-shadow: 0 0 0.75rem var(--main-box-glow-color),
+		inset 0 0 0.75rem var(--main-box-glow-color);
+	background: var(--main-bg-color);
+
+	transition-duration:0.5s;
+}
+
+main .game .architectures_panel .architecture_list .hypermod h3 {
+	font-weight:normal;
+	font-size:2rem;
+	margin:0 0 0.25rem 0;
+}
+
+main .game .architectures_panel .architecture_list .hypermod .status_display {
+	margin-top:1rem;
 }
 
 main .game .beyond_panel .beyond_menu {
@@ -712,6 +757,14 @@ main .game .options_panel .options button {
 main .game .options_panel .options button:active {
 	transform: scale(0.95, 0.95);
 	transition-duration:0.05s;
+}
+
+main .game .options_panel .options .saved_message {
+	color: var(--main-color);
+	text-shadow: var(--main-text-glow-color) 0 0 0.5rem;
+	
+	position:relative;
+	top:2.3275rem;
 }
 
 main .game p {

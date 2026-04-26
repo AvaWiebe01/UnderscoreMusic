@@ -35,13 +35,35 @@ export class GameAudio {
         this.sfxDecrypt.preservesPitch = false;
         const sfxDecryptTrack = this.sfxContext.createMediaElementSource(this.sfxDecrypt);
         sfxDecryptTrack.connect(this.sfxGain);
+
     }
 
     // Play SFX
+    
     playSfxDecrypt() {
-        // randomize pitch every click between 0.9x-1.1x
+        // randomize pitch between 0.85x-1.15x
         this.sfxDecrypt.playbackRate = 0.85 + (Math.random()*0.3);
         this.sfxDecrypt.play();
+    }
+
+    playSfxUpgrade() {
+        this.sfxUpgrade.play();
+    }
+
+    playSfxInvalid() {
+        this.sfxInvalid.play();
+    }
+
+    playSfxBuy() {
+        this.sfxBuy.play();
+    }
+
+    playSfxSell() {
+        this.sfxSell.play();
+    }
+
+    playSfxSelect() {
+        this.sfxSelect.play();
     }
 
     // Play Music

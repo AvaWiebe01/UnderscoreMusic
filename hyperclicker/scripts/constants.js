@@ -18,14 +18,14 @@ static DATA_SIZE_SUFFIXES = ["Bits","Kilobits","Megabits","Gigabits","Terabits",
 
 static RESOURCE_INFO = [ // htmlName, amt, delta, btnVal, displayableName
     ["arcbits", 111111111110, 0.00010, "ArcBits"],
-    ["hyperkeys", 0, 0.00001, "HyperKeys"],
-    ["nullpointers", 0, 0, "NullPointers"],
-    //["arcbits", 1111110_000000_00000000_000000, 0.00010, "ArcBits"],
-    //["hyperkeys", 0, 0, 0, "HyperKeys"],
+    ["hyperkeys", 0.01, 0.00001, "HyperKeys"],
 ];
 
 // htmlName, amt, delta, btnVal, displayableName, initMaxCores
 static CORE_INFO = ["cores", 2, 1/240, 0, "Cores", 8];
+
+// htmlName, amt, btnVal, displayableName, initSuccessRate
+static NULLPOINTER_INFO = ["nullpointers", 0, 0, 1, "NullPointers", 0.01];
 
 static INITIAL_UPGRADES = new Map([
     [
@@ -44,6 +44,26 @@ static INITIAL_UPGRADES = new Map([
             [
                 "hyperkeys",
                 ["hypermod1", "hypermod2"],
+            ],
+        ])
+    ],
+
+    [
+        "hyperkey_upgrades_list",
+        new Map([
+            [
+                "hyperkeys",
+                ["keyBtn1", "modMax1"],
+            ],
+        ])
+    ],
+
+    [
+        "nullpointer_upgrades_list",
+        new Map([
+            [
+                "nullpointers",
+                ["nullBtn1", "nullDelta1", "nullBoost1"],
             ],
         ])
     ],
@@ -134,6 +154,8 @@ static ALL_UPGRADES_INFO = new Map([
                             ["ultraboost2", "Ultraboost: Dual Core", "<strong>Ultraboost</strong> now grants <strong>+2%</strong> per <strong>Core</strong> generated.", "", 14_000, ["ultraboost3"], (resource) => {resource.gameData.multipliers.get("ultraboost").perCoreMult = 0.02;}],
                             ["ultraboost3", "Ultraboost: Quad Core", "<strong>Ultraboost</strong> now grants <strong>+4%</strong> per <strong>Core</strong> generated.", "", 3_000_000, [], (resource) => {resource.gameData.multipliers.get("ultraboost").perCoreMult = 0.4;}],
 
+                        // Proximity Computing
+
                             ["proximityComputing", "Proximity Computing", "Each unused <strong>Core</strong> increases <strong>process</strong> ArcBit generation by <strong>+5%</strong>", "", 0.09, ["proximityComputingYield1"], (resource) => {resource.addDeltaMultSource("proximityComputing");}],
                             ["proximityComputingYield1", "Proximity Computing: Yield+", "Increases the <strong>Proximity Computing</strong> boost per unused <strong>Core</strong> to <strong>+10%</strong>.", "", 9, ["proximityComputingYield2"], (resource) => {resource.gameData.multipliers.get("proximityComputing").perCoreMult = 0.1;}],
                             ["proximityComputingYield2", "Proximity Computing: Yield++", "Increases the <strong>Proximity Computing</strong> boost per unused <strong>Core</strong> to <strong>+15%</strong>.", "", 99.999, [], (resource) => {resource.gameData.multipliers.get("proximityComputing").perCoreMult = 0.15;}],
@@ -146,15 +168,6 @@ static ALL_UPGRADES_INFO = new Map([
                     // Unlockable Systems (new UI elements in existing tabs)
                 ]
             ],
-
-            /*
-            [
-                "hyperkeys",
-                [
-
-                ]
-            ],
-            */
         ])
     ],
 
@@ -167,6 +180,52 @@ static ALL_UPGRADES_INFO = new Map([
                 [
                     /*initial upgrade*/["hypermod1", "HyperMult Architecture", "<strong>Constructing</strong> HyperKeys provides a lengthy temporary multiplier to <strong>decryption</strong> and <strong>process</strong> ArcBit generation.", "", 0.0005, ["hypermod2"], (resource) => {unlockHyperMod("hyperMultArch");}],
                     /*initial upgrade*/["hypermod2", "HyperCore Architecture", "<strong>Core</strong> generation rate is multiplied by your <strong>HyperKey</strong> amount.", "", 0.001, [], (resource) => {unlockHyperMod("hyperCoreArch");}],
+                ]
+            ],
+        ])
+    ],
+
+    [
+        "hyperkey_upgrades_list",
+        new Map([ // resourceName, upgradesList
+            [
+                "hyperkeys",
+                [
+                    /*initial upgrade*/["keyBtn1", "HyperKey v2", "<strong>Constructing</strong> HyperKeys is <strong>twice</strong> as efficient.", "", 0.0005, [], (resource) => {resource.modifyBtnValBaseMult(2)}],
+                    
+                    /*initial upgrade*/["modMax1", "HyperMod Slot 2", "An additional <strong>HyperMod</strong> can be active concurrently.", "", 0.001, ["modMax2"], (resource) => {Utils.gameData.hypermods.modifyMaxEnabled(2)}],
+                    ["modMax2", "HyperMod Slot 3", "An additional <strong>HyperMod</strong> can be active concurrently.", "", 0.001, ["modMax3"], (resource) => {Utils.gameData.hypermods.modifyMaxEnabled(3)}],
+                    ["modMax3", "HyperMod Slot 4", "An additional <strong>HyperMod</strong> can be active concurrently.", "", 0.001, [], (resource) => {Utils.gameData.hypermods.modifyMaxEnabled(4)}],
+                ]
+            ],
+        ])
+    ],
+
+    [
+        "nullpointer_upgrades_list",
+        new Map([ // resourceName, upgradesList
+            [
+                "nullpointers",
+                [
+                    /*initial upgrade*/["nullBtn1", "efficient_search_ver1", "<strong>nullpointer_location_rate=0.015;</strong>", "", 1, ["nullBtn2"], (resource) => {resource.modifySuccessRate(0.015)}],
+                    ["nullBtn2", "efficient_search_ver2", "<strong>nullpointer_location_rate=0.0275;</strong>", "", 1, ["nullBtn3"], (resource) => {resource.modifySuccessRate(0.0275)}],
+                    ["nullBtn3", "efficient_search_ver3", "<strong>nullpointer_location_rate=0.075;</strong>", "", 1, ["nullBtn4"], (resource) => {resource.modifySuccessRate(0.075)}],
+                    ["nullBtn4", "efficient_search_ver4", "<strong>nullpointer_location_rate=0.1;</strong>", "", 1, ["nullBtn5"], (resource) => {resource.modifySuccessRate(0.1)}],
+                    ["nullBtn5", "efficient_search_finalver", "<strong>nullpointer_location_rate=0.175; //need new algorithm</strong>", "", 1, ["nullBtn6"], (resource) => {resource.modifySuccessRate(0.175)}],
+                    ["nullBtn6", "nullspace_collapse_protocol", "<strong>nullpointer_location_rate=0.25;</strong>", "", 1, ["nullBtn7"], (resource) => {resource.modifySuccessRate(0.25)}],
+                    ["nullBtn7", "nullspace_collapse_protocol_v2", "<strong>nullpointer_location_rate=0.32;</strong>", "", 1, ["nullBtn8"], (resource) => {resource.modifySuccessRate(0.32)}],
+                    ["nullBtn8", "nullspace_collapse_protocol_v2.1", "<strong>nullpointer_location_rate=0.4525;</strong>", "", 1, ["nullBtn9"], (resource) => {resource.modifySuccessRate(0.4525)}],
+                    ["nullBtn9", "nullspace_collapse_protocol_v2.1.1", "<strong>nullpointer_location_rate=0.5;</strong>", "", 1, ["nullBtn10"], (resource) => {resource.modifySuccessRate(0.5)}],
+                    ["nullBtn10", "nullspace_collapse_protocol_v5", "<strong>nullpointer_location_rate=0.5555; //seems like the limit</strong>", "", 1, [], (resource) => {resource.modifySuccessRate(0.5555)}],
+                    
+                    /*initial upgrade*/["nullDelta1", "memory_leak_capture", "<strong>passive_nullpointer_gain_active();</strong>", "", 3, ["nullDelta2"], (resource) => {resource.modifyDelta(0.01)}],
+                    ["nullDelta2", "capture_rate+", "<strong>multiply_passive_nullpointer_gain(2);</strong>", "", 3, ["nullDelta3"], (resource) => {resource.modifyDelta(0.02)}],
+                    ["nullDelta3", "capture_rate++", "<strong>multiply_passive_nullpointer_gain(2.5);</strong>", "", 3, ["nullDelta4"], (resource) => {resource.modifyDelta(0.05)}],
+                    ["nullDelta4", "capture_rate+++", "<strong>multiply_passive_nullpointer_gain(4);</strong>", "", 3, ["nullDelta5"], (resource) => {resource.modifyDelta(0.2)}],
+                    ["nullDelta5", "capture_rate+++++++", "<strong>multiply_passive_nullpointer_gain(5);</strong>", "", 3, [], (resource) => {resource.modifyDelta(1)}],
+
+                    /*initial upgrade*/["nullBoost1", "arc_booster_1_final_FINAL.exe", "<span class='rainbow'>arcbit_decryption_and_process_multiplier=100;</span>", "", 100, ["nullBoost2"], (resource) => {Utils.gameData.resources.get("arcbits").modifyBtnValBaseMult(100); Utils.gameData.resources.get("arcbits").modifyDeltaBaseMult(100);}],
+                    ["nullBoost2", "hyperboost_working_holyshit.out", "<span class='rainbow'>resources.get('hyperkeys').setMultiplier(1000);</span>", "", 500, [], (resource) => {Utils.gameData.resources.get("hyperkeys").modifyBtnValBaseMult(1000); Utils.gameData.resources.get("hyperkeys").modifyDeltaBaseMult(1000);}],
                 ]
             ],
         ])
@@ -213,7 +272,16 @@ static UPGRADE_BUTTON_CONTENT = new Map([
     ],
 
     [
-        "beyond_upgrades_list",
+        "hyperkey_upgrades_list",
+        new Map([
+            ["default", "[Upgrade]"],
+            ["cannot_buy", "[Invalid Keys]"],
+            ["purchased", "[Upgraded]"],
+        ])
+    ],
+
+    [
+        "nullpointer_upgrades_list",
         new Map([
             ["default", "[Reference]"],
             ["cannot_buy", "[<span class='obfuscated'>xxxxxxxx</span>]"],

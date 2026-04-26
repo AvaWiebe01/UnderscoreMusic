@@ -13,6 +13,10 @@ export class Archive {
         let fragmentElement = document.querySelector(`main .game .archive_panel .fragment[fragment_key="${fragmentKey}"]`);
         fragmentElement.classList.remove("not_unlocked");
         this.noFragmentsDisplay.classList.add("hidden");
+
+        // gameplay incentive for recovering
+        Utils.gameData.resources.get("arcbits").modifyBtnValBaseMult(2);
+        Utils.gameData.resources.get("arcbits").modifyDeltaBaseMult(2);
     }
 
     initDisplayElements() {

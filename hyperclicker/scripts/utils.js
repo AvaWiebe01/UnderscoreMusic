@@ -4,6 +4,8 @@ import { Process, displayProcesses } from "./processes.js";
 
 import { Upgrade, displayUpgrades } from "./upgrades.js";
 
+import { saveGame, loadGame } from "./save.js";
+
 export class Utils {
     static gameData;
 
@@ -135,5 +137,9 @@ export class Utils {
 
     static unlockTab(tabValue) {
         document.querySelector(`.tab_buttons button[tab="${tabValue}"]`).classList.remove("locked_tab");
+    }
+
+    static save() {
+        saveGame(this.gameData);
     }
 }

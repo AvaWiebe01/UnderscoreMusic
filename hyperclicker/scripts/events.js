@@ -23,6 +23,21 @@ export function initEventHandlers(gameData = new GameData()) {
             Utils.gameData.audio.toggleSfx(event.currentTarget);
         })
 
+        $(".save_data_button").click((event) => {
+            Utils.save();
+
+            // save message animation
+            const saveMessage = document.querySelector(".options_panel .options .saved_message");
+            saveMessage.classList.remove("fade-out-slow");
+            void saveMessage.offsetWidth;
+            saveMessage.classList.add("fade-out-slow");
+            saveMessage.classList.remove("hidden");
+            saveMessage.addEventListener("animationend", () => {
+                saveMessage.classList.remove("fade-out-slow"); 
+                saveMessage.classList.add("hidden");
+            })
+        })
+
         // RESOURCE BUTTONS //
         $(".resource_button").click((event) => {
             let resourceName = event.currentTarget.getAttribute("resource");
@@ -33,7 +48,15 @@ export function initEventHandlers(gameData = new GameData()) {
             gameData.resources.get(resourceName).btnClicked();
 
             // trigger audio
-            Utils.gameData.audio.playSfxDecrypt();
+            switch(resourceName) {
+                case 'arcbits':
+                    Utils.gameData.audio.playSfxDecrypt();
+                    break;
+                case 'hyperkeys':
+                    break;
+                case 'nullpointers':
+                    break;
+            }
         })
         
         // UPGRADE BUTTONS //
@@ -220,7 +243,36 @@ export function initEventHandlers(gameData = new GameData()) {
 
         // HYPERMOD BUTTONS //
         $(".hypermod_toggle").on("click", function(event) {
-            console.log(`HyperMod Enabled`);
+            const target = event.currentTarget;
+            const hypermodElement = target.closest(".hypermod");
+
+            const hypermod = Utils.gameData.hypermods.mods.get(target.getAttribute("architecture"));
+            const enabledMods = Utils.gameData.hypermods.enabledMods;
+            const maxEnabled = Utils.gameData.hypermods.maxEnabled;
+
+            if (hypermod.enabled) {
+                hypermod.disable();
+                enabledMods.delete(hypermod.htmlName);
+                hypermodElement.classList.remove("enabled");
+            }
+            else {
+                // disable the oldest enabled hypermod to make room
+                if(enabledMods.size >= maxEnabled) {
+                    const toDisable = enabledMods.entries().next().value;
+                    const toDisableElement = document.querySelector(`.architectures_panel .architecture_list .hypermod.enabled[name="${toDisable[0]}"]`);
+                    enabledMods.delete(toDisable[0]);
+                    toDisable[1].disable();
+                    toDisable[1].updateDisplays();
+                    toDisableElement.classList.remove("enabled");
+                }
+
+                hypermod.enable();
+                enabledMods.set(hypermod.htmlName, hypermod);
+                hypermodElement.classList.add("enabled");
+            }
+
+            hypermod.updateDisplays();
+            Utils.gameData.hypermods.updateDisplays();
         })
 
         // Events that occur when window is resized (for dynamic UI changes that css can't do)
