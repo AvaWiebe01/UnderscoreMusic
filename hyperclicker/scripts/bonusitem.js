@@ -97,6 +97,14 @@ export class BonusItem {
         this.iconElement.style.display = "block";
         this.textElement.style.display = "none";
 
+        this.iconElement.classList.add("fade-out-bonus");
+        this.iconElement.addEventListener("animationend", () => {
+            this.iconElement.classList.remove("fade-out-bonus");
+            this.iconElement.style.display = "none";
+
+            this.timeUntilAppear = this.cooldown;
+        });
+
         console.log("Bonus spawned!");
     }
 
