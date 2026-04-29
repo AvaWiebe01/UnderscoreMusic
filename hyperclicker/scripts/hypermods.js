@@ -89,10 +89,56 @@ export class HyperCoreArch extends HyperMod {
     }
 }
 
+export class Arch extends HyperMod {
+    enable() {
+        this.enabled = true;
+    }   
+
+    disable() {
+        this.enabled = false;
+    }
+}
+
+export class Arch2 extends HyperMod {
+    enable() {
+        this.enabled = true;
+    }
+
+    disable() {
+        this.enabled = false;
+    }
+}
+
+export class RerollArch extends HyperMod {
+    enable() {
+        Utils.gameData.resources.get("nullpointers").rolls = 2;
+        this.enabled = true;
+    }   
+
+    disable() {
+        Utils.gameData.resources.get("nullpointers").rolls = 1;
+        this.enabled = false;
+    }
+}
+
+export class StreakArch extends HyperMod {
+    enable() {
+        Utils.gameData.resources.get("nullpointers").streakBase = 3;
+        this.enabled = true;
+    }
+
+    disable() {
+        Utils.gameData.resources.get("nullpointers").streakBase = Utils.gameData.resources.get("nullpointers").defaultStreakBase;
+        this.enabled = false;
+    }
+}
+
 export function initHyperMods(gameData = new GameData()) {
     var mods = new Map([
         ["hyperMultArch", new HyperMultArch("hyperMultArch", "HyperMult", "<strong>Constructing</strong> HyperKeys provides a lengthy temporary multiplier to <strong>decryption</strong> and <strong>process</strong> ArcBit generation.")],
-        ["hyperCoreArch", new HyperCoreArch("hyperCoreArch", "HyperCore", "<strong>Core</strong> generation rate is multiplied by your <strong>HyperKey</strong> amount.")],
+        ["hyperCoreArch", new HyperCoreArch("hyperCoreArch", "HyperCore", "<strong>Core</strong> generation rate is multiplied by current <strong>HyperKey</strong> amount.")],
+        ["rerollArch", new RerollArch("rerollArch", "Reroll+", "Each attempt to <strong>Locate</strong> NullPointers rolls the probability <strong>twice</strong> and takes the best result.")],
+        ["streakArch", new StreakArch("streakArch", "Streak+", "Each consecutive NullPointer <strong>Location</strong> multiplies generation by <strong>3</strong> instead of 2.")],
     ])
 
     const hypermods = new HyperMods(mods);

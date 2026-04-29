@@ -53,8 +53,10 @@ export function initEventHandlers(gameData = new GameData()) {
                     Utils.gameData.audio.playSfxDecrypt();
                     break;
                 case 'hyperkeys':
+                    Utils.gameData.audio.playSfxConstruct();
                     break;
                 case 'nullpointers':
+                    // within nullpointer class
                     break;
             }
         })
@@ -274,6 +276,11 @@ export function initEventHandlers(gameData = new GameData()) {
             hypermod.updateDisplays();
             Utils.gameData.hypermods.updateDisplays();
         })
+
+    // BONUS BUTTONS //
+    $(".bonus_icon").on("click", function(event) {
+        Utils.gameData.bonusItem.activateBonus();
+    })
 
         // Events that occur when window is resized (for dynamic UI changes that css can't do)
         let resizeDebounce;

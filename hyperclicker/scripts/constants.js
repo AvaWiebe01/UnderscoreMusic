@@ -11,6 +11,8 @@ static AVERAGING_SAMPLES = 10;
 
 static AUTOSAVE_TICKS = 3600 // save every 3600 game ticks
 
+static BONUS_COOLDOWN = 320; // bonus starts at 5:20 -> 2:40 -> 1:20 -> 0:40 cooldown
+
 static DEFAULT_SUFFIXES = ["","Thousand","Million","Billion","Trillion","Quadrillion","Quintillion","Sextillion","Septillion","Octillion","Nonillion","Decillion"];
 static ABBREVIATED_SUFFIXES = ["","K","M","B","T","Q","Qi","Sx","Sp","Oc","No","Dc"];
 static DATA_SIZE_ABBREVIATED_SUFFIXES = ["b","Kb","Mb","Gb","Tb","Pb","Eb","Zb","Yb","Rb","Qb","Wb"];
@@ -98,8 +100,8 @@ static ALL_UPGRADES_INFO = new Map([
                         ["arcbitBtn6", "Fast Decryptor", "<strong>Decrypting</strong> ArcBits yields an additional <strong>10x</strong> more.", "", 12, ["arcbitBtn7"], (resource) => {resource.modifyBtnValBaseMult(10);}],
                         ["arcbitBtn7", "Efficient Decryptor", "<strong>Decrypting</strong> ArcBits yields an additional <strong>20x</strong> more.", "", 101, ["arcbitBtn8"], (resource) => {resource.modifyBtnValBaseMult(20);}],
                         ["arcbitBtn8", "Threaded Decryptor", "<strong>Decrypting</strong> ArcBits yields an additional <strong>50x</strong> more.", "", 520, ["arcbitBtn9"], (resource) => {resource.modifyBtnValBaseMult(50);}],
-                        ["arcbitBtn9", "Accelerated Decryptor", "<strong>Decrypting</strong> ArcBits yields an additional <strong>250x</strong> more.", "", 3210, ["arcbitBtn10"], (resource) => {resource.modifyBtnValBaseMult(250);}],
-                        ["arcbitBtn10", "Quantum Decryptor", "<strong>Decrypting</strong> ArcBits yields an additional <strong>500x</strong> more.", "", 3210, [], (resource) => {resource.modifyBtnValBaseMult(500);}],
+                        ["arcbitBtn9", "Accelerated Decryptor", "<strong>Decrypting</strong> ArcBits yields an additional <strong>250x</strong> more.", "", 3_210, ["arcbitBtn10"], (resource) => {resource.modifyBtnValBaseMult(250);}],
+                        ["arcbitBtn10", "Quantum Decryptor", "<strong>Decrypting</strong> ArcBits yields an additional <strong>500x</strong> more.", "", 3_210, [], (resource) => {resource.modifyBtnValBaseMult(500);}],
 
                     // ArcBit Processes
 
@@ -134,6 +136,13 @@ static ALL_UPGRADES_INFO = new Map([
                         ["coreCap8", "HyperProcessing", "Increase <strong>Cores</strong> capacity by <strong>800</strong>.", "", 1_000_000_000, ["coreCap9"], (resource) => {resource.gameData.resources.get("cores").modifyMaxCores(800);}],
                         ["coreCap9", "QuantumProcessing", "Increase <strong>Cores</strong> capacity by <strong>2000</strong>.", "", 64_000_000_000, [], (resource) => {resource.gameData.resources.get("cores").modifyMaxCores(2000);}],
 
+                    // Bonus item
+
+                        ["bonusCooldown1", "Malware Detection: Signature Analysis", "Antivirus detects viruses <strong>2x</strong> faster.", "", 6.4, ["bonusCooldown2"], (resource) => {Utils.gameData.bonusItem.cooldown = Math.floor(Utils.gameData.bonusItem.cooldown / 2);}],
+                        ["bonusCooldown2", "Malware Detection: Dynamic Analysis", "Antivirus detects viruses another <strong>2x</strong> faster.", "", 2_545, ["bonusCooldown3"], (resource) => {Utils.gameData.bonusItem.cooldown = Math.floor(Utils.gameData.bonusItem.cooldown / 2);}],
+                        ["bonusCooldown3", "Malware Detection: Entropy Analysis", "Antivirus detects every single virus.", "", 480_000, [], (resource) => {Utils.gameData.bonusItem.cooldown = Math.floor(Utils.gameData.bonusItem.cooldown / 2);}],
+                        
+                    
                     // Unlockable Multipliers
 
                         // ArcMult
@@ -163,7 +172,7 @@ static ALL_UPGRADES_INFO = new Map([
                     // Unlockable Tabs
                     /* initial upgrade */ ["tab1", "Expansion: Archive", "Unlock an <strong class='rainbow'>Archive</strong> of fragmented data.", "", 0.32, ["tab2"], () => {Utils.unlockTab("archive_panel_tab");}],
                     ["tab2", "Expansion: HyperMods", "Unlock the <strong class='rainbow'>HyperMod</strong> interface.", "", 32_000, ["tab3"], () => {Utils.unlockTab("hypermods_panel_tab"); unlockResource("hyperkeys");}],
-                    ["tab3", "Expansion: BEYOND", "Un<span class='obfuscated'>l</span>ock ref<span class='obfuscated'>e</span>rences t<span class='obfuscated'>o</span> <strong class='rainbow'>out-of-b<span class='obfuscated'>o</span>unds</strong> memory addres<span class='obfuscated'>s</span>es.", "", 32_000_000_000, [], () => {Utils.unlockTab("beyond_panel_tab"); unlockResource("nullpointers");}],
+                    ["tab3", "Expansion: BEYOND", "Un<span class='obfuscated'>l</span>ock ref<span class='obfuscated'>e</span>rences t<span class='obfuscated'>o</span> <strong class='rainbow'>out-of-b<span class='obfuscated'>o</span>unds</strong> memory addres<span class='obfuscated'>s</span>es.<br>Discover two new HyperMods.", "", 32_000_000_000, [], () => {Utils.unlockTab("beyond_panel_tab"); unlockResource("nullpointers"); Utils.unlockUpgrade("hypermod_upgrades_list", "hyperkeys", "hypermod5"); Utils.unlockUpgrade("hypermod_upgrades_list", "hyperkeys", "hypermod6");}],
 
                     // Unlockable Systems (new UI elements in existing tabs)
                 ]
@@ -178,8 +187,17 @@ static ALL_UPGRADES_INFO = new Map([
             [
                 "hyperkeys",
                 [
-                    /*initial upgrade*/["hypermod1", "HyperMult Architecture", "<strong>Constructing</strong> HyperKeys provides a lengthy temporary multiplier to <strong>decryption</strong> and <strong>process</strong> ArcBit generation.", "", 0.0005, ["hypermod2"], (resource) => {unlockHyperMod("hyperMultArch");}],
-                    /*initial upgrade*/["hypermod2", "HyperCore Architecture", "<strong>Core</strong> generation rate is multiplied by your <strong>HyperKey</strong> amount.", "", 0.001, [], (resource) => {unlockHyperMod("hyperCoreArch");}],
+                    /*initial upgrade*/["hypermod1", "HyperMult Architecture", "<strong>Constructing</strong> HyperKeys provides a lengthy temporary multiplier to <strong>decryption</strong> and <strong>process</strong> ArcBit generation.", "", 0.0005, ["hypermod3"], (resource) => {unlockHyperMod("hyperMultArch");}],
+                    
+                    /*initial upgrade*/["hypermod2", "HyperCore Architecture", "<strong>Core</strong> generation rate is multiplied by current <strong>HyperKey</strong> amount.", "", 0.001, ["hypermod3"], (resource) => {unlockHyperMod("hyperCoreArch");}],
+
+                    ["hypermod3", "Hyper Architecture", "<strong></strong>", "", 0.001, ["hypermod4"], (resource) => {unlockHyperMod("");}],
+
+                    ["hypermod4", "Hyper Architecture", "<strong></strong>", "", 0.001, [], (resource) => {unlockHyperMod("");}],
+
+                    ["hypermod5", "Reroll+ Architecture", "Improve success rate of <strong>Locating</strong> NullPointers.", "", 0.001, [], (resource) => {unlockHyperMod("rerollArch");}],
+
+                    ["hypermod6", "Streak+ Architecture", "Consecutive NullPointer <strong>Locations</strong> are more powerful.", "", 0.001, [], (resource) => {unlockHyperMod("streakArch");}],
                 ]
             ],
         ])
@@ -191,11 +209,15 @@ static ALL_UPGRADES_INFO = new Map([
             [
                 "hyperkeys",
                 [
-                    /*initial upgrade*/["keyBtn1", "HyperKey v2", "<strong>Constructing</strong> HyperKeys is <strong>twice</strong> as efficient.", "", 0.0005, [], (resource) => {resource.modifyBtnValBaseMult(2)}],
+                    /*initial upgrade*/["keyBtn1", "Faster Encryption", "<strong>Constructing</strong> HyperKeys is <strong>twice</strong> as efficient.", "", 0.0005, ["keyBtn2"], (resource) => {resource.modifyBtnValBaseMult(2)}],
+                    ["keyBtn2", "Stronger Encryption", "<strong>Constructing</strong> HyperKeys is <strong>twice</strong> as efficient.", "", 0.0005, ["keyBtn3"], (resource) => {resource.modifyBtnValBaseMult(2)}],
+                    ["keyBtn3", "Asymmetric Encryption", "<strong>Constructing</strong> HyperKeys is <strong>twice</strong> as efficient.", "", 0.0005, ["keyBtn4"], (resource) => {resource.modifyBtnValBaseMult(2)}],
+                    ["keyBtn4", "Hyper Encryption", "<strong>Constructing</strong> HyperKeys is <strong>twice</strong> as efficient.", "", 0.0005, ["keyBtn5"], (resource) => {resource.modifyBtnValBaseMult(2)}],
+                    ["keyBtn5", "Quantum Encryption", "<strong>Constructing</strong> HyperKeys is <strong>twice</strong> as efficient.", "", 0.0005, [], (resource) => {resource.modifyBtnValBaseMult(2)}],
                     
-                    /*initial upgrade*/["modMax1", "HyperMod Slot 2", "An additional <strong>HyperMod</strong> can be active concurrently.", "", 0.001, ["modMax2"], (resource) => {Utils.gameData.hypermods.modifyMaxEnabled(2)}],
-                    ["modMax2", "HyperMod Slot 3", "An additional <strong>HyperMod</strong> can be active concurrently.", "", 0.001, ["modMax3"], (resource) => {Utils.gameData.hypermods.modifyMaxEnabled(3)}],
-                    ["modMax3", "HyperMod Slot 4", "An additional <strong>HyperMod</strong> can be active concurrently.", "", 0.001, [], (resource) => {Utils.gameData.hypermods.modifyMaxEnabled(4)}],
+                    /*initial upgrade*/["modMax1", "HyperMod Slot 2", "A maximum of 2 <strong>HyperMods</strong> can be active concurrently.", "", 0.001, ["modMax2"], (resource) => {Utils.gameData.hypermods.modifyMaxEnabled(2)}],
+                    ["modMax2", "HyperMod Slot 3", "A maximum of 3 <strong>HyperMods</strong> can be active concurrently.", "", 0.001, ["modMax3"], (resource) => {Utils.gameData.hypermods.modifyMaxEnabled(3)}],
+                    ["modMax3", "HyperMod Slot 4", "A maximum of 4 <strong>HyperMods</strong> can be active concurrently.", "", 0.001, [], (resource) => {Utils.gameData.hypermods.modifyMaxEnabled(4)}],
                 ]
             ],
         ])
@@ -208,24 +230,32 @@ static ALL_UPGRADES_INFO = new Map([
                 "nullpointers",
                 [
                     /*initial upgrade*/["nullBtn1", "efficient_search_ver1", "<strong>nullpointer_location_rate=0.015;</strong>", "", 1, ["nullBtn2"], (resource) => {resource.modifySuccessRate(0.015)}],
-                    ["nullBtn2", "efficient_search_ver2", "<strong>nullpointer_location_rate=0.0275;</strong>", "", 1, ["nullBtn3"], (resource) => {resource.modifySuccessRate(0.0275)}],
-                    ["nullBtn3", "efficient_search_ver3", "<strong>nullpointer_location_rate=0.075;</strong>", "", 1, ["nullBtn4"], (resource) => {resource.modifySuccessRate(0.075)}],
-                    ["nullBtn4", "efficient_search_ver4", "<strong>nullpointer_location_rate=0.1;</strong>", "", 1, ["nullBtn5"], (resource) => {resource.modifySuccessRate(0.1)}],
-                    ["nullBtn5", "efficient_search_finalver", "<strong>nullpointer_location_rate=0.175; //need new algorithm</strong>", "", 1, ["nullBtn6"], (resource) => {resource.modifySuccessRate(0.175)}],
-                    ["nullBtn6", "nullspace_collapse_protocol", "<strong>nullpointer_location_rate=0.25;</strong>", "", 1, ["nullBtn7"], (resource) => {resource.modifySuccessRate(0.25)}],
-                    ["nullBtn7", "nullspace_collapse_protocol_v2", "<strong>nullpointer_location_rate=0.32;</strong>", "", 1, ["nullBtn8"], (resource) => {resource.modifySuccessRate(0.32)}],
-                    ["nullBtn8", "nullspace_collapse_protocol_v2.1", "<strong>nullpointer_location_rate=0.4525;</strong>", "", 1, ["nullBtn9"], (resource) => {resource.modifySuccessRate(0.4525)}],
-                    ["nullBtn9", "nullspace_collapse_protocol_v2.1.1", "<strong>nullpointer_location_rate=0.5;</strong>", "", 1, ["nullBtn10"], (resource) => {resource.modifySuccessRate(0.5)}],
-                    ["nullBtn10", "nullspace_collapse_protocol_v5", "<strong>nullpointer_location_rate=0.5555; //seems like the limit</strong>", "", 1, [], (resource) => {resource.modifySuccessRate(0.5555)}],
+                    ["nullBtn2", "efficient_search_ver2", "<strong>nullpointer_location_rate=0.0275;</strong>", "", 8, ["nullBtn3"], (resource) => {resource.modifySuccessRate(0.0275)}],
+                    ["nullBtn3", "efficient_search_ver3", "<strong>nullpointer_location_rate=0.075;</strong>", "", 35, ["nullBtn4"], (resource) => {resource.modifySuccessRate(0.075)}],
+                    ["nullBtn4", "efficient_search_ver4", "<strong>nullpointer_location_rate=0.1;</strong>", "", 300, ["nullBtn5"], (resource) => {resource.modifySuccessRate(0.1)}],
+                    ["nullBtn5", "efficient_search_finalver", "<strong>nullpointer_location_rate=0.175; //need new algorithm</strong>", "", 750, ["nullBtn6"], (resource) => {resource.modifySuccessRate(0.175)}],
+                    ["nullBtn6", "nullspace_collapse_protocol", "<strong>nullpointer_location_rate=0.25;</strong>", "", 1_250, ["nullBtn7"], (resource) => {resource.modifySuccessRate(0.25)}],
+                    ["nullBtn7", "nullspace_collapse_protocol_v2", "<strong>nullpointer_location_rate=0.32;</strong>", "", 3_800, ["nullBtn8"], (resource) => {resource.modifySuccessRate(0.32)}],
+                    ["nullBtn8", "nullspace_collapse_protocol_v2.1", "<strong>nullpointer_location_rate=0.4525;</strong>", "", 12_400, ["nullBtn9"], (resource) => {resource.modifySuccessRate(0.4525)}],
+                    ["nullBtn9", "nullspace_collapse_protocol_v2.1.1", "<strong>nullpointer_location_rate=0.5;</strong>", "", 24_000, ["nullBtn10"], (resource) => {resource.modifySuccessRate(0.5)}],
+                    ["nullBtn10", "nullspace_collapse_protocol_v5", "<strong>nullpointer_location_rate=0.5555; //seems like the limit</strong>", "", 55_555, [], (resource) => {resource.modifySuccessRate(0.5555)}],
                     
-                    /*initial upgrade*/["nullDelta1", "memory_leak_capture", "<strong>passive_nullpointer_gain_active();</strong>", "", 3, ["nullDelta2"], (resource) => {resource.modifyDelta(0.01)}],
-                    ["nullDelta2", "capture_rate+", "<strong>multiply_passive_nullpointer_gain(2);</strong>", "", 3, ["nullDelta3"], (resource) => {resource.modifyDelta(0.02)}],
-                    ["nullDelta3", "capture_rate++", "<strong>multiply_passive_nullpointer_gain(2.5);</strong>", "", 3, ["nullDelta4"], (resource) => {resource.modifyDelta(0.05)}],
-                    ["nullDelta4", "capture_rate+++", "<strong>multiply_passive_nullpointer_gain(4);</strong>", "", 3, ["nullDelta5"], (resource) => {resource.modifyDelta(0.2)}],
-                    ["nullDelta5", "capture_rate+++++++", "<strong>multiply_passive_nullpointer_gain(5);</strong>", "", 3, [], (resource) => {resource.modifyDelta(1)}],
+                    /*initial upgrade*/["nullDelta1", "memory_leak_capture", "<strong>passive_nullpointer_gain_active();</strong>", "", 3, ["nullDelta2"], (resource) => {resource.delta = 0.05}],
+                    ["nullDelta2", "capture_rate+", "<strong>multiply_passive_nullpointer_gain(2);</strong>", "", 10, ["nullDelta3"], (resource) => {resource.modifyDelta(2)}],
+                    ["nullDelta3", "capture_rate++", "<strong>multiply_passive_nullpointer_gain(2);</strong>", "", 24, ["nullDelta4"], (resource) => {resource.modifyDelta(2)}],
+                    ["nullDelta4", "capture_rate+++", "<strong>multiply_passive_nullpointer_gain(2);</strong>", "", 62, ["nullDelta5"], (resource) => {resource.modifyDelta(2)}],
+                    ["nullDelta5", "capture_rate++++", "<strong>multiply_passive_nullpointer_gain(2);</strong>", "", 105, ["nullDelta6"], (resource) => {resource.modifyDelta(2)}],
+                    ["nullDelta6", "auto_search+", "<strong>nullpointer_passive_capture_multiplier(3);</strong>", "", 225, ["nullDelta7"], (resource) => {resource.modifyDelta(3)}],
+                    ["nullDelta7", "auto_search++", "<strong>nullpointer_passive_capture_multiplier(4);</strong>", "", 330, ["nullDelta8"], (resource) => {resource.modifyDelta(4)}],
+                    ["nullDelta8", "auto_search+++", "<strong>nullpointer_passive_capture_multiplier(5);</strong>", "", 470, ["nullDelta9"], (resource) => {resource.modifyDelta(5)}],
+                    ["nullDelta9", "auto_search++++", "<strong>nullpointer_passive_capture_multiplier(6);</strong>", "", 600, ["nullDelta10"], (resource) => {resource.modifyDelta(6)}],
+                    ["nullDelta10", "optimal_capture", "<strong>nullpointer_passive_capture_multiplier(10);</strong>", "", 1_125, [], (resource) => {resource.modifyDelta(10)}],
 
-                    /*initial upgrade*/["nullBoost1", "arc_booster_1_final_FINAL.exe", "<span class='rainbow'>arcbit_decryption_and_process_multiplier=100;</span>", "", 100, ["nullBoost2"], (resource) => {Utils.gameData.resources.get("arcbits").modifyBtnValBaseMult(100); Utils.gameData.resources.get("arcbits").modifyDeltaBaseMult(100);}],
-                    ["nullBoost2", "hyperboost_working_holyshit.out", "<span class='rainbow'>resources.get('hyperkeys').setMultiplier(1000);</span>", "", 500, [], (resource) => {Utils.gameData.resources.get("hyperkeys").modifyBtnValBaseMult(1000); Utils.gameData.resources.get("hyperkeys").modifyDeltaBaseMult(1000);}],
+                    /*initial upgrade*/["nullBoost1", "arc_hack.exe", "<span class='rainbow'>arcbit_decryption_and_process_multiplier=100;</span>", "", 111, ["nullBoost2"], (resource) => {Utils.gameData.resources.get("arcbits").modifyBtnValBaseMult(100); Utils.gameData.resources.get("arcbits").modifyDeltaBaseMult(100);}],
+                    ["nullBoost2", "hyperboost.exe", "<span class='rainbow'>resources.get('hyperkeys').setMultiplier(175);</span>", "", 22_222, ["nullBoost3"], (resource) => {Utils.gameData.resources.get("hyperkeys").modifyBtnValBaseMult(175); Utils.gameData.resources.get("hyperkeys").modifyDeltaBaseMult(175);}],
+                    ["nullBoost3", "core_generator_overclock.exe", "<span class='rainbow'>gameData.params.CORE_GENERATION_SPEED*=25;</span>", "", 3_333_333, ["nullBoost4"], (resource) => {Utils.gameData.resources.get("cores").modifyDeltaBaseMult(25);}],
+                    ["nullBoost4", "resourceGen_final_FINAL.exe", '<span class="rainbow">internalFiles("~/var/saveData.json").write("{ALL_RESOURCES_MULTIPLIER: 250}");</span>', "", 444_444_444, ["nullFinal"], (resource) => {Utils.gameData.resources.get("arcbits").modifyBtnValBaseMult(250); Utils.gameData.resources.get("arcbits").modifyDeltaBaseMult(250); Utils.gameData.resources.get("hyperkeys").modifyBtnValBaseMult(250); Utils.gameData.resources.get("hyperkeys").modifyDeltaBaseMult(250); Utils.gameData.resources.get("nullpointers").modifyBtnValBaseMult(250); Utils.gameData.resources.get("nullpointers").modifyDeltaBaseMult(250);}],
+                    ["nullFinal", "<span class='obfuscated'>0000000000000000</span>", "<span class='rainbow'>MOV 0x000A998E, #1000;</span>", "", 99_999_000_000, [], (resource) => {Utils.gameData.resources.get("arcbits").modifyBtnValBaseMult(1000); Utils.gameData.resources.get("arcbits").modifyDeltaBaseMult(1000); Utils.gameData.resources.get("hyperkeys").modifyBtnValBaseMult(1000); Utils.gameData.resources.get("hyperkeys").modifyDeltaBaseMult(1000); Utils.gameData.resources.get("nullpointers").modifyBtnValBaseMult(1000); Utils.gameData.resources.get("nullpointers").modifyDeltaBaseMult(1000);}],
                 ]
             ],
         ])

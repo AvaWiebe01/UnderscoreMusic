@@ -14,6 +14,9 @@ export class Upgrade {
     gameData;
     buyAction;
 
+    isBought;
+    isUnlocked;
+
     // Display elements
     upgradeElement;
     costDisplay;

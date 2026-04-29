@@ -21,6 +21,8 @@ import { saveGame, loadGame } from "./save.js";
 
 import { initAudio, GameAudio } from "./audio.js";
 
+import { BonusItem } from "./bonusitem.js";
+
 // ======== START ======== //
 window.onload = function() {
 
@@ -35,6 +37,7 @@ window.onload = function() {
     const hypermods = initHyperMods(gameData);
     const archive = initArchive();
     const audio = initAudio();
+    const bonusItem = new BonusItem();
 
     // Initialize gameData variables
     gameData.addResources(resources);
@@ -44,6 +47,7 @@ window.onload = function() {
     gameData.addHyperMods(hypermods);
     gameData.addArchive(archive);
     gameData.addAudio(audio);
+    gameData.addBonusItem(bonusItem);
     initEventHandlers(gameData);
 
     // Initialize HTML and DOM content/references
@@ -76,6 +80,8 @@ window.onload = function() {
     });
 
     gameData.hypermods.initDisplayElements();
+
+    gameData.bonusItem.initDisplayElements();
 
     // Update all displays with initial content (non-destructive)
     Utils.addGameData(gameData);
@@ -117,23 +123,29 @@ function gameTick(currentTime, gameData = new GameData()) {
         Utils.visualFxTick();
         
         gameData.extraTimer += deltaTime;
+        gameData.bonusTimer += deltaTime;
+        
         gameData.lastTime = currentTime;
 
         // autosave
         if (gameData.autoSaveTimer >= Constants.AUTOSAVE_TICKS) {saveGame(gameData); gameData.autoSaveTimer=0}
         gameData.autoSaveTimer++;
     }
-
     
     if (gameData.extraTimer >= Constants.AVERAGING_TIME/Constants.AVERAGING_SAMPLES) {
-
-        // Perform all actions that must occur every 1 second
         gameData.resources.forEach((resource, key) => {
             resource.calculateGain();
             resource.displayAverageGain();
         });
 
         gameData.extraTimer -= Constants.AVERAGING_TIME/Constants.AVERAGING_SAMPLES; // Reset the counter but keep leftover time
+    }
+
+    // perform all actions that must occur every 1 second
+    if (gameData.bonusTimer >= 1000) {
+        
+        gameData.bonusItem.bonusTick();
+        gameData.bonusTimer -= 1000; // reset counter but keep leftover time
     }
 
     // Performance metric

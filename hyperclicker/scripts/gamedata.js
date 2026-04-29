@@ -6,14 +6,17 @@ export class GameData {
     hypermods;
     archive;
     audio;
+    bonusItem;
 
     lastTime;
     extraTimer;
+    bonusTimer;
     autoSaveTimer;
 
     constructor() {
         this.lastTime = performance.now(); // To calculate deltaTime
         this.extraTimer = 0;
+        this.bonusTimer = 0;
         this.autoSaveTimer = 0;
     }
 
@@ -43,5 +46,9 @@ export class GameData {
 
     addAudio(audio) {
         this.audio = audio;
+    }
+
+    addBonusItem(bonusItem) {
+        this.bonusItem = bonusItem;
     }
 }

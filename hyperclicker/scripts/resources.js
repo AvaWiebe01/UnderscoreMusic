@@ -244,7 +244,12 @@ class NullPointers extends Resource {
     successRate;
 
     streak;
+    defaultStreakBase;
     streakBase;
+
+    failureStreak;
+
+    rolls;
 
     constructor(amt, delta, btnVal, htmlName, displayableName, gameData, successRate) {
         super(amt, btnVal, htmlName, displayableName, gameData);
@@ -253,7 +258,12 @@ class NullPointers extends Resource {
         this.successRate = successRate;
 
         this.streak = 0;
-        this.streakBase = 2;
+        this.defaultStreakBase = 2;
+        this.streakBase = this.defaultStreakBase;
+
+        this.failureStreak = 0;
+
+        this.rolls = 1;
     }
 
     initDisplayElements() {
@@ -279,20 +289,37 @@ class NullPointers extends Resource {
     }
 
     modifyDelta(value) {
-        this.delta = value;
+        this.delta *= value;
     }
 
     btnClicked() {
-        const roll = Math.random();
-        const success = (roll < this.successRate);
-        console.log(`Rolled ${roll}; Success if <${this.successRate}`)
+        var success = false;
 
-        if(success) {
+        for (let idx = 1; idx <= this.rolls; idx+=1) {
+            const roll = Math.random();
+            console.log(`Roll ${idx} of ${this.rolls}: ${roll}; Success if <${this.successRate}`);
+
+            if (roll < this.successRate) {
+                success = true;
+            }
+        }
+
+        console.log(`${(success) ? "Located NullPointers" : "Failure"}`);
+
+        if(success || (this.failureStreak >= 100)) { // guaranteed success after 100 clicks
+            Utils.gameData.audio.playSfxLocateSuccess(this.streak);
+
+            console.log(`${(this.failureStreak >= 100) ? "Reason: Failure Streak >= 100" : "Reason: Roll Success"}`);
+
             this.modifyAmt(this.getFinalBtnValue());
             this.streak += 1;
+            this.failureStreak = 0;
         }
         else{
+            Utils.gameData.audio.playSfxLocateFailure();
+
             this.streak = 0;
+            this.failureStreak += 1;
         }
     }
 

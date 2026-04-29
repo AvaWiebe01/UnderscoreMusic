@@ -137,6 +137,16 @@ class MultHyperCore extends Multiplier {
     }
 }
 
+// multiplier for Bonus Item
+class MultBonusItem extends Multiplier {
+    getMult() {
+        return this.mult;
+    }
+
+    multUpdate() {
+        this.mult = Utils.gameData.bonusItem?.currentEffect?.strength ?? 1;
+    }
+}
 
 
 export function initMultipliers(gameData = new GameData) {
@@ -150,6 +160,9 @@ export function initMultipliers(gameData = new GameData) {
         // hypermod mults
         ["hyperMult", new MultHyperMult("hyperMult", gameData)],
         ["hyperCore", new MultHyperCore("hyperCore", gameData)],
+
+        // bonus mult
+        ["bonusItem", new MultBonusItem("bonusItem", gameData)],
     ]);
 
     return multipliers;

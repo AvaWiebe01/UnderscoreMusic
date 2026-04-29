@@ -139,6 +139,22 @@ export class Utils {
         document.querySelector(`.tab_buttons button[tab="${tabValue}"]`).classList.remove("locked_tab");
     }
 
+    static unlockUpgrade(upgradeTypeTag, resourceName, key) {
+        const upgrade = this.gameData.upgrades.get(upgradeTypeTag).get(resourceName).get(key);
+        
+        if (!upgrade.isUnlocked) {
+            upgrade.unlock();
+
+            const unlockedDiv = upgrade.upgradeElement;
+            unlockedDiv.classList.add("appear");
+
+            unlockedDiv.addEventListener("animationend", () => {
+                unlockedDiv.classList.remove("appear");
+            });
+        }
+
+    }
+
     static save() {
         saveGame(this.gameData);
     }
