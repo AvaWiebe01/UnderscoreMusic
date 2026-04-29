@@ -137,6 +137,31 @@ class MultHyperCore extends Multiplier {
     }
 }
 
+// multiplier based on lowest instance process amount
+class MultMultiProcess extends Multiplier {
+
+    getMult() {
+        return this.mult;
+    }
+
+    multUpdate() {
+        var lowest = 999_999_999_999_999_999_999;
+        var allZero = true;
+
+        Utils.gameData.processes.get("arcbits").forEach((process, key) => {
+            if((process.numBought < lowest) && (process.numBought != 0)) {
+                lowest = process.numBought;
+                allZero = false;
+            }
+        });
+
+        this.mult = (allZero) ? 1 : lowest;
+
+        // display mult
+        document.querySelector(".game .architectures_panel .hypermod .multi_process_mult_display").innerHTML = this.mult;
+    }
+}
+
 // multiplier for Bonus Item
 class MultBonusItem extends Multiplier {
     getMult() {
@@ -160,6 +185,7 @@ export function initMultipliers(gameData = new GameData) {
         // hypermod mults
         ["hyperMult", new MultHyperMult("hyperMult", gameData)],
         ["hyperCore", new MultHyperCore("hyperCore", gameData)],
+        ["multiProcess", new MultMultiProcess("multiProcess", gameData)],
 
         // bonus mult
         ["bonusItem", new MultBonusItem("bonusItem", gameData)],

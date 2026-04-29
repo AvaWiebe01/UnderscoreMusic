@@ -11,7 +11,7 @@ static AVERAGING_SAMPLES = 10;
 
 static AUTOSAVE_TICKS = 3600 // save every 3600 game ticks
 
-static BONUS_COOLDOWN = 320; // bonus starts at 5:20 -> 2:40 -> 1:20 -> 0:40 cooldown
+static BONUS_COOLDOWN = 10; // bonus starts at 5:20 -> 2:40 -> 1:20 -> 0:40 cooldown
 
 static DEFAULT_SUFFIXES = ["","Thousand","Million","Billion","Trillion","Quadrillion","Quintillion","Sextillion","Septillion","Octillion","Nonillion","Decillion"];
 static ABBREVIATED_SUFFIXES = ["","K","M","B","T","Q","Qi","Sx","Sp","Oc","No","Dc"];
@@ -191,9 +191,9 @@ static ALL_UPGRADES_INFO = new Map([
                     
                     /*initial upgrade*/["hypermod2", "HyperCore Architecture", "<strong>Core</strong> generation rate is multiplied by current <strong>HyperKey</strong> amount.", "", 0.001, ["hypermod3"], (resource) => {unlockHyperMod("hyperCoreArch");}],
 
-                    ["hypermod3", "Hyper Architecture", "<strong></strong>", "", 0.001, ["hypermod4"], (resource) => {unlockHyperMod("");}],
+                    ["hypermod3", "Malware Defense Architecture", "Removing a <strong>virus</strong> generates much stronger effects.", "", 0.001, ["hypermod4"], (resource) => {unlockHyperMod("malwareDefenseArch");}],
 
-                    ["hypermod4", "Hyper Architecture", "<strong></strong>", "", 0.001, [], (resource) => {unlockHyperMod("");}],
+                    ["hypermod4", "Multi-Process Architecture", "<strong>Process</strong> ArcBit generation is multiplied by the lowest <strong>number of instances</strong> of all programs [excluding 0].", "", 0.001, [], (resource) => {unlockHyperMod("multiProcessArch");}],
 
                     ["hypermod5", "Reroll+ Architecture", "Improve success rate of <strong>Locating</strong> NullPointers.", "", 0.001, [], (resource) => {unlockHyperMod("rerollArch");}],
 

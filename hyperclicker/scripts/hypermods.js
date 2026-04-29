@@ -89,22 +89,26 @@ export class HyperCoreArch extends HyperMod {
     }
 }
 
-export class Arch extends HyperMod {
+export class MalwareDefenseArch extends HyperMod {
     enable() {
+        Utils.gameData.bonusItem.effectMultiplier = 6;
         this.enabled = true;
     }   
 
     disable() {
+        Utils.gameData.bonusItem.effectMultiplier = 1;
         this.enabled = false;
     }
 }
 
-export class Arch2 extends HyperMod {
+export class MultiProcessArch extends HyperMod {
     enable() {
+        Utils.gameData.resources.get("arcbits").addDeltaMultSource("multiProcess");
         this.enabled = true;
     }
 
     disable() {
+        Utils.gameData.resources.get("arcbits").removeDeltaMultSource("multiProcess");
         this.enabled = false;
     }
 }
@@ -137,6 +141,8 @@ export function initHyperMods(gameData = new GameData()) {
     var mods = new Map([
         ["hyperMultArch", new HyperMultArch("hyperMultArch", "HyperMult", "<strong>Constructing</strong> HyperKeys provides a lengthy temporary multiplier to <strong>decryption</strong> and <strong>process</strong> ArcBit generation.")],
         ["hyperCoreArch", new HyperCoreArch("hyperCoreArch", "HyperCore", "<strong>Core</strong> generation rate is multiplied by current <strong>HyperKey</strong> amount.")],
+        ["malwareDefenseArch", new MalwareDefenseArch("malwareDefenseArch", "Malware Defense", "Removing a <strong>virus</strong> generates <strong>6x</strong> stronger effects.")],
+        ["multiProcessArch", new MultiProcessArch("multiProcessArch", "Multi-Process", `<strong>Process</strong> ArcBit generation is multiplied by the lowest <strong>number of instances</strong> of all programs [excluding 0].<br>Current multiplier: <span class="multi_process_mult_display"></span>`)],
         ["rerollArch", new RerollArch("rerollArch", "Reroll+", "Each attempt to <strong>Locate</strong> NullPointers rolls the probability <strong>twice</strong> and takes the best result.")],
         ["streakArch", new StreakArch("streakArch", "Streak+", "Each consecutive NullPointer <strong>Location</strong> multiplies generation by <strong>3</strong> instead of 2.")],
     ])

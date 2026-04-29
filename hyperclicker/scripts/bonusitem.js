@@ -15,6 +15,8 @@ export class BonusItem {
     static currentEffect;
     static effectDuration;
 
+    static effectMultiplier;
+
     static firstClick;
 
     constructor() {
@@ -29,7 +31,7 @@ export class BonusItem {
                 strength:10,
                 duration:25,
                 targets:["process"],
-                desc:"10x process generation for 25 seconds!",
+                desc:"process generation for 25 seconds!",
             },
 
             "buttonBoost":
@@ -37,7 +39,7 @@ export class BonusItem {
                 strength:8,
                 duration:30,
                 targets:["button"],
-                desc:"8x manual resource generation for 30 seconds!",
+                desc:"manual resource generation for 30 seconds!",
             },
 
             "coreBoost":
@@ -45,7 +47,7 @@ export class BonusItem {
                 strength:6,
                 duration:20,
                 targets:["core"],
-                desc:"6x core generation for 20 seconds!",
+                desc:"core generation for 20 seconds!",
             },
 
             "rareBoost":
@@ -53,12 +55,14 @@ export class BonusItem {
                 strength:32,
                 duration:32,
                 targets:["process", "core", "button"],
-                desc:"32x process, core, and manual resource generation for 32 seconds!",
+                desc:"process, core, and manual resource generation for 32 seconds!",
             },
         }
 
         this.currentEffect = null;
         this.effectDuration = 0;
+
+        this.effectMultiplier = 1;
 
         this.firstClick = true;
     }
@@ -101,12 +105,15 @@ export class BonusItem {
 
         var keys = Object.keys(this.effects);
         var selected = keys[keys.length * Math.random() << 0];
+        var selectedEffect = this.effects[selected];
 
         console.log(`Activating ${selected}!`);
 
-        this.startEffect(this.effects[selected]);
+        this.currentEffect = {strength:(selectedEffect.strength*this.effectMultiplier), duration:selectedEffect.duration, targets:selectedEffect.targets, desc:selectedEffect.desc};
 
-        this.textElement.innerHTML = `<span class="title">&gt;&gt;&gt; Virus Removed &lt;&lt;&lt;</span><br>${this.effects[selected].desc}`;
+        this.startEffect(this.currentEffect);
+
+        this.textElement.innerHTML = `<span class="title">&gt;&gt;&gt; Virus Removed &lt;&lt;&lt;</span><br>${selectedEffect.strength * this.effectMultiplier}x ${selectedEffect.desc}`;
         this.textElement.style.display = "block";
         this.bonusElement.style.left = `calc(25% + ${this.xpos}% - ${this.textElement.offsetWidth/2}px + 25px)`;
         this.bonusElement.style.top = `calc(${this.ypos}% - 50px)`;
@@ -151,11 +158,11 @@ export class BonusItem {
             }
         });
 
-        this.effectDuration = effect.duration;
+        this.effectDuration = this.currentEffect.duration;
 
         this.durationElement.style.display = "flex";
         this.durationElement.innerHTML = this.effectDuration;
-        this.durationElement.setAttribute("title", `${this.currentEffect.desc}`);
+        this.durationElement.setAttribute("title", `${this.currentEffect.strength * this.effectMultiplier}x ${this.currentEffect.desc}`);
     }
 
     endEffect() {
