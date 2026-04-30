@@ -89,6 +89,18 @@ export class HyperCoreArch extends HyperMod {
     }
 }
 
+export class KeyMultArch extends HyperMod {
+    enable() {
+        Utils.gameData.resources.get("hyperkeys").addBtnValMultSource("arcMult");
+        this.enabled = true;
+    }
+
+    disable() {
+        Utils.gameData.resources.get("hyperkeys").removeBtnValMultSource("arcMult");
+        this.enabled = false;
+    }
+}
+
 export class MalwareDefenseArch extends HyperMod {
     enable() {
         Utils.gameData.bonusItem.effectMultiplier = 6;
@@ -141,6 +153,7 @@ export function initHyperMods(gameData = new GameData()) {
     var mods = new Map([
         ["hyperMultArch", new HyperMultArch("hyperMultArch", "HyperMult", "<strong>Constructing</strong> HyperKeys provides a lengthy temporary multiplier to <strong>decryption</strong> and <strong>process</strong> ArcBit generation.")],
         ["hyperCoreArch", new HyperCoreArch("hyperCoreArch", "HyperCore", "<strong>Core</strong> generation rate is multiplied by current <strong>HyperKey</strong> amount.")],
+        ["keyMultArch", new KeyMultArch("keyMultArch", "KeyMult", "<strong>Decrypting</strong> ArcBits also provides a temporary multiplier to <strong>construction</strong> HyperKey generation.")],
         ["malwareDefenseArch", new MalwareDefenseArch("malwareDefenseArch", "Malware Defense", "Removing a <strong>virus</strong> generates <strong>6x</strong> stronger effects.")],
         ["multiProcessArch", new MultiProcessArch("multiProcessArch", "Multi-Process", `<strong>Process</strong> ArcBit generation is multiplied by the lowest <strong>number of instances</strong> of all programs [excluding 0].<br>Current multiplier: <span class="multi_process_mult_display"></span>`)],
         ["rerollArch", new RerollArch("rerollArch", "Reroll+", "Each attempt to <strong>Locate</strong> NullPointers rolls the probability <strong>twice</strong> and takes the best result.")],

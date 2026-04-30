@@ -20,7 +20,7 @@ static DATA_SIZE_SUFFIXES = ["Bits","Kilobits","Megabits","Gigabits","Terabits",
 
 static RESOURCE_INFO = [ // htmlName, amt, delta, btnVal, displayableName
     ["arcbits", 111111111110, 0.00010, "ArcBits"],
-    ["hyperkeys", 0.01, 0.00001, "HyperKeys"],
+    ["hyperkeys", 0.00, 0.00001, "HyperKeys"],
 ];
 
 // htmlName, amt, delta, btnVal, displayableName, initMaxCores
@@ -45,7 +45,7 @@ static INITIAL_UPGRADES = new Map([
         new Map([
             [
                 "hyperkeys",
-                ["hypermod1", "hypermod2"],
+                ["hypermodHyperMult", "hypermodHyperCore"],
             ],
         ])
     ],
@@ -101,21 +101,21 @@ static ALL_UPGRADES_INFO = new Map([
                         ["arcbitBtn7", "Efficient Decryptor", "<strong>Decrypting</strong> ArcBits yields an additional <strong>20x</strong> more.", "", 101, ["arcbitBtn8"], (resource) => {resource.modifyBtnValBaseMult(20);}],
                         ["arcbitBtn8", "Threaded Decryptor", "<strong>Decrypting</strong> ArcBits yields an additional <strong>50x</strong> more.", "", 520, ["arcbitBtn9"], (resource) => {resource.modifyBtnValBaseMult(50);}],
                         ["arcbitBtn9", "Accelerated Decryptor", "<strong>Decrypting</strong> ArcBits yields an additional <strong>250x</strong> more.", "", 3_210, ["arcbitBtn10"], (resource) => {resource.modifyBtnValBaseMult(250);}],
-                        ["arcbitBtn10", "Quantum Decryptor", "<strong>Decrypting</strong> ArcBits yields an additional <strong>500x</strong> more.", "", 3_210, [], (resource) => {resource.modifyBtnValBaseMult(500);}],
+                        ["arcbitBtn10", "Quantum Decryptor", "<strong>Decrypting</strong> ArcBits yields an additional <strong>500x</strong> more.", "", 48_500, [], (resource) => {resource.modifyBtnValBaseMult(500);}],
 
                     // ArcBit Processes
 
                         /* initial upgrade */ ["arcbitProc1", "Clock Speed I", "<strong>Processes</strong> generate <strong>1.2x</strong> more ArcBits/s.", "", 0.05, ["arcbitProc2", "coreGen1"], (resource) => {resource.modifyDeltaBaseMult(1.2);}],
                         ["arcbitProc2", "Clock Speed II", "<strong>Processes</strong> generate an additional <strong>1.6x</strong> more ArcBits/s.", "", 0.5, ["arcbitProc3"], (resource) => {resource.modifyDeltaBaseMult(1.6);}],
                         ["arcbitProc3", "Clock Speed III", "<strong>Processes</strong> generate an additional <strong>2.0x</strong> more ArcBits/s.", "", 5, ["arcbitProc4"], (resource) => {resource.modifyDeltaBaseMult(2);}],
-                        ["arcbitProc4", "Clock Speed IV", "<strong>Processes</strong> generate an additional <strong>2.4x</strong> more ArcBits/s.", "", 5, ["arcbitProc5"], (resource) => {resource.modifyDeltaBaseMult(2.4);}],
-                        ["arcbitProc5", "Clock Speed V", "<strong>Processes</strong> generate an additional <strong>2.8x</strong> more ArcBits/s.", "", 5, ["arcbitProc6"], (resource) => {resource.modifyDeltaBaseMult(2.8);}],
+                        ["arcbitProc4", "Clock Speed IV", "<strong>Processes</strong> generate an additional <strong>2.4x</strong> more ArcBits/s.", "", 50, ["arcbitProc5"], (resource) => {resource.modifyDeltaBaseMult(2.4);}],
+                        ["arcbitProc5", "Clock Speed V", "<strong>Processes</strong> generate an additional <strong>2.8x</strong> more ArcBits/s.", "", 500, ["arcbitProc6"], (resource) => {resource.modifyDeltaBaseMult(2.8);}],
                         
-                        ["arcbitProc6", "Overhead Reduction I", "<strong>Processes</strong> generate an additional <strong>3.2x</strong> more ArcBits/s.", "", 5, ["arcbitProc7"], (resource) => {resource.modifyDeltaBaseMult(3.2);}],
-                        ["arcbitProc7", "Overhead Reduction II", "<strong>Processes</strong> generate an additional <strong>3.6x</strong> more ArcBits/s.", "", 5, ["arcbitProc8"], (resource) => {resource.modifyDeltaBaseMult(3.6);}],
-                        ["arcbitProc8", "Overhead Reduction III", "<strong>Processes</strong> generate an additional <strong>4.0x</strong> more ArcBits/s.", "", 5, ["arcbitProc9"], (resource) => {resource.modifyDeltaBaseMult(4);}],
-                        ["arcbitProc9", "Overhead Reduction IV", "<strong>Processes</strong> generate an additional <strong>10x</strong> more ArcBits/s.", "", 5, ["arcbitProc10"], (resource) => {resource.modifyDeltaBaseMult(10);}],
-                        ["arcbitProc10", "Overhead Reduction V", "<strong>Processes</strong> generate an additional <strong>25x</strong> more ArcBits/s.", "", 5, [], (resource) => {resource.modifyDeltaBaseMult(25);}],
+                        ["arcbitProc6", "Overhead Reduction I", "<strong>Processes</strong> generate an additional <strong>3.2x</strong> more ArcBits/s.", "", 890, ["arcbitProc7"], (resource) => {resource.modifyDeltaBaseMult(3.2);}],
+                        ["arcbitProc7", "Overhead Reduction II", "<strong>Processes</strong> generate an additional <strong>3.6x</strong> more ArcBits/s.", "", 3_800, ["arcbitProc8"], (resource) => {resource.modifyDeltaBaseMult(3.6);}],
+                        ["arcbitProc8", "Overhead Reduction III", "<strong>Processes</strong> generate an additional <strong>4.0x</strong> more ArcBits/s.", "", 16_440, ["arcbitProc9"], (resource) => {resource.modifyDeltaBaseMult(4);}],
+                        ["arcbitProc9", "Overhead Reduction IV", "<strong>Processes</strong> generate an additional <strong>10x</strong> more ArcBits/s.", "", 122_000, ["arcbitProc10"], (resource) => {resource.modifyDeltaBaseMult(10);}],
+                        ["arcbitProc10", "Overhead Reduction V", "<strong>Processes</strong> generate an additional <strong>25x</strong> more ArcBits/s.", "", 4_100_000, [], (resource) => {resource.modifyDeltaBaseMult(25);}],
 
                     // Cores
 
@@ -151,11 +151,13 @@ static ALL_UPGRADES_INFO = new Map([
                             ["arcMult2", "ArcMult v2.0", "<strong>Decrypting</strong> ArcBits also provides a temporary multiplier to <strong>process</strong> ArcBit generation.", "", 0.45, [], (resource) => {resource.addDeltaMultSource("arcMult");}],
 
                             ["arcMultOverclock1", "ArcMult: Overclock I", "<strong>ArcMult</strong> gains <strong>2x</strong> more multiplier per click.", "", 0.2, ["arcMultOverclock2"], (resource) => {resource.gameData.multipliers.get("arcMult").increaseFactor *= 2;}],
-                            ["arcMultOverclock2", "ArcMult: Overclock II", "<strong>ArcMult</strong> gains another <strong>2x</strong> more multiplier per click.", "", 128, [], (resource) => {resource.gameData.multipliers.get("arcMult").increaseFactor *= 2;}],
+                            ["arcMultOverclock2", "ArcMult: Overclock II", "<strong>ArcMult</strong> gains another <strong>2x</strong> more multiplier per click.", "", 128, ["arcMultOverclock3"], (resource) => {resource.gameData.multipliers.get("arcMult").increaseFactor *= 2;}],
+                            ["arcMultOverclock3", "ArcMult: Maximum Overclock", "<strong>ArcMult</strong> gains another <strong>2x</strong> more multiplier per click.", "", 3_720, [], (resource) => {resource.gameData.multipliers.get("arcMult").increaseFactor *= 2;}],
 
                             ["arcMultEfficiency1", "ArcMult: Efficiency+", "<strong>ArcMult</strong> decays <strong>2x</strong> slower.", "", 20, ["arcMultEfficiency2"], (resource) => {resource.gameData.multipliers.get("arcMult").decayFactor *= 0.5;}],
                             ["arcMultEfficiency2", "ArcMult: Efficiency++", "<strong>ArcMult</strong> decays another <strong>2x</strong> slower.", "", 1_250, ["arcMultEfficiency3"], (resource) => {resource.gameData.multipliers.get("arcMult").decayFactor *= 0.5;}],
-                            ["arcMultEfficiency3", "ArcMult: Efficiency+++", "<strong>ArcMult</strong> decays another <strong>2x</strong> slower.", "", 64_000, [], (resource) => {resource.gameData.multipliers.get("arcMult").decayFactor *= 0.5;}],
+                            ["arcMultEfficiency3", "ArcMult: Efficiency+++", "<strong>ArcMult</strong> decays another <strong>2x</strong> slower.", "", 64_000, ["arcMultEfficiency4"], (resource) => {resource.gameData.multipliers.get("arcMult").decayFactor *= 0.5;}],
+                            ["arcMultEfficiency4", "ArcMult: Maximum Efficiency", "<strong>ArcMult</strong> decays another <strong>2x</strong> slower.", "", 468_000, [], (resource) => {resource.gameData.multipliers.get("arcMult").decayFactor *= 0.5;}],
 
                         // Ultraboost
 
@@ -172,7 +174,7 @@ static ALL_UPGRADES_INFO = new Map([
                     // Unlockable Tabs
                     /* initial upgrade */ ["tab1", "Expansion: Archive", "Unlock an <strong class='rainbow'>Archive</strong> of fragmented data.", "", 0.32, ["tab2"], () => {Utils.unlockTab("archive_panel_tab");}],
                     ["tab2", "Expansion: HyperMods", "Unlock the <strong class='rainbow'>HyperMod</strong> interface.", "", 32_000, ["tab3"], () => {Utils.unlockTab("hypermods_panel_tab"); unlockResource("hyperkeys");}],
-                    ["tab3", "Expansion: BEYOND", "Un<span class='obfuscated'>l</span>ock ref<span class='obfuscated'>e</span>rences t<span class='obfuscated'>o</span> <strong class='rainbow'>out-of-b<span class='obfuscated'>o</span>unds</strong> memory addres<span class='obfuscated'>s</span>es.<br>Discover two new HyperMods.", "", 32_000_000_000, [], () => {Utils.unlockTab("beyond_panel_tab"); unlockResource("nullpointers"); Utils.unlockUpgrade("hypermod_upgrades_list", "hyperkeys", "hypermod5"); Utils.unlockUpgrade("hypermod_upgrades_list", "hyperkeys", "hypermod6");}],
+                    ["tab3", "Expansion: BEYOND", "Un<span class='obfuscated'>l</span>ock ref<span class='obfuscated'>e</span>rences t<span class='obfuscated'>o</span> <strong class='rainbow'>out-of-b<span class='obfuscated'>o</span>unds</strong> memory addres<span class='obfuscated'>s</span>es.<br>Discover two new HyperMods.", "", 32_000_000_000, [], () => {Utils.unlockTab("beyond_panel_tab"); unlockResource("nullpointers"); Utils.unlockUpgrade("hypermod_upgrades_list", "hyperkeys", "hypermodReroll"); Utils.unlockUpgrade("hypermod_upgrades_list", "hyperkeys", "hypermodStreak");}],
 
                     // Unlockable Systems (new UI elements in existing tabs)
                 ]
@@ -187,17 +189,19 @@ static ALL_UPGRADES_INFO = new Map([
             [
                 "hyperkeys",
                 [
-                    /*initial upgrade*/["hypermod1", "HyperMult Architecture", "<strong>Constructing</strong> HyperKeys provides a lengthy temporary multiplier to <strong>decryption</strong> and <strong>process</strong> ArcBit generation.", "", 0.0005, ["hypermod3"], (resource) => {unlockHyperMod("hyperMultArch");}],
+                    /*initial upgrade*/["hypermodHyperMult", "HyperMult Architecture", "<strong>Constructing</strong> HyperKeys provides a lengthy temporary multiplier to <strong>decryption</strong> and <strong>process</strong> ArcBit generation.", "", 0.0005, ["hypermodMalwareDefense"], (resource) => {unlockHyperMod("hyperMultArch");}],
                     
-                    /*initial upgrade*/["hypermod2", "HyperCore Architecture", "<strong>Core</strong> generation rate is multiplied by current <strong>HyperKey</strong> amount.", "", 0.001, ["hypermod3"], (resource) => {unlockHyperMod("hyperCoreArch");}],
+                    /*initial upgrade*/["hypermodHyperCore", "HyperCore Architecture", "<strong>Core</strong> generation rate is multiplied by current <strong>HyperKey</strong> amount.", "", 0.00468, ["hypermodKeyMult"], (resource) => {unlockHyperMod("hyperCoreArch");}],
 
-                    ["hypermod3", "Malware Defense Architecture", "Removing a <strong>virus</strong> generates much stronger effects.", "", 0.001, ["hypermod4"], (resource) => {unlockHyperMod("malwareDefenseArch");}],
+                    ["hypermodKeyMult", "Architecture", "<strong>Decrypting</strong> ArcBits also provides a temporary multiplier to <strong>construction</strong> HyperKey generation.", "", 0.02, [], (resource) => {unlockHyperMod("keyMultArch");}],
 
-                    ["hypermod4", "Multi-Process Architecture", "<strong>Process</strong> ArcBit generation is multiplied by the lowest <strong>number of instances</strong> of all programs [excluding 0].", "", 0.001, [], (resource) => {unlockHyperMod("multiProcessArch");}],
+                    ["hypermodMalwareDefense", "Malware Defense Architecture", "Removing a <strong>virus</strong> generates much stronger effects.", "", 0.124, ["hypermodMultiProcess"], (resource) => {unlockHyperMod("malwareDefenseArch");}],
 
-                    ["hypermod5", "Reroll+ Architecture", "Improve success rate of <strong>Locating</strong> NullPointers.", "", 0.001, [], (resource) => {unlockHyperMod("rerollArch");}],
+                    ["hypermodMultiProcess", "Multi-Process Architecture", "<strong>Process</strong> ArcBit generation is multiplied by the lowest <strong>number of instances</strong> of all programs [excluding 0].", "", 6.5, [], (resource) => {unlockHyperMod("multiProcessArch");}],
 
-                    ["hypermod6", "Streak+ Architecture", "Consecutive NullPointer <strong>Locations</strong> are more powerful.", "", 0.001, [], (resource) => {unlockHyperMod("streakArch");}],
+                    ["hypermodReroll", "Reroll+ Architecture", "Improve success rate of <strong>Locating</strong> NullPointers.", "", 450, [], (resource) => {unlockHyperMod("rerollArch");}],
+
+                    ["hypermodStreak", "Streak+ Architecture", "Consecutive NullPointer <strong>Locations</strong> are more powerful.", "", 1_600, [], (resource) => {unlockHyperMod("streakArch");}],
                 ]
             ],
         ])
@@ -210,14 +214,14 @@ static ALL_UPGRADES_INFO = new Map([
                 "hyperkeys",
                 [
                     /*initial upgrade*/["keyBtn1", "Faster Encryption", "<strong>Constructing</strong> HyperKeys is <strong>twice</strong> as efficient.", "", 0.0005, ["keyBtn2"], (resource) => {resource.modifyBtnValBaseMult(2)}],
-                    ["keyBtn2", "Stronger Encryption", "<strong>Constructing</strong> HyperKeys is <strong>twice</strong> as efficient.", "", 0.0005, ["keyBtn3"], (resource) => {resource.modifyBtnValBaseMult(2)}],
-                    ["keyBtn3", "Asymmetric Encryption", "<strong>Constructing</strong> HyperKeys is <strong>twice</strong> as efficient.", "", 0.0005, ["keyBtn4"], (resource) => {resource.modifyBtnValBaseMult(2)}],
-                    ["keyBtn4", "Hyper Encryption", "<strong>Constructing</strong> HyperKeys is <strong>twice</strong> as efficient.", "", 0.0005, ["keyBtn5"], (resource) => {resource.modifyBtnValBaseMult(2)}],
-                    ["keyBtn5", "Quantum Encryption", "<strong>Constructing</strong> HyperKeys is <strong>twice</strong> as efficient.", "", 0.0005, [], (resource) => {resource.modifyBtnValBaseMult(2)}],
+                    ["keyBtn2", "Stronger Encryption", "<strong>Constructing</strong> HyperKeys is <strong>thrice</strong> as efficient.", "", 0.001, ["keyBtn3"], (resource) => {resource.modifyBtnValBaseMult(3)}],
+                    ["keyBtn3", "Asymmetric Encryption", "<strong>Constructing</strong> HyperKeys is <strong>4x</strong> as efficient.", "", 0.00525, ["keyBtn4"], (resource) => {resource.modifyBtnValBaseMult(4)}],
+                    ["keyBtn4", "Hyper Encryption", "<strong>Constructing</strong> HyperKeys is <strong>5x</strong> as efficient.", "", 0.0285, ["keyBtn5"], (resource) => {resource.modifyBtnValBaseMult(5)}],
+                    ["keyBtn5", "Quantum Encryption", "<strong>Constructing</strong> HyperKeys is <strong>32x</strong> as efficient.", "", 0.32, [], (resource) => {resource.modifyBtnValBaseMult(32)}],
                     
                     /*initial upgrade*/["modMax1", "HyperMod Slot 2", "A maximum of 2 <strong>HyperMods</strong> can be active concurrently.", "", 0.001, ["modMax2"], (resource) => {Utils.gameData.hypermods.modifyMaxEnabled(2)}],
-                    ["modMax2", "HyperMod Slot 3", "A maximum of 3 <strong>HyperMods</strong> can be active concurrently.", "", 0.001, ["modMax3"], (resource) => {Utils.gameData.hypermods.modifyMaxEnabled(3)}],
-                    ["modMax3", "HyperMod Slot 4", "A maximum of 4 <strong>HyperMods</strong> can be active concurrently.", "", 0.001, [], (resource) => {Utils.gameData.hypermods.modifyMaxEnabled(4)}],
+                    ["modMax2", "HyperMod Slot 3", "A maximum of 3 <strong>HyperMods</strong> can be active concurrently.", "", 1, ["modMax3"], (resource) => {Utils.gameData.hypermods.modifyMaxEnabled(3)}],
+                    ["modMax3", "HyperMod Slot 4", "A maximum of 4 <strong>HyperMods</strong> can be active concurrently.", "", 1_000, [], (resource) => {Utils.gameData.hypermods.modifyMaxEnabled(4)}],
                 ]
             ],
         ])

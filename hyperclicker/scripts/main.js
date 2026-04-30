@@ -143,7 +143,7 @@ function gameTick(currentTime, gameData = new GameData()) {
 
     // perform all actions that must occur every 1 second
     if (gameData.bonusTimer >= 1000) {
-        
+
         gameData.bonusItem.bonusTick();
         gameData.bonusTimer -= 1000; // reset counter but keep leftover time
     }
