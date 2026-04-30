@@ -499,7 +499,6 @@ main .game .main_panel p.cost {
 }
 
 main .game .main_panel span.suffix {
-	color:var(--main-color);
     font-family:"spacemono", "Courier New", monospace;
     text-align:center;
     text-shadow: var(--main-text-glow-color) 0 0 0.75rem;
@@ -629,6 +628,7 @@ main .game .process_list .process .process_buttons button {
 }
 
 main .game .process_list .process .process_buttons button:active {
+	color:var(--bg-color);
 	transform: scale(0.95, 0.95);
 	transition-duration:0.05s;
 }
