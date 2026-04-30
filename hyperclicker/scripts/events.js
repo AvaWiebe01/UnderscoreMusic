@@ -7,6 +7,10 @@ export function initEventHandlers(gameData = new GameData()) {
     $(document).ready(() => {
 
         // OPTIONS BUTTONS //
+        $(".option button").click((event) => {
+            Utils.gameData.audio.playSfxSelect();
+        })
+
         $(".notation_button").click((event) => {
             Utils.updateNotation(parseInt($(event.currentTarget).attr("notation")));
         })
@@ -73,6 +77,8 @@ export function initEventHandlers(gameData = new GameData()) {
                 event.currentTarget.innerHTML = `${Constants.UPGRADE_BUTTON_CONTENT.get(upgradeTypeTag).get("purchased")}`;
                 event.currentTarget.classList.add("bought");
 
+                Utils.gameData.audio.playSfxUpgrade();
+
                 // add upgrade to purchased list (newest at the top)
                 let purchasedUpgradeList = document.querySelector(`.purchased_upgrade_list[upgrade_type="${upgradeTypeTag}"]`);
                 if(purchasedUpgradeList) {
@@ -91,6 +97,10 @@ export function initEventHandlers(gameData = new GameData()) {
                     parentDiv.classList.add("hidden");
                     
                     // unlock subsequent upgrades
+                    if (upgrade.unlockUpgrades.length != 0) {
+                        Utils.gameData.audio.playSfxUnlocked();
+                    }
+
                     for (const unlockUpgradeKey of upgrade.unlockUpgrades) {
                         upgrade.gameData.upgrades?.get(upgrade.upgradeTypeTag)?.get(upgrade.resource.htmlName)?.get(unlockUpgradeKey).unlock();
 
@@ -105,6 +115,8 @@ export function initEventHandlers(gameData = new GameData()) {
             }
             else {
                 event.currentTarget.classList.add("shake");
+                Utils.gameData.audio.playSfxInvalid();
+
                 event.currentTarget.addEventListener("animationend", () => {
                 event.currentTarget.classList.remove("shake"); 
                 }); 
@@ -147,11 +159,15 @@ export function initEventHandlers(gameData = new GameData()) {
 
             if(action == "buy") {
                 if(process.canBuy(process.buyAmt)) {
+                    Utils.gameData.audio.playSfxDecrypt();
+
                     process.buy();
                     process.displayAllFields();
                 }
                 else {
                     event.currentTarget.classList.add("shake");
+                    Utils.gameData.audio.playSfxInvalid();
+
                     event.currentTarget.addEventListener("animationend", () => {
                     event.currentTarget.classList.remove("shake"); 
                     }); 
@@ -160,11 +176,15 @@ export function initEventHandlers(gameData = new GameData()) {
                 
             else if(action == "sell_one") {
                 if(process.canSell(1)) {
+                    Utils.gameData.audio.playSfxConstruct();
+
                     process.sell(1);
                     process.displayAllFields();
                 }
                 else {
                     event.currentTarget.classList.add("shake");
+                    Utils.gameData.audio.playSfxInvalid();
+
                     event.currentTarget.addEventListener("animationend", () => {
                     event.currentTarget.classList.remove("shake"); 
                     }); 
@@ -173,11 +193,15 @@ export function initEventHandlers(gameData = new GameData()) {
 
             else if(action == "sell_all") {
                 if(process.canSell(process.numBought)) {
+                    Utils.gameData.audio.playSfxConstruct();
+
                     process.sell(process.numBought);
                     process.displayAllFields();
                 }
                 else {
                     event.currentTarget.classList.add("shake");
+                    Utils.gameData.audio.playSfxInvalid();
+
                     event.currentTarget.addEventListener("animationend", () => {
                     event.currentTarget.classList.remove("shake"); 
                     }); 
@@ -223,6 +247,7 @@ export function initEventHandlers(gameData = new GameData()) {
         })
 
         $(".tab_buttons").on("click", "button", function(event) {
+            Utils.gameData.audio.playSfxSelect();
 
             // Tab display
             document.querySelectorAll(".tab").forEach((tabElement) => {
@@ -245,6 +270,8 @@ export function initEventHandlers(gameData = new GameData()) {
 
         // HYPERMOD BUTTONS //
         $(".hypermod_toggle").on("click", function(event) {
+            Utils.gameData.audio.playSfxSelect();
+
             const target = event.currentTarget;
             const hypermodElement = target.closest(".hypermod");
 
@@ -280,6 +307,7 @@ export function initEventHandlers(gameData = new GameData()) {
     // BONUS BUTTONS //
     $(".bonus_icon").on("click", function(event) {
         Utils.gameData.bonusItem.activateBonus();
+        Utils.gameData.audio.playSfxBonus();
     })
 
         // Events that occur when window is resized (for dynamic UI changes that css can't do)

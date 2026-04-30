@@ -193,7 +193,7 @@ static ALL_UPGRADES_INFO = new Map([
                     
                     /*initial upgrade*/["hypermodHyperCore", "HyperCore Architecture", "<strong>Core</strong> generation rate is multiplied by current <strong>HyperKey</strong> amount.", "", 0.00468, ["hypermodKeyMult"], (resource) => {unlockHyperMod("hyperCoreArch");}],
 
-                    ["hypermodKeyMult", "Architecture", "<strong>Decrypting</strong> ArcBits also provides a temporary multiplier to <strong>construction</strong> HyperKey generation.", "", 0.02, [], (resource) => {unlockHyperMod("keyMultArch");}],
+                    ["hypermodKeyMult", "KeyMult Architecture", "<strong>Decrypting</strong> ArcBits also provides a temporary multiplier to <strong>construction</strong> HyperKey generation.", "", 0.02, [], (resource) => {unlockHyperMod("keyMultArch");}],
 
                     ["hypermodMalwareDefense", "Malware Defense Architecture", "Removing a <strong>virus</strong> generates much stronger effects.", "", 0.124, ["hypermodMultiProcess"], (resource) => {unlockHyperMod("malwareDefenseArch");}],
 

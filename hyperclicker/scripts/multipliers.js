@@ -51,7 +51,10 @@ class MultArcMult extends Multiplier {
     }
 
     decay() {
-        this.mult -= this.decayFactor * 0.1 * (2**(3*(this.mult-2)) - 0.125); // decay approaches 0 as mult approaches 1
+        this.mult -= this.decayFactor * (1 / (1 + Math.exp(-(this.mult - 3)))) * (this.mult - 1); // decay approaches 0 as mult approaches 1, capped at 1 mult of decay per tick
+        if(this.mult < 1) {
+            this.mult = 1;
+        }
     }
 }
 
@@ -108,7 +111,7 @@ class MultHyperMult extends Multiplier {
 
         // less mult is granted the higher the current mult, to balance the longer decay
         $(".resource_button[resource='hyperkeys']").click((event) => {
-            this.mult += this.increaseFactor * 0.4 / this.mult;
+            this.mult += this.increaseFactor / this.mult;
         })
     }
 
@@ -122,7 +125,10 @@ class MultHyperMult extends Multiplier {
 
     // this multiplier lasts much longer than arcMult
     decay() {
-        this.mult -= this.decayFactor * 0.007 * (2**(3*(this.mult-2)) - 0.125); // decay approaches 0 as mult approaches 1
+        this.mult -= this.decayFactor * (0.4 / (1 + Math.exp(-(this.mult - 9)))) * (this.mult - 1); // decay approaches 0 as mult approaches 1, capped at 1 mult of decay per tick
+        if(this.mult < 1) {
+            this.mult = 1;
+        }
     }
 }
 
