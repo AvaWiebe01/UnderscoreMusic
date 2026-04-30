@@ -79,6 +79,20 @@
     animation: fade 0.5s backwards;
 }
 
+.fade-out-slow {
+    animation: fade 2s backwards;
+}
+
+.fade-out-notification {
+    animation: fade 3s backwards;
+	animation-timing-function: cubic-bezier(0.15, 0, 1, 0.25);
+}
+
+.fade-out-bonus {
+    animation: fade 10s backwards;
+	animation-timing-function: cubic-bezier(0.5, 0, 1, 0.25);
+}
+
 .appear {
 	animation: appear 0.5s forwards,
 		appear-shake 0.5s;
@@ -137,7 +151,7 @@ main h1 img {
 main h2 {
 	text-align:center;
 	font-size: 2.5rem;
-	margin: 1rem 0 0 0;
+	margin:4rem 0 0 0;
 	font-weight:normal;
 }
 
@@ -157,6 +171,71 @@ main .game {
 main .game * {
     background:var(--transparent);
 } 
+
+main .game .bonus_item {
+	display:none;
+	position:absolute;
+	flex-direction:column;
+	align-items:center;
+	top:0;
+	left:0;
+	z-index: 999;
+}
+
+main .game .bonus_text {
+	display:none;
+	background:var(--text-bg-color-solid);
+	padding:0.75rem;
+	font-size:1rem;
+	color:var(--main-color);
+	text-shadow: var(--main-text-glow-color) 0 0 0.75rem;
+	border:0.1rem solid var(--text-color);
+	box-shadow: 0 0 0.75rem var(--text-glow-color),
+		inset 0 0 0.75rem var(--text-glow-color);
+	z-index:999;
+	text-align:center;
+}
+
+main .game .bonus_text .title {
+	font-size:1.75rem;
+	color:var(--text-color);
+	text-shadow: var(--text-glow-color) 0 0 0.75rem;
+}
+
+main .game .bonus_icon {
+	transition-duration:0.25s;
+	border:0.25rem solid var(--text-color);
+	box-shadow: 0 0 0.75rem var(--text-glow-color),
+		inset 0 0 0.75rem var(--text-glow-color);
+}
+
+main .game .bonus_icon:hover {
+	transform:scale(1.25, 1.25);
+	transition-duration:0.25s;
+}
+
+main .game .bonus_icon:active {
+	transform:scale(1, 1);
+	transition-duration:0.25s;
+}
+
+main .game .bonus_duration {
+	display:none;
+	position:fixed;
+	flex-direction:column;
+	align-items:center;
+	justify-content:center;
+	width:50px;
+	height:50px;
+	text-align: center;
+	bottom:2rem;
+	right:2rem;
+	z-index:999;
+	background:var(--main-bg-color);
+	border:0.25rem solid var(--main-color);
+	box-shadow: 0 0 0.75rem var(--main-box-glow-color),
+		inset 0 0 0.75rem var(--main-box-glow-color);
+}
 
 main .game .main_panel {
     padding: 0.5rem;
@@ -232,6 +311,10 @@ main .game .generate_panel .generate_button .btnval_display {
 	color: var(--accent-color);
 	text-shadow: var(--accent-text-glow-color) 0 0 0.75rem;
 	text-align: center;
+}
+
+main .game .generate_panel .generate_button .btnval_display .white {
+	color: var(--text-color);
 }
 
 main .game .tabs_wrapper {
@@ -511,6 +594,10 @@ main .game .process_list .process {
 		inset 0 0 0.75rem var(--text-glow-color);
 }
 
+main .game .process_list .process.not_unlocked {
+	display:none;
+}
+
 main .game .process_panel h3 {
 	font-family:"spacemono", "Courier New", monospace;
 	font-weight:normal;
@@ -569,6 +656,61 @@ main .game .process_list .process .process_info p {
 	margin-left: 1rem;
 }
 
+main .game .architectures_panel .max_enabled_display {
+	text-align:center;
+	font-size:1.5rem;
+	margin-bottom:1rem;
+}
+
+main .game .architectures_panel .architecture_list {
+	display: flex;
+	flex-direction:column;
+	justify-content:flex-start;
+	align-items:stretch;
+	gap:1rem;
+}
+
+main .game .architectures_panel .architecture_list .no_hypermods_display {
+	text-align:center;
+}
+
+main .game .architectures_panel .architecture_list .hypermod {
+	padding:1rem;
+	text-align: left;
+	border: 0.1rem solid var(--text-color);
+	box-shadow: 0 0 0.75rem var(--text-glow-color),
+		inset 0 0 0.75rem var(--text-glow-color);
+	background: var(--text-bg-color);
+
+	transition-duration:0.5s;
+}
+
+main .game .architectures_panel .architecture_list .hypermod.enabled {
+	border: 0.1rem solid var(--main-color);
+	box-shadow: 0 0 0.75rem var(--main-box-glow-color),
+		inset 0 0 0.75rem var(--main-box-glow-color);
+	background: var(--main-bg-color);
+
+	transition-duration:0.5s;
+}
+
+main .game .architectures_panel .architecture_list .hypermod h3 {
+	font-weight:normal;
+	font-size:2rem;
+	margin:0 0 0.25rem 0;
+}
+
+main .game .architectures_panel .architecture_list .hypermod .status_display {
+	margin-top:1rem;
+}
+
+main .game .hypermods_panel .upgrade_list .upgrade {
+	border: 0.1rem solid var(--accent-color);
+	box-shadow: 0 0 0.75rem var(--accent-box-glow-color),
+		inset 0 0 0.75rem var(--accent-box-glow-color);
+	background: var(--accent-bg-color);
+}
+
 main .game .beyond_panel .beyond_menu {
 	height:10rem;
 	border: 0.1rem solid var(--text-color);
@@ -586,7 +728,7 @@ main .game .archive_panel .archive_menu {
 }
 
 main .game .archive_panel .archive_menu h2 {
-	margin: 1rem 0 0 0;
+	margin: 2rem 0 0 0;
 	font-weight: normal;
 	font-size: 1.75rem;
 	color: var(--main-color);
@@ -597,7 +739,6 @@ main .game .archive_panel .archive_menu h3 {
 	margin: 0 0 0.5rem 0;
 	font-weight: normal;
 	font-size: 1.25rem;
-	
 }
 
 main .game .archive_panel .unlocked_fragments {
@@ -682,6 +823,7 @@ main .game .archive_panel a.fragment_link:active {
 main .game .options {
 	display: flex;
 	flex-direction: row;
+	flex-wrap:wrap;
 	gap: 1rem;
 }
 
@@ -693,9 +835,21 @@ main .game .options .option {
 	padding:1rem;
 }
 
+main .game .options_panel .options button {
+	margin-bottom:1rem;
+}
+
 main .game .options_panel .options button:active {
 	transform: scale(0.95, 0.95);
 	transition-duration:0.05s;
+}
+
+main .game .options_panel .options .saved_message {
+	color: var(--main-color);
+	text-shadow: var(--main-text-glow-color) 0 0 0.5rem;
+	
+	position:relative;
+	top:2.3275rem;
 }
 
 main .game p {

@@ -37,7 +37,7 @@ class MultArcMult extends Multiplier {
         this.decayFactor = 1;
         this.increaseFactor = 1;
 
-        $(".resource_button").click((event) => {
+        $(".resource_button[resource='arcbits']").click((event) => {
             this.mult += this.increaseFactor * 0.2;
         })
     }
@@ -96,10 +96,20 @@ class MultProximityComputing extends Multiplier {
     }
 }
 
-/*
-class MultTemp extends Multiplier {
+// multiplier based on clicking hyperkey generation fast
+class MultHyperMult extends Multiplier {
+    decayFactor;
+    increaseFactor;
+
     constructor(name, gameData = new GameData) {
         super(name, gameData);
+        this.decayFactor = 1;
+        this.increaseFactor = 1;
+
+        // less mult is granted the higher the current mult, to balance the longer decay
+        $(".resource_button[resource='hyperkeys']").click((event) => {
+            this.mult += this.increaseFactor * 0.4 / this.mult;
+        })
     }
 
     getMult() {
@@ -107,16 +117,78 @@ class MultTemp extends Multiplier {
     }
 
     multUpdate() {
+        this.decay();
+    }
 
+    // this multiplier lasts much longer than arcMult
+    decay() {
+        this.mult -= this.decayFactor * 0.007 * (2**(3*(this.mult-2)) - 0.125); // decay approaches 0 as mult approaches 1
     }
 }
-*/
+
+// multiplier based on current HyperKey amount
+class MultHyperCore extends Multiplier {
+    getMult() {
+        return this.mult;
+    }
+
+    multUpdate() {
+        this.mult = Utils.gameData.resources.get("hyperkeys").amt;
+    }
+}
+
+// multiplier based on lowest instance process amount
+class MultMultiProcess extends Multiplier {
+
+    getMult() {
+        return this.mult;
+    }
+
+    multUpdate() {
+        var lowest = 999_999_999_999_999_999_999;
+        var allZero = true;
+
+        Utils.gameData.processes.get("arcbits").forEach((process, key) => {
+            if((process.numBought < lowest) && (process.numBought != 0)) {
+                lowest = process.numBought;
+                allZero = false;
+            }
+        });
+
+        this.mult = (allZero) ? 1 : lowest;
+
+        // display mult
+        document.querySelector(".game .architectures_panel .hypermod .multi_process_mult_display").innerHTML = this.mult;
+    }
+}
+
+// multiplier for Bonus Item
+class MultBonusItem extends Multiplier {
+    getMult() {
+        return this.mult;
+    }
+
+    multUpdate() {
+        this.mult = Utils.gameData.bonusItem?.currentEffect?.strength ?? 1;
+    }
+}
+
 
 export function initMultipliers(gameData = new GameData) {
     let multipliers = new Map([
+
+        // arcbit mults
         ["arcMult", new MultArcMult("arcMult", gameData)],
         ["ultraboost", new MultUltraboost("ultraboost", gameData)],
         ["proximityComputing", new MultProximityComputing("proximityComputing", gameData)],
+
+        // hypermod mults
+        ["hyperMult", new MultHyperMult("hyperMult", gameData)],
+        ["hyperCore", new MultHyperCore("hyperCore", gameData)],
+        ["multiProcess", new MultMultiProcess("multiProcess", gameData)],
+
+        // bonus mult
+        ["bonusItem", new MultBonusItem("bonusItem", gameData)],
     ]);
 
     return multipliers;

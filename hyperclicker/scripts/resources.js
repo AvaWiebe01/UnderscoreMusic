@@ -59,8 +59,16 @@ export class Resource {
         this.deltaMultSources.add(this.gameData.multipliers.get(sourceName));
     }
 
+    removeDeltaMultSource(sourceName) {
+        this.deltaMultSources.delete(this.gameData.multipliers.get(sourceName));
+    }
+
     addBtnValMultSource(sourceName) {
         this.btnValMultSources.add(this.gameData.multipliers.get(sourceName));
+    }
+
+    removeBtnValMultSource(sourceName) {
+        this.btnValMultSources.delete(this.gameData.multipliers.get(sourceName));
     }
 
     calculateGain() {
@@ -75,7 +83,7 @@ export class Resource {
 
     displayAverageGain() {
         for(let i = 0; i < this.gainDisplays.length; i++) {
-            this.gainDisplays[i].innerHTML = Utils.getDisplayableNumber(this.getAverageGain()) + '/s';
+            this.gainDisplays[i].innerHTML = Math.max(0, Utils.getDisplayableNumber(this.getAverageGain())) + '/s';
         }
     }
 
@@ -155,7 +163,7 @@ export class Resource {
     getBaseDelta() {
         let totalDelta = 0;
 
-        this.gameData.processes.get(this.htmlName).forEach((process, key, processes) => {
+        this.gameData.processes?.get(this.htmlName).forEach?.((process, key, processes) => {
             totalDelta += process.getProductionDelta();
         });
 
@@ -231,6 +239,98 @@ class Cores extends Resource {
     }
 }
 
+class NullPointers extends Resource {
+    delta;
+    successRate;
+
+    streak;
+    defaultStreakBase;
+    streakBase;
+
+    failureStreak;
+
+    rolls;
+
+    constructor(amt, delta, btnVal, htmlName, displayableName, gameData, successRate) {
+        super(amt, btnVal, htmlName, displayableName, gameData);
+
+        this.delta = delta;
+        this.successRate = successRate;
+
+        this.streak = 0;
+        this.defaultStreakBase = 2;
+        this.streakBase = this.defaultStreakBase;
+
+        this.failureStreak = 0;
+
+        this.rolls = 1;
+    }
+
+    initDisplayElements() {
+
+        this.amtDisplays = document.getElementsByClassName(this.htmlName + "_display");
+        this.gainDisplays = document.getElementsByClassName(this.htmlName + "_gain_display");
+        this.deltaDisplays = document.getElementsByClassName(this.htmlName + "_delta_display");
+        this.btnValDisplays = document.getElementsByClassName(this.htmlName + "_btnval_display");
+
+        this.displayAmt();
+    }
+
+    getBaseDelta() {
+        return this.delta;
+    }
+
+    getFinalBtnValue() {
+        return this.btnVal * this.getBtnValTotalMult() * (this.streakBase**(this.streak));
+    }
+
+    modifySuccessRate(value) {
+        this.successRate = value;
+    }
+
+    modifyDelta(value) {
+        this.delta *= value;
+    }
+
+    btnClicked() {
+        var success = false;
+
+        for (let idx = 1; idx <= this.rolls; idx+=1) {
+            const roll = Math.random();
+            console.log(`Roll ${idx} of ${this.rolls}: ${roll}; Success if <${this.successRate}`);
+
+            if (roll < this.successRate) {
+                success = true;
+            }
+        }
+
+        console.log(`${(success) ? "Located NullPointers" : "Failure"}`);
+
+        if(success || (this.failureStreak >= 100)) { // guaranteed success after 100 clicks
+            Utils.gameData.audio.playSfxLocateSuccess(this.streak);
+
+            console.log(`${(this.failureStreak >= 100) ? "Reason: Failure Streak >= 100" : "Reason: Roll Success"}`);
+
+            this.modifyAmt(this.getFinalBtnValue());
+            this.streak += 1;
+            this.failureStreak = 0;
+        }
+        else{
+            Utils.gameData.audio.playSfxLocateFailure();
+
+            this.streak = 0;
+            this.failureStreak += 1;
+        }
+    }
+
+    // need to display success rate
+    displayFinalBtnVal () {
+        for(let i = 0; i < this.btnValDisplays.length; i++) {
+            this.btnValDisplays[i].innerHTML = `${(this.successRate * 100).toFixed(2)}% <span class="white">chance for</span> +${Utils.getDisplayableNumber(this.getFinalBtnValue())}`;
+        }
+    }
+}
+
 export function unlockResource(htmlName) {
     document.getElementById(`${htmlName}_display_main`).classList.remove("not_unlocked");
     document.getElementById(`${htmlName}_btn_main`).classList.remove("not_unlocked");
@@ -245,6 +345,9 @@ export function initResources(RESOURCE_INFO = [], gameData) {
 
     resources.set(Constants.CORE_INFO[0], new Cores(Constants.CORE_INFO[1], Constants.CORE_INFO[2], Constants.CORE_INFO[3], Constants.CORE_INFO[0], Constants.CORE_INFO[4], gameData, Constants.CORE_INFO[5]));
     resources.get("cores").initDisplayElements();
+
+    resources.set(Constants.NULLPOINTER_INFO[0], new NullPointers(Constants.NULLPOINTER_INFO[1], Constants.NULLPOINTER_INFO[2], Constants.NULLPOINTER_INFO[3], Constants.NULLPOINTER_INFO[0], Constants.NULLPOINTER_INFO[4], gameData, Constants.NULLPOINTER_INFO[5]));
+    resources.get("nullpointers").initDisplayElements();
 
     return resources;
 }

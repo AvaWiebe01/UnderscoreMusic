@@ -4,6 +4,8 @@ import { Process, displayProcesses } from "./processes.js";
 
 import { Upgrade, displayUpgrades } from "./upgrades.js";
 
+import { saveGame, loadGame } from "./save.js";
+
 export class Utils {
     static gameData;
 
@@ -135,5 +137,25 @@ export class Utils {
 
     static unlockTab(tabValue) {
         document.querySelector(`.tab_buttons button[tab="${tabValue}"]`).classList.remove("locked_tab");
+    }
+
+    static unlockUpgrade(upgradeTypeTag, resourceName, key) {
+        const upgrade = this.gameData.upgrades.get(upgradeTypeTag).get(resourceName).get(key);
+        
+        if (!upgrade.isUnlocked) {
+            upgrade.unlock();
+
+            const unlockedDiv = upgrade.upgradeElement;
+            unlockedDiv.classList.add("appear");
+
+            unlockedDiv.addEventListener("animationend", () => {
+                unlockedDiv.classList.remove("appear");
+            });
+        }
+
+    }
+
+    static save() {
+        saveGame(this.gameData);
     }
 }

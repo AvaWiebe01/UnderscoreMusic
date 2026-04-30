@@ -20,6 +20,7 @@ export class Process {
     gameData;
 
     // Display elements
+    processElement;
     numBoughtDisplay;
     baseGenerationDisplay;
     activeGenerationDisplay;
@@ -46,14 +47,14 @@ export class Process {
     }
 
     initDisplayElements() {
-        let processElement = document.querySelector(`main .game .process_panel .process_list .process[process_key="${this.key}"]`);
-        this.numBoughtDisplay = processElement.querySelector("span.num_bought_display");
-        this.baseGenerationDisplay = processElement.querySelector("span.base_generation_display");
-        this.activeGenerationDisplay = processElement.querySelector("span.active_generation_display");
-        this.buyCoresDisplay = processElement.querySelector("span.buy_cores_display");
-        this.buyResourceDisplay = processElement.querySelector("span.buy_resource_display");
-        this.sellOneCoresDisplay = processElement.querySelector("span.sell_one_cores_display");
-        this.sellAllCoresDisplay = processElement.querySelector("span.sell_all_cores_display");
+        this.processElement = document.querySelector(`main .game .process_panel .process_list .process[process_key="${this.key}"]`);
+        this.numBoughtDisplay = this.processElement.querySelector("span.num_bought_display");
+        this.baseGenerationDisplay = this.processElement.querySelector("span.base_generation_display");
+        this.activeGenerationDisplay = this.processElement.querySelector("span.active_generation_display");
+        this.buyCoresDisplay = this.processElement.querySelector("span.buy_cores_display");
+        this.buyResourceDisplay = this.processElement.querySelector("span.buy_resource_display");
+        this.sellOneCoresDisplay = this.processElement.querySelector("span.sell_one_cores_display");
+        this.sellAllCoresDisplay = this.processElement.querySelector("span.sell_all_cores_display");
     }
 
     // Get the price multiplier based on current number of instances
@@ -96,6 +97,9 @@ export class Process {
         this.numBought += 1;
         this.calculateCost();
         console.log(this.title + " bought!");
+
+        // unlock next process
+        this.processElement.nextElementSibling.classList.remove("not_unlocked");
     }
 
     canSell(sellAmount) {
@@ -182,9 +186,11 @@ export function displayProcesses(processMap) {
 
     let processList = document.getElementsByClassName("process_list")[0];
 
+    var idx = 0;
+
     processMap.forEach((value, key) => {
         processesHtml += `
-            <div class="process" process_key="${key}" resource="${value.resource.htmlName}">
+            <div class="process ${(idx < Constants.NUM_INITIAL_PROCESSES) ? "" : "not_unlocked"}" process_key="${key}" resource="${value.resource.htmlName}">
                 <div class="process_info">
                     <h3>${value.title}</h3>
                     <p class="description">${value.description}</p>
@@ -208,6 +214,8 @@ export function displayProcesses(processMap) {
                     </button>
                 </div>
             </div>`
+
+        idx+=1;
     });
 
     processList.innerHTML += processesHtml;

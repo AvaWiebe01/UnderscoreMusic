@@ -72,6 +72,9 @@ main .display img {
     display:block;
     left:0;
     bottom:0;
+
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
 }
 
 main .text_box_wrapper {
@@ -188,4 +191,8 @@ main .drop {
 
 main .rainbow {
     position:relative; bottom:-8px; animation: 1.2s ease-in-out -1.35s infinite rainbow;
+}
+
+main .little {
+    font-size: 1.25rem;
 }

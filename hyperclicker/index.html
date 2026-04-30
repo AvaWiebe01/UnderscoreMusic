@@ -8,30 +8,28 @@
 		<link rel="icon" href="/images/underscorefavicon.png">
 		
 		<link rel="stylesheet" href="/styles/global-styles.css">
-		<link rel="stylesheet" href="styles/incremental-styles.css">
+		<link rel="stylesheet" href="styles/hyperclicker-styles.css">
 		
 		<script src="/scripts/jquery-3.7.1.js"></script>
-		<script src="/incremental/scripts/main.js" type="module"></script>
+		<script src="/hyperclicker/scripts/main.js" type="module"></script>
 	</head>
 	
 	<body>
-		
-		<header>
-			<a href="/"><img src="/images/underscorelogo.png" width="640" height="120" alt="Underscore" title="Underscore"></a>
-		</header>
-		
-		<nav>
-			<div class="border">
-				<a href="/">MAIN</a><a href="/about">ABOUT</a><a href="/music">MUSIC</a><a href="/art">ART</a><a href="/store">STORE</a><a href="/codex-decryptor">CODEX\\DECRYPTOR</a>
-			</div>
-		</nav>
-		
 		<main>			
 			<h1>
 				▶ HyperClicker ◀
 			</h1>
 			
 			<div class="game">	
+				<div class="bonus_item">
+					<div class="bonus_text"></div>
+					<img class="bonus_icon" title="Click: Remove Virus!" src="/images/hyperclicker/bonusItemNoBorder.png">
+				</div>
+
+				<div class="bonus_duration">
+					 
+				</div>
+
                 <div class="main_panel">
 
 					<div class = "resource_panel panel">
@@ -116,10 +114,29 @@
 						</div>
 
 						<div class="tab hypermods_panel_tab inactive_tab">
-							<h2>&lt; Available HyperMod Architectures &gt;</h2>
-							<h5>Alter the system architecture to unlock unique and powerful effects.</h5>
+							<h2>&lt; HyperMod Interface &gt;</h2>
+							<div class = "architectures_panel panel">
+								<div class="max_enabled_display"></div>
+								<div class="architecture_list">
+									<span class="no_hypermods_display"></span>
+								</div>
+							</div>
+							<h2>&lt; Available System Architectures &gt;</h2>
+							<h5>Unlock unique and powerful effects by purchasing HyperMods.</h5>
 							<div class = "hypermods_panel panel">
 								<div class="upgrade_list hypermod_upgrades_list" upgrade_type="hypermod_upgrades_list">
+								</div>
+							</div>
+							<h2>&lt; Available HyperKey Enhancements &gt;</h2>
+							<h5>Upgrade the HyperKey protocol to improve efficiency.</h5>
+							<div class = "hyperkeys_panel panel">
+								<div class="upgrade_list hyperkey_upgrades_list" upgrade_type="hyperkey_upgrades_list">
+								</div>
+							</div>
+							<h2>&lt; Purchased HyperKey Enhancements &gt;</h2>
+							<h5>View previous HyperKey protocol upgrades.</h5>
+							<div class="purchased_upgrades">
+								<div class="purchased_upgrade_list hyperkey_upgrades_list" upgrade_type="hyperkey_upgrades_list">
 								</div>
 							</div>
 						</div>
@@ -128,8 +145,13 @@
 							<div class="beyond_panel panel">
 								<h2><span class="rainbow">&gt;&gt;&gt; BEYOND &lt;&lt;&lt;</span></h2>
 								<h5><span class="error">ERR: 0x<span class="obfuscated">0000000000000000</span> IS INVALID MEMORY ADDRESS - USER OUTSIDE OF ALLOCATION ZONE</span></h5>
-								<div class="beyond_menu">
-
+								<div class="upgrade_list nullpointer_upgrades_list" upgrade_type="nullpointer_upgrades_list">
+								</div>
+								<h2>&lt; Referenced Locations &gt;</h2>
+								<h5>The search through Nullspace continues.</h5>
+								<div class="purchased_upgrades">
+									<div class="purchased_upgrade_list nullpointer_upgrades_list" upgrade_type="nullpointer_upgrades_list">
+									</div>
 								</div>
 							</div>
 						</div>
@@ -148,6 +170,7 @@
 									</div>
 
 									<h2>Detected Fragments</h2>
+									<h5>Recovering a fragment unlocks a permanent 2x multiplier to all ArcBit generation.</h5>
 									<div class="upgrade_list archive_unlocks_list" upgrade_type="archive_unlocks_list">
 									</div>
 								</div>
@@ -173,6 +196,17 @@
 											<p>Resource Panel Always Visible</p>
 											<button class="sticky_resources_button">Disable</button>
 										</div>
+										<div class="option audio_options">
+											<p>Audio Settings</p>
+											<button class="mute_music_button">Mute Music</button>
+											<button class="mute_sfx_button">Mute Sound Effects</button>
+											<p>[Music triggers periodically, it doesn't play continously.]</p>
+										</div>
+										<div class="option save_options">
+											<p>Manual Saving&emsp;<span class="saved_message hidden">Data Saved!</span></p>
+											<button class="save_data_button">Save Data</button>
+											<p>[Autosave happens every 60 seconds.]</p>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -187,42 +221,12 @@
 		<footer>
 			<div class="left">
 				<p>Copyright © Underscore 2025. All rights reserved.</p>
-				
-				<p><a href="/">Main</a></p>
-				<p><a href="/about">About</a></p>
-				<p><a href="/music">Music</a></p>
-				<p><a href="/art">Art</a></p>
-				<p><a href="/store">Store</a></p>
-				<p><a href="/codex-decryptor">Codex\\Decryptor</a></p>
-				<p><a href="#">Back to Top</a></p>
 			</div>
-			
-			<div class="right">
-			
-				<h3>Social Media</h3>
-				
-				<div class="icons">
-					<a target="_blank"  href="https://www.youtube.com/@IAmUnderscore"><img src="/images/youtubeicon.png" width="32" height="32" alt="Youtube icon"></a>
-					<a target="_blank"  href="https://www.discord.gg/QZFHRCtr9b"><img src="/images/discordicon.png" width="32" height="32" alt="discord icon"></a>
-					<a target="_blank"  href="https://x.com/True_Underscore"><img src="/images/xicon.png" width="32" height="32" alt="X icon"></a>
-					<a target="_blank"  href="https://www.twitch.tv/realunderscore"><img src="/images/twitchicon.png" width="32" height="32" alt="Twitch icon"></a>
-				</div>
-				
-				
-				<h3>Streaming Services</h3>
-				<div class="icons">
-					<a target="_blank"  href="https://open.spotify.com/artist/4Q1v2fy0yGaXQ6NueV7KN1"><img src="/images/spotifyicon.png" width="32" height="32" alt="Spotify icon"></a>
-					<a target="_blank"  href="https://soundcloud.com/trueunderscore"><img src="/images/soundcloudicon.png" width="32" height="32" alt="SoundCloud icon"></a>
-					<a target="_blank"  href="https://music.apple.com/us/artist/underscore/1563256991"><img src="/images/applemusicicon.png" width="32" height="32" alt="Apple Music icon"></a>
-					<a target="_blank"  href="https://music.youtube.com/channel/UCA-LHIj9v2b1_iq289j_V3g"><img src="/images/ytmusicicon.png" width="32" height="32" alt="Youtube Music icon"></a>
-				</div>
-				
-				<div class="icons flags">
-					<img id="heart" src="/images/heart32.png" width="32" height="32" title="&lt;3" alt="heart">
-					<img src="/images/pride32.png" width="32" height="32" title="^-^" alt="pride flag">
-					<img src="/images/trans32.png" width="32" height="32" title=":3" alt="transgender flag">
-				</div>
-			</div>
-			
-		</footer>
 	</body>
+
+	<audio id="music_void" src="/hyperclicker/music/void.ogg"></audio>
+
+	<audio id="sfx_decrypt" src="/hyperclicker/sfx/decrypt.ogg"></audio>
+	<audio id="sfx_construct" src="/hyperclicker/sfx/construct.ogg"></audio>
+	<audio id="sfx_locate_failure" src="/hyperclicker/sfx/locateFailure.ogg"></audio>
+	<audio id="sfx_locate_success" src="/hyperclicker/sfx/locateSuccess.ogg"></audio>
