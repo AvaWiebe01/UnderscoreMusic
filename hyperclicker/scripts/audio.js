@@ -7,6 +7,8 @@ export class GameAudio {
 
     static musicMuted;
     static sfxMuted;
+    static storyMusicMuted;
+    static storySfxMuted;
 
     static musicVoid;
 
@@ -16,10 +18,9 @@ export class GameAudio {
     static sfxLocateSuccess;
     static sfxUpgrade;
     static sfxInvalid;
-    static sfxBuy;
-    static sfxSell;
     static sfxSelect;
     static sfxBonus;
+    static sfxUnlocked;
 
 
     constructor() {
@@ -33,6 +34,8 @@ export class GameAudio {
 
         this.musicMuted = false;
         this.sfxMuted = false;
+        this.storyMusicMuted = false;
+        this.storySfxMuted = false;
 
         // init Music
 
@@ -62,6 +65,30 @@ export class GameAudio {
         const sfxLocateSuccessTrack = this.sfxContext.createMediaElementSource(this.sfxLocateSuccess);
         sfxLocateSuccessTrack.connect(this.sfxGain);
 
+        this.sfxUpgrade = document.getElementById("sfx_upgrade");
+        this.sfxUpgrade.preservesPitch = false;
+        const sfxUpgradeTrack = this.sfxContext.createMediaElementSource(this.sfxUpgrade);
+        sfxUpgradeTrack.connect(this.sfxGain);
+
+        this.sfxInvalid = document.getElementById("sfx_invalid");
+        this.sfxInvalid.preservesPitch = false;
+        const sfxInvalidTrack = this.sfxContext.createMediaElementSource(this.sfxInvalid);
+        sfxInvalidTrack.connect(this.sfxGain);
+
+        this.sfxSelect = document.getElementById("sfx_select");
+        this.sfxSelect.preservesPitch = false;
+        const sfxSelectTrack = this.sfxContext.createMediaElementSource(this.sfxSelect);
+        sfxSelectTrack.connect(this.sfxGain);
+
+        this.sfxBonus = document.getElementById("sfx_bonus");
+        this.sfxBonus.preservesPitch = false;
+        const sfxBonusTrack = this.sfxContext.createMediaElementSource(this.sfxBonus);
+        sfxBonusTrack.connect(this.sfxGain);
+
+        this.sfxUnlocked = document.getElementById("sfx_unlocked");
+        this.sfxUnlocked.preservesPitch = false;
+        const sfxUnlockedTrack = this.sfxContext.createMediaElementSource(this.sfxUnlocked);
+        sfxUnlockedTrack.connect(this.sfxGain);
     }
 
     // Play SFX
@@ -98,27 +125,40 @@ export class GameAudio {
     }
 
     playSfxUpgrade() {
+        this.sfxUpgrade.pause();
+        this.sfxUpgrade.currentTime = 0;
+        this.sfxUpgrade.playbackRate = 1;
         this.sfxUpgrade.play();
     }
 
     playSfxInvalid() {
+        // randomize pitch between 0.9x-1.11x
+        this.sfxInvalid.pause();
+        this.sfxInvalid.currentTime = 0;
+        this.sfxInvalid.playbackRate = 0.9 + (Math.random()*0.2);
         this.sfxInvalid.play();
     }
 
-    playSfxBuy() {
-        this.sfxBuy.play();
-    }
-
-    playSfxSell() {
-        this.sfxSell.play();
-    }
-
     playSfxSelect() {
+        // randomize pitch between 0.9x-1.1x
+        this.sfxSelect.pause();
+        this.sfxSelect.currentTime = 0;
+        this.sfxSelect.playbackRate = 0.9 + (Math.random()*0.2);
         this.sfxSelect.play();
     }
 
     playSfxBonus() {
+        this.sfxBonus.pause();
+        this.sfxBonus.currentTime = 0;
+        this.sfxBonus.playbackRate = 1;
         this.sfxBonus.play();
+    }
+
+    playSfxUnlocked() {
+        this.sfxUnlocked.pause();
+        this.sfxUnlocked.currentTime = 0;
+        this.sfxUnlocked.playbackRate = 1;
+        this.sfxUnlocked.play();
     }
 
 
@@ -138,6 +178,36 @@ export class GameAudio {
         target.innerHTML = (this.sfxMuted) ? "Enable Sound Effects" : "Mute Sound Effects";
 
         this.sfxGain.gain.setValueAtTime((this.sfxMuted ? 0 : 1), this.sfxContext.currentTime);
+    }
+
+    toggleStoryMusic(target) {
+        this.storyMusicMuted = !this.storyMusicMuted;
+        target.innerHTML = (this.storyMusicMuted) ? "Enable Music" : "Mute Music";
+        
+        // change URL parameters
+        const links = document.getElementsByClassName("fragment_link");
+        for (let link of links) {
+            const url = new URL(link.getAttribute("href"), window.location.href);
+            const params = url.searchParams;
+            params.set(`musicVol`, `${(this.storyMusicMuted ? 0 : 1)}`);
+            url.search = params.toString();
+            link.setAttribute("href", url.href);
+        }
+    }
+
+    toggleStorySfx(target) {
+        this.storySfxMuted = !this.storySfxMuted;
+        target.innerHTML = (this.storySfxMuted) ? "Enable Sound Effects" : "Mute Sound Effects";
+
+        // change URL parameters
+        const links = document.getElementsByClassName("fragment_link");
+        for (let link of links) {
+            const url = new URL(link.getAttribute("href"), window.location.href);
+            const params = url.searchParams;
+            params.set(`sfxVol`, `${(this.storySfxMuted ? 0 : 1)}`);
+            url.search = params.toString();
+            link.setAttribute("href", url.href);
+        }
     }
 }
 

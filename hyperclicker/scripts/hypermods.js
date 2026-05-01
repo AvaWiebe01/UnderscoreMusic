@@ -61,6 +61,12 @@ export class HyperMod {
         statusDisplay.innerHTML = `${this.enabled ? "<span class='pink'>Installed!</span>" : "Ready for Install."}`;
         buttonDisplay.innerHTML = `${this.enabled ? "Deactivate HyperMod" : "Activate HyperMod"}`;
     }
+
+    toJSON() {
+        return { 
+            enabled: this.enabled,
+        }
+    }
 }
 
 export class HyperMultArch extends HyperMod {

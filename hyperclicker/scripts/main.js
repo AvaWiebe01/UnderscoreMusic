@@ -90,6 +90,12 @@ window.onload = function() {
     // if the player has a save file in localStorage, load it
     if (localStorage.getItem("playerSave") !== null) {loadGame(gameData);}
 
+    // remove the loading screen
+    const loadingScreen = document.querySelector(".loading_screen");
+    const title = document.querySelector("main h1");
+    loadingScreen.classList.add("hidden");
+    title.classList.add("animate");
+
     // Start the game loop
     requestAnimationFrame((currentTime) => gameTick(currentTime, gameData));
 }

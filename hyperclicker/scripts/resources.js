@@ -83,7 +83,7 @@ export class Resource {
 
     displayAverageGain() {
         for(let i = 0; i < this.gainDisplays.length; i++) {
-            this.gainDisplays[i].innerHTML = Math.max(0, Utils.getDisplayableNumber(this.getAverageGain())) + '/s';
+            this.gainDisplays[i].innerHTML = Utils.getDisplayableNumber(Math.max(0,this.getAverageGain())) + '/s';
         }
     }
 
@@ -177,6 +177,14 @@ export class Resource {
         this.displayAmt();
         this.displayFinalBtnVal();
         this.displayFinalDelta();
+    }
+
+    toJSON() {
+        return {
+            amt: this.amt,
+            deltaBaseMult: this.deltaBaseMult,
+            btnValBaseMult: this.btnValBaseMult,
+        }
     }
 }
 

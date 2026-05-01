@@ -10,6 +10,7 @@ static AVERAGING_TIME = 1000; // in milliseconds
 static AVERAGING_SAMPLES = 10;
 
 static AUTOSAVE_TICKS = 3600 // save every 3600 game ticks
+static RESET_PROGRESS_CLICKS = 10;
 
 static BONUS_COOLDOWN = 320; // bonus starts at 5:20 -> 2:40 -> 1:20 -> 0:40 cooldown
 
@@ -193,7 +194,7 @@ static ALL_UPGRADES_INFO = new Map([
                     
                     /*initial upgrade*/["hypermodHyperCore", "HyperCore Architecture", "<strong>Core</strong> generation rate is multiplied by current <strong>HyperKey</strong> amount.", "", 0.00468, ["hypermodKeyMult"], (resource) => {unlockHyperMod("hyperCoreArch");}],
 
-                    ["hypermodKeyMult", "Architecture", "<strong>Decrypting</strong> ArcBits also provides a temporary multiplier to <strong>construction</strong> HyperKey generation.", "", 0.02, [], (resource) => {unlockHyperMod("keyMultArch");}],
+                    ["hypermodKeyMult", "KeyMult Architecture", "<strong>Decrypting</strong> ArcBits also provides a temporary multiplier to <strong>construction</strong> HyperKey generation.", "", 0.02, [], (resource) => {unlockHyperMod("keyMultArch");}],
 
                     ["hypermodMalwareDefense", "Malware Defense Architecture", "Removing a <strong>virus</strong> generates much stronger effects.", "", 0.124, ["hypermodMultiProcess"], (resource) => {unlockHyperMod("malwareDefenseArch");}],
 

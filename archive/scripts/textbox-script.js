@@ -1,4 +1,6 @@
 const speechContext = new AudioContext();
+const speechGain = speechContext.createGain(); 
+speechGain.connect(speechContext.destination);
 
 class Line {
     content;
@@ -623,6 +625,10 @@ window.onload = async function() {
     const portraitDisplay = document.getElementById("portrait");
     const arrowDisplay = document.getElementById("arrow");
 
+    const urlParams = new URLSearchParams(window.location.search);
+    const musicVol = urlParams.get("musicVol") ?? 1;
+    const sfxVol = urlParams.get("sfxVol") ?? 1;
+
     const kyanaSpeech = document.getElementById("kyana_speech");
     const lunaSpeech = document.getElementById("luna_speech");
     const nyxSpeech = document.getElementById("nyx_speech");
@@ -631,10 +637,10 @@ window.onload = async function() {
     const lunaTrack = speechContext.createMediaElementSource(lunaSpeech);
     const nyxTrack = speechContext.createMediaElementSource(nyxSpeech);
     const arinTrack = speechContext.createMediaElementSource(arinSpeech);
-    kyanaTrack.connect(speechContext.destination);
-    lunaTrack.connect(speechContext.destination);
-    nyxTrack.connect(speechContext.destination);
-    arinTrack.connect(speechContext.destination);
+    kyanaTrack.connect(speechGain);
+    lunaTrack.connect(speechGain);
+    nyxTrack.connect(speechGain);
+    arinTrack.connect(speechGain);
 
     const voices = new Map([
         ["kyana", kyanaSpeech],
@@ -654,6 +660,8 @@ window.onload = async function() {
     ]);
 
     const musicContext = new AudioContext();
+    const musicGain = musicContext.createGain();
+    musicGain.connect(musicContext.destination);
 
     const ambientResp = await fetch("/archive/music/ambient.wav");
     ambientBuffer = await musicContext.decodeAudioData(await ambientResp.arrayBuffer());
@@ -669,6 +677,10 @@ window.onload = async function() {
     ])
 
     var currentMusic = null;
+
+    // set audio volumes from URL
+    speechGain.gain.setValueAtTime(sfxVol, speechContext.currentTime);
+    musicGain.gain.setValueAtTime(musicVol, musicContext.currentTime);
 
     // Force a click to resume the AudioContext
     await waitForInput();
@@ -691,7 +703,7 @@ window.onload = async function() {
             if(trigger != "stop") {
                 currentMusic = musicContext.createBufferSource();
                 currentMusic.buffer = music.get(trigger);
-                currentMusic.connect(musicContext.destination);
+                currentMusic.connect(musicGain);
                 currentMusic.loop = true;
                 currentMusic.start();
             }
