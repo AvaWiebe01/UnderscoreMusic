@@ -4,7 +4,7 @@ import { Process, displayProcesses } from "./processes.js";
 
 import { Upgrade, displayUpgrades } from "./upgrades.js";
 
-import { saveGame, loadGame } from "./save.js";
+import { saveGame, loadGame, resetProgress } from "./save.js";
 
 export class Utils {
     static gameData;
@@ -12,6 +12,10 @@ export class Utils {
     static notationType = 0; // 0 = default, 1 = abbreviated, 2 = engineering, 3 = exponential, 4 = standard decimal, 5 = Abbreviated data size, 6 = data size
     static stickyResources = true;
     static fxCounter = 0;
+
+    static resetCounter = 0; // confirm before resetting save data
+
+    static purchasedUpgrades = []; // ordered list of all upgrades purchased
 
     // Visual FX elements
     static obfuscatedElements = document.getElementsByClassName("obfuscated");
@@ -133,6 +137,10 @@ export class Utils {
                 process.displayAllFields();
             });
         });
+
+        this.gameData.hypermods.mods.forEach((hypermod, key) => {
+            hypermod.updateDisplays();
+        })
     }
 
     static unlockTab(tabValue) {
@@ -141,7 +149,7 @@ export class Utils {
 
     static unlockUpgrade(upgradeTypeTag, resourceName, key) {
         const upgrade = this.gameData.upgrades.get(upgradeTypeTag).get(resourceName).get(key);
-        
+
         if (!upgrade.isUnlocked) {
             upgrade.unlock();
 
@@ -157,5 +165,9 @@ export class Utils {
 
     static save() {
         saveGame(this.gameData);
+    }
+
+    static resetProgress() {
+        resetProgress();
     }
 }

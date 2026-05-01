@@ -13,9 +13,12 @@
 		<script src="/scripts/jquery-3.7.1.js"></script>
 		<script src="/hyperclicker/scripts/main.js" type="module"></script>
 	</head>
-	
 	<body>
-		<main>			
+		<div class="loading_screen rainbow">
+			Loading HYPERCLICKER...
+		</div>	
+		<main>		
+
 			<h1>
 				▶ HyperClicker ◀
 			</h1>
@@ -186,26 +189,32 @@
 											<p>Notation Type</p>
 											<button class="notation_button" notation="0">Default</button>
 											<button class="notation_button" notation="1">Abbreviated</button>
-											<button class="notation_button" notation="6">Data Size</button>
-											<button class="notation_button" notation="5">Abbreviated Data Size</button>
+											<!--<button class="notation_button" notation="6">Data Size</button>-->
+											<!--<button class="notation_button" notation="5">Abbreviated Data Size</button>-->
 											<button class="notation_button" notation="2">Engineering</button>
 											<button class="notation_button" notation="3">Exponential</button>
-											<button class="notation_button" notation="4">L O N G</button>
+											<!--<button class="notation_button" notation="4">L O N G</button>-->
 										</div>
 										<div class="option sticky_resources_options">
 											<p>Resource Panel Always Visible</p>
 											<button class="sticky_resources_button">Disable</button>
 										</div>
 										<div class="option audio_options">
-											<p>Audio Settings</p>
-											<button class="mute_music_button">Mute Music</button>
+											<p>Audio [Main Game]</p>
 											<button class="mute_sfx_button">Mute Sound Effects</button>
-											<p>[Music triggers periodically, it doesn't play continously.]</p>
+											<p>Audio [Story Sections]</p>
+											<button class="mute_story_music_button">Mute Music</button>
+											<button class="mute_story_sfx_button">Mute Sound Effects</button>
 										</div>
 										<div class="option save_options">
 											<p>Manual Saving&emsp;<span class="saved_message hidden">Data Saved!</span></p>
 											<button class="save_data_button">Save Data</button>
 											<p>[Autosave happens every 60 seconds.]</p>
+										</div>
+										<div class="option reset_options">
+											<p>Reset Progress&emsp;<span class="reset_message hidden">Data Saved!</span></p>
+											<button class="reset_progress_button">Delete Save Data</button>
+											<p>[Click 10 times in a row to confirm.]</p>
 										</div>
 									</div>
 								</div>
@@ -220,7 +229,10 @@
 		
 		<footer>
 			<div class="left">
-				<p>Copyright © Underscore 2025. All rights reserved.</p>
+				<p>
+					HyperClicker v0.9<br>
+					Copyright © Underscore 2026. All rights reserved.
+				</p>
 			</div>
 	</body>
 

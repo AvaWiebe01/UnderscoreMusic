@@ -27,6 +27,14 @@ export function initEventHandlers(gameData = new GameData()) {
             Utils.gameData.audio.toggleSfx(event.currentTarget);
         })
 
+        $(".mute_story_music_button").click((event) => {
+            Utils.gameData.audio.toggleStoryMusic(event.currentTarget);
+        })
+
+        $(".mute_story_sfx_button").click((event) => {
+            Utils.gameData.audio.toggleStorySfx(event.currentTarget);
+        }) 
+
         $(".save_data_button").click((event) => {
             Utils.save();
 
@@ -40,6 +48,26 @@ export function initEventHandlers(gameData = new GameData()) {
                 saveMessage.classList.remove("fade-out-slow"); 
                 saveMessage.classList.add("hidden");
             })
+        })
+
+        $(".reset_progress_button").click((event) => {
+
+            Utils.resetCounter += 1;
+
+            const resetMessage = document.querySelector(".options_panel .options .reset_message");
+            resetMessage.innerHTML = `>> ${Constants.RESET_PROGRESS_CLICKS - Utils.resetCounter} <<`;
+            resetMessage.classList.remove("hidden");
+
+            if(Utils.resetCounter >= Constants.RESET_PROGRESS_CLICKS) {
+                Utils.resetProgress();
+            }
+        })
+
+        $(".reset_progress_button").mouseleave((event) => {
+            Utils.resetCounter = 0;
+
+            const resetMessage = document.querySelector(".options_panel .options .reset_message");
+            resetMessage.classList.add("hidden");
         })
 
         // RESOURCE BUTTONS //

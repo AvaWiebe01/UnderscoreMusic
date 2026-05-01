@@ -169,6 +169,14 @@ export class Process {
         this.sellOneCoresDisplay.innerHTML = `+${Utils.getDisplayableNumber((this.numBought ? this.coreReq : 0), false)} Cores`; 
         this.sellAllCoresDisplay.innerHTML = `+${Utils.getDisplayableNumber(this.coreReq * this.numBought, false)} Cores`; 
     }
+
+    toJSON() {
+        return {
+            key: this.key,
+            numBought: this.numBought,
+            baseProductionMult: this.baseProductionMult,
+        };
+    }
 }
 
 function getProcessMap(processesInfo = [], resource = new Resource(), gameData = new GameData) {

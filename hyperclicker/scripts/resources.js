@@ -178,6 +178,14 @@ export class Resource {
         this.displayFinalBtnVal();
         this.displayFinalDelta();
     }
+
+    toJSON() {
+        return {
+            amt: this.amt,
+            deltaBaseMult: this.deltaBaseMult,
+            btnValBaseMult: this.btnValBaseMult,
+        }
+    }
 }
 
 class Cores extends Resource {

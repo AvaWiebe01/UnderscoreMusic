@@ -57,8 +57,8 @@ export class Upgrade {
         return false;
     }
 
-    buy() {
-        if (!this.canBuy()) {
+    buy(override = false) {
+        if (!this.canBuy() && !override) {
             console.log(this.title + " cannot be purchased!");
             return;
         }
@@ -66,11 +66,24 @@ export class Upgrade {
         this.resource.amt -= this.cost;
         this.buyAction(this.resource);
         this.isBought = true;
+
+        Utils.purchasedUpgrades.push({
+            upgradeTypeTag: this.upgradeTypeTag,
+            resourceName: this.resource.htmlName,
+            key: this.key,
+        });
+
         console.log(this.title + " bought!");
     }
 
     displayAllFields() {
         this.costDisplay.innerHTML = `${this.isBought ? '[COST_DEDUCTED]' : Utils.getDisplayableNumber(this.cost)} ${this.isBought ? '' : this.resource.displayableName}`;
+    }
+
+    toJSON() {
+        return {
+            isBought: this.isBought,
+        };
     }
 }
 

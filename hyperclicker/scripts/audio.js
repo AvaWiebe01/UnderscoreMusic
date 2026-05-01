@@ -7,6 +7,8 @@ export class GameAudio {
 
     static musicMuted;
     static sfxMuted;
+    static storyMusicMuted;
+    static storySfxMuted;
 
     static musicVoid;
 
@@ -32,6 +34,8 @@ export class GameAudio {
 
         this.musicMuted = false;
         this.sfxMuted = false;
+        this.storyMusicMuted = false;
+        this.storySfxMuted = false;
 
         // init Music
 
@@ -174,6 +178,36 @@ export class GameAudio {
         target.innerHTML = (this.sfxMuted) ? "Enable Sound Effects" : "Mute Sound Effects";
 
         this.sfxGain.gain.setValueAtTime((this.sfxMuted ? 0 : 1), this.sfxContext.currentTime);
+    }
+
+    toggleStoryMusic(target) {
+        this.storyMusicMuted = !this.storyMusicMuted;
+        target.innerHTML = (this.storyMusicMuted) ? "Enable Music" : "Mute Music";
+        
+        // change URL parameters
+        const links = document.getElementsByClassName("fragment_link");
+        for (let link of links) {
+            const url = new URL(link.getAttribute("href"), window.location.href);
+            const params = url.searchParams;
+            params.set(`musicVol`, `${(this.storyMusicMuted ? 0 : 1)}`);
+            url.search = params.toString();
+            link.setAttribute("href", url.href);
+        }
+    }
+
+    toggleStorySfx(target) {
+        this.storySfxMuted = !this.storySfxMuted;
+        target.innerHTML = (this.storySfxMuted) ? "Enable Sound Effects" : "Mute Sound Effects";
+
+        // change URL parameters
+        const links = document.getElementsByClassName("fragment_link");
+        for (let link of links) {
+            const url = new URL(link.getAttribute("href"), window.location.href);
+            const params = url.searchParams;
+            params.set(`sfxVol`, `${(this.storySfxMuted ? 0 : 1)}`);
+            url.search = params.toString();
+            link.setAttribute("href", url.href);
+        }
     }
 }
 

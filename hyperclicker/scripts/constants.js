@@ -10,6 +10,7 @@ static AVERAGING_TIME = 1000; // in milliseconds
 static AVERAGING_SAMPLES = 10;
 
 static AUTOSAVE_TICKS = 3600 // save every 3600 game ticks
+static RESET_PROGRESS_CLICKS = 10;
 
 static BONUS_COOLDOWN = 320; // bonus starts at 5:20 -> 2:40 -> 1:20 -> 0:40 cooldown
 
