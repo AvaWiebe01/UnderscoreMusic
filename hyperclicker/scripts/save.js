@@ -84,9 +84,8 @@ export function loadGame() {
 
     // restore all hypermods
     gameData.hypermods.mods.forEach((hypermod, hypermodName) => {
-        hypermod.enabled = saveFile.hypermods[hypermodName].enabled;
-
-        if(hypermod.enabled) {
+        if(saveFile.hypermods[hypermodName].enabled) {
+            hypermod.enable();
             gameData.hypermods.enabledMods.set(hypermodName, hypermod);
             document.querySelector(`.architecture_list .hypermod[name="${hypermodName}"]`).classList.add("enabled");
         }
