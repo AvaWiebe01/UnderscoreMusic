@@ -43,23 +43,27 @@ class MultArcMult extends Multiplier {
 
     displayElement;
 
+    _multHandler;
+
     constructor(name, gameData = new GameData) {
         super(name, gameData);
         this.decayFactor = 1;
         this.increaseFactor = 1;
 
-        $(".resource_button[resource='arcbits']").on("click", (event) => {this.multIncrease()});
+        this._multHandler = (event) => this.multIncrease(); 
+
+        $(".resource_button[resource='arcbits']").on("click", this._multHandler);
     }
 
     // any resource button contributes
     activateUniversalMult() {
-        $(".resource_button[resource='hyperkeys']").on("click", this.multIncrease);
-        $(".resource_button[resource='nullpointers']").on("click", this.multIncrease);
+        $(".resource_button[resource='hyperkeys']").on("click", this._multHandler);
+        $(".resource_button[resource='nullpointers']").on("click", this._multHandler);
     }
 
     deactivateUniversalMult() {
-        $(".resource_button[resource='hyperkeys']").off("click", this.multIncrease);
-        $(".resource_button[resource='nullpointers']").off("click", this.multIncrease);
+        $(".resource_button[resource='hyperkeys']").off("click", this._multHandler);
+        $(".resource_button[resource='nullpointers']").off("click", this._multHandler);
     }
 
     multIncrease() {

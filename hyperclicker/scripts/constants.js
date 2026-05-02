@@ -20,7 +20,7 @@ static DATA_SIZE_ABBREVIATED_SUFFIXES = ["b","Kb","Mb","Gb","Tb","Pb","Eb","Zb",
 static DATA_SIZE_SUFFIXES = ["Bits","Kilobits","Megabits","Gigabits","Terabits","Petabits","Exabits","Zettabits","Yottabits","Ronnabits","Quettabits","Wrennbits"];
 
 static RESOURCE_INFO = [ // htmlName, amt, delta, btnVal, displayableName
-    ["arcbits", 0, 0.00010, "ArcBits"],
+    ["arcbits", 1111111111111111110, 0.00010, "ArcBits"],
     ["hyperkeys", 0.00, 0.00001, "HyperKeys"],
 ];
 
@@ -190,7 +190,7 @@ static ALL_UPGRADES_INFO = new Map([
             [
                 "hyperkeys",
                 [
-                    /*initial upgrade*/["hypermodHyperMult", "HyperMult Architecture", "<strong>Constructing</strong> HyperKeys provides a lengthy temporary multiplier to <strong>decryption</strong> and <strong>process</strong> ArcBit generation.", "", 0.0005, ["hypermodMalwareDefense"], (resource) => {unlockHyperMod("hyperMultArch");}],
+                    /*initial upgrade*/["hypermodHyperMult", "HyperMult Architecture", "<strong>All</strong> resource buttons contribute to <strong>ArcMult</strong>.", "", 0.0005, ["hypermodMalwareDefense"], (resource) => {unlockHyperMod("hyperMultArch");}],
                     
                     /*initial upgrade*/["hypermodHyperCore", "HyperCore Architecture", "<strong>Core</strong> generation rate is multiplied by current <strong>HyperKey</strong> amount.", "", 0.00468, ["hypermodKeyMult"], (resource) => {unlockHyperMod("hyperCoreArch");}],
 

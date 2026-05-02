@@ -71,14 +71,16 @@ export class HyperMod {
 
 export class HyperMultArch extends HyperMod {
     enable() {
-        Utils.gameData.resources.get("arcbits").addDeltaMultSource("hyperMult");
-        Utils.gameData.resources.get("arcbits").addBtnValMultSource("hyperMult");
+        //Utils.gameData.resources.get("arcbits").addDeltaMultSource("hyperMult");
+        //Utils.gameData.resources.get("arcbits").addBtnValMultSource("hyperMult");
+        Utils.gameData.multipliers.get("arcMult").activateUniversalMult();
         this.enabled = true;
     }
 
     disable() {
-        Utils.gameData.resources.get("arcbits").removeDeltaMultSource("hyperMult");
-        Utils.gameData.resources.get("arcbits").removeBtnValMultSource("hyperMult");
+        //Utils.gameData.resources.get("arcbits").removeDeltaMultSource("hyperMult");
+        //Utils.gameData.resources.get("arcbits").removeBtnValMultSource("hyperMult");
+        Utils.gameData.multipliers.get("arcMult").deactivateUniversalMult();
         this.enabled = false;
     }
 }
@@ -159,7 +161,7 @@ export class StreakArch extends HyperMod {
 
 export function initHyperMods(gameData = new GameData()) {
     var mods = new Map([
-        ["hyperMultArch", new HyperMultArch("hyperMultArch", "HyperMult", "<strong>Constructing</strong> HyperKeys provides a lengthy temporary multiplier to <strong>decryption</strong> and <strong>process</strong> ArcBit generation.")],
+        ["hyperMultArch", new HyperMultArch("hyperMultArch", "HyperMult", "<strong>All</strong> resource buttons contribute to <strong>ArcMult</strong>.")],
         ["hyperCoreArch", new HyperCoreArch("hyperCoreArch", "HyperCore", "<strong>Core</strong> generation rate is multiplied by current <strong>HyperKey</strong> amount.")],
         ["keyMultArch", new KeyMultArch("keyMultArch", "KeyMult", "<strong>Decrypting</strong> ArcBits also provides a temporary multiplier to <strong>construction</strong> HyperKey generation.")],
         ["malwareDefenseArch", new MalwareDefenseArch("malwareDefenseArch", "Malware Defense", "Removing a <strong>virus</strong> generates <strong>2x</strong> stronger effects. Detect viruses 30% faster.")],

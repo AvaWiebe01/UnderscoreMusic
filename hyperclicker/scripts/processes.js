@@ -99,7 +99,7 @@ export class Process {
         console.log(this.title + " bought!");
 
         // unlock next process
-        this.processElement.nextElementSibling.classList.remove("not_unlocked");
+        if(this.processElement.nextElementSibling) {this.processElement.nextElementSibling.classList.remove("not_unlocked");}
     }
 
     canSell(sellAmount) {
