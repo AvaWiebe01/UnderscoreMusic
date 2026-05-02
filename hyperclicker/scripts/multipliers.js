@@ -6,13 +6,19 @@ import { GameData } from "./gamedata.js";
 // Dynamic multiplier - must be re-calculated each frame
 export class Multiplier {
     name;
+    displayableName;
     mult;
     gameData;
 
-    constructor(name, gameData = new GameData) {
+    displayElement;
+
+    constructor(name, displayableName, gameData = new GameData) {
         this.name = name;
+        this.displayableName = displayableName;
         this.mult = 1;
         this.gameData = gameData;
+
+        this.displayElements = null;
 
         // Subclasses must add all necessary events here
     }
@@ -27,11 +33,39 @@ export class Multiplier {
     }
 
     unlock() {
-        console.log("Implement unlock in subclass if required.");
+        this.showDisplays();
+        
+        this.mult = 1; // override if needed
+    }
+
+    hideDisplays() {
+        for (let elem of this.displayElements ?? []) {
+            elem.classList.add("not_unlocked");
+        } 
+    }
+
+    showDisplays() {
+        for (let elem of this.displayElements ?? []) {
+            elem.classList.remove("not_unlocked");
+        }
+    }
+
+    updateDisplays() {
+        for (let elem of this.displayElements ?? []) {
+            elem.innerHTML = `[${this.displayableName}: ${this.mult.toFixed(1)}x]`
+        }
     }
 
     initDisplayElements() {
         console.log("Implement display elements in subclass if required.");
+    }
+
+    toJSON() {
+        throw new Error("toJSON must be implemented by subclass.");
+    }
+
+    fromJSON() {
+        throw new Error("fromJSON and multUpdate must be implemented by subclass.");
     }
 }
 
@@ -41,12 +75,10 @@ class MultArcMult extends Multiplier {
 
     increaseFactor;
 
-    displayElement;
-
     _multHandler;
 
-    constructor(name, gameData = new GameData) {
-        super(name, gameData);
+    constructor(name, displayableName, gameData = new GameData) {
+        super(name, displayableName, gameData);
         this.decayFactor = 1;
         this.increaseFactor = 1;
 
@@ -76,8 +108,6 @@ class MultArcMult extends Multiplier {
 
     multUpdate() {
         this.decay();
-
-        this.displayElement.innerHTML = `(ArcMult: ${this.mult.toFixed(1)}x)`;
     }
 
     decay() {
@@ -92,13 +122,18 @@ class MultArcMult extends Multiplier {
         }
     }
 
-    unlock() {
-        this.displayElement.classList.remove("not_unlocked");
-        this.mult = 1;
+    initDisplayElements() {
+        this.displayElements = document.getElementsByClassName("arcmult_display");
     }
 
-    initDisplayElements() {
-        this.displayElement = document.querySelector(".game .generate_panel .arcmult_display");
+    toJSON() {
+        return {
+            mult: this.mult,
+        };
+    }
+
+    fromJSON(obj) {
+        this.mult = obj.mult;
     }
 }
 
@@ -107,8 +142,8 @@ class MultUltraboost extends Multiplier {
     totalCoresGenerated;
     perCoreMult;
 
-    constructor(name, gameData = new GameData) {
-        super(name, gameData);
+    constructor(name, displayableName, gameData = new GameData) {
+        super(name, displayableName, gameData);
 
         this.perCoreMult = 0.001;
         this.totalCoresGenerated = 0;
@@ -119,8 +154,28 @@ class MultUltraboost extends Multiplier {
         return this.mult;
     }
 
+    unlock() {
+        this.showDisplays();
+        
+        this.totalCoresGenerated = 0; // override if needed
+    }
+
     multUpdate() {
         this.totalCoresGenerated += this.gameData.resources.get("cores").lastTickDelta;
+    }
+
+    initDisplayElements() {
+        this.displayElements = document.getElementsByClassName("ultraboost_display");
+    }
+
+    toJSON() {
+        return {
+            totalCoresGenerated: this.totalCoresGenerated,
+        };
+    }
+
+    fromJSON(obj) {
+        this.totalCoresGenerated = obj.totalCoresGenerated;
     }
 }
 
@@ -128,10 +183,10 @@ class MultUltraboost extends Multiplier {
 class MultProximityComputing extends Multiplier {
     perCoreMult;
 
-    constructor(name, gameData = new GameData) {
-        super(name, gameData);
+    constructor(name, displayableName, gameData = new GameData) {
+        super(name, displayableName, gameData);
 
-        this.perCoreMult = 1.05;
+        this.perCoreMult = 0.01;
     }
 
     getMult() {
@@ -139,7 +194,21 @@ class MultProximityComputing extends Multiplier {
     }
 
     multUpdate() {
-        this.mult = Math.floor(this.gameData.resources.get("cores").amt) * this.perCoreMult;
+        this.mult = (Math.floor(this.gameData.resources.get("cores").amt) * this.perCoreMult) + 1;
+    }
+
+    initDisplayElements() {
+        this.displayElements = document.getElementsByClassName("proximity_computing_display");
+    }
+
+    toJSON() {
+        return {
+            
+        };
+    }
+
+    fromJSON(obj) {
+
     }
 }
 
@@ -148,8 +217,8 @@ class MultHyperMult extends Multiplier {
     decayFactor;
     increaseFactor;
 
-    constructor(name, gameData = new GameData) {
-        super(name, gameData);
+    constructor(name, displayableName, gameData = new GameData) {
+        super(name, displayableName, gameData);
         this.decayFactor = 1;
         this.increaseFactor = 1;
 
@@ -174,6 +243,16 @@ class MultHyperMult extends Multiplier {
             this.mult = 1;
         }
     }
+    
+    toJSON() {
+        return {
+            mult: this.mult,
+        };
+    }
+
+    fromJSON(obj) {
+        this.mult = obj.mult;
+    }
 }
 
 // multiplier based on current HyperKey amount
@@ -184,6 +263,20 @@ class MultHyperCore extends Multiplier {
 
     multUpdate() {
         this.mult = Utils.gameData.resources.get("hyperkeys").amt;
+    }
+
+    initDisplayElements() {
+        this.displayElements = document.getElementsByClassName("hypercore_display");
+    }
+
+    toJSON() {
+        return {
+
+        };
+    }
+
+    fromJSON(obj) {
+
     }
 }
 
@@ -210,6 +303,20 @@ class MultMultiProcess extends Multiplier {
         // display mult
         document.querySelector(".game .architectures_panel .hypermod .multi_process_mult_display").innerHTML = this.mult;
     }
+
+    initDisplayElements() {
+        this.displayElements = document.getElementsByClassName("multi_process_display");
+    }
+
+    toJSON() {
+        return {
+
+        };
+    }
+
+    fromJSON(obj) {
+        
+    }
 }
 
 // multiplier for Bonus Item
@@ -221,6 +328,16 @@ class MultBonusItem extends Multiplier {
     multUpdate() {
         this.mult = Utils.gameData.bonusItem?.currentEffect?.strength ?? 1;
     }
+
+    toJSON() {
+        return {
+
+        };
+    }
+
+    fromJSON() {
+        
+    }
 }
 
 
@@ -228,14 +345,14 @@ export function initMultipliers(gameData = new GameData) {
     let multipliers = new Map([
 
         // arcbit mults
-        ["arcMult", new MultArcMult("arcMult", gameData)],
-        ["ultraboost", new MultUltraboost("ultraboost", gameData)],
-        ["proximityComputing", new MultProximityComputing("proximityComputing", gameData)],
+        ["arcMult", new MultArcMult("arcMult", "ArcMult", gameData)],
+        ["ultraboost", new MultUltraboost("ultraboost", "Ultraboost", gameData)],
+        ["proximityComputing", new MultProximityComputing("proximityComputing", "Proximity Computing", gameData)],
 
         // hypermod mults
-        ["hyperMult", new MultHyperMult("hyperMult", gameData)],
-        ["hyperCore", new MultHyperCore("hyperCore", gameData)],
-        ["multiProcess", new MultMultiProcess("multiProcess", gameData)],
+        ["hyperMult", new MultHyperMult("hyperMult", "HyperMult", gameData)],
+        ["hyperCore", new MultHyperCore("hyperCore", "HyperCore", gameData)],
+        ["multiProcess", new MultMultiProcess("multiProcess", "Multi-Process", gameData)],
 
         // bonus mult
         ["bonusItem", new MultBonusItem("bonusItem", gameData)],

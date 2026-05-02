@@ -54,18 +54,21 @@
 					</div>
 
 					<div class = "generate_panel panel">
-						<div class="generate_button">
+						<div class="generate_button" id="arcbits_btn_main">
 							<button class="resource_button" resource="arcbits">Decrypt</button>
 							<span class="btnval_display arcbits_btnval_display"></span>
-							<span class="arcmult_display not_unlocked"></span>
+							<span class="arcmult_display mult_display not_unlocked"></span>
 						</div>
 						<div class="generate_button not_unlocked" id="hyperkeys_btn_main">
 							<button class="resource_button" resource="hyperkeys">Construct</button>
 							<span class="btnval_display hyperkeys_btnval_display"></span>
+							<span class="arcmult_display mult_display not_unlocked hidden"></span>
 						</div>
 						<div class="generate_button not_unlocked" id="nullpointers_btn_main">
 							<button class="resource_button" resource="nullpointers">Locate</button>
 							<span class="btnval_display nullpointers_btnval_display"></span>
+							<span class="streak_multiplier_display mult_display"></span>
+							<span class="rolls_amt_display mult_display"></span>
 						</div>
 					</div>
 
@@ -99,18 +102,28 @@
 							<h2>&lt; Available Programs &gt;</h2>
 							<h5>Decrypt ArcBits automatically using software resources.</h5>
 							<div class="process_panel panel">
-								<div class="cores_panel">
-									<h3>CPU Resources:</h3>
-									<h4>Cores:</h4>
-									<span class="pink">Available:</span> <span class="cores_display"></span><br>
-									<span class="pink">Capacity:</span> <span class="cores_max_display"></span><br>
-									<div class="cores_usage_bar_wrapper wrapper_bar">
-										<span class="cores_usage_bar inner_bar"></span>
-									</div><br>
-									<span>Next Core:</span><br>
-									<div class="cores_progress_bar_wrapper wrapper_bar">
-										<span class="cores_progress_bar inner_bar"></span>
+								<div class="side_panel">
+									<div class="cores_panel">
+										<h3>CPU Resources:</h3>
+										<h4>Cores:</h4>
+										<span class="pink">Available:</span> <span class="cores_display"></span><br>
+										<span class="pink">Capacity:</span> <span class="cores_max_display"></span><br>
+										<div class="cores_usage_bar_wrapper wrapper_bar">
+											<span class="cores_usage_bar inner_bar"></span>
+										</div><br>
+										<span>Next Core:</span><br>
+										<div class="cores_progress_bar_wrapper wrapper_bar">
+											<span class="cores_progress_bar inner_bar"></span>
+										</div><br>
+										<span class="hypercore_display mult_display not_unlocked"></span>
 									</div>
+								<div class="process_multipliers_panel">
+									<h3>Active Multipliers:</h3>
+									<span class="arcmult_display mult_display not_unlocked hidden"></span>
+									<span class="ultraboost_display mult_display not_unlocked"></span>
+									<span class="proximity_computing_display mult_display not_unlocked"></span>
+									<span class="multi_process_display mult_display not_unlocked"></span>
+								</div>
 								</div>
 								<div class="process_list">
 								</div>

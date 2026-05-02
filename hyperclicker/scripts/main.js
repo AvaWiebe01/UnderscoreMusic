@@ -118,6 +118,7 @@ function gameTick(currentTime, gameData = new GameData()) {
         // Perform all actions that must occur every tick
         gameData.multipliers.forEach((multiplier, key) => {
             multiplier.multUpdate();
+            multiplier.updateDisplays();
         });
 
         gameData.resources.forEach((resource, key) => {

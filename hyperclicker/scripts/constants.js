@@ -149,7 +149,7 @@ static ALL_UPGRADES_INFO = new Map([
                         // ArcMult
 
                             ["arcMult1", "ArcMult v1.0", "<strong>Decrypting</strong> ArcBits provides multiplier to <strong>decryption</strong> ArcBit generation. Decays slowly over time.", "", 0.01, ["arcMult2", "arcMultOverclock1", "arcMultEfficiency1"], (resource) => {resource.addBtnValMultSource("arcMult"); Utils.gameData.multipliers.get("arcMult").unlock();}], 
-                            ["arcMult2", "ArcMult v2.0", "<strong>Decrypting</strong> ArcBits also provides a multiplier to <strong>process</strong> ArcBit generation.", "", 0.45, [], (resource) => {resource.addDeltaMultSource("arcMult");}],
+                            ["arcMult2", "ArcMult v2.0", "<strong>ArcMult</strong> also provides a multiplier to <strong>process</strong> ArcBit generation.", "", 0.45, [], (resource) => {resource.addDeltaMultSource("arcMult"); document.querySelector(".game .process_panel .arcmult_display").classList.remove("hidden")}],
 
                             ["arcMultOverclock1", "ArcMult: Overclock I", "<strong>ArcMult</strong> gains <strong>2x</strong> more multiplier per click.", "", 0.2, ["arcMultOverclock2"], (resource) => {resource.gameData.multipliers.get("arcMult").increaseFactor *= 2;}],
                             ["arcMultOverclock2", "ArcMult: Overclock II", "<strong>ArcMult</strong> gains another <strong>2x</strong> more multiplier per click.", "", 128, ["arcMultOverclock3"], (resource) => {resource.gameData.multipliers.get("arcMult").increaseFactor *= 2;}],
@@ -162,15 +162,15 @@ static ALL_UPGRADES_INFO = new Map([
 
                         // Ultraboost
 
-                            ["ultraboost1", "Ultraboost", "Each <strong>Core</strong> generated gives a permanent <strong>+0.1%</strong> multiplier to <strong>process</strong> ArcBit generation.", "", 6, ["ultraboost2"], (resource) => {resource.addDeltaMultSource("ultraboost");}],
+                            ["ultraboost1", "Ultraboost", "Each <strong>Core</strong> generated gives a permanent <strong>+0.1%</strong> multiplier to <strong>process</strong> ArcBit generation.", "", 6, ["ultraboost2"], (resource) => {resource.addDeltaMultSource("ultraboost"); Utils.gameData.multipliers.get("ultraboost").unlock();}],
                             ["ultraboost2", "Ultraboost: Dual Core", "<strong>Ultraboost</strong> now grants <strong>+0.2%</strong> per <strong>Core</strong> generated.", "", 14_000, ["ultraboost3"], (resource) => {resource.gameData.multipliers.get("ultraboost").perCoreMult = 0.002;}],
                             ["ultraboost3", "Ultraboost: Quad Core", "<strong>Ultraboost</strong> now grants <strong>+0.3%</strong> per <strong>Core</strong> generated.", "", 3_000_000, [], (resource) => {resource.gameData.multipliers.get("ultraboost").perCoreMult = 0.003;}],
 
                         // Proximity Computing
 
-                            ["proximityComputing", "Proximity Computing", "Each unused <strong>Core</strong> increases <strong>process</strong> ArcBit generation by <strong>+5%</strong>", "", 0.09, ["proximityComputingYield1"], (resource) => {resource.addDeltaMultSource("proximityComputing");}],
-                            ["proximityComputingYield1", "Proximity Computing: Yield+", "Increases the <strong>Proximity Computing</strong> boost per unused <strong>Core</strong> to <strong>+10%</strong>.", "", 9, ["proximityComputingYield2"], (resource) => {resource.gameData.multipliers.get("proximityComputing").perCoreMult = 0.1;}],
-                            ["proximityComputingYield2", "Proximity Computing: Yield++", "Increases the <strong>Proximity Computing</strong> boost per unused <strong>Core</strong> to <strong>+15%</strong>.", "", 99.999, [], (resource) => {resource.gameData.multipliers.get("proximityComputing").perCoreMult = 0.15;}],
+                            ["proximityComputing", "Proximity Computing", "Each unused <strong>Core</strong> increases <strong>process</strong> ArcBit generation by <strong>+1%</strong>", "", 82_500, ["proximityComputingYield1"], (resource) => {resource.addDeltaMultSource("proximityComputing"); Utils.gameData.multipliers.get("proximityComputing").unlock();}],
+                            ["proximityComputingYield1", "Proximity Computing: Yield+", "Increases the <strong>Proximity Computing</strong> boost per unused <strong>Core</strong> to <strong>+2%</strong>.", "", 4_250_000, ["proximityComputingYield2"], (resource) => {resource.gameData.multipliers.get("proximityComputing").perCoreMult = 0.02;}],
+                            ["proximityComputingYield2", "Proximity Computing: Yield++", "Increases the <strong>Proximity Computing</strong> boost per unused <strong>Core</strong> to <strong>+3%</strong>.", "", 821_000_000_000, [], (resource) => {resource.gameData.multipliers.get("proximityComputing").perCoreMult = 0.03;}],
                     
                     // Unlockable Tabs
                     /* initial upgrade */ ["tab1", "Expansion: Archive", "Unlock an <strong class='rainbow'>Archive</strong> of fragmented data.", "", 0.32, ["tab2"], () => {Utils.unlockTab("archive_panel_tab");}],
@@ -194,7 +194,7 @@ static ALL_UPGRADES_INFO = new Map([
                     
                     /*initial upgrade*/["hypermodHyperCore", "HyperCore Architecture", "<strong>Core</strong> generation rate is multiplied by current <strong>HyperKey</strong> amount.", "", 0.00468, ["hypermodKeyMult"], (resource) => {unlockHyperMod("hyperCoreArch");}],
 
-                    ["hypermodKeyMult", "KeyMult Architecture", "<strong>Decrypting</strong> ArcBits also provides a temporary multiplier to <strong>construction</strong> HyperKey generation.", "", 0.02, [], (resource) => {unlockHyperMod("keyMultArch");}],
+                    ["hypermodKeyMult", "KeyMult Architecture", "<strong>ArcMult</strong> also provides a multiplier to <strong>construction</strong> HyperKey generation.", "", 0.02, [], (resource) => {unlockHyperMod("keyMultArch");}],
 
                     ["hypermodMalwareDefense", "Malware Defense Architecture", "Removing a <strong>virus</strong> generates stronger effects. Detect more viruses.", "", 0.124, ["hypermodMultiProcess"], (resource) => {unlockHyperMod("malwareDefenseArch");}],
 
@@ -246,10 +246,10 @@ static ALL_UPGRADES_INFO = new Map([
                     ["nullBtn10", "nullspace_collapse_protocol_v5", "<strong>nullpointer_location_rate=0.5555; //seems like the limit</strong>", "", 55_555, [], (resource) => {resource.modifySuccessRate(0.5555)}],
                     
                     /*initial upgrade*/["nullDelta1", "memory_leak_capture", "<strong>passive_nullpointer_gain_active();</strong>", "", 3, ["nullDelta2"], (resource) => {resource.delta = 0.05}],
-                    ["nullDelta2", "capture_rate+", "<strong>increase_passive_nullpointer_gain(+100%);</strong>", "", 10, ["nullDelta3"], (resource) => {resource.modifyDeltaMult(2)}],
-                    ["nullDelta3", "capture_rate++", "<strong>multiply_passive_nullpointer_gain(+100%);</strong>", "", 24, ["nullDelta4"], (resource) => {resource.modifyDeltaMult(2)}],
-                    ["nullDelta4", "capture_rate+++", "<strong>multiply_passive_nullpointer_gain(+100%);</strong>", "", 62, ["nullDelta5"], (resource) => {resource.modifyDeltaMult(2)}],
-                    ["nullDelta5", "capture_rate++++", "<strong>multiply_passive_nullpointer_gain(+100%);</strong>", "", 105, ["nullDelta6"], (resource) => {resource.modifyDeltaMult(2)}],
+                    ["nullDelta2", "capture_rate+", "<strong>nullpointer_passive_capture_speed(+100%);</strong>", "", 10, ["nullDelta3"], (resource) => {resource.modifyDeltaMult(2)}],
+                    ["nullDelta3", "capture_rate++", "<strong>nullpointer_passive_capture_speed(+100%);</strong>", "", 24, ["nullDelta4"], (resource) => {resource.modifyDeltaMult(2)}],
+                    ["nullDelta4", "capture_rate+++", "<strong>nullpointer_passive_capture_speed(+100%);</strong>", "", 62, ["nullDelta5"], (resource) => {resource.modifyDeltaMult(2)}],
+                    ["nullDelta5", "capture_rate++++", "<strong>nullpointer_passive_capture_speed(+100%);</strong>", "", 105, ["nullDelta6"], (resource) => {resource.modifyDeltaMult(2)}],
                     ["nullDelta6", "auto_search+", "<strong>nullpointer_passive_capture_speed(+200%);</strong>", "", 225, ["nullDelta7"], (resource) => {resource.modifyDeltaMult(3)}],
                     ["nullDelta7", "auto_search++", "<strong>nullpointer_passive_capture_speed(+300%);</strong>", "", 500, ["nullDelta8"], (resource) => {resource.modifyDeltaMult(4)}],
                     ["nullDelta8", "auto_search+++", "<strong>nullpointer_passive_capture_speed(+400%);</strong>", "", 1_400, ["nullDelta9"], (resource) => {resource.modifyDeltaMult(5)}],

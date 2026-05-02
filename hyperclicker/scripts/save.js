@@ -9,6 +9,7 @@ export function saveGame() {
     var resourcesObj = {};
     var processesObj = {};
     var upgradesObj = {};
+    var multipliersObj = {};
     var hypermodsObj = {};
 
     gameData.resources.forEach((resource, resourceName) => {
@@ -25,6 +26,10 @@ export function saveGame() {
 
     upgradesObj = Utils.purchasedUpgrades;
 
+    gameData.multipliers.forEach((multiplier, multiplierName) => {
+        multipliersObj[multiplierName] = multiplier.toJSON();
+    });
+
     gameData.hypermods.mods.forEach((hypermod, hypermodName) => {
         hypermodsObj[hypermodName] = hypermod.toJSON();
     });
@@ -35,6 +40,8 @@ export function saveGame() {
         processes: processesObj,
 
         upgrades: upgradesObj,
+
+        multipliers: multipliersObj,
 
         hypermods: hypermodsObj,
 
@@ -63,7 +70,7 @@ export function loadGame() {
     const saveFile = JSON.parse(localStorage.getItem("playerSave"));
 
     // restore all upgrades
-    for (let upgd of saveFile.upgrades) {
+    for (let upgd of saveFile.upgrades ?? []) {
         const upgradeObject = gameData.upgrades.get(upgd.upgradeTypeTag).get(upgd.resourceName).get(upgd.key);
         upgradeObject.buy(true);
         upgradeObject.upgradeElement.classList.add("hidden");
@@ -88,17 +95,22 @@ export function loadGame() {
     // restore all processes
     gameData.processes.forEach((processMap, resourceName) => {
         processMap.forEach((process, processName) => {
-            process.numBought = saveFile.processes[process.resource.htmlName][processName].numBought;
-            process.baseProductionMult = saveFile.processes[process.resource.htmlName][processName].baseProductionMult;
+            process.numBought = saveFile.processes?.[process.resource.htmlName][processName].numBought;
+            process.baseProductionMult = saveFile.processes?.[process.resource.htmlName][processName].baseProductionMult;
 
             // unlock next process
             if(process.numBought > 0 && process.processElement.nextElementSibling) {process.processElement.nextElementSibling.classList.remove("not_unlocked");}
         });
     });
 
+    // restore all multipliers
+    gameData.multipliers.forEach((multiplier, multiplierName) => {
+        if(saveFile.multipliers?.[multiplierName] ?? false) {multiplier.fromJSON(saveFile.multipliers[multiplierName])};
+    });
+
     // restore all hypermods
     gameData.hypermods.mods.forEach((hypermod, hypermodName) => {
-        if(saveFile.hypermods[hypermodName].enabled) {
+        if(saveFile.hypermods?.[hypermodName].enabled ?? false) {
             hypermod.enable();
             gameData.hypermods.enabledMods.set(hypermodName, hypermod);
             document.querySelector(`.architecture_list .hypermod[name="${hypermodName}"]`).classList.add("enabled");
@@ -107,18 +119,18 @@ export function loadGame() {
 
     // restore all resources
     gameData.resources.forEach((resource, resourceName) => {
-        resource.amt = saveFile.resources[resourceName].amt;
-        resource.deltaBaseMult = saveFile.resources[resourceName].deltaBaseMult;
-        resource.btnValBaseMult = saveFile.resources[resourceName].btnValBaseMult;
+        resource.amt = saveFile?.resources?.[resourceName].amt;
+        resource.deltaBaseMult = saveFile.resources?.[resourceName].deltaBaseMult;
+        resource.btnValBaseMult = saveFile.resources?.[resourceName].btnValBaseMult;
     });
 
     // restore all options
-    Utils.notationType = saveFile.options.notationType;
-    if (!saveFile.options.stickyResources) {Utils.toggleStickyResources();}
-    gameData.audio.musicMuted = saveFile.options.musicMuted;
-    gameData.audio.sfxMuted = saveFile.options.sfxMuted;
-    gameData.audio.storyMusicMuted = saveFile.options.storyMusicMuted;
-    gameData.audio.storySfxMuted = saveFile.options.storySfxMuted;
+    Utils.notationType = saveFile.options.notationType ?? 0;
+    if (!(saveFile.options.stickyResources ?? true)) {Utils.toggleStickyResources();}
+    gameData.audio.musicMuted = saveFile.options?.musicMuted ?? false;
+    gameData.audio.sfxMuted = saveFile.options?.sfxMuted ?? false;
+    gameData.audio.storyMusicMuted = saveFile.options?.storyMusicMuted ?? false;
+    gameData.audio.storySfxMuted = saveFile.options?.storySfxMuted ?? false;
 
     // update displays
     Utils.refreshAllDisplays();

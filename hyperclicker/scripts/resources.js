@@ -255,10 +255,12 @@ class NullPointers extends Resource {
     streak;
     defaultStreakBase;
     streakBase;
+    streakDisplay;
 
     failureStreak;
 
     rolls;
+    rollsDisplay;
 
     constructor(amt, delta, btnVal, htmlName, displayableName, gameData, successRate) {
         super(amt, btnVal, htmlName, displayableName, gameData);
@@ -282,6 +284,8 @@ class NullPointers extends Resource {
         this.gainDisplays = document.getElementsByClassName(this.htmlName + "_gain_display");
         this.deltaDisplays = document.getElementsByClassName(this.htmlName + "_delta_display");
         this.btnValDisplays = document.getElementsByClassName(this.htmlName + "_btnval_display");
+        this.streakDisplay = document.querySelector(".game .generate_panel div[id='nullpointers_btn_main'] .streak_multiplier_display");
+        this.rollsDisplay = document.querySelector(".game .generate_panel div[id='nullpointers_btn_main'] .rolls_amt_display");
 
         this.displayAmt();
     }
@@ -338,6 +342,22 @@ class NullPointers extends Resource {
         for(let i = 0; i < this.btnValDisplays.length; i++) {
             this.btnValDisplays[i].innerHTML = `${(this.successRate * 100).toFixed(2)}% <span class="white">chance for</span> +${Utils.getDisplayableNumber(this.getFinalBtnValue())}`;
         }
+    }
+
+    // rolls, streak base
+    displayModifiers() {
+        this.streakDisplay.innerHTML = `[Streak multiplier: ${this.streakBase}x]`;
+        this.rollsDisplay.innerHTML = `[Rolls per click: ${this.rolls}]`;
+    }
+
+    resourceTick(deltaTime, gameData) {
+        this.lastTickDelta = ((deltaTime/1000)*this.getBaseDelta()) * this.getDeltaTotalMult()
+        this.modifyAmt(this.lastTickDelta);
+
+        this.displayAmt();
+        this.displayFinalBtnVal();
+        this.displayFinalDelta();
+        this.displayModifiers();
     }
 }
 
