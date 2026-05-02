@@ -106,10 +106,10 @@ static ALL_UPGRADES_INFO = new Map([
 
                     // ArcBit Processes
 
-                        /* initial upgrade */ ["arcbitProc1", "Clock Speed I", "<strong>Processes</strong> generate <strong>1.05x</strong> more ArcBits/s.", "", 0.05, ["arcbitProc2", "coreGen1"], (resource) => {resource.modifyDeltaBaseMult(1.25);}],
-                        ["arcbitProc2", "Clock Speed II", "<strong>Processes</strong> generate an additional <strong>1.1x</strong> more ArcBits/s.", "", 0.5, ["arcbitProc3"], (resource) => {resource.modifyDeltaBaseMult(1.25);}],
-                        ["arcbitProc3", "Clock Speed III", "<strong>Processes</strong> generate an additional <strong>1.15x</strong> more ArcBits/s.", "", 5, ["arcbitProc4"], (resource) => {resource.modifyDeltaBaseMult(1.25);}],
-                        ["arcbitProc4", "Clock Speed IV", "<strong>Processes</strong> generate an additional <strong>1.2x</strong> more ArcBits/s.", "", 50, ["arcbitProc5"], (resource) => {resource.modifyDeltaBaseMult(1.25);}],
+                        /* initial upgrade */ ["arcbitProc1", "Clock Speed I", "<strong>Processes</strong> generate <strong>1.25x</strong> more ArcBits/s.", "", 0.05, ["arcbitProc2", "coreGen1"], (resource) => {resource.modifyDeltaBaseMult(1.25);}],
+                        ["arcbitProc2", "Clock Speed II", "<strong>Processes</strong> generate an additional <strong>1.25x</strong> more ArcBits/s.", "", 0.5, ["arcbitProc3"], (resource) => {resource.modifyDeltaBaseMult(1.25);}],
+                        ["arcbitProc3", "Clock Speed III", "<strong>Processes</strong> generate an additional <strong>1.25x</strong> more ArcBits/s.", "", 5, ["arcbitProc4"], (resource) => {resource.modifyDeltaBaseMult(1.25);}],
+                        ["arcbitProc4", "Clock Speed IV", "<strong>Processes</strong> generate an additional <strong>1.25x</strong> more ArcBits/s.", "", 50, ["arcbitProc5"], (resource) => {resource.modifyDeltaBaseMult(1.25);}],
                         ["arcbitProc5", "Clock Speed V", "<strong>Processes</strong> generate an additional <strong>1.25x</strong> more ArcBits/s.", "", 500, ["arcbitProc6"], (resource) => {resource.modifyDeltaBaseMult(1.25);}],
                         
                         ["arcbitProc6", "Overhead Reduction I", "<strong>Processes</strong> generate an additional <strong>1.3x</strong> more ArcBits/s.", "", 890, ["arcbitProc7"], (resource) => {resource.modifyDeltaBaseMult(1.3);}],
