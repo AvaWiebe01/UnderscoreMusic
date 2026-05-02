@@ -543,6 +543,29 @@ const DIALOGUE = new Map([
                         "p ppp pp ppppppppp pppp p"),
         ]
     ],
+
+    // hidden archives
+    [
+        "!-LMTLOG",
+        [
+            new Line(   "New Archon Camera #00348EEA Audio Feed - Beaver Warehouses, 11:38 PM", "system", 2,
+                        "ppp pppppp pppppp _________ ppppp pppp , aaaaaa aaaaaaaaaa, ppppp pp"),
+
+            new Line(   "- END OF RECOVERED DATA -", "system", 2,
+                        "p ppp pp ppppppppp pppp p"),
+        ]
+    ],
+
+    [
+        "!-LXAN01",
+        [
+            new Line(   "HyperI/O Camera #99A20001 Audio Feed - Hyper Beam HQ, 12:24 PM", "system", 2,
+                        "pppppppp pppppp _________ ppppp pppp , aaaaa aaaa aa, ppppp pp"),
+                        
+            new Line(   "- END OF RECOVERED DATA -", "system", 2,
+                        "p ppp pp ppppppppp pppp p"),
+        ]
+    ],
 ]);
 
 function displayLine(textbox, line = new Line("content not specified.", null, 1, null), speakerDisplay, voices) {
@@ -633,20 +656,24 @@ window.onload = async function() {
     const lunaSpeech = document.getElementById("luna_speech");
     const nyxSpeech = document.getElementById("nyx_speech");
     const arinSpeech = document.getElementById("arin_speech");
+    const lexiaSpeech = document.getElementById("lexia_speech");
     const kyanaTrack = speechContext.createMediaElementSource(kyanaSpeech);
     const lunaTrack = speechContext.createMediaElementSource(lunaSpeech);
     const nyxTrack = speechContext.createMediaElementSource(nyxSpeech);
     const arinTrack = speechContext.createMediaElementSource(arinSpeech);
+    const lexiaTrack = speechContext.createMediaElementSource(lexiaSpeech);
     kyanaTrack.connect(speechGain);
     lunaTrack.connect(speechGain);
     nyxTrack.connect(speechGain);
     arinTrack.connect(speechGain);
+    lexiaTrack.connect(speechGain);
 
     const voices = new Map([
         ["kyana", kyanaSpeech],
         ["luna", lunaSpeech],
         ["nyx", nyxSpeech],
         ["arin", arinSpeech],
+        ["lexia", lexiaSpeech],
     ]);
 
     const portraitRoot = "/images/archive/";
@@ -655,6 +682,7 @@ window.onload = async function() {
         ["luna", "luna-portrait-256.png"],
         ["onyx", "nyx-portrait-256.png"],
         ["arin", "arin-portrait-256.png"],
+        ["lexia", "lexia-portrait-256.png"],
         ["system", "system-portrait-256.png"],
         ["unknown", "unknown-portrait-256.png"],
     ]);
