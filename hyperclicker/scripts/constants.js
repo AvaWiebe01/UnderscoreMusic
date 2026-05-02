@@ -20,7 +20,7 @@ static DATA_SIZE_ABBREVIATED_SUFFIXES = ["b","Kb","Mb","Gb","Tb","Pb","Eb","Zb",
 static DATA_SIZE_SUFFIXES = ["Bits","Kilobits","Megabits","Gigabits","Terabits","Petabits","Exabits","Zettabits","Yottabits","Ronnabits","Quettabits","Wrennbits"];
 
 static RESOURCE_INFO = [ // htmlName, amt, delta, btnVal, displayableName
-    ["arcbits", 1111111111111111110, 0.00010, "ArcBits"],
+    ["arcbits", 0, 0.00010, "ArcBits"],
     ["hyperkeys", 0.00, 0.00001, "HyperKeys"],
 ];
 
