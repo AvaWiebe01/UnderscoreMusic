@@ -14,18 +14,18 @@ static RESET_PROGRESS_CLICKS = 10;
 
 static BONUS_COOLDOWN = 320; // bonus starts at 5:20 -> 2:40 -> 1:20 -> 0:40 cooldown
 
-static DEFAULT_SUFFIXES = ["","Thousand","Million","Billion","Trillion","Quadrillion","Quintillion","Sextillion","Septillion","Octillion","Nonillion","Decillion"];
-static ABBREVIATED_SUFFIXES = ["","K","M","B","T","Q","Qi","Sx","Sp","Oc","No","Dc"];
+static DEFAULT_SUFFIXES = ["","Thousand","Million","Billion","Trillion","Quadrillion","Quintillion","Sextillion","Septillion","Octillion","Nonillion","Decillion","Undecillion","Duodecillion","Tredecillion","Quattuordecillion","Quindecillion","Sexdecillion","Septendecillion","Octodecillion","Novemdecillion","Vigintillion","Unvigintillion","Duovigintillion","Trevigintillion","Quattuorvigintillion","Quinvigintillion","Sexvigintillion","Septenvigintillion","Octovigintillion","Novemvigintillion","Trigintillion","Untrigintillion","Duotrigintillion"];
+static ABBREVIATED_SUFFIXES = ["","K","M","B","T","Q","Qi","Sx","Sp","Oc","No","Dc","Udc","Ddc","Tdc","Qadc","Qidc","Sxdc","Spdc","Ocdc","Nmdc","Vg","Uvg","Dvg","Tvg","Qavg","Qivg","Sxvg","Spvg","Ocvg","Nmvg","Tg","Utg","Dtg"];
 static DATA_SIZE_ABBREVIATED_SUFFIXES = ["b","Kb","Mb","Gb","Tb","Pb","Eb","Zb","Yb","Rb","Qb","Wb"];
 static DATA_SIZE_SUFFIXES = ["Bits","Kilobits","Megabits","Gigabits","Terabits","Petabits","Exabits","Zettabits","Yottabits","Ronnabits","Quettabits","Wrennbits"];
 
 static RESOURCE_INFO = [ // htmlName, amt, delta, btnVal, displayableName
-    ["arcbits", 111111111110, 0.00010, "ArcBits"],
+    ["arcbits", 0, 0.00010, "ArcBits"],
     ["hyperkeys", 0.00, 0.00001, "HyperKeys"],
 ];
 
 // htmlName, amt, delta, btnVal, displayableName, initMaxCores
-static CORE_INFO = ["cores", 2, 1/240, 0, "Cores", 8];
+static CORE_INFO = ["cores", 2, 1/80, 0, "Cores", 8];
 
 // htmlName, amt, btnVal, displayableName, initSuccessRate
 static NULLPOINTER_INFO = ["nullpointers", 0, 0, 1, "NullPointers", 0.01];
@@ -92,17 +92,17 @@ static ALL_UPGRADES_INFO = new Map([
 
                     // ArcBit Decryption
                     
-                        /* initial upgrade */ ["arcbitBtn1", "More ArcBits", "<strong>Decrypting</strong> ArcBits yields <strong>1.25x</strong> more.", "", 0.001, ["arcbitBtn2"], (resource) => {resource.modifyBtnValBaseMult(1.25);}],
-                        ["arcbitBtn2", "Improved ArcBits", "<strong>Decrypting</strong> ArcBits yields an additional <strong>1.50x</strong> more.", "", 0.004, ["arcbitBtn3", "arcMult1"], (resource) => {resource.modifyBtnValBaseMult(1.5);}],
-                        ["arcbitBtn3", "Optimized ArcBits", "<strong>Decrypting</strong> ArcBits yields an additional <strong>2x</strong> more.", "", 0.02, ["arcbitBtn4"], (resource) => {resource.modifyBtnValBaseMult(2);}],
-                        ["arcbitBtn4", "Optimal ArcBits", "<strong>Decrypting</strong> ArcBits yields an additional <strong>3x</strong> more.", "", 0.1, ["arcbitBtn5"], (resource) => {resource.modifyBtnValBaseMult(3);}],
-                        ["arcbitBtn5", "Hyper-Optimal ArcBits", "<strong>Decrypting</strong> ArcBits yields an additional <strong>5x</strong> more.", "", 2.42, ["arcbitBtn6"], (resource) => {resource.modifyBtnValBaseMult(5);}],
+                        /* initial upgrade */ ["arcbitBtn1", "More ArcBits", "<strong>Decrypting</strong> ArcBits yields <strong>1.20x</strong> more.", "", 0.002, ["arcbitBtn2"], (resource) => {resource.modifyBtnValBaseMult(1.20);}],
+                        ["arcbitBtn2", "Improved ArcBits", "<strong>Decrypting</strong> ArcBits yields an additional <strong>1.40x</strong> more.", "", 0.005, ["arcbitBtn3", "arcMult1"], (resource) => {resource.modifyBtnValBaseMult(1.40);}],
+                        ["arcbitBtn3", "Optimized ArcBits", "<strong>Decrypting</strong> ArcBits yields an additional <strong>1.60x</strong> more.", "", 0.02, ["arcbitBtn4"], (resource) => {resource.modifyBtnValBaseMult(1.60);}],
+                        ["arcbitBtn4", "Optimal ArcBits", "<strong>Decrypting</strong> ArcBits yields an additional <strong>1.80x</strong> more.", "", 0.1, ["arcbitBtn5"], (resource) => {resource.modifyBtnValBaseMult(1.80);}],
+                        ["arcbitBtn5", "Hyper-Optimal ArcBits", "<strong>Decrypting</strong> ArcBits yields an additional <strong>2x</strong> more.", "", 0.85, ["arcbitBtn6"], (resource) => {resource.modifyBtnValBaseMult(2);}],
                         
-                        ["arcbitBtn6", "Fast Decryptor", "<strong>Decrypting</strong> ArcBits yields an additional <strong>10x</strong> more.", "", 12, ["arcbitBtn7"], (resource) => {resource.modifyBtnValBaseMult(10);}],
-                        ["arcbitBtn7", "Efficient Decryptor", "<strong>Decrypting</strong> ArcBits yields an additional <strong>20x</strong> more.", "", 101, ["arcbitBtn8"], (resource) => {resource.modifyBtnValBaseMult(20);}],
-                        ["arcbitBtn8", "Threaded Decryptor", "<strong>Decrypting</strong> ArcBits yields an additional <strong>50x</strong> more.", "", 520, ["arcbitBtn9"], (resource) => {resource.modifyBtnValBaseMult(50);}],
-                        ["arcbitBtn9", "Accelerated Decryptor", "<strong>Decrypting</strong> ArcBits yields an additional <strong>250x</strong> more.", "", 3_210, ["arcbitBtn10"], (resource) => {resource.modifyBtnValBaseMult(250);}],
-                        ["arcbitBtn10", "Quantum Decryptor", "<strong>Decrypting</strong> ArcBits yields an additional <strong>500x</strong> more.", "", 48_500, [], (resource) => {resource.modifyBtnValBaseMult(500);}],
+                        ["arcbitBtn6", "Fast Decryptor", "<strong>Decrypting</strong> ArcBits yields an additional <strong>3x</strong> more.", "", 3.14, ["arcbitBtn7"], (resource) => {resource.modifyBtnValBaseMult(3);}],
+                        ["arcbitBtn7", "Efficient Decryptor", "<strong>Decrypting</strong> ArcBits yields an additional <strong>4x</strong> more.", "", 101, ["arcbitBtn8"], (resource) => {resource.modifyBtnValBaseMult(4);}],
+                        ["arcbitBtn8", "Threaded Decryptor", "<strong>Decrypting</strong> ArcBits yields an additional <strong>5x</strong> more.", "", 520, ["arcbitBtn9"], (resource) => {resource.modifyBtnValBaseMult(5);}],
+                        ["arcbitBtn9", "Accelerated Decryptor", "<strong>Decrypting</strong> ArcBits yields an additional <strong>7.5x</strong> more.", "", 3_210, ["arcbitBtn10"], (resource) => {resource.modifyBtnValBaseMult(7.5);}],
+                        ["arcbitBtn10", "Quantum Decryptor", "<strong>Decrypting</strong> ArcBits yields an additional <strong>10x</strong> more.", "", 48_500, [], (resource) => {resource.modifyBtnValBaseMult(10);}],
 
                     // ArcBit Processes
 
@@ -115,16 +115,16 @@ static ALL_UPGRADES_INFO = new Map([
                         ["arcbitProc6", "Overhead Reduction I", "<strong>Processes</strong> generate an additional <strong>3.2x</strong> more ArcBits/s.", "", 890, ["arcbitProc7"], (resource) => {resource.modifyDeltaBaseMult(3.2);}],
                         ["arcbitProc7", "Overhead Reduction II", "<strong>Processes</strong> generate an additional <strong>3.6x</strong> more ArcBits/s.", "", 3_800, ["arcbitProc8"], (resource) => {resource.modifyDeltaBaseMult(3.6);}],
                         ["arcbitProc8", "Overhead Reduction III", "<strong>Processes</strong> generate an additional <strong>4.0x</strong> more ArcBits/s.", "", 16_440, ["arcbitProc9"], (resource) => {resource.modifyDeltaBaseMult(4);}],
-                        ["arcbitProc9", "Overhead Reduction IV", "<strong>Processes</strong> generate an additional <strong>10x</strong> more ArcBits/s.", "", 122_000, ["arcbitProc10"], (resource) => {resource.modifyDeltaBaseMult(10);}],
-                        ["arcbitProc10", "Overhead Reduction V", "<strong>Processes</strong> generate an additional <strong>25x</strong> more ArcBits/s.", "", 4_100_000, [], (resource) => {resource.modifyDeltaBaseMult(25);}],
+                        ["arcbitProc9", "Overhead Reduction IV", "<strong>Processes</strong> generate an additional <strong>6.0x</strong> more ArcBits/s.", "", 122_000, ["arcbitProc10"], (resource) => {resource.modifyDeltaBaseMult(6);}],
+                        ["arcbitProc10", "Overhead Reduction V", "<strong>Processes</strong> generate an additional <strong>10x</strong> more ArcBits/s.", "", 4_100_000, [], (resource) => {resource.modifyDeltaBaseMult(10);}],
 
                     // Cores
 
-                        ["coreGen1", "Stone CoreGen", "<strong>Cores</strong> generate <strong>1.5x</strong> faster.", "", 0.01, ["coreGen2"], (resource) => {resource.gameData.resources.get("cores").modifyDeltaBaseMult(1.5);}],
-                        ["coreGen2", "Iron CoreGen", "<strong>Cores</strong> generate another <strong>1.75x</strong> faster.", "", 0.2, ["coreGen3", "coreCap1"], (resource) => {resource.gameData.resources.get("cores").modifyDeltaBaseMult(1.75);}],
-                        ["coreGen3", "Emerald CoreGen", "<strong>Cores</strong> generate another <strong>2x</strong> faster.", "", 4, ["coreGen4"], (resource) => {resource.gameData.resources.get("cores").modifyDeltaBaseMult(2);}],
-                        ["coreGen4", "Diamond CoreGen", "<strong>Cores</strong> generate another <strong>3x</strong> faster.", "", 155, ["coreGen5"], (resource) => {resource.gameData.resources.get("cores").modifyDeltaBaseMult(3);}],
-                        ["coreGen5", "Archite CoreGen", "<strong>Cores</strong> generate another <strong>4x</strong> faster.", "", 2_250, [], (resource) => {resource.gameData.resources.get("cores").modifyDeltaBaseMult(4);}],
+                        ["coreGen1", "Stone CoreGen", "<strong>Cores</strong> generate <strong>1.25x</strong> faster.", "", 0.01, ["coreGen2"], (resource) => {resource.gameData.resources.get("cores").modifyDeltaBaseMult(1.25);}],
+                        ["coreGen2", "Iron CoreGen", "<strong>Cores</strong> generate another <strong>1.5x</strong> faster.", "", 0.2, ["coreGen3", "coreCap1"], (resource) => {resource.gameData.resources.get("cores").modifyDeltaBaseMult(1.5);}],
+                        ["coreGen3", "Emerald CoreGen", "<strong>Cores</strong> generate another <strong>1.75x</strong> faster.", "", 4, ["coreGen4"], (resource) => {resource.gameData.resources.get("cores").modifyDeltaBaseMult(1.75);}],
+                        ["coreGen4", "Diamond CoreGen", "<strong>Cores</strong> generate another <strong>2x</strong> faster.", "", 155, ["coreGen5"], (resource) => {resource.gameData.resources.get("cores").modifyDeltaBaseMult(2);}],
+                        ["coreGen5", "Archite CoreGen", "<strong>Cores</strong> generate another <strong>2.5x</strong> faster.", "", 2_250, [], (resource) => {resource.gameData.resources.get("cores").modifyDeltaBaseMult(2.5);}],
                         
                         ["coreCap1", "Minithreading", "Increase <strong>Cores</strong> capacity by <strong>4</strong>.", "", 35, ["coreCap2"], (resource) => {resource.gameData.resources.get("cores").modifyMaxCores(4);}],
                         ["coreCap2", "Multithreading", "Increase <strong>Cores</strong> capacity by <strong>8</strong>.", "", 320, ["coreCap3", "ultraboost1"], (resource) => {resource.gameData.resources.get("cores").modifyMaxCores(8);}],
@@ -155,16 +155,16 @@ static ALL_UPGRADES_INFO = new Map([
                             ["arcMultOverclock2", "ArcMult: Overclock II", "<strong>ArcMult</strong> gains another <strong>2x</strong> more multiplier per click.", "", 128, ["arcMultOverclock3"], (resource) => {resource.gameData.multipliers.get("arcMult").increaseFactor *= 2;}],
                             ["arcMultOverclock3", "ArcMult: Maximum Overclock", "<strong>ArcMult</strong> gains another <strong>2x</strong> more multiplier per click.", "", 3_720, [], (resource) => {resource.gameData.multipliers.get("arcMult").increaseFactor *= 2;}],
 
-                            ["arcMultEfficiency1", "ArcMult: Efficiency+", "<strong>ArcMult</strong> decays <strong>2x</strong> slower.", "", 20, ["arcMultEfficiency2"], (resource) => {resource.gameData.multipliers.get("arcMult").decayFactor *= 0.5;}],
-                            ["arcMultEfficiency2", "ArcMult: Efficiency++", "<strong>ArcMult</strong> decays another <strong>2x</strong> slower.", "", 1_250, ["arcMultEfficiency3"], (resource) => {resource.gameData.multipliers.get("arcMult").decayFactor *= 0.5;}],
+                            ["arcMultEfficiency1", "ArcMult: Efficiency+", "<strong>ArcMult</strong> decays <strong>2x</strong> slower.", "", 0.78, ["arcMultEfficiency2"], (resource) => {resource.gameData.multipliers.get("arcMult").decayFactor *= 0.5;}],
+                            ["arcMultEfficiency2", "ArcMult: Efficiency++", "<strong>ArcMult</strong> decays another <strong>2x</strong> slower.", "", 15.8, ["arcMultEfficiency3"], (resource) => {resource.gameData.multipliers.get("arcMult").decayFactor *= 0.5;}],
                             ["arcMultEfficiency3", "ArcMult: Efficiency+++", "<strong>ArcMult</strong> decays another <strong>2x</strong> slower.", "", 64_000, ["arcMultEfficiency4"], (resource) => {resource.gameData.multipliers.get("arcMult").decayFactor *= 0.5;}],
                             ["arcMultEfficiency4", "ArcMult: Maximum Efficiency", "<strong>ArcMult</strong> decays another <strong>2x</strong> slower.", "", 468_000, [], (resource) => {resource.gameData.multipliers.get("arcMult").decayFactor *= 0.5;}],
 
                         // Ultraboost
 
-                            ["ultraboost1", "Ultraboost", "Each <strong>Core</strong> generated gives a permanent <strong>+1%</strong> multiplier to <strong>process</strong> ArcBit generation.", "", 6, ["ultraboost2"], (resource) => {resource.addDeltaMultSource("ultraboost");}],
-                            ["ultraboost2", "Ultraboost: Dual Core", "<strong>Ultraboost</strong> now grants <strong>+2%</strong> per <strong>Core</strong> generated.", "", 14_000, ["ultraboost3"], (resource) => {resource.gameData.multipliers.get("ultraboost").perCoreMult = 0.02;}],
-                            ["ultraboost3", "Ultraboost: Quad Core", "<strong>Ultraboost</strong> now grants <strong>+4%</strong> per <strong>Core</strong> generated.", "", 3_000_000, [], (resource) => {resource.gameData.multipliers.get("ultraboost").perCoreMult = 0.4;}],
+                            ["ultraboost1", "Ultraboost", "Each <strong>Core</strong> generated gives a permanent <strong>+0.1%</strong> multiplier to <strong>process</strong> ArcBit generation.", "", 6, ["ultraboost2"], (resource) => {resource.addDeltaMultSource("ultraboost");}],
+                            ["ultraboost2", "Ultraboost: Dual Core", "<strong>Ultraboost</strong> now grants <strong>+0.2%</strong> per <strong>Core</strong> generated.", "", 14_000, ["ultraboost3"], (resource) => {resource.gameData.multipliers.get("ultraboost").perCoreMult = 0.002;}],
+                            ["ultraboost3", "Ultraboost: Quad Core", "<strong>Ultraboost</strong> now grants <strong>+0.3%</strong> per <strong>Core</strong> generated.", "", 3_000_000, [], (resource) => {resource.gameData.multipliers.get("ultraboost").perCoreMult = 0.003;}],
 
                         // Proximity Computing
 
@@ -273,7 +273,7 @@ static ALL_UPGRADES_INFO = new Map([
             [
                 "arcbits",
                 [
-                    ["fragment1", "Fragment 0", "HyperI/O Voice Transmission #1A70032E", "", 1.25, ["fragment2", "fragment3", "fragment4"], (resource) => resource.gameData.archive.unlockFragment("fragment_0")],
+                    ["fragment1", "Fragment 0", "HyperI/O Voice Transmission #1A70032E", "", 1, ["fragment2", "fragment3", "fragment4"], (resource) => resource.gameData.archive.unlockFragment("fragment_0")],
                     ["fragment2", "Fragment 0.5", "Codex Partition #2E830AB4", "", 45, [], (resource) => resource.gameData.archive.unlockFragment("fragment_0.5")],
                     ["fragment3", "Fragment 1", "HyperI/O Camera #3E9EFFF4 Audio Feed", "", 999, [], (resource) => resource.gameData.archive.unlockFragment("fragment_1")],
                     ["fragment4", "Fragment 2", "HyperI/O Voice Transmission #1A7F327E", "", 45_000, ["fragment5"], (resource) => resource.gameData.archive.unlockFragment("fragment_2")],
@@ -342,10 +342,10 @@ static ALL_PROCESSES_INFO = new Map([
         [ // key: title, description, flavorText, baseCost, coreReq, baseProduction
             ["linkCrawler", "Link Crawler", "Follows links in the Codex to gather surface data.", "", 0.01, 1, 0.002],
             ["hyperReader", "HyperReader++", "Reads hidden hypertext to parse deeper data.", "", 2, 3, 0.04],
-            ["infiltrator", "1nfiltr4t0r", "Brute forces passwords to read hidden files.", "", 128, 8, 1],
-            ["keyBreak", "KeyBreak v0.7-internaluse", "Uses advanced decryption to breach secure servers.", "", 24_000, 15, 236],
-            ["uberhack", "[-UBERHACK-]", "Combines several attacks into a single devastating payload.", "", 306_500, 36, 8421],
-            ["bladeSys", "BladeSys by Crysen Software", "Strikes a blade through any cryptography issue with dominating precision.", "", 3_200_000, 80, 8],
+            ["infiltrator", "1nfiltr4t0r", "Brute forces passwords to read hidden files.", "", 128, 8, 0.22],
+            ["keyBreak", "KeyBreak v0.7-internaluse", "Uses advanced decryption to breach secure servers.", "", 24_000, 15, 8.4],
+            ["uberhack", "[-UBERHACK-]", "Combines several attacks into a single devastating payload.", "", 306_500, 36, 68],
+            ["bladeSys", "BladeSys by Crysen Software", "Strikes a blade through any cryptography issue with dominating precision.", "", 32_000_000, 128, 810],
         ]
     ],
 
