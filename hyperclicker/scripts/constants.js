@@ -148,7 +148,7 @@ static ALL_UPGRADES_INFO = new Map([
 
                         // ArcMult
 
-                            ["arcMult1", "ArcMult v1.0", "<strong>Decrypting</strong> ArcBits provides multiplier to <strong>decryption</strong> ArcBit generation. Decays slowly over time.", "", 0.01, ["arcMult2", "arcMultOverclock1", "arcMultEfficiency1"], (resource) => {resource.addBtnValMultSource("arcMult");}],
+                            ["arcMult1", "ArcMult v1.0", "<strong>Decrypting</strong> ArcBits provides multiplier to <strong>decryption</strong> ArcBit generation. Decays slowly over time.", "", 0.01, ["arcMult2", "arcMultOverclock1", "arcMultEfficiency1"], (resource) => {resource.addBtnValMultSource("arcMult"); Utils.gameData.multipliers.get("arcMult").unlock();}], 
                             ["arcMult2", "ArcMult v2.0", "<strong>Decrypting</strong> ArcBits also provides a multiplier to <strong>process</strong> ArcBit generation.", "", 0.45, [], (resource) => {resource.addDeltaMultSource("arcMult");}],
 
                             ["arcMultOverclock1", "ArcMult: Overclock I", "<strong>ArcMult</strong> gains <strong>2x</strong> more multiplier per click.", "", 0.2, ["arcMultOverclock2"], (resource) => {resource.gameData.multipliers.get("arcMult").increaseFactor *= 2;}],

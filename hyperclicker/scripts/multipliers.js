@@ -26,6 +26,10 @@ export class Multiplier {
         throw new Error("getMult and multUpdate must be implemented by subclass.");
     }
 
+    unlock() {
+        console.log("Implement unlock in subclass if required.");
+    }
+
     initDisplayElements() {
         console.log("Implement display elements in subclass if required.");
     }
@@ -82,6 +86,11 @@ class MultArcMult extends Multiplier {
         if(this.mult < 1) {
             this.mult = 1;
         }
+    }
+
+    unlock() {
+        this.displayElement.classList.remove("not_unlocked");
+        this.mult = 1;
     }
 
     initDisplayElements() {

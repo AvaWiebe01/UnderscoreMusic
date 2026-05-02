@@ -92,7 +92,7 @@ export function loadGame() {
             process.baseProductionMult = saveFile.processes[process.resource.htmlName][processName].baseProductionMult;
 
             // unlock next process
-            if(process.numBought > 0) {process.processElement.nextElementSibling.classList.remove("not_unlocked");}
+            if(process.numBought > 0 && process.processElement.nextElementSibling) {process.processElement.nextElementSibling.classList.remove("not_unlocked");}
         });
     });
 
