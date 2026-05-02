@@ -148,8 +148,8 @@ static ALL_UPGRADES_INFO = new Map([
 
                         // ArcMult
 
-                            ["arcMult1", "ArcMult v1.0", "<strong>Decrypting</strong> ArcBits provides a temporary multiplier to <strong>decryption</strong> ArcBit generation.", "", 0.01, ["arcMult2", "arcMultOverclock1", "arcMultEfficiency1"], (resource) => {resource.addBtnValMultSource("arcMult");}],
-                            ["arcMult2", "ArcMult v2.0", "<strong>Decrypting</strong> ArcBits also provides a temporary multiplier to <strong>process</strong> ArcBit generation.", "", 0.45, [], (resource) => {resource.addDeltaMultSource("arcMult");}],
+                            ["arcMult1", "ArcMult v1.0", "<strong>Decrypting</strong> ArcBits provides multiplier to <strong>decryption</strong> ArcBit generation. Decays slowly over time.", "", 0.01, ["arcMult2", "arcMultOverclock1", "arcMultEfficiency1"], (resource) => {resource.addBtnValMultSource("arcMult");}],
+                            ["arcMult2", "ArcMult v2.0", "<strong>Decrypting</strong> ArcBits also provides a multiplier to <strong>process</strong> ArcBit generation.", "", 0.45, [], (resource) => {resource.addDeltaMultSource("arcMult");}],
 
                             ["arcMultOverclock1", "ArcMult: Overclock I", "<strong>ArcMult</strong> gains <strong>2x</strong> more multiplier per click.", "", 0.2, ["arcMultOverclock2"], (resource) => {resource.gameData.multipliers.get("arcMult").increaseFactor *= 2;}],
                             ["arcMultOverclock2", "ArcMult: Overclock II", "<strong>ArcMult</strong> gains another <strong>2x</strong> more multiplier per click.", "", 128, ["arcMultOverclock3"], (resource) => {resource.gameData.multipliers.get("arcMult").increaseFactor *= 2;}],
@@ -196,7 +196,7 @@ static ALL_UPGRADES_INFO = new Map([
 
                     ["hypermodKeyMult", "KeyMult Architecture", "<strong>Decrypting</strong> ArcBits also provides a temporary multiplier to <strong>construction</strong> HyperKey generation.", "", 0.02, [], (resource) => {unlockHyperMod("keyMultArch");}],
 
-                    ["hypermodMalwareDefense", "Malware Defense Architecture", "Removing a <strong>virus</strong> generates much stronger effects.", "", 0.124, ["hypermodMultiProcess"], (resource) => {unlockHyperMod("malwareDefenseArch");}],
+                    ["hypermodMalwareDefense", "Malware Defense Architecture", "Removing a <strong>virus</strong> generates stronger effects. Detect more viruses.", "", 0.124, ["hypermodMultiProcess"], (resource) => {unlockHyperMod("malwareDefenseArch");}],
 
                     ["hypermodMultiProcess", "Multi-Process Architecture", "<strong>Process</strong> ArcBit generation is multiplied by the lowest <strong>number of instances</strong> of all programs [excluding 0].", "", 6.5, [], (resource) => {unlockHyperMod("multiProcessArch");}],
 
@@ -246,15 +246,15 @@ static ALL_UPGRADES_INFO = new Map([
                     ["nullBtn10", "nullspace_collapse_protocol_v5", "<strong>nullpointer_location_rate=0.5555; //seems like the limit</strong>", "", 55_555, [], (resource) => {resource.modifySuccessRate(0.5555)}],
                     
                     /*initial upgrade*/["nullDelta1", "memory_leak_capture", "<strong>passive_nullpointer_gain_active();</strong>", "", 3, ["nullDelta2"], (resource) => {resource.delta = 0.05}],
-                    ["nullDelta2", "capture_rate+", "<strong>multiply_passive_nullpointer_gain(2);</strong>", "", 10, ["nullDelta3"], (resource) => {resource.modifyDelta(2)}],
-                    ["nullDelta3", "capture_rate++", "<strong>multiply_passive_nullpointer_gain(2);</strong>", "", 24, ["nullDelta4"], (resource) => {resource.modifyDelta(2)}],
-                    ["nullDelta4", "capture_rate+++", "<strong>multiply_passive_nullpointer_gain(2);</strong>", "", 62, ["nullDelta5"], (resource) => {resource.modifyDelta(2)}],
-                    ["nullDelta5", "capture_rate++++", "<strong>multiply_passive_nullpointer_gain(2);</strong>", "", 105, ["nullDelta6"], (resource) => {resource.modifyDelta(2)}],
-                    ["nullDelta6", "auto_search+", "<strong>nullpointer_passive_capture_multiplier(3);</strong>", "", 225, ["nullDelta7"], (resource) => {resource.modifyDelta(3)}],
-                    ["nullDelta7", "auto_search++", "<strong>nullpointer_passive_capture_multiplier(4);</strong>", "", 330, ["nullDelta8"], (resource) => {resource.modifyDelta(4)}],
-                    ["nullDelta8", "auto_search+++", "<strong>nullpointer_passive_capture_multiplier(5);</strong>", "", 470, ["nullDelta9"], (resource) => {resource.modifyDelta(5)}],
-                    ["nullDelta9", "auto_search++++", "<strong>nullpointer_passive_capture_multiplier(6);</strong>", "", 600, ["nullDelta10"], (resource) => {resource.modifyDelta(6)}],
-                    ["nullDelta10", "optimal_capture", "<strong>nullpointer_passive_capture_multiplier(10);</strong>", "", 1_125, [], (resource) => {resource.modifyDelta(10)}],
+                    ["nullDelta2", "capture_rate+", "<strong>increase_passive_nullpointer_gain(+100%);</strong>", "", 10, ["nullDelta3"], (resource) => {resource.modifyDeltaMult(2)}],
+                    ["nullDelta3", "capture_rate++", "<strong>multiply_passive_nullpointer_gain(+100%);</strong>", "", 24, ["nullDelta4"], (resource) => {resource.modifyDeltaMult(2)}],
+                    ["nullDelta4", "capture_rate+++", "<strong>multiply_passive_nullpointer_gain(+100%);</strong>", "", 62, ["nullDelta5"], (resource) => {resource.modifyDeltaMult(2)}],
+                    ["nullDelta5", "capture_rate++++", "<strong>multiply_passive_nullpointer_gain(+100%);</strong>", "", 105, ["nullDelta6"], (resource) => {resource.modifyDeltaMult(2)}],
+                    ["nullDelta6", "auto_search+", "<strong>nullpointer_passive_capture_speed(+200%);</strong>", "", 225, ["nullDelta7"], (resource) => {resource.modifyDeltaMult(3)}],
+                    ["nullDelta7", "auto_search++", "<strong>nullpointer_passive_capture_speed(+300%);</strong>", "", 500, ["nullDelta8"], (resource) => {resource.modifyDeltaMult(4)}],
+                    ["nullDelta8", "auto_search+++", "<strong>nullpointer_passive_capture_speed(+400%);</strong>", "", 1_400, ["nullDelta9"], (resource) => {resource.modifyDeltaMult(5)}],
+                    ["nullDelta9", "auto_search++++", "<strong>nullpointer_passive_capture_speed(+500%);</strong>", "", 7_200, ["nullDelta10"], (resource) => {resource.modifyDeltaMult(6)}],
+                    ["nullDelta10", "optimal_capture", "<strong>nullpointer_passive_capture_speed(+999%);</strong>", "", 111_000, [], (resource) => {resource.modifyDeltaMult(9.99)}],
 
                     /*initial upgrade*/["nullBoost1", "arc_hack.exe", "<span class='rainbow'>arcbit_decryption_and_process_multiplier=100;</span>", "", 111, ["nullBoost2"], (resource) => {Utils.gameData.resources.get("arcbits").modifyBtnValBaseMult(100); Utils.gameData.resources.get("arcbits").modifyDeltaBaseMult(100);}],
                     ["nullBoost2", "hyperboost.exe", "<span class='rainbow'>resources.get('hyperkeys').setMultiplier(175);</span>", "", 22_222, ["nullBoost3"], (resource) => {Utils.gameData.resources.get("hyperkeys").modifyBtnValBaseMult(175); Utils.gameData.resources.get("hyperkeys").modifyDeltaBaseMult(175);}],
@@ -343,9 +343,9 @@ static ALL_PROCESSES_INFO = new Map([
             ["linkCrawler", "Link Crawler", "Follows links in the Codex to gather surface data.", "", 0.01, 1, 0.002],
             ["hyperReader", "HyperReader++", "Reads hidden hypertext to parse deeper data.", "", 2, 3, 0.04],
             ["infiltrator", "1nfiltr4t0r", "Brute forces passwords to read hidden files.", "", 128, 8, 0.22],
-            ["keyBreak", "KeyBreak v0.7-internaluse", "Uses advanced decryption to breach secure servers.", "", 24_000, 15, 8.4],
-            ["uberhack", "[-UBERHACK-]", "Combines several attacks into a single devastating payload.", "", 306_500, 36, 68],
-            ["bladeSys", "BladeSys by Crysen Software", "Strikes a blade through any cryptography issue with dominating precision.", "", 32_000_000, 128, 810],
+            ["keyBreak", "KeyBreak v0.7-internaluse", "Uses advanced decryption to breach secure servers.", "", 24_000, 15, 4.2],
+            ["uberhack", "[-UBERHACK-]", "Combines several attacks into a single devastating payload.", "", 306_500, 36, 34],
+            ["bladeSys", "BladeSys by Crysen Software", "Strikes a blade through any cryptography issue with dominating precision.", "", 32_000_000, 128, 405],
         ]
     ],
 

@@ -79,6 +79,10 @@ window.onload = function() {
         });
     });
 
+    gameData.multipliers.forEach((multiplier, key) => {
+        multiplier.initDisplayElements();
+    });
+
     gameData.hypermods.initDisplayElements();
 
     gameData.bonusItem.initDisplayElements();
@@ -107,6 +111,7 @@ function gameTick(currentTime, gameData = new GameData()) {
     //let startTime, endTime; startTime = window.performance.now() * 1000; 
 
     let deltaTime = currentTime - gameData.lastTime;
+    gameData.deltaTime = deltaTime;
 
     if (deltaTime >= 1000/Constants.REFRESH_RATE) {
 

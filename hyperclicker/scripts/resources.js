@@ -249,6 +249,7 @@ class Cores extends Resource {
 
 class NullPointers extends Resource {
     delta;
+    deltaMult;
     successRate;
 
     streak;
@@ -263,6 +264,7 @@ class NullPointers extends Resource {
         super(amt, btnVal, htmlName, displayableName, gameData);
 
         this.delta = delta;
+        this.deltaMult = 0;
         this.successRate = successRate;
 
         this.streak = 0;
@@ -285,7 +287,7 @@ class NullPointers extends Resource {
     }
 
     getBaseDelta() {
-        return this.delta;
+        return this.delta * (this.deltaMult + 1);
     }
 
     getFinalBtnValue() {
@@ -296,8 +298,8 @@ class NullPointers extends Resource {
         this.successRate = value;
     }
 
-    modifyDelta(value) {
-        this.delta *= value;
+    modifyDeltaMult(value) {
+        this.deltaMult += value;
     }
 
     btnClicked() {

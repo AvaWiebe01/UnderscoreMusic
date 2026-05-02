@@ -351,6 +351,14 @@ main .game .generate_panel .generate_button .btnval_display .white {
 	color: var(--text-color);
 }
 
+main .game .generate_panel .generate_button .arcmult_display {
+	margin-top:0.5rem;
+	color:var(--text-glow-color);
+	text-shadow: none;
+	text-align: center;
+	font-size:0.75rem;
+}
+
 main .game .tabs_wrapper {
 	margin-top: 1rem;
 }

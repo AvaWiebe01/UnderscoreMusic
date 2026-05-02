@@ -25,21 +25,41 @@ export class Multiplier {
     multUpdate() {
         throw new Error("getMult and multUpdate must be implemented by subclass.");
     }
+
+    initDisplayElements() {
+        console.log("Implement display elements in subclass if required.");
+    }
 }
 
 // multiplier based on clicking arcbit generation fast
 class MultArcMult extends Multiplier {
     decayFactor;
+
     increaseFactor;
+
+    displayElement;
 
     constructor(name, gameData = new GameData) {
         super(name, gameData);
         this.decayFactor = 1;
         this.increaseFactor = 1;
 
-        $(".resource_button[resource='arcbits']").click((event) => {
-            this.mult += this.increaseFactor * 0.2;
-        })
+        $(".resource_button[resource='arcbits']").on("click", (event) => {this.multIncrease()});
+    }
+
+    // any resource button contributes
+    activateUniversalMult() {
+        $(".resource_button[resource='hyperkeys']").on("click", this.multIncrease);
+        $(".resource_button[resource='nullpointers']").on("click", this.multIncrease);
+    }
+
+    deactivateUniversalMult() {
+        $(".resource_button[resource='hyperkeys']").off("click", this.multIncrease);
+        $(".resource_button[resource='nullpointers']").off("click", this.multIncrease);
+    }
+
+    multIncrease() {
+        this.mult += 0.1 * (1/(this.mult**3)) * this.increaseFactor;
     }
 
     getMult() {
@@ -48,13 +68,24 @@ class MultArcMult extends Multiplier {
 
     multUpdate() {
         this.decay();
+
+        this.displayElement.innerHTML = `(ArcMult: ${this.mult.toFixed(1)}x)`;
     }
 
     decay() {
-        this.mult -= this.decayFactor * (1 / (1 + Math.exp(-(this.mult - 3)))) * (this.mult - 1); // decay approaches 0 as mult approaches 1, capped at 1 mult of decay per tick
+        // decay approaches 0 as mult approaches 1, capped at 1 mult of decay per tick
+        // this.mult -= this.decayFactor * (1 / (1 + Math.exp(-(this.mult - 3)))) * (this.mult - 1);
+
+        // slow linear decay
+        this.mult -= this.decayFactor * 0.01 / Utils.gameData.deltaTime;
+
         if(this.mult < 1) {
             this.mult = 1;
         }
+    }
+
+    initDisplayElements() {
+        this.displayElement = document.querySelector(".game .generate_panel .arcmult_display");
     }
 }
 
