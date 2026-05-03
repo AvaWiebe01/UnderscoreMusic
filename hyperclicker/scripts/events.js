@@ -19,6 +19,10 @@ export function initEventHandlers(gameData = new GameData()) {
             Utils.toggleStickyResources(event.currentTarget);
         })
 
+        $(".large_resource_buttons_button").click((event) => {
+            Utils.toggleLargeResourceButtons(event.currentTarget);
+        })
+
         $(".mute_music_button").click((event) => {
             Utils.gameData.audio.toggleMusic(event.currentTarget);
         })
@@ -90,6 +94,21 @@ export function initEventHandlers(gameData = new GameData()) {
                 case 'nullpointers':
                     // within nullpointer class
                     break;
+            }
+        })
+
+        $(".generate_panel").on("mouseenter", (event) => {
+            if(!Utils.largeResourceButtons) {
+                return;
+            }
+
+            for (let button of event.currentTarget.getElementsByClassName("resource_button")) {
+                button.style.height = "9rem";
+            }
+        })
+        .on("mouseleave", (event) => {
+            for (let button of event.currentTarget.getElementsByClassName("resource_button")) {
+                button.style.height = "4.5rem";
             }
         })
         

@@ -48,6 +48,7 @@ export function saveGame() {
         options: {
             notationType: Utils.notationType,
             stickyResources: Utils.stickyResources,
+            largeResourceButtons: Utils.largeResourceButtons,
             musicMuted: Utils.gameData.audio.musicMuted,
             sfxMuted: Utils.gameData.audio.sfxMuted,
             storyMusicMuted: Utils.gameData.audio.storyMusicMuted,
@@ -126,11 +127,13 @@ export function loadGame() {
 
     // restore all options
     Utils.notationType = saveFile.options.notationType ?? 0;
-    if (!(saveFile.options.stickyResources ?? true)) {Utils.toggleStickyResources();}
+    if (!(saveFile.options.stickyResources ?? true)) {Utils.toggleStickyResources(document.querySelector(".options .option .sticky_resources_button"));}
+    if ((saveFile.options.largeResourceButtons ?? false)) {Utils.toggleLargeResourceButtons(document.querySelector(".options .option .large_resource_buttons_button"));}
     gameData.audio.musicMuted = saveFile.options?.musicMuted ?? false;
     gameData.audio.sfxMuted = saveFile.options?.sfxMuted ?? false;
     gameData.audio.storyMusicMuted = saveFile.options?.storyMusicMuted ?? false;
     gameData.audio.storySfxMuted = saveFile.options?.storySfxMuted ?? false;
+
 
     // update displays
     Utils.refreshAllDisplays();

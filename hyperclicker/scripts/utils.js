@@ -11,6 +11,8 @@ export class Utils {
 
     static notationType = 0; // 0 = default, 1 = abbreviated, 2 = engineering, 3 = exponential, 4 = standard decimal, 5 = Abbreviated data size, 6 = data size
     static stickyResources = true;
+    static largeResourceButtons = false;
+
     static fxCounter = 0;
 
     static resetCounter = 0; // confirm before resetting save data
@@ -101,6 +103,11 @@ export class Utils {
 
             upgradeList.style.width = `calc(${finalListWidth}rem)`;
         }
+    }
+
+    static toggleLargeResourceButtons(target) {
+        this.largeResourceButtons = !this.largeResourceButtons;
+        target.innerHTML = (this.largeResourceButtons) ? "Disable" : "Enable";
     }
 
     // Visual Fx that must be updated every frame

@@ -339,6 +339,12 @@ main .game .generate_panel .generate_button.not_unlocked {
 
 main .game .generate_panel .generate_button button {
 	font-size: 2rem;
+	height:4.5rem;
+	transition-duration: 0.5s;
+}
+
+main .game .generate_panel .generate_button button:hover {
+	transition-duration: 0.25s;
 }
 
 main .game .generate_panel .generate_button .btnval_display {
@@ -902,6 +908,10 @@ main .game .options .option {
 		inset 0 0 0.75rem var(--text-glow-color);
 	background: var(--text-bg-color);
 	padding:1rem;
+}
+
+main .game .options .option .option_title {
+	font-size: 1.25rem;
 }
 
 main .game .options_panel .options button {
