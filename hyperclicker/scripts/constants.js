@@ -48,7 +48,7 @@ static INITIAL_UPGRADES = new Map([
         new Map([
             [
                 "hyperkeys",
-                ["hypermodHyperMult", "hypermodHyperCore"],
+                ["hypermodNetworkGeneration", "hypermodHyperCore"],
             ],
         ])
     ],
@@ -192,15 +192,17 @@ static ALL_UPGRADES_INFO = new Map([
             [
                 "hyperkeys",
                 [
-                    /*initial upgrade*/["hypermodHyperMult", "HyperMult Architecture", "<strong>All</strong> resource buttons contribute to <strong>ArcMult</strong>.", "", 0.0005, ["hypermodMalwareDefense"], (resource) => {unlockHyperMod("hyperMultArch");}],
+                    /*initial upgrade*/["hypermodNetworkGeneration", "Network Generation Architecture", "Each instance of <strong>Link Crawler</strong> increases core generation rate.", "", 0.0015, ["hypermodMalwareDefense"], (resource) => {unlockHyperMod("networkGenerationArch");}],
                     
-                    /*initial upgrade*/["hypermodHyperCore", "HyperCore Architecture", "<strong>Core</strong> generation rate is multiplied by current <strong>HyperKey</strong> amount.", "", 0.00468, ["hypermodKeyMult"], (resource) => {unlockHyperMod("hyperCoreArch");}],
+                    /*initial upgrade*/["hypermodHyperCore", "HyperCore Architecture", "<strong>Core</strong> generation rate is multiplied by current <strong>HyperKey</strong> amount.", "", 0.0075, ["hypermodKeyMult"], (resource) => {unlockHyperMod("hyperCoreArch");}],
 
-                    ["hypermodKeyMult", "KeyMult Architecture", "<strong>ArcMult</strong> also provides a multiplier to <strong>construction</strong> HyperKey generation.", "", 0.02, [], (resource) => {unlockHyperMod("keyMultArch");}],
+                    ["hypermodKeyMult", "KeyMult Architecture", "<strong>ArcMult</strong> also provides a multiplier to <strong>construction</strong> HyperKey generation.", "", 0.02, ["hypermodHyperMult"], (resource) => {unlockHyperMod("keyMultArch");}],
 
                     ["hypermodMalwareDefense", "Malware Defense Architecture", "Removing a <strong>virus</strong> generates stronger effects. Detect more viruses.", "", 0.124, ["hypermodMultiProcess"], (resource) => {unlockHyperMod("malwareDefenseArch");}],
 
                     ["hypermodMultiProcess", "Multi-Process Architecture", "<strong>Process</strong> ArcBit generation is multiplied by the lowest <strong>number of instances</strong> of all programs [excluding 0].", "", 6.5, [], (resource) => {unlockHyperMod("multiProcessArch");}],
+
+                    ["hypermodHyperMult", "HyperMult Architecture", "<strong>All</strong> resource buttons contribute to <strong>ArcMult</strong>.", "", 60, ["hypermodMultiProcess"], (resource) => {unlockHyperMod("hyperMultArch");}],
 
                     ["hypermodReroll", "Reroll+ Architecture", "Improve success rate of <strong>Locating</strong> NullPointers.", "", 450, [], (resource) => {unlockHyperMod("rerollArch");}],
 

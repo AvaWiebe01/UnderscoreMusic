@@ -169,8 +169,23 @@ export class StreakArch extends HyperMod {
     }
 }
 
+export class NetworkGenerationArch extends HyperMod {
+    enable() {
+        Utils.gameData.resources.get("cores").addDeltaMultSource("networkGeneration");
+        Utils.gameData.multipliers.get("networkGeneration").showDisplays();
+        this.enabled = true;
+    }
+
+    disable() {
+        Utils.gameData.resources.get("cores").addDeltaMultSource("networkGeneration");
+        Utils.gameData.multipliers.get("networkGeneration").hideDisplays();
+        this.enabled = false;
+    } 
+}
+
 export function initHyperMods(gameData = new GameData()) {
     var mods = new Map([
+        ["networkGenerationArch", new NetworkGenerationArch("networkGenerationArch", "Network Generation", "Each instance of <strong>Link Crawler</strong> increases core generation rate by <strong>5%</strong>.")],
         ["hyperMultArch", new HyperMultArch("hyperMultArch", "HyperMult", "<strong>All</strong> resource buttons contribute to <strong>ArcMult</strong>.")],
         ["hyperCoreArch", new HyperCoreArch("hyperCoreArch", "HyperCore", "<strong>Core</strong> generation rate is multiplied by current <strong>HyperKey</strong> amount.")],
         ["keyMultArch", new KeyMultArch("keyMultArch", "KeyMult", "<strong>ArcMult</strong> also provides a multiplier to <strong>construction</strong> HyperKey generation.")],

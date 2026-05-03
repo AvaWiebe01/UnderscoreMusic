@@ -352,6 +352,13 @@ main .game .generate_panel .generate_button .btnval_display .white {
 	color: var(--text-color);
 }
 
+.active_multipliers {
+	display:flex;
+	flex-direction:column;
+	justify-content:flex-start;
+	align-items:flex-start;
+}
+
 main .game .mult_display {
 	margin-top:0.5rem;
 	color:var(--text-glow-color);

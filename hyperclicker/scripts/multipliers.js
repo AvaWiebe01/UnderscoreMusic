@@ -280,6 +280,33 @@ class MultHyperCore extends Multiplier {
     }
 }
 
+// multiplier based on current HyperKey amount
+class MultNetworkGeneration extends Multiplier {
+    multPerInstance = 0.05;
+        
+    getMult() {
+        return this.mult;
+    }
+
+    multUpdate() {
+        this.mult = (Utils.gameData.processes.get("arcbits").get("linkCrawler").numBought * this.multPerInstance) + 1;
+    }
+
+    initDisplayElements() {
+        this.displayElements = document.getElementsByClassName("network_generation_display");
+    }
+
+    toJSON() {
+        return {
+
+        };
+    }
+
+    fromJSON(obj) {
+
+    }
+}
+
 // multiplier based on lowest instance process amount
 class MultMultiProcess extends Multiplier {
 
@@ -350,6 +377,7 @@ export function initMultipliers(gameData = new GameData) {
         ["hyperMult", new MultHyperMult("hyperMult", "HyperMult", gameData)],
         ["hyperCore", new MultHyperCore("hyperCore", "HyperCore", gameData)],
         ["multiProcess", new MultMultiProcess("multiProcess", "Multi-Process", gameData)],
+        ["networkGeneration", new MultNetworkGeneration("networkGeneration", "Network Generation", gameData)],
 
         // bonus mult
         ["bonusItem", new MultBonusItem("bonusItem", gameData)],
