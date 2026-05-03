@@ -29,6 +29,9 @@ static RESOURCE_INFO = [ // htmlName, amt, delta, btnVal, displayableName
 // htmlName, amt, delta, btnVal, displayableName, initMaxCores
 static CORE_INFO = ["cores", 2, 1/80, 0, "Cores", 8];
 
+// htmlName, amt, delta, btnVal, displayableName
+static RAM_INFO = ["ram", 1000, 0, 0, "RAM"];
+
 // htmlName, amt, btnVal, displayableName, initSuccessRate
 static NULLPOINTER_INFO = ["nullpointers", 0, 0, 1, "NullPointers", 0.01];
 
@@ -167,7 +170,7 @@ static ALL_UPGRADES_INFO = new Map([
 
                         // ArcMult
 
-                            ["arcMult1", "ArcMult v1.0", "<strong>Decrypting</strong> ArcBits provides multiplier to <strong>decryption</strong> ArcBit generation. Decays slowly over time.", "", 0.01, ["arcMult2", "arcMultOverclock1", "arcMultEfficiency1"], (resource) => {resource.addBtnValMultSource("arcMult"); Utils.gameData.multipliers.get("arcMult").unlock();}], 
+                            ["arcMult1", "ArcMult v1.0", "<strong>Decrypting</strong> ArcBits provides a multiplier to <strong>decryption</strong> ArcBit generation. Decays slowly over time.", "", 0.01, ["arcMult2", "arcMultOverclock1", "arcMultEfficiency1"], (resource) => {resource.addBtnValMultSource("arcMult"); Utils.gameData.multipliers.get("arcMult").unlock();}], 
                             ["arcMult2", "ArcMult v2.0", "<strong>ArcMult</strong> also provides a multiplier to <strong>process</strong> ArcBit generation.", "", 0.45, [], (resource) => {resource.addDeltaMultSource("arcMult"); document.querySelector(".game .process_panel .arcmult_display").classList.remove("hidden")}],
 
                             ["arcMultOverclock1", "ArcMult: Overclock I", "<strong>ArcMult</strong> gains <strong>2x</strong> more multiplier per click.", "", 0.2, ["arcMultOverclock2"], (resource) => {resource.gameData.multipliers.get("arcMult").increaseFactor *= 2;}],
@@ -181,7 +184,7 @@ static ALL_UPGRADES_INFO = new Map([
 
                         // Ultraboost
 
-                            ["ultraboost1", "Ultraboost", "Each <strong>Core</strong> generated gives a permanent <strong>+0.1%</strong> multiplier to <strong>process</strong> ArcBit generation.", "", 6, ["ultraboost2"], (resource) => {resource.addDeltaMultSource("ultraboost"); Utils.gameData.multipliers.get("ultraboost").unlock();}],
+                            ["ultraboost1", "Ultraboost", "Each <strong>Core</strong> generated gives a permanent <strong>+0.1%</strong> multiplier to <strong>process</strong> ArcBit generation.", "", 750, ["ultraboost2"], (resource) => {resource.addDeltaMultSource("ultraboost"); Utils.gameData.multipliers.get("ultraboost").unlock();}],
                             ["ultraboost2", "Ultraboost: Dual Core", "<strong>Ultraboost</strong> now grants <strong>+0.2%</strong> per <strong>Core</strong> generated.", "", 14_000, ["ultraboost3"], (resource) => {resource.gameData.multipliers.get("ultraboost").perCoreMult = 0.002;}],
                             ["ultraboost3", "Ultraboost: Quad Core", "<strong>Ultraboost</strong> now grants <strong>+0.3%</strong> per <strong>Core</strong> generated.", "", 3_000_000, [], (resource) => {resource.gameData.multipliers.get("ultraboost").perCoreMult = 0.003;}],
 
@@ -191,12 +194,22 @@ static ALL_UPGRADES_INFO = new Map([
                             ["proximityComputingYield1", "Proximity Computing: Yield+", "Increases the <strong>Proximity Computing</strong> boost per unused <strong>Core</strong> to <strong>+2%</strong>.", "", 4_250_000, ["proximityComputingYield2"], (resource) => {resource.gameData.multipliers.get("proximityComputing").perCoreMult = 0.02;}],
                             ["proximityComputingYield2", "Proximity Computing: Yield++", "Increases the <strong>Proximity Computing</strong> boost per unused <strong>Core</strong> to <strong>+3%</strong>.", "", 821_000_000_000, [], (resource) => {resource.gameData.multipliers.get("proximityComputing").perCoreMult = 0.03;}],
                     
+                        // Key Augmentation
+                            ["keyAug1", "Key Augmentation", "HyperKey <strong>construction</strong> gains +0.5% effectiveness per click.", "", 92_000_000_000, ["keyAug2"], (resource) => {Utils.gameData.resources.get('hyperkeys').addBtnValMultSource("keyAugmentation"); Utils.gameData.multipliers.get('keyAugmentation').unlock()}],
+                            ["keyAug2", "Key Augmentation II", "Key Augmentation now gains <strong>+1%</strong> per click.", "", 845_000_000_000_000, [], (resource) => {Utils.gameData.multipliers.get('keyAugmentation').perClickMult = 0.01}],
+
+
                     // Unlockable Tabs
-                    /* initial upgrade */ ["tab1", "Expansion: Archive", "Unlock an <strong class='rainbow'>Archive</strong> of fragmented data.", "", 0.32, ["tab2"], () => {Utils.unlockTab("archive_panel_tab");}],
-                    ["tab2", "Expansion: HyperMods", "Unlock the <strong class='rainbow'>HyperMod</strong> interface.", "", 320_000, ["tab3", "hyperVal1"], () => {Utils.unlockTab("hypermods_panel_tab"); unlockResource("hyperkeys");}],
-                    ["tab3", "Expansion: BEYOND", "Un<span class='obfuscated'>l</span>ock ref<span class='obfuscated'>e</span>rences t<span class='obfuscated'>o</span> <strong class='rainbow'>out-of-b<span class='obfuscated'>o</span>unds</strong> memory addres<span class='obfuscated'>s</span>es.<br>Discover two new HyperMods.", "", 32_000_000_000, ["nullStreak1"], () => {Utils.unlockTab("beyond_panel_tab"); unlockResource("nullpointers"); Utils.unlockUpgrade("hypermod_upgrades_list", "hyperkeys", "hypermodReroll"); Utils.unlockUpgrade("hypermod_upgrades_list", "hyperkeys", "hypermodStreak");}],
+                    /* initial upgrade */ ["tab1", "Expansion: Archive", "Unlock an <strong class='rainbow'>Archive</strong> of fragmented data.", "", 0.32, ["tab2"], (resource) => {Utils.unlockTab("archive_panel_tab");}],
+                    ["tab2", "Expansion: HyperMods", "Unlock the <strong class='rainbow'>HyperMod</strong> interface.", "", 320_000, ["tab3", "hyperVal1", "keyAug1", "ram1"], (resource) => {Utils.unlockTab("hypermods_panel_tab"); unlockResource("hyperkeys");}],
+                    ["tab3", "Expansion: BEYOND", "Un<span class='obfuscated'>l</span>ock ref<span class='obfuscated'>e</span>rences t<span class='obfuscated'>o</span> <strong class='rainbow'>out-of-b<span class='obfuscated'>o</span>unds</strong> memory addres<span class='obfuscated'>s</span>es.<br>Discover two new HyperMods.", "", 32_000_000_000, ["nullStreak1"], (resource) => {Utils.unlockTab("beyond_panel_tab"); unlockResource("nullpointers"); Utils.unlockUpgrade("hypermod_upgrades_list", "hyperkeys", "hypermodReroll"); Utils.unlockUpgrade("hypermod_upgrades_list", "hyperkeys", "hypermodStreak");}],
 
                     // Unlockable Systems (new UI elements in existing tabs)
+                    ["ram1", "RAM Interface", "Unlock the ability to manage the CPU's <strong>RAM</strong>. Processes receive a multiplier equal to <strong>log10(RAM)</strong>.", "", 5_750_000_000, ["ramHypermod", "ram2"], (resource) => {Utils.gameData.resources.get("ram").unlock(); resource.addDeltaMultSource("ramBoost"); Utils.gameData.multipliers.get("ramBoost").unlock();}],
+
+                    ["ram2", "Error Correction Code", "RAM", "", 5_750_000_000, ["ram3"], (resource) => {Utils.gameData.resources.get("ram");}],
+
+                    ["ramHypermod", "RAM: HyperMod Access", "Discover a new <strong>HyperMod</strong>.", "", 290_000_000_000, [], (resource) => {Utils.unlockUpgrade("hypermod_upgrades_list", "hyperkeys", "hypermod");}],
                 ]
             ],
         ])
@@ -264,9 +277,9 @@ static ALL_UPGRADES_INFO = new Map([
                     ["nullBtn5", "efficient_search_finalver", "<strong>nullpointer_location_rate=0.175; //need new algorithm</strong>", "", 750, ["nullBtn6"], (resource) => {resource.modifySuccessRate(0.175)}],
                     ["nullBtn6", "nullspace_collapse_protocol", "<strong>nullpointer_location_rate=0.25;</strong>", "", 1_250, ["nullBtn7"], (resource) => {resource.modifySuccessRate(0.25)}],
                     ["nullBtn7", "nullspace_collapse_protocol_v2", "<strong>nullpointer_location_rate=0.32;</strong>", "", 3_800, ["nullBtn8"], (resource) => {resource.modifySuccessRate(0.32)}],
-                    ["nullBtn8", "nullspace_collapse_protocol_v2.1", "<strong>nullpointer_location_rate=0.4525;</strong>", "", 12_400, ["nullBtn9"], (resource) => {resource.modifySuccessRate(0.4525)}],
-                    ["nullBtn9", "nullspace_collapse_protocol_v2.1.1", "<strong>nullpointer_location_rate=0.5;</strong>", "", 24_000, ["nullBtn10"], (resource) => {resource.modifySuccessRate(0.5)}],
-                    ["nullBtn10", "nullspace_collapse_protocol_v5", "<strong>nullpointer_location_rate=0.5555; //seems like the limit</strong>", "", 55_555, [], (resource) => {resource.modifySuccessRate(0.5555)}],
+                    ["nullBtn8", "nullspace_collapse_protocol_v2.1", "<strong>nullpointer_location_rate=0.4525;</strong>", "", 64_200, ["nullBtn9"], (resource) => {resource.modifySuccessRate(0.4525)}],
+                    ["nullBtn9", "nullspace_collapse_protocol_v2.1.1", "<strong>nullpointer_location_rate=0.5;</strong>", "", 1_800_000, ["nullBtn10"], (resource) => {resource.modifySuccessRate(0.5)}],
+                    ["nullBtn10", "nullspace_collapse_protocol_v5", "<strong>nullpointer_location_rate=0.5555; //seems like the limit</strong>", "", 55_555_555, [], (resource) => {resource.modifySuccessRate(0.5555)}],
                     
                     /*initial upgrade*/["nullDelta1", "memory_leak_capture", "<strong>passive_nullpointer_gain_active();</strong>", "", 3, ["nullDelta2"], (resource) => {resource.delta = 0.05}],
                     ["nullDelta2", "capture_rate+", "<strong>nullpointer_passive_capture_speed(+100%);</strong>", "", 10, ["nullDelta3"], (resource) => {resource.modifyDeltaMult(2)}],
@@ -364,8 +377,8 @@ static ALL_PROCESSES_INFO = new Map([
         "arcbits",
         [ // key: title, description, flavorText, baseCost, coreReq, baseProduction
             ["linkCrawler", "Link Crawler", "Follows links in the Codex to gather surface data.", "", 0.01, 1, 0.002],
-            ["hyperReader", "HyperReader++", "Reads hidden hypertext to parse deeper data.", "", 2, 3, 0.04],
-            ["infiltrator", "1nfiltr4t0r", "Brute forces passwords to read hidden files.", "", 128, 8, 0.22],
+            ["hyperReader", "HyperReader++", "Reads hidden hypertext to parse deeper data.", "", 2, 3, 0.01],
+            ["infiltrator", "1nfiltr4t0r", "Brute forces passwords to read hidden files.", "", 128, 8, 0.16],
             ["keyBreak", "KeyBreak v0.7-internaluse", "Uses advanced decryption to breach secure servers.", "", 24_000, 15, 4.2],
             ["uberhack", "[-UBERHACK-]", "Combines several attacks into a single devastating payload.", "", 306_500, 36, 34],
             ["bladeSys", "BladeSys by Crysen Software", "Strikes a blade through any cryptography issue with dominating precision.", "", 32_000_000, 128, 405],

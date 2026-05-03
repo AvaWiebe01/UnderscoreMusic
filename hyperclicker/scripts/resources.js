@@ -267,6 +267,40 @@ class Cores extends Resource {
     }
 }
 
+class Ram extends Resource {
+    constructor(amt, delta, btnVal, htmlName, displayableName, gameData) {
+        super(amt, btnVal, htmlName, displayableName, gameData);
+
+        this.delta = delta;
+    }
+
+    initDisplayElements() {
+
+        this.amtDisplays = document.getElementsByClassName(this.htmlName + "_display");
+        this.gainDisplays = document.getElementsByClassName(this.htmlName + "_gain_display");
+        this.deltaDisplays = document.getElementsByClassName(this.htmlName + "_delta_display");
+        this.btnValDisplays = document.getElementsByClassName(this.htmlName + "_btnval_display");
+
+        this.ramPanelElement = document.querySelector(".game .process_panel .cpu_resources_panel .ram_panel");
+
+        this.displayAmt();
+    }
+
+    unlock() {
+        this.ramPanelElement.classList.remove("not_unlocked");
+    }
+
+    getBaseDelta() {
+        return this.delta;
+    }
+
+    displayAmt() {
+        for(let i = 0; i < this.amtDisplays.length; i++) {
+            this.amtDisplays[i].innerHTML = Utils.getDisplayableNumber(this.amt, true, 6); // display in data size format
+        }
+    }
+}
+
 class NullPointers extends Resource {
     delta;
     deltaMult;
@@ -393,6 +427,9 @@ export function initResources(RESOURCE_INFO = [], gameData) {
 
     resources.set(Constants.CORE_INFO[0], new Cores(Constants.CORE_INFO[1], Constants.CORE_INFO[2], Constants.CORE_INFO[3], Constants.CORE_INFO[0], Constants.CORE_INFO[4], gameData, Constants.CORE_INFO[5]));
     resources.get("cores").initDisplayElements();
+
+    resources.set(Constants.RAM_INFO[0], new Ram(Constants.RAM_INFO[1], Constants.RAM_INFO[2], Constants.RAM_INFO[3], Constants.RAM_INFO[0], Constants.RAM_INFO[4], gameData));
+    resources.get("ram").initDisplayElements();
 
     resources.set(Constants.NULLPOINTER_INFO[0], new NullPointers(Constants.NULLPOINTER_INFO[1], Constants.NULLPOINTER_INFO[2], Constants.NULLPOINTER_INFO[3], Constants.NULLPOINTER_INFO[0], Constants.NULLPOINTER_INFO[4], gameData, Constants.NULLPOINTER_INFO[5]));
     resources.get("nullpointers").initDisplayElements();

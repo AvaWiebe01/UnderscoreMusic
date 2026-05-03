@@ -100,6 +100,12 @@ window.onload = function() {
     loadingScreen.classList.add("hidden");
     title.classList.add("animate");
 
+    // show the intro if this is the first time
+    if(!Utils.seenIntro) {
+        const introScreen = document.querySelector(".intro_screen");
+        introScreen.classList.remove("hidden");
+    }
+
     // Start the game loop
     requestAnimationFrame((currentTime) => gameTick(currentTime, gameData));
 }

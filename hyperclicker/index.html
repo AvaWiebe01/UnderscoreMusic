@@ -24,6 +24,28 @@
 			</h1>
 			
 			<div class="game">	
+				<div class="intro_screen_wrapper">
+					<div class="intro_screen hidden">
+						<h2>You are now entering New Archon.</h2>
+						<p>
+							The year is 2042.
+							The city is surrounded by a corrosive wasteland.
+							<br><br>
+
+							Inside the city limits, life goes on. Crime rates rise steadily each year.
+							Desperate for change, operators at Hyper Beam work to protect the public and terminate illegal activities.
+							<br><br>
+
+							You are a skilled programmer living in Central, New Archon's capital district.
+							While scanning through the Codex, the city-wide computer network, you discover murmurs of unrest among Hyper Beam's operators.
+							<br><br>
+
+							<span class="emphasis">You decide to look deeper, searching through the Codex's encrypted data until you uncover the truth.</span>
+							<br><br>
+						</p>
+						<button class="intro_button">&gt; Start &lt;</button>
+					</div>
+				</div>
 				<div class="bonus_item">
 					<div class="bonus_text"></div>
 					<img class="bonus_icon" title="Click: Remove Virus!" src="/images/hyperclicker/bonusItemNoBorder.png">
@@ -63,6 +85,7 @@
 							<button class="resource_button" resource="hyperkeys">Construct</button>
 							<span class="btnval_display hyperkeys_btnval_display"></span>
 							<span class="arcmult_display mult_display not_unlocked hidden"></span>
+							<span class="key_augmentation_display mult_display not_unlocked"></span>
 						</div>
 						<div class="generate_button not_unlocked" id="nullpointers_btn_main">
 							<button class="resource_button" resource="nullpointers">Locate</button>
@@ -103,21 +126,30 @@
 							<h5>Decrypt ArcBits automatically using software resources.</h5>
 							<div class="process_panel panel">
 								<div class="side_panel">
-									<div class="cores_panel">
+									<div class="cpu_resources_panel">
 										<h3>CPU Resources:</h3>
-										<h4>Cores:</h4>
-										<span class="pink">Available:</span> <span class="cores_display"></span><br>
-										<span class="pink">Capacity:</span> <span class="cores_max_display"></span><br>
-										<div class="cores_usage_bar_wrapper wrapper_bar">
-											<span class="cores_usage_bar inner_bar"></span>
-										</div><br>
-										<span>Next Core:</span><br>
-										<div class="cores_progress_bar_wrapper wrapper_bar">
-											<span class="cores_progress_bar inner_bar"></span>
-										</div><br>
-										<div class="active_multipliers">
-											<span class="hypercore_display mult_display not_unlocked"></span><br>
-											<span class="network_generation_display mult_display not_unlocked"></span>
+										<div class="cores_panel">
+											<h4>Cores:</h4>
+											<span class="pink">Available:</span> <span class="cores_display"></span><br>
+											<span class="pink">Capacity:</span> <span class="cores_max_display"></span><br>
+											<div class="cores_usage_bar_wrapper wrapper_bar">
+												<span class="cores_usage_bar inner_bar"></span>
+											</div><br>
+											<span>Next Core:</span><br>
+											<div class="cores_progress_bar_wrapper wrapper_bar">
+												<span class="cores_progress_bar inner_bar"></span>
+											</div><br>
+											<div class="active_multipliers">
+												<span class="hypercore_display mult_display not_unlocked"></span><br>
+												<span class="network_generation_display mult_display not_unlocked"></span>
+											</div>
+										</div>
+										<div class="ram_panel not_unlocked">
+											<br><br>
+											<h4>RAM:</h4>
+											<span class="pink">Usable Memory:</span> <span class="ram_display"></span><br>
+											<div class="active_multipliers">
+											</div>
 										</div>
 									</div>
 								<div class="process_multipliers_panel">
@@ -126,6 +158,7 @@
 									<span class="ultraboost_display mult_display not_unlocked"></span>
 									<span class="proximity_computing_display mult_display not_unlocked"></span>
 									<span class="multi_process_display mult_display not_unlocked"></span>
+									<span class="ram_boost_display mult_display not_unlocked"></span>
 								</div>
 								</div>
 								<div class="process_list">

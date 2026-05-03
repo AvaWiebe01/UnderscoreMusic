@@ -47,12 +47,17 @@ export function saveGame() {
 
         options: {
             notationType: Utils.notationType,
+
             stickyResources: Utils.stickyResources,
+
             largeResourceButtons: Utils.largeResourceButtons,
+
             musicMuted: Utils.gameData.audio.musicMuted,
             sfxMuted: Utils.gameData.audio.sfxMuted,
             storyMusicMuted: Utils.gameData.audio.storyMusicMuted,
             storySfxMuted: Utils.gameData.audio.storySfxMuted,
+
+            seenIntro: Utils.seenIntro,
         },
 
         validationField: Math.random(),
@@ -99,8 +104,15 @@ export function loadGame() {
             process.numBought = saveFile.processes?.[process.resource.htmlName][processName].numBought;
             process.baseProductionMult = saveFile.processes?.[process.resource.htmlName][processName].baseProductionMult;
 
-            // unlock next process
-            if(process.numBought > 0 && process.processElement.nextElementSibling) {process.processElement.nextElementSibling.classList.remove("not_unlocked");}
+            // unlock next and all previous processes
+            if(process.numBought > 0) {
+                var elem = process.processElement.nextElementSibling ?? process.processElement;
+
+                while (elem ?? false) {
+                    elem.classList.remove("not_unlocked");
+                    elem = elem.previousElementSibling ?? false;
+                }
+            }
         });
     });
 
@@ -120,7 +132,8 @@ export function loadGame() {
 
     // restore all resources
     gameData.resources.forEach((resource, resourceName) => {
-        resource.amt = saveFile?.resources?.[resourceName].amt;
+
+        if (saveFile?.resources?.[resourceName] ?? false) {resource.amt = saveFile.resources[resourceName].amt;}
         //resource.deltaBaseMult = saveFile.resources?.[resourceName].deltaBaseMult;
         //resource.btnValBaseMult = saveFile.resources?.[resourceName].btnValBaseMult;
     });
@@ -133,6 +146,7 @@ export function loadGame() {
     gameData.audio.sfxMuted = saveFile.options?.sfxMuted ?? false;
     gameData.audio.storyMusicMuted = saveFile.options?.storyMusicMuted ?? false;
     gameData.audio.storySfxMuted = saveFile.options?.storySfxMuted ?? false;
+    Utils.seenIntro = saveFile.options.seenIntro ?? false;
 
 
     // update displays

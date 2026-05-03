@@ -6,6 +6,20 @@ export function initEventHandlers(gameData = new GameData()) {
 
     $(document).ready(() => {
 
+        // INTRO BUTTON //
+        $(".intro_button").click((event) => {
+            const introScreenElement = event.currentTarget.closest(".intro_screen");
+
+            Utils.gameData.audio.playSfxUnlocked();
+
+            introScreenElement.classList.add("fade-flash");
+            introScreenElement.addEventListener("animationend", () => {
+                introScreenElement.classList.add("hidden");
+                introScreenElement.classList.remove("flash-out"); 
+            })
+            Utils.seenIntro = true;
+        })
+
         // OPTIONS BUTTONS //
         $(".option button").click((event) => {
             Utils.gameData.audio.playSfxSelect();

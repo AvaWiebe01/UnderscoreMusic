@@ -157,7 +157,7 @@ class MultUltraboost extends Multiplier {
     unlock() {
         this.showDisplays();
         
-        this.totalCoresGenerated = 0; // override if needed
+        this.totalCoresGenerated = 0;
     }
 
     multUpdate() {
@@ -343,6 +343,76 @@ class MultMultiProcess extends Multiplier {
     }
 }
 
+// multiplier based on total hyperkey clicks
+class MultKeyAugmentation extends Multiplier {
+    totalButtonClicks;
+    perClickMult;
+
+    constructor(name, displayableName, gameData = new GameData) {
+        super(name, displayableName, gameData);
+
+        this.perClickMult = 0.005;
+        this.totalButtonClicks = 0;
+    }
+
+    getMult() {
+        this.mult = 1 + (Math.floor(this.totalButtonClicks) * this.perClickMult);
+        return this.mult;
+    }
+
+    unlock() {
+        this.showDisplays();
+
+        $(".resource_button[resource='hyperkeys']").on("click", (event) => {
+            this.totalButtonClicks += 1;
+        })
+
+    }
+
+    multUpdate() {
+
+    }
+
+    initDisplayElements() {
+        this.displayElements = document.getElementsByClassName("key_augmentation_display");
+    }
+
+    toJSON() {
+        return {
+            totalButtonClicks: this.totalButtonClicks,
+        };
+    }
+
+    fromJSON(obj) {
+        this.totalButtonClicks = obj.totalButtonClicks;
+    }
+}
+
+// multiplier for RAM affecting processes
+class MultRamBoost extends Multiplier {
+    getMult() {
+        return this.mult;
+    }
+
+    multUpdate() {
+        this.mult = Math.max(Math.log10(Utils.gameData.resources.get("ram").amt), 1);
+    }
+
+    initDisplayElements() {
+        this.displayElements = document.getElementsByClassName("ram_boost_display");
+    }
+
+    toJSON() {
+        return {
+
+        };
+    }
+
+    fromJSON() {
+        
+    }
+}
+
 // multiplier for Bonus Item
 class MultBonusItem extends Multiplier {
     getMult() {
@@ -372,6 +442,8 @@ export function initMultipliers(gameData = new GameData) {
         ["arcMult", new MultArcMult("arcMult", "ArcMult", gameData)],
         ["ultraboost", new MultUltraboost("ultraboost", "Ultraboost", gameData)],
         ["proximityComputing", new MultProximityComputing("proximityComputing", "Proximity Computing", gameData)],
+        ["keyAugmentation", new MultKeyAugmentation("keyAugmentation", "Key Augmentation", gameData)],
+        ["ramBoost", new MultRamBoost("ramBoost", "RAM Boost", gameData)],
 
         // hypermod mults
         ["hyperMult", new MultHyperMult("hyperMult", "HyperMult", gameData)],

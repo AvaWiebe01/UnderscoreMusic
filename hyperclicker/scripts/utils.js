@@ -13,6 +13,8 @@ export class Utils {
     static stickyResources = true;
     static largeResourceButtons = false;
 
+    static seenIntro = false; // if the introduction message has been seen before
+
     static fxCounter = 0;
 
     static resetCounter = 0; // confirm before resetting save data
@@ -31,9 +33,9 @@ export class Utils {
         this.gameData = gameData;
     }
 
-    static getDisplayableNumber(num, hasDecimals = true) {
+    static getDisplayableNumber(num, hasDecimals = true, notation = this.notationType) {
         let suffix = "";
-        switch(this.notationType) {
+        switch(notation) {
             case 0:
                 suffix = " " + Constants.DEFAULT_SUFFIXES[num >= 1000 ? Math.floor(Math.log10(num)/3) : 0];
                 break;
