@@ -196,13 +196,15 @@ static ALL_UPGRADES_INFO = new Map([
                     
                     /*initial upgrade*/["hypermodHyperCore", "HyperCore Architecture", "<strong>Core</strong> generation rate is multiplied by current <strong>HyperKey</strong> amount.", "", 0.0075, ["hypermodKeyMult"], (resource) => {unlockHyperMod("hyperCoreArch");}],
 
-                    ["hypermodKeyMult", "KeyMult Architecture", "<strong>ArcMult</strong> also provides a multiplier to <strong>construction</strong> HyperKey generation.", "", 0.02, ["hypermodHyperMult"], (resource) => {unlockHyperMod("keyMultArch");}],
+                    ["hypermodKeyMult", "KeyMult Architecture", "<strong>ArcMult</strong> also provides a multiplier to <strong>construction</strong> HyperKey generation.", "", 0.02, ["hypermodMultiProcess"], (resource) => {unlockHyperMod("keyMultArch");}],
 
                     ["hypermodMalwareDefense", "Malware Defense Architecture", "Removing a <strong>virus</strong> generates stronger effects. Detect more viruses.", "", 0.124, ["hypermodMultiProcess"], (resource) => {unlockHyperMod("malwareDefenseArch");}],
 
-                    ["hypermodMultiProcess", "Multi-Process Architecture", "<strong>Process</strong> ArcBit generation is multiplied by the lowest <strong>number of instances</strong> of all programs [excluding 0].", "", 6.5, [], (resource) => {unlockHyperMod("multiProcessArch");}],
+                    ["hypermodMultiProcess", "Multi-Process Architecture", "<strong>Process</strong> ArcBit generation is multiplied by the lowest <strong>number of instances</strong> of all programs [excluding 0].", "", 6.5, ["hypermodHyperMult"], (resource) => {unlockHyperMod("multiProcessArch");}],
 
-                    ["hypermodHyperMult", "HyperMult Architecture", "<strong>All</strong> resource buttons contribute to <strong>ArcMult</strong>.", "", 60, ["hypermodMultiProcess"], (resource) => {unlockHyperMod("hyperMultArch");}],
+                    ["hypermodHyperMult", "HyperMult Architecture", "<strong>All</strong> resource buttons contribute to <strong>ArcMult</strong>.", "", 60, ["hypermodCpuBleed"], (resource) => {unlockHyperMod("hyperMultArch");}],
+
+                    ["hypermodCpuBleed", "CPU Bleed Architecture", "ArcBit <strong>Decryption</strong> yields a percentage of active process ArcBit generation.", "", 225, [], (resource) => {unlockHyperMod("cpuBleedArch");}],
 
                     ["hypermodReroll", "Reroll+ Architecture", "Improve success rate of <strong>Locating</strong> NullPointers.", "", 450, [], (resource) => {unlockHyperMod("rerollArch");}],
 

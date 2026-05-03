@@ -7,6 +7,7 @@ export class Resource {
     deltaBaseMult;  // For one-time multiplier changes, that never need to be re-calculated
     btnVal;
     btnValBaseMult;  // For one-time multiplier changes, that never need to be re-calculated
+    btnValFractionOfDelta;
     htmlName;
     displayableName;
     gameData;
@@ -31,6 +32,7 @@ export class Resource {
         this.deltaBaseMult = 1;
         this.btnVal = btnVal;
         this.btnValBaseMult = 1; 
+        this.btnValFractionOfDelta = 0;
         this.htmlName = htmlName; // Must be exactly as it appears in HTML, ex. "arcbits"
         this.displayableName = displayableName;
         this.gameData = gameData;
@@ -131,11 +133,18 @@ export class Resource {
         let totalMult = 1;
         totalMult *= this.btnValBaseMult;
 
-        this.btnValMultSources.forEach((multSource) => {
-            totalMult *= multSource.getMult();
-        });
+        totalMult *= this.getBtnValActiveMult();
 
         return totalMult;
+    }
+
+    getBtnValActiveMult() {
+        var activeMult = 1;
+        this.btnValMultSources.forEach((multSource) => {
+            activeMult *= multSource.getMult();
+        });
+
+        return activeMult;
     }
 
     modifyBtnValBaseMult(mult) {
@@ -144,7 +153,18 @@ export class Resource {
     }
 
     getFinalBtnValue() {
-        return this.btnVal * this.getBtnValTotalMult();
+        var additiveDeltaBtnValue = 0;
+        var totalButtonValue = 0;
+        var activeMult = this.getBtnValActiveMult();
+
+        totalButtonValue = this.btnVal * this.btnValBaseMult * activeMult;
+
+        // add percentage of process generation
+        if(Math.abs(this.btnValFractionOfDelta) > 0.0001) {
+            additiveDeltaBtnValue = (this.lastTickDelta/(Utils.gameData?.deltaTime/Constants.ONE_SECOND_MS)) * this.btnValFractionOfDelta * activeMult;
+        }
+    
+        return totalButtonValue + additiveDeltaBtnValue;
     }
 
     modifyBtnValue(value) {

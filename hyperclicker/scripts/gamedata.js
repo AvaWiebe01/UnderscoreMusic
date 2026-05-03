@@ -8,12 +8,16 @@ export class GameData {
     audio;
     bonusItem;
 
+    deltaTime;
+
     lastTime;
     extraTimer;
     bonusTimer;
     autoSaveTimer;
 
     constructor() {
+        this.deltaTime = 0;
+        
         this.lastTime = performance.now(); // To calculate deltaTime
         this.extraTimer = 0;
         this.bonusTimer = 0;

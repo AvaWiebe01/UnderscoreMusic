@@ -69,7 +69,7 @@ export class Multiplier {
     }
 }
 
-// multiplier based on clicking arcbit generation fast
+// multiplier based on clicking arcbit generation
 class MultArcMult extends Multiplier {
     decayFactor;
 
@@ -280,7 +280,7 @@ class MultHyperCore extends Multiplier {
     }
 }
 
-// multiplier based on current HyperKey amount
+// multiplier based on current libkCrawler instances
 class MultNetworkGeneration extends Multiplier {
     multPerInstance = 0.05;
         
