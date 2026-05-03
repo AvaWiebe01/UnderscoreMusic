@@ -29,8 +29,8 @@ static RESOURCE_INFO = [ // htmlName, amt, delta, btnVal, displayableName
 // htmlName, amt, delta, btnVal, displayableName, initMaxCores
 static CORE_INFO = ["cores", 2, 1/80, 0, "Cores", 8];
 
-// htmlName, amt, delta, btnVal, displayableName
-static RAM_INFO = ["ram", 1000, 0, 0, "RAM"];
+// htmlName, amt, delta, btnVal, displayableName, initRamPerCore
+static RAM_INFO = ["ram", 1000, 0, 0, "RAM", 1000];
 
 // htmlName, amt, btnVal, displayableName, initSuccessRate
 static NULLPOINTER_INFO = ["nullpointers", 0, 0, 1, "NullPointers", 0.01];

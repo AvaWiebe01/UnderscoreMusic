@@ -197,6 +197,17 @@ export class CpuBleedArch extends HyperMod {
     } 
 }
 
+export class RamArch extends HyperMod {
+
+    enable() {
+        this.enabled = true;
+    }
+
+    disable() {
+        this.enabled = false;
+    } 
+}
+
 export function initHyperMods(gameData = new GameData()) {
     var mods = new Map([
         ["hyperMultArch", new HyperMultArch("hyperMultArch", "HyperMult", "<strong>All</strong> resource buttons contribute to <strong>ArcMult</strong>.")],

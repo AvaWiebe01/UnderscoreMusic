@@ -191,7 +191,7 @@ export class Resource {
     }
 
     resourceTick(deltaTime, gameData) {
-        this.lastTickDelta = ((deltaTime/1000)*this.getBaseDelta()) * this.getDeltaTotalMult()
+        this.lastTickDelta = ((deltaTime/1000)*this.getBaseDelta()) * this.getDeltaTotalMult();
         this.modifyAmt(this.lastTickDelta);
 
         this.displayAmt();
@@ -217,12 +217,14 @@ class Cores extends Resource {
     // Additional parameters
     delta;
     maxCores;
+    atFullCapacity;
 
     constructor(amt, delta, btnVal, htmlName, displayableName, gameData, maxCores) {
         super(amt, btnVal, htmlName, displayableName, gameData);
 
         this.delta = delta;
         this.maxCores = maxCores;
+        this.atFullCapacity = false;
     }
 
     initDisplayElements() {
@@ -248,7 +250,10 @@ class Cores extends Resource {
     }
 
     modifyAmt(value) { // Do not go above core limit
-        this.amt = ((this.amt + value) <= this.maxCores ? this.amt + value : this.maxCores);
+        this.atFullCapacity = ((this.amt + this.lastTickDelta) >= this.maxCores);
+
+        var newAmt = this.amt + value;
+        this.amt = ((newAmt <= this.maxCores) ? newAmt : this.maxCores);
     }
 
     displayAmt() { // Round down to nearest integer
@@ -268,10 +273,18 @@ class Cores extends Resource {
 }
 
 class Ram extends Resource {
-    constructor(amt, delta, btnVal, htmlName, displayableName, gameData) {
+
+    // Additional parameters
+    delta;
+    ramPerCore;
+
+    ramPerCoreDisplay;
+
+    constructor(amt, delta, btnVal, htmlName, displayableName, gameData, ramPerCore) {
         super(amt, btnVal, htmlName, displayableName, gameData);
 
         this.delta = delta;
+        this.ramPerCore = ramPerCore;
     }
 
     initDisplayElements() {
@@ -280,6 +293,8 @@ class Ram extends Resource {
         this.gainDisplays = document.getElementsByClassName(this.htmlName + "_gain_display");
         this.deltaDisplays = document.getElementsByClassName(this.htmlName + "_delta_display");
         this.btnValDisplays = document.getElementsByClassName(this.htmlName + "_btnval_display");
+
+        this.ramPerCoreDisplays = document.getElementsByClassName("ram_per_core_display");
 
         this.ramPanelElement = document.querySelector(".game .process_panel .cpu_resources_panel .ram_panel");
 
@@ -298,6 +313,29 @@ class Ram extends Resource {
         for(let i = 0; i < this.amtDisplays.length; i++) {
             this.amtDisplays[i].innerHTML = Utils.getDisplayableNumber(this.amt, true, 6); // display in data size format
         }
+
+        for(let i = 0; i < this.amtDisplays.length; i++) {
+            this.ramPerCoreDisplays[i].innerHTML = Utils.getDisplayableNumber(this.ramPerCore, true, 6); // display in data size format
+        }
+    }
+
+    resourceTick(deltaTime, gameData) {
+
+        const cores = Utils.gameData.resources.get("cores");
+        if(cores.atFullCapacity) {
+            ((cores.lastTickDelta * this.ramPerCore) ?? 0);
+        }
+
+        var coreBasedDelta = (cores.atFullCapacity) ? (cores.lastTickDelta * this.ramPerCore) : 0; // only gain from cores if core capacity is full
+        var standardDelta = (deltaTime/1000)*this.getBaseDelta();
+
+        this.lastTickDelta = (coreBasedDelta + standardDelta) * this.getDeltaTotalMult(); 
+
+        this.modifyAmt(this.lastTickDelta);
+
+        this.displayAmt();
+        this.displayFinalBtnVal();
+        this.displayFinalDelta();
     }
 }
 
@@ -428,7 +466,7 @@ export function initResources(RESOURCE_INFO = [], gameData) {
     resources.set(Constants.CORE_INFO[0], new Cores(Constants.CORE_INFO[1], Constants.CORE_INFO[2], Constants.CORE_INFO[3], Constants.CORE_INFO[0], Constants.CORE_INFO[4], gameData, Constants.CORE_INFO[5]));
     resources.get("cores").initDisplayElements();
 
-    resources.set(Constants.RAM_INFO[0], new Ram(Constants.RAM_INFO[1], Constants.RAM_INFO[2], Constants.RAM_INFO[3], Constants.RAM_INFO[0], Constants.RAM_INFO[4], gameData));
+    resources.set(Constants.RAM_INFO[0], new Ram(Constants.RAM_INFO[1], Constants.RAM_INFO[2], Constants.RAM_INFO[3], Constants.RAM_INFO[0], Constants.RAM_INFO[4], gameData, Constants.RAM_INFO[5]));
     resources.get("ram").initDisplayElements();
 
     resources.set(Constants.NULLPOINTER_INFO[0], new NullPointers(Constants.NULLPOINTER_INFO[1], Constants.NULLPOINTER_INFO[2], Constants.NULLPOINTER_INFO[3], Constants.NULLPOINTER_INFO[0], Constants.NULLPOINTER_INFO[4], gameData, Constants.NULLPOINTER_INFO[5]));

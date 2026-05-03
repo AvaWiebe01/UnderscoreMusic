@@ -83,7 +83,7 @@ export function loadGame() {
 
         // make unlocked upgrades visible
         for (const unlockUpgradeKey of upgradeObject.unlockUpgrades) {
-            Utils.gameData.upgrades?.get(upgd.upgradeTypeTag)?.get(upgd.resourceName)?.get(unlockUpgradeKey).unlock();
+            Utils.gameData.upgrades?.get(upgd.upgradeTypeTag)?.get(upgd.resourceName)?.get(unlockUpgradeKey)?.unlock();
         }
 
         // add to unlocked upgrades list

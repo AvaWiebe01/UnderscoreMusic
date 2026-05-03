@@ -161,7 +161,10 @@ class MultUltraboost extends Multiplier {
     }
 
     multUpdate() {
-        this.totalCoresGenerated += this.gameData.resources.get("cores").lastTickDelta;
+        const cores = this.gameData.resources.get("cores");
+        if (!cores.atFullCapacity) {
+            this.totalCoresGenerated += cores.lastTickDelta;
+        }
     }
 
     initDisplayElements() {
