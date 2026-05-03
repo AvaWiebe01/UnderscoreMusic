@@ -339,12 +339,9 @@ main .game .generate_panel .generate_button.not_unlocked {
 
 main .game .generate_panel .generate_button button {
 	font-size: 2rem;
+	padding: 1rem 0;
 	height:4.5rem;
-	transition-duration: 0.5s;
-}
-
-main .game .generate_panel .generate_button button:hover {
-	transition-duration: 0.25s;
+	transition: background-color 0.25s, color 0.25s, height 0.35s;
 }
 
 main .game .generate_panel .generate_button .btnval_display {

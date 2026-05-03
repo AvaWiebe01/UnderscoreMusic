@@ -96,7 +96,7 @@ export function initEventHandlers(gameData = new GameData()) {
                     break;
             }
         })
-
+        
         $(".generate_panel").on("mouseenter", (event) => {
             if(!Utils.largeResourceButtons) {
                 return;
