@@ -896,10 +896,10 @@ main .game .archive_panel a.fragment_link:active {
 }
 
 main .game .options {
-	display: flex;
-	flex-direction: row;
-	flex-wrap:wrap;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
 	gap: 1rem;
+	grid-auto-rows: minmax(100px, auto);
 }
 
 main .game .options .option {
@@ -908,10 +908,15 @@ main .game .options .option {
 		inset 0 0 0.75rem var(--text-glow-color);
 	background: var(--text-bg-color);
 	padding:1rem;
+	text-align:left;
+	color:var(--text-glow-color);
+	text-shadow: none;
 }
 
 main .game .options .option .option_title {
 	font-size: 1.25rem;
+	color: var(--text-color);
+	text-shadow: var(--text-glow-color) 0 0 0.5rem;
 }
 
 main .game .options_panel .options button {
