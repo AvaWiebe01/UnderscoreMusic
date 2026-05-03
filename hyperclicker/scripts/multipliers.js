@@ -299,9 +299,6 @@ class MultMultiProcess extends Multiplier {
         });
 
         this.mult = (allZero) ? 1 : lowest;
-
-        // display mult
-        document.querySelector(".game .architectures_panel .hypermod .multi_process_mult_display").innerHTML = this.mult;
     }
 
     initDisplayElements() {

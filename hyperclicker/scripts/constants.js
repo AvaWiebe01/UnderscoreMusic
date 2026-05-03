@@ -5,11 +5,13 @@ import { unlockHyperMod } from "./hypermods.js";
 export class Constants {
 
 static REFRESH_RATE = 60;
+static ONE_SECOND_MS = 1000;
 
 static AVERAGING_TIME = 1000; // in milliseconds
 static AVERAGING_SAMPLES = 10;
 
-static AUTOSAVE_TICKS = 3600 // save every 3600 game ticks
+static AUTOSAVE_TIME_MS = 60_000 // save every 60,000 ms
+
 static RESET_PROGRESS_CLICKS = 10;
 
 static BONUS_COOLDOWN = 320; // bonus starts at 5:20 -> 2:40 -> 1:20 -> 0:40 cooldown
@@ -139,9 +141,9 @@ static ALL_UPGRADES_INFO = new Map([
 
                     // Bonus item
 
-                        ["bonusCooldown1", "Malware Detection: Signature Analysis", "Antivirus detects viruses <strong>2x</strong> faster.", "", 6.4, ["bonusCooldown2"], (resource) => {Utils.gameData.bonusItem.cooldown = Math.floor(Utils.gameData.bonusItem.cooldown / 2);}],
-                        ["bonusCooldown2", "Malware Detection: Dynamic Analysis", "Antivirus detects viruses another <strong>2x</strong> faster.", "", 2_545, ["bonusCooldown3"], (resource) => {Utils.gameData.bonusItem.cooldown = Math.floor(Utils.gameData.bonusItem.cooldown / 2);}],
-                        ["bonusCooldown3", "Malware Detection: Entropy Analysis", "Antivirus detects every single virus.", "", 480_000, [], (resource) => {Utils.gameData.bonusItem.cooldown = Math.floor(Utils.gameData.bonusItem.cooldown / 2);}],
+                        ["bonusCooldown1", "Malware Detection: Signature Analysis", "Antivirus detects viruses <strong>2x</strong> faster.", "", 666, ["bonusCooldown2"], (resource) => {Utils.gameData.bonusItem.cooldown = Math.floor(Utils.gameData.bonusItem.cooldown / 2);}],
+                        ["bonusCooldown2", "Malware Detection: Dynamic Analysis", "Antivirus detects viruses another <strong>2x</strong> faster.", "", 72_000, ["bonusCooldown3"], (resource) => {Utils.gameData.bonusItem.cooldown = Math.floor(Utils.gameData.bonusItem.cooldown / 2);}],
+                        ["bonusCooldown3", "Malware Detection: Entropy Analysis", "Antivirus detects every single virus.", "", 24_800_000, [], (resource) => {Utils.gameData.bonusItem.cooldown = Math.floor(Utils.gameData.bonusItem.cooldown / 2);}],
                         
                     
                     // Unlockable Multipliers
@@ -155,10 +157,10 @@ static ALL_UPGRADES_INFO = new Map([
                             ["arcMultOverclock2", "ArcMult: Overclock II", "<strong>ArcMult</strong> gains another <strong>2x</strong> more multiplier per click.", "", 128, ["arcMultOverclock3"], (resource) => {resource.gameData.multipliers.get("arcMult").increaseFactor *= 2;}],
                             ["arcMultOverclock3", "ArcMult: Maximum Overclock", "<strong>ArcMult</strong> gains another <strong>2x</strong> more multiplier per click.", "", 3_720, [], (resource) => {resource.gameData.multipliers.get("arcMult").increaseFactor *= 2;}],
 
-                            ["arcMultEfficiency1", "ArcMult: Efficiency+", "<strong>ArcMult</strong> decays <strong>2x</strong> slower.", "", 0.78, ["arcMultEfficiency2"], (resource) => {resource.gameData.multipliers.get("arcMult").decayFactor *= 0.5;}],
-                            ["arcMultEfficiency2", "ArcMult: Efficiency++", "<strong>ArcMult</strong> decays another <strong>2x</strong> slower.", "", 15.8, ["arcMultEfficiency3"], (resource) => {resource.gameData.multipliers.get("arcMult").decayFactor *= 0.5;}],
-                            ["arcMultEfficiency3", "ArcMult: Efficiency+++", "<strong>ArcMult</strong> decays another <strong>2x</strong> slower.", "", 64_000, ["arcMultEfficiency4"], (resource) => {resource.gameData.multipliers.get("arcMult").decayFactor *= 0.5;}],
-                            ["arcMultEfficiency4", "ArcMult: Maximum Efficiency", "<strong>ArcMult</strong> decays another <strong>2x</strong> slower.", "", 468_000, [], (resource) => {resource.gameData.multipliers.get("arcMult").decayFactor *= 0.5;}],
+                            ["arcMultEfficiency1", "ArcMult: Efficiency+", "<strong>ArcMult</strong> decays <strong>1.25x</strong> slower.", "", 0.78, ["arcMultEfficiency2"], (resource) => {resource.gameData.multipliers.get("arcMult").decayFactor *= 0.875;}],
+                            ["arcMultEfficiency2", "ArcMult: Efficiency++", "<strong>ArcMult</strong> decays another <strong>1.25x</strong> slower.", "", 15.8, ["arcMultEfficiency3"], (resource) => {resource.gameData.multipliers.get("arcMult").decayFactor *= 0.875;}],
+                            ["arcMultEfficiency3", "ArcMult: Efficiency+++", "<strong>ArcMult</strong> decays another <strong>1.25x</strong> slower.", "", 64_000, ["arcMultEfficiency4"], (resource) => {resource.gameData.multipliers.get("arcMult").decayFactor *= 0.875;}],
+                            ["arcMultEfficiency4", "ArcMult: Maximum Efficiency", "<strong>ArcMult</strong> decays another <strong>1.25x</strong> slower.", "", 468_000, [], (resource) => {resource.gameData.multipliers.get("arcMult").decayFactor *= 0.875;}],
 
                         // Ultraboost
 
@@ -174,7 +176,7 @@ static ALL_UPGRADES_INFO = new Map([
                     
                     // Unlockable Tabs
                     /* initial upgrade */ ["tab1", "Expansion: Archive", "Unlock an <strong class='rainbow'>Archive</strong> of fragmented data.", "", 0.32, ["tab2"], () => {Utils.unlockTab("archive_panel_tab");}],
-                    ["tab2", "Expansion: HyperMods", "Unlock the <strong class='rainbow'>HyperMod</strong> interface.", "", 32_000, ["tab3"], () => {Utils.unlockTab("hypermods_panel_tab"); unlockResource("hyperkeys");}],
+                    ["tab2", "Expansion: HyperMods", "Unlock the <strong class='rainbow'>HyperMod</strong> interface.", "", 320_000, ["tab3"], () => {Utils.unlockTab("hypermods_panel_tab"); unlockResource("hyperkeys");}],
                     ["tab3", "Expansion: BEYOND", "Un<span class='obfuscated'>l</span>ock ref<span class='obfuscated'>e</span>rences t<span class='obfuscated'>o</span> <strong class='rainbow'>out-of-b<span class='obfuscated'>o</span>unds</strong> memory addres<span class='obfuscated'>s</span>es.<br>Discover two new HyperMods.", "", 32_000_000_000, [], () => {Utils.unlockTab("beyond_panel_tab"); unlockResource("nullpointers"); Utils.unlockUpgrade("hypermod_upgrades_list", "hyperkeys", "hypermodReroll"); Utils.unlockUpgrade("hypermod_upgrades_list", "hyperkeys", "hypermodStreak");}],
 
                     // Unlockable Systems (new UI elements in existing tabs)
@@ -202,7 +204,7 @@ static ALL_UPGRADES_INFO = new Map([
 
                     ["hypermodReroll", "Reroll+ Architecture", "Improve success rate of <strong>Locating</strong> NullPointers.", "", 450, [], (resource) => {unlockHyperMod("rerollArch");}],
 
-                    ["hypermodStreak", "Streak+ Architecture", "Consecutive NullPointer <strong>Locations</strong> are more powerful.", "", 1_600, [], (resource) => {unlockHyperMod("streakArch");}],
+                    ["hypermodStreak", "Streak+ Architecture", "Consecutive streaks of NullPointer <strong>Location</strong> are more powerful.", "", 1_600, [], (resource) => {unlockHyperMod("streakArch");}],
                 ]
             ],
         ])
@@ -221,8 +223,8 @@ static ALL_UPGRADES_INFO = new Map([
                     ["keyBtn5", "Quantum Encryption", "<strong>Constructing</strong> HyperKeys is <strong>32x</strong> as efficient.", "", 0.32, [], (resource) => {resource.modifyBtnValBaseMult(32)}],
                     
                     /*initial upgrade*/["modMax1", "HyperMod Slot 2", "A maximum of 2 <strong>HyperMods</strong> can be active concurrently.", "", 0.001, ["modMax2"], (resource) => {Utils.gameData.hypermods.modifyMaxEnabled(2)}],
-                    ["modMax2", "HyperMod Slot 3", "A maximum of 3 <strong>HyperMods</strong> can be active concurrently.", "", 1, ["modMax3"], (resource) => {Utils.gameData.hypermods.modifyMaxEnabled(3)}],
-                    ["modMax3", "HyperMod Slot 4", "A maximum of 4 <strong>HyperMods</strong> can be active concurrently.", "", 1_000, [], (resource) => {Utils.gameData.hypermods.modifyMaxEnabled(4)}],
+                    ["modMax2", "HyperMod Slot 3", "A maximum of 3 <strong>HyperMods</strong> can be active concurrently.", "", 25, ["modMax3"], (resource) => {Utils.gameData.hypermods.modifyMaxEnabled(3)}],
+                    ["modMax3", "HyperMod Slot 4", "A maximum of 4 <strong>HyperMods</strong> can be active concurrently.", "", 99.5, [], (resource) => {Utils.gameData.hypermods.modifyMaxEnabled(4)}],
                 ]
             ],
         ])
@@ -274,13 +276,13 @@ static ALL_UPGRADES_INFO = new Map([
                 "arcbits",
                 [
                     ["fragment1", "Fragment 0", "HyperI/O Voice Transmission #1A70032E", "", 1, ["fragment2", "fragment3", "fragment4"], (resource) => resource.gameData.archive.unlockFragment("fragment_0")],
-                    ["fragment2", "Fragment 0.5", "Codex Partition #2E830AB4", "", 45, [], (resource) => resource.gameData.archive.unlockFragment("fragment_0.5")],
-                    ["fragment3", "Fragment 1", "HyperI/O Camera #3E9EFFF4 Audio Feed", "", 999, [], (resource) => resource.gameData.archive.unlockFragment("fragment_1")],
-                    ["fragment4", "Fragment 2", "HyperI/O Voice Transmission #1A7F327E", "", 45_000, ["fragment5"], (resource) => resource.gameData.archive.unlockFragment("fragment_2")],
-                    ["fragment5", "Fragment 3", "New Archon Camera #112D8A39 Audio Feed", "", 1_000_000_000, ["fragment6", "fragment7"], (resource) => resource.gameData.archive.unlockFragment("fragment_3")],
-                    ["fragment6", "Fragment 3.5", "Codex Partition #448A120F", "", 1_000_000_000_000_000, [], (resource) => resource.gameData.archive.unlockFragment("fragment_3.5")],
-                    ["fragment7", "Fragment 4", "HyperI/O Camera #34C1D859 Audio Feed", "", 1_000_000_000_000_000_000_000, ["fragment8"], (resource) => resource.gameData.archive.unlockFragment("fragment_4")],
-                    ["fragment8", "Final Fragment", "The End.", "", 1_000_000_000_000_000_000_000_000_000, [], (resource) => resource.gameData.archive.unlockFragment("fragment_final")],
+                    ["fragment2", "Fragment 0.5", "Codex Partition #2E830AB4", "", 999, [], (resource) => resource.gameData.archive.unlockFragment("fragment_0.5")],
+                    ["fragment3", "Fragment 1", "HyperI/O Camera #3E9EFFF4 Audio Feed", "", 450_000, [], (resource) => resource.gameData.archive.unlockFragment("fragment_1")],
+                    ["fragment4", "Fragment 2", "HyperI/O Voice Transmission #1A7F327E", "", 1_000_000_000, ["fragment5"], (resource) => resource.gameData.archive.unlockFragment("fragment_2")],
+                    ["fragment5", "Fragment 3", "New Archon Camera #112D8A39 Audio Feed", "", 25_000_000_000_000, ["fragment6", "fragment7"], (resource) => resource.gameData.archive.unlockFragment("fragment_3")],
+                    ["fragment6", "Fragment 3.5", "Codex Partition #448A120F", "", 8_000_000_000_000_000, [], (resource) => resource.gameData.archive.unlockFragment("fragment_3.5")],
+                    ["fragment7", "Fragment 4", "HyperI/O Camera #34C1D859 Audio Feed", "", 500_000_000_000_000_000_000, ["fragment8"], (resource) => resource.gameData.archive.unlockFragment("fragment_4")],
+                    ["fragment8", "Final Fragment", "The End.", "", 32_000_000_000_000_000_000_000_000_000, [], (resource) => resource.gameData.archive.unlockFragment("fragment_final")],
                 ]
             ],
         ])

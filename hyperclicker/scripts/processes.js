@@ -59,7 +59,7 @@ export class Process {
 
     // Get the price multiplier based on current number of instances
     getCostFactor() {
-        return ((1.4)**this.numBought);
+        return ((1.75)**this.numBought);
     }
 
     calculateCost() {

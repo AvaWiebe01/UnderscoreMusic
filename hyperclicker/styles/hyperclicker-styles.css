@@ -291,6 +291,7 @@ main .game .resource_panel {
     padding:1rem;
 	position:sticky;
 	top:1rem;
+	z-index:9999;
 }
 
 main .game .resource_display {

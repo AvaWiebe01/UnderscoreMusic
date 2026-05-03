@@ -143,12 +143,14 @@ export class MultiProcessArch extends HyperMod {
 
 export class RerollArch extends HyperMod {
     enable() {
-        Utils.gameData.resources.get("nullpointers").rolls = 2;
+        const nullptrs = Utils.gameData.resources.get("nullpointers");
+        nullptrs.rolls += 1;
         this.enabled = true;
     }   
 
     disable() {
-        Utils.gameData.resources.get("nullpointers").rolls = 1;
+        const nullptrs = Utils.gameData.resources.get("nullpointers");
+        nullptrs.rolls -= 1;
         this.enabled = false;
     }
 }
@@ -156,13 +158,13 @@ export class RerollArch extends HyperMod {
 export class StreakArch extends HyperMod {
     enable() {
         const nullptrs = Utils.gameData.resources.get("nullpointers");
-        nullptrs.streakBase = 3;
+        nullptrs.streakBase += 1;
         this.enabled = true;
     }
 
     disable() {
         const nullptrs = Utils.gameData.resources.get("nullpointers");
-        nullptrs.streakBase = nullptrs.defaultStreakBase;
+        nullptrs.streakBase -= 1;
         this.enabled = false;
     }
 }
@@ -173,9 +175,9 @@ export function initHyperMods(gameData = new GameData()) {
         ["hyperCoreArch", new HyperCoreArch("hyperCoreArch", "HyperCore", "<strong>Core</strong> generation rate is multiplied by current <strong>HyperKey</strong> amount.")],
         ["keyMultArch", new KeyMultArch("keyMultArch", "KeyMult", "<strong>ArcMult</strong> also provides a multiplier to <strong>construction</strong> HyperKey generation.")],
         ["malwareDefenseArch", new MalwareDefenseArch("malwareDefenseArch", "Malware Defense", "Removing a <strong>virus</strong> generates <strong>2x</strong> stronger effects. Detect viruses 30% faster.")],
-        ["multiProcessArch", new MultiProcessArch("multiProcessArch", "Multi-Process", `<strong>Process</strong> ArcBit generation is multiplied by the lowest <strong>number of instances</strong> of all programs [excluding 0].<br>Current multiplier: <span class="multi_process_mult_display"></span>`)],
-        ["rerollArch", new RerollArch("rerollArch", "Reroll+", "Each attempt to <strong>Locate</strong> NullPointers rolls the probability <strong>twice</strong> and takes the best result.")],
-        ["streakArch", new StreakArch("streakArch", "Streak+", "Each consecutive NullPointer <strong>Location</strong> multiplies generation by <strong>3</strong> instead of 2.")],
+        ["multiProcessArch", new MultiProcessArch("multiProcessArch", "Multi-Process", `<strong>Process</strong> ArcBit generation is multiplied by the lowest <strong>number of instances</strong> of all programs [excluding 0].`)],
+        ["rerollArch", new RerollArch("rerollArch", "Reroll+", "Each attempt to <strong>Locate</strong> NullPointers rolls the probability 1 additional time for a positive outcome.")],
+        ["streakArch", new StreakArch("streakArch", "Streak+", "NullPointer <strong>streak</strong> multiplier is increased by <strong>1</strong>.")],
     ])
 
     const hypermods = new HyperMods(mods);

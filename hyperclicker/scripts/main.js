@@ -140,8 +140,8 @@ function gameTick(currentTime, gameData = new GameData()) {
         gameData.lastTime = currentTime;
 
         // autosave
-        if (gameData.autoSaveTimer >= Constants.AUTOSAVE_TICKS) {saveGame(gameData); gameData.autoSaveTimer=0}
-        gameData.autoSaveTimer++;
+        if (gameData.autoSaveTimer >= Constants.AUTOSAVE_TIME_MS) {saveGame(gameData); gameData.autoSaveTimer=0} 
+        gameData.autoSaveTimer += deltaTime;
     }
     
     if (gameData.extraTimer >= Constants.AVERAGING_TIME/Constants.AVERAGING_SAMPLES) {
@@ -151,13 +151,21 @@ function gameTick(currentTime, gameData = new GameData()) {
         });
 
         gameData.extraTimer -= Constants.AVERAGING_TIME/Constants.AVERAGING_SAMPLES; // Reset the counter but keep leftover time
+
+        if(gameData.extraTimer >= Constants.AVERAGING_TIME/Constants.AVERAGING_SAMPLES) {
+            gameData.extraTimer = 0; // prevent rapid ticks after resuming tab
+        }
     }
 
     // perform all actions that must occur every 1 second
-    if (gameData.bonusTimer >= 1000) {
+    if (gameData.bonusTimer >= Constants.ONE_SECOND_MS) {
 
         gameData.bonusItem.bonusTick();
-        gameData.bonusTimer -= 1000; // reset counter but keep leftover time
+        gameData.bonusTimer -= Constants.ONE_SECOND_MS; // reset counter but keep leftover time
+
+        if(gameData.bonusTimer >= Constants.ONE_SECOND_MS) {
+            gameData.bonusTimer = 0; // prevent rapid ticks after resuming tab
+        }
     }
 
     // Performance metric
