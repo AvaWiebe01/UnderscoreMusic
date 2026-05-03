@@ -199,13 +199,13 @@ export class CpuBleedArch extends HyperMod {
 
 export function initHyperMods(gameData = new GameData()) {
     var mods = new Map([
-        ["networkGenerationArch", new NetworkGenerationArch("networkGenerationArch", "Network Generation", "Each instance of <strong>Link Crawler</strong> increases core generation rate by <strong>5%</strong>.")],
         ["hyperMultArch", new HyperMultArch("hyperMultArch", "HyperMult", "<strong>All</strong> resource buttons contribute to <strong>ArcMult</strong>.")],
-        ["hyperCoreArch", new HyperCoreArch("hyperCoreArch", "HyperCore", "<strong>Core</strong> generation rate is multiplied by current <strong>HyperKey</strong> amount.")],
         ["keyMultArch", new KeyMultArch("keyMultArch", "KeyMult", "<strong>ArcMult</strong> also provides a multiplier to <strong>construction</strong> HyperKey generation.")],
+        ["cpuBleedArch", new CpuBleedArch("cpuBleedArch", "CPU Bleed", "ArcBit <strong>Decryption</strong> yields <strong>+1%</strong> of active <strong>process</strong> ArcBit generation.")],
+        ["networkGenerationArch", new NetworkGenerationArch("networkGenerationArch", "Network Generation", "Each instance of <strong>Link Crawler</strong> increases core generation rate by <strong>5%</strong>.")],
+        ["hyperCoreArch", new HyperCoreArch("hyperCoreArch", "HyperCore", "<strong>Core</strong> generation rate is multiplied by current <strong>HyperKey</strong> amount.")],
         ["malwareDefenseArch", new MalwareDefenseArch("malwareDefenseArch", "Malware Defense", "Removing a <strong>virus</strong> generates <strong>2x</strong> stronger effects. Detect viruses <strong>30%</strong> faster.")],
         ["multiProcessArch", new MultiProcessArch("multiProcessArch", "Multi-Process", `<strong>Process</strong> ArcBit generation is multiplied by the lowest <strong>number of instances</strong> of all programs [excluding 0].`)],
-        ["cpuBleedArch", new CpuBleedArch("cpuBleedArch", "CPU Bleed", "ArcBit <strong>Decryption</strong> yields <strong>+1%</strong> of active process ArcBit generation.")],
         ["rerollArch", new RerollArch("rerollArch", "Reroll+", "Each attempt to <strong>Locate</strong> NullPointers rolls the probability 1 additional time for a positive outcome.")],
         ["streakArch", new StreakArch("streakArch", "Streak+", "NullPointer <strong>streak</strong> multiplier is increased by <strong>1</strong>.")],
     ])
