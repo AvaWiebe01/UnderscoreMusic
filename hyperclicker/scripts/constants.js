@@ -22,7 +22,7 @@ static DATA_SIZE_ABBREVIATED_SUFFIXES = ["b","Kb","Mb","Gb","Tb","Pb","Eb","Zb",
 static DATA_SIZE_SUFFIXES = ["Bits","Kilobits","Megabits","Gigabits","Terabits","Petabits","Exabits","Zettabits","Yottabits","Ronnabits","Quettabits","Wrennbits"];
 
 static RESOURCE_INFO = [ // htmlName, amt, delta, btnVal, displayableName
-    ["arcbits", 0, 0.00010, "ArcBits"],
+    ["arcbits", 1111111111110, 0.00010, "ArcBits"],
     ["hyperkeys", 0.00, 0.00001, "HyperKeys"],
 ];
 
@@ -51,7 +51,7 @@ static INITIAL_UPGRADES = new Map([
         new Map([
             [
                 "hyperkeys",
-                ["hypermodNetworkGeneration", "hypermodHyperCore"],
+                ["hypermodNetworkGeneration", "hypermodHyperCore", "hypermodKeyMult", "hypermodMalwareDefense"],
             ],
         ])
     ],
@@ -222,23 +222,23 @@ static ALL_UPGRADES_INFO = new Map([
             [
                 "hyperkeys",
                 [
-                    /*initial upgrade*/["hypermodNetworkGeneration", "Network Generation Architecture", "Each instance of <strong>Link Crawler</strong> increases core generation rate.", "", 0.0015, ["hypermodMalwareDefense"], (resource) => {unlockHyperMod("networkGenerationArch");}],
+                    /*initial upgrade*/["hypermodNetworkGeneration", "Network Generation Architecture", "Each instance of <strong>Link Crawler</strong> increases core generation rate.", "", 0.0015, [], (resource) => {unlockHyperMod("networkGenerationArch");}],
                     
-                    /*initial upgrade*/["hypermodHyperCore", "HyperCore Architecture", "<strong>Core</strong> generation rate is multiplied by current <strong>HyperKey</strong> amount.", "", 0.0075, ["hypermodKeyMult"], (resource) => {unlockHyperMod("hyperCoreArch");}],
+                    /*initial upgrade*/["hypermodHyperCore", "HyperCore Architecture", "<strong>Core</strong> generation rate is multiplied by current sqrt(current <strong>HyperKey</strong> amount).", "", 0.0075, [], (resource) => {unlockHyperMod("hyperCoreArch");}],
 
-                    ["hypermodKeyMult", "KeyMult Architecture", "<strong>ArcMult</strong> also provides a multiplier to <strong>construction</strong> HyperKey generation.", "", 0.02, ["hypermodMultiProcess"], (resource) => {unlockHyperMod("keyMultArch");}],
+                    /*initial upgrade*/["hypermodKeyMult", "KeyMult Architecture", "<strong>ArcMult</strong> also provides a multiplier to <strong>construction</strong> HyperKey generation.", "", 0.08, ["hypermodMultiProcess"], (resource) => {unlockHyperMod("keyMultArch");}],
 
-                    ["hypermodMalwareDefense", "Malware Defense Architecture", "Removing a <strong>virus</strong> generates stronger effects. Detect more viruses.", "", 0.124, ["hypermodMultiProcess"], (resource) => {unlockHyperMod("malwareDefenseArch");}],
+                    /*initial upgrade*/["hypermodMalwareDefense", "Malware Defense Architecture", "Removing a <strong>virus</strong> generates stronger effects. Detect more viruses.", "", 0.575, ["hypermodHyperMult"], (resource) => {unlockHyperMod("malwareDefenseArch");}],
 
-                    ["hypermodMultiProcess", "Multi-Process Architecture", "<strong>Process</strong> ArcBit generation is multiplied by the lowest <strong>number of instances</strong> of all programs [excluding 0].", "", 6.5, ["hypermodHyperMult"], (resource) => {unlockHyperMod("multiProcessArch");}],
+                    ["hypermodMultiProcess", "Multi-Process Architecture", "<strong>Process</strong> ArcBit generation is multiplied by the lowest <strong>number of instances</strong> of all programs [excluding 0].", "", 4.3, ["hypermodCpuBleed"], (resource) => {unlockHyperMod("multiProcessArch");}],
 
-                    ["hypermodHyperMult", "HyperMult Architecture", "<strong>All</strong> resource buttons contribute to <strong>ArcMult</strong>.", "", 60, ["hypermodCpuBleed"], (resource) => {unlockHyperMod("hyperMultArch");}],
+                    ["hypermodHyperMult", "HyperMult Architecture", "<strong>All</strong> resource buttons contribute to <strong>ArcMult</strong>.", "", 32, [], (resource) => {unlockHyperMod("hyperMultArch");}],
 
                     ["hypermodCpuBleed", "CPU Bleed Architecture", "ArcBit <strong>Decryption</strong> yields a percentage of active process ArcBit generation.", "", 225, [], (resource) => {unlockHyperMod("cpuBleedArch");}],
 
-                    ["hypermodReroll", "Reroll+ Architecture", "Improve success rate of <strong>Locating</strong> NullPointers.", "", 450, [], (resource) => {unlockHyperMod("rerollArch");}],
+                    ["hypermodReroll", "Reroll+ Architecture", "Improve success rate of <strong>Locating</strong> NullPointers.", "", 800, [], (resource) => {unlockHyperMod("rerollArch");}],
 
-                    ["hypermodStreak", "Streak+ Architecture", "Consecutive streaks of NullPointer <strong>Location</strong> are more powerful.", "", 1_600, [], (resource) => {unlockHyperMod("streakArch");}],
+                    ["hypermodStreak", "Streak+ Architecture", "Consecutive streaks of NullPointer <strong>Location</strong> are more powerful.", "", 16_000, [], (resource) => {unlockHyperMod("streakArch");}],
                 ]
             ],
         ])
@@ -251,13 +251,13 @@ static ALL_UPGRADES_INFO = new Map([
                 "hyperkeys",
                 [
                     /*initial upgrade*/["keyBtn1", "Faster Encryption", "<strong>Constructing</strong> HyperKeys is <strong>twice</strong> as efficient.", "", 0.0005, ["keyBtn2"], (resource) => {resource.modifyBtnValBaseMult(2)}],
-                    ["keyBtn2", "Stronger Encryption", "<strong>Constructing</strong> HyperKeys is <strong>thrice</strong> as efficient.", "", 0.001, ["keyBtn3"], (resource) => {resource.modifyBtnValBaseMult(3)}],
-                    ["keyBtn3", "Asymmetric Encryption", "<strong>Constructing</strong> HyperKeys is <strong>4x</strong> as efficient.", "", 0.00525, ["keyBtn4"], (resource) => {resource.modifyBtnValBaseMult(4)}],
-                    ["keyBtn4", "Hyper Encryption", "<strong>Constructing</strong> HyperKeys is <strong>5x</strong> as efficient.", "", 0.0285, ["keyBtn5"], (resource) => {resource.modifyBtnValBaseMult(5)}],
-                    ["keyBtn5", "Quantum Encryption", "<strong>Constructing</strong> HyperKeys is <strong>32x</strong> as efficient.", "", 0.32, [], (resource) => {resource.modifyBtnValBaseMult(32)}],
+                    ["keyBtn2", "Stronger Encryption", "<strong>Constructing</strong> HyperKeys is <strong>thrice</strong> as efficient.", "", 0.002, ["keyBtn3"], (resource) => {resource.modifyBtnValBaseMult(3)}],
+                    ["keyBtn3", "Asymmetric Encryption", "<strong>Constructing</strong> HyperKeys is <strong>4x</strong> as efficient.", "", 0.015, ["keyBtn4"], (resource) => {resource.modifyBtnValBaseMult(4)}],
+                    ["keyBtn4", "Hyper Encryption", "<strong>Constructing</strong> HyperKeys is <strong>5x</strong> as efficient.", "", 0.275, ["keyBtn5"], (resource) => {resource.modifyBtnValBaseMult(5)}],
+                    ["keyBtn5", "Quantum Encryption", "<strong>Constructing</strong> HyperKeys is <strong>32x</strong> as efficient.", "", 3.2, [], (resource) => {resource.modifyBtnValBaseMult(32)}],
                     
-                    /*initial upgrade*/["modMax1", "HyperMod Slot 2", "A maximum of 2 <strong>HyperMods</strong> can be active concurrently.", "", 0.001, ["modMax2"], (resource) => {Utils.gameData.hypermods.modifyMaxEnabled(2)}],
-                    ["modMax2", "HyperMod Slot 3", "A maximum of 3 <strong>HyperMods</strong> can be active concurrently.", "", 25, ["modMax3"], (resource) => {Utils.gameData.hypermods.modifyMaxEnabled(3)}],
+                    /*initial upgrade*/["modMax1", "HyperMod Slot 2", "A maximum of 2 <strong>HyperMods</strong> can be active concurrently.", "", 0.5, ["modMax2"], (resource) => {Utils.gameData.hypermods.modifyMaxEnabled(2)}],
+                    ["modMax2", "HyperMod Slot 3", "A maximum of 3 <strong>HyperMods</strong> can be active concurrently.", "", 350, ["modMax3"], (resource) => {Utils.gameData.hypermods.modifyMaxEnabled(3)}],
                     ["modMax3", "HyperMod Slot 4", "A maximum of 4 <strong>HyperMods</strong> can be active concurrently.", "", 180_000, [], (resource) => {Utils.gameData.hypermods.modifyMaxEnabled(4)}],
                 ]
             ],
