@@ -148,6 +148,7 @@ export class Utils {
         this.gameData.hypermods.mods.forEach((hypermod, key) => {
             hypermod.updateDisplays();
         })
+        Utils.gameData.hypermods.updateDisplays();
     }
 
     static unlockTab(tabValue) {

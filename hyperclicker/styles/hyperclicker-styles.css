@@ -930,7 +930,8 @@ main .game .options_panel .options .saved_message {
 	text-shadow: var(--main-text-glow-color) 0 0 0.5rem;
 	
 	position:relative;
-	top:2.3275rem;
+	top:2.6rem;
+	left:-1.5rem;
 }
 
 main .game .options_panel .options .reset_message {
@@ -938,8 +939,8 @@ main .game .options_panel .options .reset_message {
 	text-shadow: var(--main-text-glow-color) 0 0 0.5rem;
 	
 	position:relative;
-	top:2.3275rem;
-	left:4.5rem;
+	top:2.6rem;
+	left:2.5rem;
 }
 
 

@@ -121,8 +121,8 @@ export function loadGame() {
     // restore all resources
     gameData.resources.forEach((resource, resourceName) => {
         resource.amt = saveFile?.resources?.[resourceName].amt;
-        resource.deltaBaseMult = saveFile.resources?.[resourceName].deltaBaseMult;
-        resource.btnValBaseMult = saveFile.resources?.[resourceName].btnValBaseMult;
+        //resource.deltaBaseMult = saveFile.resources?.[resourceName].deltaBaseMult;
+        //resource.btnValBaseMult = saveFile.resources?.[resourceName].btnValBaseMult;
     });
 
     // restore all options

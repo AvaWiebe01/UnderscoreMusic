@@ -273,7 +273,6 @@ class NullPointers extends Resource {
     successRate;
 
     streak;
-    defaultStreakBase;
     streakBase;
     streakDisplay;
 
@@ -290,8 +289,7 @@ class NullPointers extends Resource {
         this.successRate = successRate;
 
         this.streak = 0;
-        this.defaultStreakBase = 2;
-        this.streakBase = this.defaultStreakBase;
+        this.streakBase = 2;
 
         this.failureStreak = 0;
 

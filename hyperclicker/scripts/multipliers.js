@@ -262,7 +262,7 @@ class MultHyperCore extends Multiplier {
     }
 
     multUpdate() {
-        this.mult = Utils.gameData.resources.get("hyperkeys").amt;
+        this.mult = Math.sqrt(Utils.gameData.resources.get("hyperkeys").amt);
     }
 
     initDisplayElements() {

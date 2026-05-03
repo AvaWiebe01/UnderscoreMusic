@@ -137,7 +137,24 @@ static ALL_UPGRADES_INFO = new Map([
                         ["coreCap6", "MultiProcessing", "Increase <strong>Cores</strong> capacity by <strong>200</strong>.", "", 1_500_000, ["coreCap7"], (resource) => {resource.gameData.resources.get("cores").modifyMaxCores(200);}],
                         ["coreCap7", "MegaProcessing", "Increase <strong>Cores</strong> capacity by <strong>400</strong>.", "", 75_000_000, ["coreCap8"], (resource) => {resource.gameData.resources.get("cores").modifyMaxCores(400);}],
                         ["coreCap8", "HyperProcessing", "Increase <strong>Cores</strong> capacity by <strong>800</strong>.", "", 1_000_000_000, ["coreCap9"], (resource) => {resource.gameData.resources.get("cores").modifyMaxCores(800);}],
-                        ["coreCap9", "QuantumProcessing", "Increase <strong>Cores</strong> capacity by <strong>2000</strong>.", "", 64_000_000_000, [], (resource) => {resource.gameData.resources.get("cores").modifyMaxCores(2000);}],
+                        ["coreCap9", "QuantumProcessing", "Increase <strong>Cores</strong> capacity by <strong>2000</strong>.", "", 64_000_000_000, ["coreCap10"], (resource) => {resource.gameData.resources.get("cores").modifyMaxCores(2000);}],
+
+                        ["coreCap10", "ThreadRipper", "<strong>Cores</strong> capacity is raised to <strong>10,000</strong>.", "", 128_000_000_000_000_000_000, [], (resource) => {resource.gameData.resources.get("cores").modifyMaxCores(6448);}],
+
+                    // Upgrades for hyperkeys
+
+                        ["hyperVal1", "HyperKey: Dedicated Servers", "HyperKey <strong>construction</strong> is <strong>1.25x</strong> stronger.", "", 54_250_000, ["hyperVal2"], (resource) => {Utils.gameData.resources.get("hyperkeys").modifyBtnValBaseMult(1.25);}],
+                        ["hyperVal2", "HyperKey: Reliable Servers", "HyperKey <strong>construction</strong> is <strong>1.5x</strong> stronger.", "", 9_500_000_000, ["hyperVal3"], (resource) => {Utils.gameData.resources.get("hyperkeys").modifyBtnValBaseMult(1.5);}],
+                        ["hyperVal3", "HyperKey: Devoted Servers", "HyperKey <strong>construction</strong> is <strong>1.75x</strong> stronger.", "", 48_750_000_000_000, ["hyperVal4"], (resource) => {Utils.gameData.resources.get("hyperkeys").modifyBtnValBaseMult(1.75);}],
+                        ["hyperVal4", "HyperKey: Faithful Servers", "HyperKey <strong>construction</strong> is <strong>2x</strong> stronger.", "", 945_000_000_000_000, ["hyperVal5"], (resource) => {Utils.gameData.resources.get("hyperkeys").modifyBtnValBaseMult(2);}],
+                        ["hyperVal5", "HyperKey: Unfaltering Servers", "HyperKey <strong>construction</strong> is <strong>2.5x</strong> stronger.", "", 6_580_000_000_000_000_000, [], (resource) => {Utils.gameData.resources.get("hyperkeys").modifyBtnValBaseMult(2.5);}],
+                
+                    // Upgrades for nullptrs
+
+                        ["nullStreak1", "NullPointer: Streamlining v0.15", "NullPointer <strong>streak</strong> multiplier <strong>+0.15x</strong>.", "", 4_250_000_000_000, ["nullStreak2"], (resource) => {Utils.gameData.resources.get("nullpointers").streakBase += 0.15;}],
+                        ["nullStreak2", "NullPointer: Streamlining v0.20", "NullPointer <strong>streak</strong> multiplier <strong>+0.20x</strong>.", "", 6_750_000_000_000_000, ["nullStreak3"], (resource) => {Utils.gameData.resources.get("nullpointers").streakBase += 0.20;}],
+                        ["nullStreak3", "NullPointer: Streamlining v0.25", "NullPointer <strong>streak</strong> multiplier <strong>+0.25x</strong>.", "", 15_800_000_000_000_000_000, ["nullStreak4"], (resource) => {Utils.gameData.resources.get("nullpointers").streakBase += 0.25;}],
+                        ["nullStreak4", "NullPointer: Streamlining v0.40", "NullPointer <strong>streak</strong> multiplier <strong>+0.40x</strong>.", "", 75_000_000_000_000_000_000_000, [], (resource) => {Utils.gameData.resources.get("nullpointers").streakBase += 0.40;}],
 
                     // Bonus item
 
@@ -176,8 +193,8 @@ static ALL_UPGRADES_INFO = new Map([
                     
                     // Unlockable Tabs
                     /* initial upgrade */ ["tab1", "Expansion: Archive", "Unlock an <strong class='rainbow'>Archive</strong> of fragmented data.", "", 0.32, ["tab2"], () => {Utils.unlockTab("archive_panel_tab");}],
-                    ["tab2", "Expansion: HyperMods", "Unlock the <strong class='rainbow'>HyperMod</strong> interface.", "", 320_000, ["tab3"], () => {Utils.unlockTab("hypermods_panel_tab"); unlockResource("hyperkeys");}],
-                    ["tab3", "Expansion: BEYOND", "Un<span class='obfuscated'>l</span>ock ref<span class='obfuscated'>e</span>rences t<span class='obfuscated'>o</span> <strong class='rainbow'>out-of-b<span class='obfuscated'>o</span>unds</strong> memory addres<span class='obfuscated'>s</span>es.<br>Discover two new HyperMods.", "", 32_000_000_000, [], () => {Utils.unlockTab("beyond_panel_tab"); unlockResource("nullpointers"); Utils.unlockUpgrade("hypermod_upgrades_list", "hyperkeys", "hypermodReroll"); Utils.unlockUpgrade("hypermod_upgrades_list", "hyperkeys", "hypermodStreak");}],
+                    ["tab2", "Expansion: HyperMods", "Unlock the <strong class='rainbow'>HyperMod</strong> interface.", "", 320_000, ["tab3", "hyperVal1"], () => {Utils.unlockTab("hypermods_panel_tab"); unlockResource("hyperkeys");}],
+                    ["tab3", "Expansion: BEYOND", "Un<span class='obfuscated'>l</span>ock ref<span class='obfuscated'>e</span>rences t<span class='obfuscated'>o</span> <strong class='rainbow'>out-of-b<span class='obfuscated'>o</span>unds</strong> memory addres<span class='obfuscated'>s</span>es.<br>Discover two new HyperMods.", "", 32_000_000_000, ["nullStreak1"], () => {Utils.unlockTab("beyond_panel_tab"); unlockResource("nullpointers"); Utils.unlockUpgrade("hypermod_upgrades_list", "hyperkeys", "hypermodReroll"); Utils.unlockUpgrade("hypermod_upgrades_list", "hyperkeys", "hypermodStreak");}],
 
                     // Unlockable Systems (new UI elements in existing tabs)
                 ]
@@ -228,7 +245,7 @@ static ALL_UPGRADES_INFO = new Map([
                     
                     /*initial upgrade*/["modMax1", "HyperMod Slot 2", "A maximum of 2 <strong>HyperMods</strong> can be active concurrently.", "", 0.001, ["modMax2"], (resource) => {Utils.gameData.hypermods.modifyMaxEnabled(2)}],
                     ["modMax2", "HyperMod Slot 3", "A maximum of 3 <strong>HyperMods</strong> can be active concurrently.", "", 25, ["modMax3"], (resource) => {Utils.gameData.hypermods.modifyMaxEnabled(3)}],
-                    ["modMax3", "HyperMod Slot 4", "A maximum of 4 <strong>HyperMods</strong> can be active concurrently.", "", 99.5, [], (resource) => {Utils.gameData.hypermods.modifyMaxEnabled(4)}],
+                    ["modMax3", "HyperMod Slot 4", "A maximum of 4 <strong>HyperMods</strong> can be active concurrently.", "", 180_000, [], (resource) => {Utils.gameData.hypermods.modifyMaxEnabled(4)}],
                 ]
             ],
         ])
@@ -262,11 +279,11 @@ static ALL_UPGRADES_INFO = new Map([
                     ["nullDelta9", "auto_search++++", "<strong>nullpointer_passive_capture_speed(+500%);</strong>", "", 7_200, ["nullDelta10"], (resource) => {resource.modifyDeltaMult(6)}],
                     ["nullDelta10", "optimal_capture", "<strong>nullpointer_passive_capture_speed(+999%);</strong>", "", 111_000, [], (resource) => {resource.modifyDeltaMult(9.99)}],
 
-                    /*initial upgrade*/["nullBoost1", "arc_hack.exe", "<span class='rainbow'>arcbit_decryption_and_process_multiplier=100;</span>", "", 111, ["nullBoost2"], (resource) => {Utils.gameData.resources.get("arcbits").modifyBtnValBaseMult(100); Utils.gameData.resources.get("arcbits").modifyDeltaBaseMult(100);}],
-                    ["nullBoost2", "hyperboost.exe", "<span class='rainbow'>resources.get('hyperkeys').setMultiplier(175);</span>", "", 22_222, ["nullBoost3"], (resource) => {Utils.gameData.resources.get("hyperkeys").modifyBtnValBaseMult(175); Utils.gameData.resources.get("hyperkeys").modifyDeltaBaseMult(175);}],
-                    ["nullBoost3", "core_generator_overclock.exe", "<span class='rainbow'>gameData.params.CORE_GENERATION_SPEED*=25;</span>", "", 3_333_333, ["nullBoost4"], (resource) => {Utils.gameData.resources.get("cores").modifyDeltaBaseMult(25);}],
-                    ["nullBoost4", "resourceGen_final_FINAL.exe", '<span class="rainbow">internalFiles("~/var/saveData.json").write("{ALL_RESOURCES_MULTIPLIER: 250}");</span>', "", 444_444_444, ["nullFinal"], (resource) => {Utils.gameData.resources.get("arcbits").modifyBtnValBaseMult(250); Utils.gameData.resources.get("arcbits").modifyDeltaBaseMult(250); Utils.gameData.resources.get("hyperkeys").modifyBtnValBaseMult(250); Utils.gameData.resources.get("hyperkeys").modifyDeltaBaseMult(250); Utils.gameData.resources.get("nullpointers").modifyBtnValBaseMult(250); Utils.gameData.resources.get("nullpointers").modifyDeltaBaseMult(250);}],
-                    ["nullFinal", "<span class='obfuscated'>0000000000000000</span>", "<span class='rainbow'>MOV 0x000A998E, #1000;</span>", "", 99_999_000_000, [], (resource) => {Utils.gameData.resources.get("arcbits").modifyBtnValBaseMult(1000); Utils.gameData.resources.get("arcbits").modifyDeltaBaseMult(1000); Utils.gameData.resources.get("hyperkeys").modifyBtnValBaseMult(1000); Utils.gameData.resources.get("hyperkeys").modifyDeltaBaseMult(1000); Utils.gameData.resources.get("nullpointers").modifyBtnValBaseMult(1000); Utils.gameData.resources.get("nullpointers").modifyDeltaBaseMult(1000);}],
+                    /*initial upgrade*/["nullBoost1", "arc_hack.exe", "<span class='rainbow'>arcbit_decryption_and_process_multiplier=8;</span>", "", 111, ["nullBoost2"], (resource) => {Utils.gameData.resources.get("arcbits").modifyBtnValBaseMult(8); Utils.gameData.resources.get("arcbits").modifyDeltaBaseMult(100);}],
+                    ["nullBoost2", "hyperboost.exe", "<span class='rainbow'>resources.get('hyperkeys').setMultiplier(8);</span>", "", 22_222, ["nullBoost3"], (resource) => {Utils.gameData.resources.get("hyperkeys").modifyBtnValBaseMult(16); Utils.gameData.resources.get("hyperkeys").modifyDeltaBaseMult(175);}],
+                    ["nullBoost3", "core_generator_overclock.exe", "<span class='rainbow'>gameData.params.CORE_GENERATION_SPEED*=4;</span>", "", 3_333_333, ["nullBoost4"], (resource) => {Utils.gameData.resources.get("cores").modifyDeltaBaseMult(5);}],
+                    ["nullBoost4", "resourceGen_final_FINAL.exe", '<span class="rainbow">internalFiles("~/var/saveData.json").write("{ALL_RESOURCES_MULTIPLIER: 2}");</span>', "", 444_444_444, ["nullFinal"], (resource) => {Utils.gameData.resources.get("arcbits").modifyBtnValBaseMult(2); Utils.gameData.resources.get("arcbits").modifyDeltaBaseMult(2); Utils.gameData.resources.get("hyperkeys").modifyBtnValBaseMult(2); Utils.gameData.resources.get("hyperkeys").modifyDeltaBaseMult(2); Utils.gameData.resources.get("nullpointers").modifyBtnValBaseMult(2); Utils.gameData.resources.get("nullpointers").modifyDeltaBaseMult(2);}],
+                    ["nullFinal", "<span class='obfuscated'>0000000000000000</span>", "<span class='rainbow'>MOV 0x000A998E, '#4x';</span>", "", 99_999_000_000, [], (resource) => {Utils.gameData.resources.get("arcbits").modifyBtnValBaseMult(4); Utils.gameData.resources.get("arcbits").modifyDeltaBaseMult(4); Utils.gameData.resources.get("hyperkeys").modifyBtnValBaseMult(4); Utils.gameData.resources.get("hyperkeys").modifyDeltaBaseMult(4); Utils.gameData.resources.get("nullpointers").modifyBtnValBaseMult(4); Utils.gameData.resources.get("nullpointers").modifyDeltaBaseMult(4);}],
                 ]
             ],
         ])
