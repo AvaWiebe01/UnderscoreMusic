@@ -197,13 +197,23 @@ export class CpuBleedArch extends HyperMod {
     } 
 }
 
-export class RamArch extends HyperMod {
+export class MemoryRedirectionArch extends HyperMod {
 
     enable() {
+        Utils.gameData.resources.get("ram").addDeltaMultSource("memoryRedirection");
+        Utils.gameData.multipliers.get("memoryRedirection").showDisplays();
+
+        Utils.gameData.resources.get("arcbits").addDeltaMultSource("memoryRedirectionPenalty");
+        Utils.gameData.multipliers.get("memoryRedirectionPenalty").showDisplays();
         this.enabled = true;
     }
 
     disable() {
+        Utils.gameData.resources.get("ram").removeDeltaMultSource("memoryRedirection");
+        Utils.gameData.multipliers.get("memoryRedirection").hideDisplays();
+
+        Utils.gameData.resources.get("arcbits").removeDeltaMultSource("memoryRedirectionPenalty");
+        Utils.gameData.multipliers.get("memoryRedirectionPenalty").hideDisplays();
         this.enabled = false;
     } 
 }
@@ -213,6 +223,7 @@ export function initHyperMods(gameData = new GameData()) {
         ["hyperMultArch", new HyperMultArch("hyperMultArch", "HyperMult", "<strong>All</strong> resource buttons contribute to <strong>ArcMult</strong>.")],
         ["keyMultArch", new KeyMultArch("keyMultArch", "KeyMult", "<strong>ArcMult</strong> also provides a multiplier to <strong>construction</strong> HyperKey generation.")],
         ["cpuBleedArch", new CpuBleedArch("cpuBleedArch", "CPU Bleed", "ArcBit <strong>Decryption</strong> yields <strong>+1%</strong> of active <strong>process</strong> ArcBit generation.")],
+        ["memoryRedirectionArch", new MemoryRedirectionArch("memoryRedirectionArch", "Memory Redirection", "<strong>RAM</strong> generation is multiplied by 1.02^(total process instances). <strong>ArcBit</strong> generation is multiplied by 0.98^(total process instances).")],
         ["networkGenerationArch", new NetworkGenerationArch("networkGenerationArch", "Network Generation", "Each instance of <strong>Link Crawler</strong> increases core generation rate by <strong>5%</strong>.")],
         ["hyperCoreArch", new HyperCoreArch("hyperCoreArch", "HyperCore", "<strong>Core</strong> generation rate is multiplied by sqrt(current <strong>HyperKey</strong> amount).")],
         ["malwareDefenseArch", new MalwareDefenseArch("malwareDefenseArch", "Malware Defense", "Removing a <strong>virus</strong> generates <strong>2x</strong> stronger effects. Detect viruses <strong>30%</strong> faster.")],

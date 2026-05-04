@@ -416,6 +416,56 @@ class MultRamBoost extends Multiplier {
     }
 }
 
+// multiplier for memoryRedirection hypermod
+class MultMemoryRedirection extends Multiplier {
+    getMult() {
+        return this.mult;
+    }
+
+    multUpdate() {
+        this.mult = 2; //fix
+    }
+
+    initDisplayElements() {
+        this.displayElements = document.getElementsByClassName("memory_redirection_display");
+    }
+
+    toJSON() {
+        return {
+
+        };
+    }
+
+    fromJSON() {
+        
+    }
+}
+
+// multiplier for memoryRedirection hypermod arcbit penalty
+class MultMemoryRedirectionPenalty extends Multiplier {
+    getMult() {
+        return this.mult;
+    }
+
+    multUpdate() {
+        this.mult = 0.5; // fix
+    }
+
+    initDisplayElements() {
+        this.displayElements = document.getElementsByClassName("memory_redirection_penalty_display");
+    }
+
+    toJSON() {
+        return {
+
+        };
+    }
+
+    fromJSON() {
+        
+    }
+}
+
 // multiplier for Bonus Item
 class MultBonusItem extends Multiplier {
     getMult() {
@@ -453,6 +503,8 @@ export function initMultipliers(gameData = new GameData) {
         ["hyperCore", new MultHyperCore("hyperCore", "HyperCore", gameData)],
         ["multiProcess", new MultMultiProcess("multiProcess", "Multi-Process", gameData)],
         ["networkGeneration", new MultNetworkGeneration("networkGeneration", "Network Generation", gameData)],
+        ["memoryRedirection", new MultMemoryRedirection("memoryRedirection", "Memory Redirection", gameData)],
+        ["memoryRedirectionPenalty", new MultMemoryRedirection("memoryRedirectionPenalty", "Memory Redirection", gameData)],
 
         // bonus mult
         ["bonusItem", new MultBonusItem("bonusItem", gameData)],

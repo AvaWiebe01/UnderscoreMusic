@@ -30,7 +30,7 @@ static RESOURCE_INFO = [ // htmlName, amt, delta, btnVal, displayableName
 static CORE_INFO = ["cores", 2, 1/80, 0, "Cores", 8];
 
 // htmlName, amt, delta, btnVal, displayableName, initRamPerCore
-static RAM_INFO = ["ram", 1000, 0, 0, "RAM", 1000];
+static RAM_INFO = ["ram", 8, 0, 0, "RAM", 128];
 
 // htmlName, amt, btnVal, displayableName, initSuccessRate
 static NULLPOINTER_INFO = ["nullpointers", 0, 0, 1, "NullPointers", 0.01];
@@ -205,11 +205,15 @@ static ALL_UPGRADES_INFO = new Map([
                     ["tab3", "Expansion: BEYOND", "Un<span class='obfuscated'>l</span>ock ref<span class='obfuscated'>e</span>rences t<span class='obfuscated'>o</span> <strong class='rainbow'>out-of-b<span class='obfuscated'>o</span>unds</strong> memory addres<span class='obfuscated'>s</span>es.<br>Discover two new HyperMods.", "", 32_000_000_000, ["nullStreak1"], (resource) => {Utils.unlockTab("beyond_panel_tab"); unlockResource("nullpointers"); Utils.unlockUpgrade("hypermod_upgrades_list", "hyperkeys", "hypermodReroll"); Utils.unlockUpgrade("hypermod_upgrades_list", "hyperkeys", "hypermodStreak");}],
 
                     // Unlockable Systems (new UI elements in existing tabs)
-                    ["ram1", "RAM Interface", "Unlock the ability to manage the CPU's <strong>RAM</strong>. Processes receive a multiplier equal to <strong>log10(RAM)</strong>.", "", 5_750_000_000, ["ramHypermod", "ram2"], (resource) => {Utils.gameData.resources.get("ram").unlock(); resource.addDeltaMultSource("ramBoost"); Utils.gameData.multipliers.get("ramBoost").unlock();}],
+                    ["ram1", "RAM Interface", "Unlock the ability to manage the CPU's <strong>RAM</strong>. When <strong>Core</strong> capacity is full, excess Cores are converted into RAM. Processes receive a multiplier equal to <strong>log10(RAM)</strong>.", "", 5_750_000_000, ["ramHypermod", "ram2"], (resource) => {Utils.gameData.resources.get("ram").unlock(); resource.addDeltaMultSource("ramBoost"); Utils.gameData.multipliers.get("ramBoost").unlock();}],
 
-                    ["ram2", "Error Correction Code", "RAM", "", 5_750_000_000, ["ram3"], (resource) => {Utils.gameData.resources.get("ram");}],
+                    ["ram2", "Memory Salvage", "Generate <strong>2x</strong> more RAM per converted Core.", "", 28_000_000_000, ["ram3"], (resource) => {Utils.gameData.resources.get("ram").modifyRamPerCore(2);}],
+                    ["ram3", "Improved Memory Salvage", "Generate <strong>2x</strong> more RAM per converted Core.", "", 945_000_000_000, ["ram4"], (resource) => {Utils.gameData.resources.get("ram").modifyRamPerCore(2);}],
+                    ["ram4", "Optimized Memory Salvage", "Generate <strong>2x</strong> more RAM per converted Core.", "", 22_250_000_000_000, ["ram5"], (resource) => {Utils.gameData.resources.get("ram").modifyRamPerCore(2);}],
+                    ["ram5", "Atomic Memory Salvage", "Generate <strong>4x</strong> more RAM per converted Core.", "", 740_000_000_000_000, ["ram6"], (resource) => {Utils.gameData.resources.get("ram").modifyRamPerCore(4);}],
+                    ["ram6", "Quantum Memory Salvage", "Generate <strong>8x</strong> more RAM per converted Core.", "", 44_500_000_000_000_000, [], (resource) => {Utils.gameData.resources.get("ram").modifyRamPerCore(8);}],
 
-                    ["ramHypermod", "RAM: HyperMod Access", "Discover a new <strong>HyperMod</strong>.", "", 290_000_000_000, [], (resource) => {Utils.unlockUpgrade("hypermod_upgrades_list", "hyperkeys", "hypermod");}],
+                    ["ramHypermod", "RAM: HyperMod Access", "Discover a new <strong>HyperMod</strong>.", "", 290_000_000_000, [], (resource) => {Utils.unlockUpgrade("hypermod_upgrades_list", "hyperkeys", "hypermodMemoryRedirection");}],
                 ]
             ],
         ])
@@ -235,6 +239,8 @@ static ALL_UPGRADES_INFO = new Map([
                     ["hypermodHyperMult", "HyperMult Architecture", "<strong>All</strong> resource buttons contribute to <strong>ArcMult</strong>.", "", 32, [], (resource) => {unlockHyperMod("hyperMultArch");}],
 
                     ["hypermodCpuBleed", "CPU Bleed Architecture", "ArcBit <strong>Decryption</strong> yields a percentage of active process ArcBit generation.", "", 225, [], (resource) => {unlockHyperMod("cpuBleedArch");}],
+
+                    ["hypermodMemoryRedirection", "Memory Redirection Architecture", "Divert processes to <strong>RAM</strong> generation, sacrificing <strong>ArcBit</strong> generation.", "", 415, [], (resource) => {unlockHyperMod("memoryRedirectionArch");}],
 
                     ["hypermodReroll", "Reroll+ Architecture", "Improve success rate of <strong>Locating</strong> NullPointers.", "", 800, [], (resource) => {unlockHyperMod("rerollArch");}],
 

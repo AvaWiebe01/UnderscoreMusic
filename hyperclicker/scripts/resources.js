@@ -305,6 +305,10 @@ class Ram extends Resource {
         this.ramPanelElement.classList.remove("not_unlocked");
     }
 
+    modifyRamPerCore(amount) {
+        this.ramPerCore *= amount;
+    }
+
     getBaseDelta() {
         return this.delta;
     }

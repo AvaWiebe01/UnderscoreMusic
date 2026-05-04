@@ -34,6 +34,9 @@ export class Utils {
     }
 
     static getDisplayableNumber(num, hasDecimals = true, notation = this.notationType) {
+
+        let decimalCount = Math.min(num > 0.000000000001 ? Math.max(-Math.log10(num) + 2.99999, 3) : 0, 5);
+
         let suffix = "";
         switch(notation) {
             case 0:
@@ -48,18 +51,19 @@ export class Utils {
             case 3:
                 suffix = num < 1000 ? "" : "e+" + Math.floor(Math.log10(num)/3)*3;
                 break;
+
+            // extra notations
             case 4: // fuck it, don't shorten it at all
                 return num.toFixed((num < 1000) ? 5 : 0);
             case 5:
                 suffix = " " + Constants.DATA_SIZE_ABBREVIATED_SUFFIXES[num >= 1000 ? Math.floor(Math.log10(num)/3) : 0];
-                break;
+                
+                return (num/(10**(Math.floor(Math.log10(num)/3)*3))).toFixed(decimalCount) + '<span class="suffix">' + suffix + '</span>';
             case 6:
                 suffix = " " + Constants.DATA_SIZE_SUFFIXES[num >= 1000 ? Math.floor(Math.log10(num)/3) : 0];
-                break;
 
+                return (num/(10**(Math.floor(Math.log10(num)/3)*3))).toFixed(decimalCount) + '<span class="suffix">' + suffix + '</span>';
         }
-        
-        let decimalCount = Math.min(num > 0.000000000001 ? Math.max(-Math.log10(num) + 2.99999, 3) : 0, 5);
 
         if(num >= 1000) {
             return (num/(10**(Math.floor(Math.log10(num)/3)*3))).toFixed(decimalCount) + '<span class="suffix">' + suffix + '</span>';
