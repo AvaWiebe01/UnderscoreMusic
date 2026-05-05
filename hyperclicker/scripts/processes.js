@@ -107,7 +107,7 @@ export class Process {
             console.log("Not enough to sell!");
             return false;
         }
-
+        
         return true;
     }
 

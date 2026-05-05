@@ -4,155 +4,166 @@ import { GameData } from "./gamedata.js";
 
 export function saveGame() {
 
-    const gameData = Utils.gameData;
+    try {
 
-    var resourcesObj = {};
-    var processesObj = {};
-    var upgradesObj = {};
-    var multipliersObj = {};
-    var hypermodsObj = {};
+        const gameData = Utils.gameData;
 
-    gameData.resources.forEach((resource, resourceName) => {
-        resourcesObj[resourceName] = resource.toJSON();
-    });
+        var resourcesObj = {};
+        var processesObj = {};
+        var upgradesObj = {};
+        var multipliersObj = {};
+        var hypermodsObj = {};
 
-    gameData.processes.forEach((processMap, resourceName) => {
-        processesObj[resourceName] = {};
-
-        processMap.forEach((process, processName) => {
-            processesObj[resourceName][processName] = process.toJSON();
+        gameData.resources.forEach((resource, resourceName) => {
+            resourcesObj[resourceName] = resource.toJSON();
         });
-    });
 
-    upgradesObj = Utils.purchasedUpgrades;
+        gameData.processes.forEach((processMap, resourceName) => {
+            processesObj[resourceName] = {};
 
-    gameData.multipliers.forEach((multiplier, multiplierName) => {
-        multipliersObj[multiplierName] = multiplier.toJSON();
-    });
+            processMap.forEach((process, processName) => {
+                processesObj[resourceName][processName] = process.toJSON();
+            });
+        });
 
-    gameData.hypermods.mods.forEach((hypermod, hypermodName) => {
-        hypermodsObj[hypermodName] = hypermod.toJSON();
-    });
+        upgradesObj = Utils.purchasedUpgrades;
 
-    const saveFile = {
-        resources: resourcesObj,
+        gameData.multipliers.forEach((multiplier, multiplierName) => {
+            multipliersObj[multiplierName] = multiplier.toJSON();
+        });
 
-        processes: processesObj,
+        gameData.hypermods.mods.forEach((hypermod, hypermodName) => {
+            hypermodsObj[hypermodName] = hypermod.toJSON();
+        });
 
-        upgrades: upgradesObj,
+        const saveFile = {
+            resources: resourcesObj,
 
-        multipliers: multipliersObj,
+            processes: processesObj,
 
-        hypermods: hypermodsObj,
+            upgrades: upgradesObj,
 
-        options: {
-            notationType: Utils.notationType,
+            multipliers: multipliersObj,
 
-            stickyResources: Utils.stickyResources,
+            hypermods: hypermodsObj,
 
-            largeResourceButtons: Utils.largeResourceButtons,
+            options: {
+                notationType: Utils.notationType,
 
-            musicMuted: Utils.gameData.audio.musicMuted,
-            sfxMuted: Utils.gameData.audio.sfxMuted,
-            storyMusicMuted: Utils.gameData.audio.storyMusicMuted,
-            storySfxMuted: Utils.gameData.audio.storySfxMuted,
+                stickyResources: Utils.stickyResources,
 
-            seenIntro: Utils.seenIntro,
-        },
+                largeResourceButtons: Utils.largeResourceButtons,
 
-        validationField: Math.random(),
+                musicMuted: Utils.gameData.audio.musicMuted,
+                sfxMuted: Utils.gameData.audio.sfxMuted,
+                storyMusicMuted: Utils.gameData.audio.storyMusicMuted,
+                storySfxMuted: Utils.gameData.audio.storySfxMuted,
+
+                seenIntro: Utils.seenIntro,
+            },
+
+            validationField: Math.random(),
+        }
+
+        console.log(`Save validation #: ${saveFile.validationField}`);
+
+        const saveFileStr = JSON.stringify(saveFile);
+        localStorage.setItem("playerSave", saveFileStr);
+
+    } catch(e) {
+        Utils.displayError(e, "There was an issue saving your data.");
     }
-
-    console.log(`Save validation #: ${saveFile.validationField}`);
-
-    const saveFileStr = JSON.stringify(saveFile);
-    localStorage.setItem("playerSave", saveFileStr);
 }
 
 export function loadGame() {
 
-    const gameData = Utils.gameData;
-    
-    const saveFile = JSON.parse(localStorage.getItem("playerSave"));
+    try {
 
-    // restore all upgrades
-    for (let upgd of saveFile.upgrades ?? []) {
-        const upgradeObject = gameData.upgrades.get(upgd.upgradeTypeTag).get(upgd.resourceName).get(upgd.key);
-        upgradeObject.buy(true);
-        upgradeObject.upgradeElement.classList.add("hidden");
+        const gameData = Utils.gameData;
+        
+        const saveFile = JSON.parse(localStorage.getItem("playerSave"));
 
-        // make unlocked upgrades visible
-        for (const unlockUpgradeKey of upgradeObject.unlockUpgrades) {
-            Utils.gameData.upgrades?.get(upgd.upgradeTypeTag)?.get(upgd.resourceName)?.get(unlockUpgradeKey)?.unlock();
+        // restore all upgrades
+        for (let upgd of saveFile.upgrades ?? []) {
+            const upgradeObject = gameData.upgrades.get(upgd.upgradeTypeTag).get(upgd.resourceName).get(upgd.key);
+            upgradeObject.buy(true);
+            upgradeObject.upgradeElement.classList.add("hidden");
+
+            // make unlocked upgrades visible
+            for (const unlockUpgradeKey of upgradeObject.unlockUpgrades) {
+                Utils.gameData.upgrades?.get(upgd.upgradeTypeTag)?.get(upgd.resourceName)?.get(unlockUpgradeKey)?.unlock();
+            }
+
+            // add to unlocked upgrades list
+            let purchasedUpgradeList = document.querySelector(`.purchased_upgrade_list[upgrade_type="${upgd.upgradeTypeTag}"]`);
+            if(purchasedUpgradeList) {
+                purchasedUpgradeList.innerHTML = `
+                    <div class="purchased_upgrade">
+                        <h3>${upgradeObject.title}</h3>
+                        <span class="description">${upgradeObject.description}</span>
+                    </div>
+                ` + purchasedUpgradeList.innerHTML;
+            }
         }
 
-        // add to unlocked upgrades list
-        let purchasedUpgradeList = document.querySelector(`.purchased_upgrade_list[upgrade_type="${upgd.upgradeTypeTag}"]`);
-        if(purchasedUpgradeList) {
-            purchasedUpgradeList.innerHTML = `
-                <div class="purchased_upgrade">
-                    <h3>${upgradeObject.title}</h3>
-                    <span class="description">${upgradeObject.description}</span>
-                </div>
-            ` + purchasedUpgradeList.innerHTML;
-        }
-    }
+        // restore all processes
+        gameData.processes.forEach((processMap, resourceName) => {
+            processMap.forEach((process, processName) => {
+                process.numBought = saveFile.processes?.[process.resource.htmlName][processName].numBought;
+                process.baseProductionMult = saveFile.processes?.[process.resource.htmlName][processName].baseProductionMult;
 
-    // restore all processes
-    gameData.processes.forEach((processMap, resourceName) => {
-        processMap.forEach((process, processName) => {
-            process.numBought = saveFile.processes?.[process.resource.htmlName][processName].numBought;
-            process.baseProductionMult = saveFile.processes?.[process.resource.htmlName][processName].baseProductionMult;
+                // unlock next and all previous processes
+                if(process.numBought > 0) {
+                    var elem = process.processElement.nextElementSibling ?? process.processElement;
 
-            // unlock next and all previous processes
-            if(process.numBought > 0) {
-                var elem = process.processElement.nextElementSibling ?? process.processElement;
-
-                while (elem ?? false) {
-                    elem.classList.remove("not_unlocked");
-                    elem = elem.previousElementSibling ?? false;
+                    while (elem ?? false) {
+                        elem.classList.remove("not_unlocked");
+                        elem = elem.previousElementSibling ?? false;
+                    }
                 }
+            });
+        });
+
+        // restore all multipliers
+        gameData.multipliers.forEach((multiplier, multiplierName) => {
+            if(saveFile.multipliers?.[multiplierName] ?? false) {multiplier.fromJSON(saveFile.multipliers[multiplierName])};
+        });
+
+        // restore all hypermods
+        gameData.hypermods.mods.forEach((hypermod, hypermodName) => {
+            if(saveFile.hypermods?.[hypermodName]?.enabled ?? false) {
+                hypermod.enable();
+                gameData.hypermods.enabledMods.set(hypermodName, hypermod);
+                document.querySelector(`.architecture_list .hypermod[name="${hypermodName}"]`).classList.add("enabled");
             }
         });
-    });
 
-    // restore all multipliers
-    gameData.multipliers.forEach((multiplier, multiplierName) => {
-        if(saveFile.multipliers?.[multiplierName] ?? false) {multiplier.fromJSON(saveFile.multipliers[multiplierName])};
-    });
+        // restore all resources
+        gameData.resources.forEach((resource, resourceName) => {
 
-    // restore all hypermods
-    gameData.hypermods.mods.forEach((hypermod, hypermodName) => {
-        if(saveFile.hypermods?.[hypermodName]?.enabled ?? false) {
-            hypermod.enable();
-            gameData.hypermods.enabledMods.set(hypermodName, hypermod);
-            document.querySelector(`.architecture_list .hypermod[name="${hypermodName}"]`).classList.add("enabled");
-        }
-    });
+            if (saveFile?.resources?.[resourceName] ?? false) {resource.amt = saveFile.resources[resourceName].amt;}
+            //resource.deltaBaseMult = saveFile.resources?.[resourceName].deltaBaseMult;
+            //resource.btnValBaseMult = saveFile.resources?.[resourceName].btnValBaseMult;
+        });
 
-    // restore all resources
-    gameData.resources.forEach((resource, resourceName) => {
+        // restore all options
+        Utils.notationType = saveFile.options.notationType ?? 0;
+        if (!(saveFile.options.stickyResources ?? true)) {Utils.toggleStickyResources(document.querySelector(".options .option .sticky_resources_button"));}
+        if ((saveFile.options.largeResourceButtons ?? false)) {Utils.toggleLargeResourceButtons(document.querySelector(".options .option .large_resource_buttons_button"));}
+        gameData.audio.musicMuted = saveFile.options?.musicMuted ?? false;
+        gameData.audio.sfxMuted = saveFile.options?.sfxMuted ?? false;
+        gameData.audio.storyMusicMuted = saveFile.options?.storyMusicMuted ?? false;
+        gameData.audio.storySfxMuted = saveFile.options?.storySfxMuted ?? false;
+        Utils.seenIntro = saveFile.options.seenIntro ?? false;
 
-        if (saveFile?.resources?.[resourceName] ?? false) {resource.amt = saveFile.resources[resourceName].amt;}
-        //resource.deltaBaseMult = saveFile.resources?.[resourceName].deltaBaseMult;
-        //resource.btnValBaseMult = saveFile.resources?.[resourceName].btnValBaseMult;
-    });
+        // update displays
+        Utils.refreshAllDisplays();
 
-    // restore all options
-    Utils.notationType = saveFile.options.notationType ?? 0;
-    if (!(saveFile.options.stickyResources ?? true)) {Utils.toggleStickyResources(document.querySelector(".options .option .sticky_resources_button"));}
-    if ((saveFile.options.largeResourceButtons ?? false)) {Utils.toggleLargeResourceButtons(document.querySelector(".options .option .large_resource_buttons_button"));}
-    gameData.audio.musicMuted = saveFile.options?.musicMuted ?? false;
-    gameData.audio.sfxMuted = saveFile.options?.sfxMuted ?? false;
-    gameData.audio.storyMusicMuted = saveFile.options?.storyMusicMuted ?? false;
-    gameData.audio.storySfxMuted = saveFile.options?.storySfxMuted ?? false;
-    Utils.seenIntro = saveFile.options.seenIntro ?? false;
+        console.log(`Load validation #: ${saveFile.validationField}`);
 
-
-    // update displays
-    Utils.refreshAllDisplays();
-
-    console.log(`Load validation #: ${saveFile.validationField}`);
+    } catch(e) {
+        Utils.displayError(e, "There was an issue loading your save file.");
+    }
 }
 
 export function resetProgress() {

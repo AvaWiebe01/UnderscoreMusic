@@ -136,6 +136,51 @@ body {
 	margin:0;
 }
 
+.error_screen {
+	position:fixed;
+	color:var(--text-color);
+	top:0;
+	align-items:stretch;
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+	font-family:"spacemono", "Courier New", monospace;
+	background-color: var(--bg-color);
+	width:100%;
+	height:100%;
+	z-index: 2000;
+}
+
+.error_screen.hidden {
+	width:0;
+	height:0;
+	z-index:0;
+	display:none;
+}
+
+.error_screen h2 {
+	text-align:center;
+	font-size:4.5rem;
+	color:var(--main-color);
+	margin-bottom:1rem;
+	text-shadow: var(--main-text-glow-color) 0 0 0.75rem;
+}
+
+.error_screen p {
+	text-align:center;
+	font-size:1rem;
+}
+
+.error_screen .error_message {
+	font-size: 2rem;
+}
+
+.error_screen div.debug {
+	text-align:center;
+	font-size:0.75rem;
+	color:var(--text-glow-color);
+}
+
 .loading_screen {
 	position:fixed;
 	top:0;

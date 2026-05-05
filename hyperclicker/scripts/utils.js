@@ -192,4 +192,19 @@ export class Utils {
     static resetProgress() {
         resetProgress();
     }
+
+    static displayError(e, msg = "Something went wrong.") {
+
+        if(!(e instanceof Error)) {
+            e = new Error(e);
+        }
+
+        console.log(`Error: ${e.name}`);
+        console.log(`Message: ${e.message}`);
+        console.log(msg);
+
+        const errorElement = document.querySelector(".error_screen");
+        errorElement.innerHTML = `<h2>Sorry, an error occurred.</h2><p><span class="error_message">${msg}</span><br><br><br>If the issue persists after reloading, please contact me for help.<br><br>Discord: @underscoreofficial<br>Email: underscoremusic.contact@gmail.com</p><div class="debug">Save this info:<br>Type: ${e.name}<br>Msg: ${e.message}</div>`;
+        errorElement.classList.remove("hidden");
+    }
 }

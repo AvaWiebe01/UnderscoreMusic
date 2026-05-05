@@ -113,69 +113,75 @@ window.onload = function() {
 // ======== MAIN GAME LOOP ======== //
 function gameTick(currentTime, gameData = new GameData()) {
 
-    // Performance metric
-    //let startTime, endTime; startTime = window.performance.now() * 1000; 
+    try {
 
-    let deltaTime = currentTime - gameData.lastTime;
-    gameData.deltaTime = deltaTime;
+        // Performance metric
+        //let startTime, endTime; startTime = window.performance.now() * 1000; 
 
-    if (deltaTime >= 1000/Constants.REFRESH_RATE) {
+        let deltaTime = currentTime - gameData.lastTime;
+        gameData.deltaTime = deltaTime;
 
-        // Perform all actions that must occur every tick
-        gameData.multipliers.forEach((multiplier, key) => {
-            multiplier.multUpdate();
-            multiplier.updateDisplays();
-        });
+        if (deltaTime >= 1000/Constants.REFRESH_RATE) {
 
-        gameData.resources.forEach((resource, key) => {
-            resource.resourceTick(deltaTime, gameData);
-        });
-
-        gameData.processes.forEach((processMap, key) => {
-            processMap.forEach((process, key) => {
-                process.displayActiveProduction();
-                process.displayBaseGeneration();
+            // Perform all actions that must occur every tick
+            gameData.multipliers.forEach((multiplier, key) => {
+                multiplier.multUpdate();
+                multiplier.updateDisplays();
             });
-        });
 
-        Utils.visualFxTick();
-        
-        gameData.extraTimer += deltaTime;
-        gameData.bonusTimer += deltaTime;
-        
-        gameData.lastTime = currentTime;
+            gameData.resources.forEach((resource, key) => {
+                resource.resourceTick(deltaTime, gameData);
+            });
 
-        // autosave
-        if (gameData.autoSaveTimer >= Constants.AUTOSAVE_TIME_MS) {saveGame(gameData); gameData.autoSaveTimer=0} 
-        gameData.autoSaveTimer += deltaTime;
-    }
+            gameData.processes.forEach((processMap, key) => {
+                processMap.forEach((process, key) => {
+                    process.displayActiveProduction();
+                    process.displayBaseGeneration();
+                });
+            });
+
+            Utils.visualFxTick();
+            
+            gameData.extraTimer += deltaTime;
+            gameData.bonusTimer += deltaTime;
+            
+            gameData.lastTime = currentTime;
+
+            // autosave
+            if (gameData.autoSaveTimer >= Constants.AUTOSAVE_TIME_MS) {saveGame(gameData); gameData.autoSaveTimer=0} 
+            gameData.autoSaveTimer += deltaTime;
+        }
+        
+        if (gameData.extraTimer >= Constants.AVERAGING_TIME/Constants.AVERAGING_SAMPLES) {
+            gameData.resources.forEach((resource, key) => {
+                resource.calculateGain();
+                resource.displayAverageGain();
+            });
+
+            gameData.extraTimer -= Constants.AVERAGING_TIME/Constants.AVERAGING_SAMPLES; // Reset the counter but keep leftover time
+
+            if(gameData.extraTimer >= Constants.AVERAGING_TIME/Constants.AVERAGING_SAMPLES) {
+                gameData.extraTimer = 0; // prevent rapid ticks after resuming tab
+            }
+        }
+
+        // perform all actions that must occur every 1 second
+        if (gameData.bonusTimer >= Constants.ONE_SECOND_MS) {
+
+            gameData.bonusItem.bonusTick();
+            gameData.bonusTimer -= Constants.ONE_SECOND_MS; // reset counter but keep leftover time
+
+            if(gameData.bonusTimer >= Constants.ONE_SECOND_MS) {
+                gameData.bonusTimer = 0; // prevent rapid ticks after resuming tab
+            }
+        }
+        
+        // Performance metric
+        //endTime = window.performance.now() * 1000; console.log(`Unit: Microseconds >>> Start: ${startTime} > End: ${endTime} > GENERATION TIME: ${endTime - startTime} > ALLOTTED TIME/FRAME: ${1000000/Constants.REFRESH_RATE} > % OF TIME USED: ${((endTime - startTime) / (1000000/Constants.REFRESH_RATE)) * 100}`);
+
+        requestAnimationFrame((currentTime) => gameTick(currentTime, gameData));
     
-    if (gameData.extraTimer >= Constants.AVERAGING_TIME/Constants.AVERAGING_SAMPLES) {
-        gameData.resources.forEach((resource, key) => {
-            resource.calculateGain();
-            resource.displayAverageGain();
-        });
-
-        gameData.extraTimer -= Constants.AVERAGING_TIME/Constants.AVERAGING_SAMPLES; // Reset the counter but keep leftover time
-
-        if(gameData.extraTimer >= Constants.AVERAGING_TIME/Constants.AVERAGING_SAMPLES) {
-            gameData.extraTimer = 0; // prevent rapid ticks after resuming tab
-        }
+    } catch(e) {
+        Utils.displayError(e, "There was an issue with the game logic.");
     }
-
-    // perform all actions that must occur every 1 second
-    if (gameData.bonusTimer >= Constants.ONE_SECOND_MS) {
-
-        gameData.bonusItem.bonusTick();
-        gameData.bonusTimer -= Constants.ONE_SECOND_MS; // reset counter but keep leftover time
-
-        if(gameData.bonusTimer >= Constants.ONE_SECOND_MS) {
-            gameData.bonusTimer = 0; // prevent rapid ticks after resuming tab
-        }
-    }
-
-    // Performance metric
-    //endTime = window.performance.now() * 1000; console.log(`Unit: Microseconds >>> Start: ${startTime} > End: ${endTime} > GENERATION TIME: ${endTime - startTime} > ALLOTTED TIME/FRAME: ${1000000/Constants.REFRESH_RATE} > % OF TIME USED: ${((endTime - startTime) / (1000000/Constants.REFRESH_RATE)) * 100}`);
-
-    requestAnimationFrame((currentTime) => gameTick(currentTime, gameData));
 }
