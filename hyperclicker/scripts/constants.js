@@ -23,14 +23,14 @@ static DATA_SIZE_SUFFIXES = ["Bits","Kilobits","Megabits","Gigabits","Terabits",
 
 static RESOURCE_INFO = [ // htmlName, amt, delta, btnVal, displayableName
     ["arcbits", 1111111111110, 0.00010, "ArcBits"],
-    ["hyperkeys", 0.00, 0.00001, "HyperKeys"],
+    ["hyperkeys", 1111110, 0.00001, "HyperKeys"],
 ];
 
 // htmlName, amt, delta, btnVal, displayableName, initMaxCores
 static CORE_INFO = ["cores", 2, 1/80, 0, "Cores", 8];
 
 // htmlName, amt, delta, btnVal, displayableName, initRamPerCore
-static RAM_INFO = ["ram", 8, 0, 0, "RAM", 128];
+static RAM_INFO = ["ram", 8, 0, 0, "RAM", 512];
 
 // htmlName, amt, btnVal, displayableName, initSuccessRate
 static NULLPOINTER_INFO = ["nullpointers", 0, 0, 1, "NullPointers", 0.01];
@@ -205,7 +205,7 @@ static ALL_UPGRADES_INFO = new Map([
                     ["tab3", "Expansion: BEYOND", "Un<span class='obfuscated'>l</span>ock ref<span class='obfuscated'>e</span>rences t<span class='obfuscated'>o</span> <strong class='rainbow'>out-of-b<span class='obfuscated'>o</span>unds</strong> memory addres<span class='obfuscated'>s</span>es.<br>Discover two new HyperMods.", "", 32_000_000_000, ["nullStreak1"], (resource) => {Utils.unlockTab("beyond_panel_tab"); unlockResource("nullpointers"); Utils.unlockUpgrade("hypermod_upgrades_list", "hyperkeys", "hypermodReroll"); Utils.unlockUpgrade("hypermod_upgrades_list", "hyperkeys", "hypermodStreak");}],
 
                     // Unlockable Systems (new UI elements in existing tabs)
-                    ["ram1", "RAM Interface", "Unlock the ability to manage the CPU's <strong>RAM</strong>. When <strong>Core</strong> capacity is full, excess Cores are converted into RAM. Processes receive a multiplier equal to <strong>log10(RAM)</strong>.", "", 5_750_000_000, ["ramHypermod", "ram2"], (resource) => {Utils.gameData.resources.get("ram").unlock(); resource.addDeltaMultSource("ramBoost"); Utils.gameData.multipliers.get("ramBoost").unlock();}],
+                    ["ram1", "RAM Interface", "Unlock the ability to manage the CPU's <strong>RAM</strong>.<br><br>When <strong>Core</strong> capacity is full, excess Cores are converted into RAM.<br>Processes receive a multiplier equal to <strong>log10(RAM)</strong>.", "", 5_750_000_000, ["ramHypermod", "ram2"], (resource) => {Utils.gameData.resources.get("ram").unlock(); resource.addDeltaMultSource("ramBoost"); Utils.gameData.multipliers.get("ramBoost").unlock();}],
 
                     ["ram2", "Memory Salvage", "Generate <strong>2x</strong> more RAM per converted Core.", "", 28_000_000_000, ["ram3"], (resource) => {Utils.gameData.resources.get("ram").modifyRamPerCore(2);}],
                     ["ram3", "Improved Memory Salvage", "Generate <strong>2x</strong> more RAM per converted Core.", "", 945_000_000_000, ["ram4"], (resource) => {Utils.gameData.resources.get("ram").modifyRamPerCore(2);}],
@@ -232,7 +232,7 @@ static ALL_UPGRADES_INFO = new Map([
 
                     /*initial upgrade*/["hypermodKeyMult", "KeyMult Architecture", "<strong>ArcMult</strong> also provides a multiplier to <strong>construction</strong> HyperKey generation.", "", 0.08, ["hypermodMultiProcess"], (resource) => {unlockHyperMod("keyMultArch");}],
 
-                    /*initial upgrade*/["hypermodMalwareDefense", "Malware Defense Architecture", "Removing a <strong>virus</strong> generates stronger effects. Detect more viruses.", "", 0.575, ["hypermodHyperMult"], (resource) => {unlockHyperMod("malwareDefenseArch");}],
+                    /*initial upgrade*/["hypermodMalwareDefense", "Malware Defense Architecture", "Removing a <strong>virus</strong> generates stronger effects.<br>Detect more viruses.", "", 0.575, ["hypermodHyperMult"], (resource) => {unlockHyperMod("malwareDefenseArch");}],
 
                     ["hypermodMultiProcess", "Multi-Process Architecture", "<strong>Process</strong> ArcBit generation is multiplied by the lowest <strong>number of instances</strong> of all programs [excluding 0].", "", 4.3, ["hypermodCpuBleed"], (resource) => {unlockHyperMod("multiProcessArch");}],
 

@@ -423,7 +423,7 @@ class MultMemoryRedirection extends Multiplier {
     }
 
     multUpdate() {
-        this.mult = 2; //fix
+        this.mult = 1.02**Utils.getNumTotalProcesses();
     }
 
     initDisplayElements() {
@@ -448,7 +448,7 @@ class MultMemoryRedirectionPenalty extends Multiplier {
     }
 
     multUpdate() {
-        this.mult = 0.5; // fix
+        this.mult = 0.98**Utils.getNumTotalProcesses();
     }
 
     initDisplayElements() {
@@ -504,7 +504,7 @@ export function initMultipliers(gameData = new GameData) {
         ["multiProcess", new MultMultiProcess("multiProcess", "Multi-Process", gameData)],
         ["networkGeneration", new MultNetworkGeneration("networkGeneration", "Network Generation", gameData)],
         ["memoryRedirection", new MultMemoryRedirection("memoryRedirection", "Memory Redirection", gameData)],
-        ["memoryRedirectionPenalty", new MultMemoryRedirection("memoryRedirectionPenalty", "Memory Redirection", gameData)],
+        ["memoryRedirectionPenalty", new MultMemoryRedirectionPenalty("memoryRedirectionPenalty", "Memory Redirection", gameData)],
 
         // bonus mult
         ["bonusItem", new MultBonusItem("bonusItem", gameData)],

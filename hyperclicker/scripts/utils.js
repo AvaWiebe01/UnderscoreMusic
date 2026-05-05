@@ -177,6 +177,14 @@ export class Utils {
 
     }
 
+    static getNumTotalProcesses() {
+        var totalProcesses = 0;
+        this.gameData.processes.get("arcbits").forEach((process, processName) => {
+            totalProcesses += process.numBought;
+        });
+        return totalProcesses;
+    }
+
     static save() {
         saveGame(this.gameData);
     }
