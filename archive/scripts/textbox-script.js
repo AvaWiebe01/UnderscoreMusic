@@ -29,7 +29,7 @@ const DIALOGUE = new Map([
         [
             new Line(   "HyperI/O Voice Transmission #1A70032E - Central District, 08:49 PM", "system", 2, 
                         "pppppppp ppppp pppppppppppp _________ , aaaaaaa aaaaaaaa, ppppp pp",
-                        "ambient"),
+                        "neutral"),
 
             new Line(   "We’re detecting a heat signature around that corner, Kyana. I’d be cautious.", "luna", 1,
                         "_____ _________ _ ____ _________ ______ ____ ______, _____. ___ __ ________."),
@@ -83,7 +83,8 @@ const DIALOGUE = new Map([
         "C-LEVEL0",
         [
             new Line(   "HyperI/O Camera #3E9EFFF4 Audio Feed - Hyper Beam HQ, 12:41 AM", "system", 2,
-                        "pppppppp pppppp _________ ppppp pppp , aaaaa aaaa aa, ppppp pp"),
+                        "pppppppp pppppp _________ ppppp pppp , aaaaa aaaa aa, ppppp pp",
+                        "neutral"),
 
             new Line(   "Oh, hey Kyana! Didn't expect you to drop by today.", "onyx", 1,
                         "__, ___ _____. ______ ______ ___ __ ____ __ _____."),
@@ -180,7 +181,8 @@ const DIALOGUE = new Map([
         "E-KL32FA",
         [
             new Line(   "New Archon Camera #112D8A39 Audio Feed - Lotus Apartment Complex, 12:37 AM", "system", 2,
-                        "ppp pppppp pppppp _________ ppppp pppp , aaaaa aaaaaaaaa aaaaaaa, ppppp pp"),
+                        "ppp pppppp pppppp _________ ppppp pppp , aaaaa aaaaaaaaa aaaaaaa, ppppp pp",
+                        "ambient"),
 
             new Line(   "Kyana, I’m going to bed~!", "luna", 1,
                         "_____, ___ _____ __ ____."),
@@ -351,7 +353,8 @@ const DIALOGUE = new Map([
                         "_ _____ ____."),
 
             new Line(   "...I don’t know...", "kyana", 0.5,
-                        "ffff fffff ffff,,,"),
+                        "ffff fffff fffffff",
+                        "stop"),
 
             new Line(   "But we have to do something. We can’t let anyone use it. If that’s even possible.", "kyana", 1,
                         "___ __ ____ __ __ _________. __ _____ ___ ______ ___ __. __ ______ ____ ________."),
@@ -450,7 +453,8 @@ const DIALOGUE = new Map([
         "G-ADMIN1",
         [
             new Line(   "HyperI/O Camera #34C1D859 Audio Feed - Hyper Beam HQ Admin Office, 6:00 AM", "system", 2,
-                        "pppppppp pppppp _________ ppppp pppp , aaaaa aaaa aa aaaaa aaaaaa, pppp pp"),
+                        "pppppppp pppppp _________ ppppp pppp , aaaaa aaaa aa aaaaa aaaaaa, pppp pp",
+                        "dread"),
 
             new Line(   "Good morning, Arin. I think it’s time for us to have a little chat, hm?", "kyana", 1,
                         "____ _______, ____. _ _____ ____ ____ ___ __ __ ____ _ ______ iiii, www"),
@@ -549,7 +553,32 @@ const DIALOGUE = new Map([
         "!-LMTLOG",
         [
             new Line(   "New Archon Camera #00348EEA Audio Feed - Beaver Warehouses, 11:38 PM", "system", 2,
-                        "ppp pppppp pppppp _________ ppppp pppp , aaaaaa aaaaaaaaaa, ppppp pp"),
+                        "ppp pppppp pppppp _________ ppppp pppp , aaaaaa aaaaaaaaaa, ppppp pp",
+                        "dread"),
+
+            new Line(   "I assume you heard the news, sir?", "unknown", 1,
+                        "p pppppp ppp ppppp ppp ppppp,pppp"),
+
+            new Line(   "I did.", "unknown", 1,
+                        "a aaaa"),
+
+            new Line(   "Wrenn just doesn't know how to keep her nose out of something, does she?", "unknown", 1,
+                        "aaaaa aaaa aaaaaaa aaaa aaa aa aaaa aaa aaaa aaa aa aaaaaaaaaa,aaaa aaaa"),
+
+            new Line(   "She won't be a problem for much longer. Red team is staging a little operation of our own.", "unknown", 1,
+                        "ppp ppppp pp p ppppppp ppp pppp ppppppp.ppp pppp pp ppppppp p pppppp ppppppppp pp ppp pppp"),
+
+            new Line(   "Good. And the vehicle development?", "unknown", 1,
+                        "aaaaa.aaa aaa aaaaaaa aaaaaaaaaaaa"),
+
+            new Line(   "Slow but steady, sir. They're projecting completion in five to seven months.", "unknown", 1,
+                        "pppp ppp ppppppp,pppp.ppppppp pppppppppp pppppppppp pp pppp pp ppppp ppppppp"),
+
+            new Line(   "Tell them they're getting shot if it's not done in four. HB's engineers are fast.", "unknown", 1,
+                        "aaaa aaaa aaaaaaa aaaaaaa aaaa aa aaaa aaa aaaa aa aaaaa.aaaa aaaaaaaaa aaa aaaaa"),
+
+            new Line(   "Understood, sir.", "unknown", 1,
+                        "ppppppppppp,pppp"),
 
             new Line(   "- END OF RECOVERED DATA -", "system", 2,
                         "p ppp pp ppppppppp pppp p"),
@@ -559,8 +588,60 @@ const DIALOGUE = new Map([
     [
         "!-LXAN01",
         [
-            new Line(   "HyperI/O Camera #99A20001 Audio Feed - Hyper Beam HQ, 12:24 PM", "system", 2,
-                        "pppppppp pppppp _________ ppppp pppp , aaaaa aaaa aa, ppppp pp"),
+            new Line(   "HyperI/O Camera #99A20001 Audio Feed - Hyper Beam HQ Dining Hall, 12:24 PM", "system", 2,
+                        "pppppppp pppppp _________ ppppp pppp , aaaaa aaaa aa aaaaaa aaaa, ppppp pp",
+                        "neutral"),
+
+            new Line(   "Yo, what's up?", "lexia", 1,
+                        "__, ______ __?"),
+
+            new Line(   "Hey Lex!", "onyx", 1,
+                        "___, ___!"),
+
+            new Line(   "Hi, Lexia.", "kyana", 1,
+                        "___, ____"),
+
+            new Line(   "You came at a good time, actually.", "kyana", 1,
+                        "___ ____ __ _ ____ ____, _________"),
+
+            new Line(   "Oh?", "lexia", 1,
+                        "__?"),
+
+            new Line(   "Yeah, Kyana and I were just talking about you...", "onyx", 1,
+                        "____, _____ ___ _ ____ ____ _______ _____ ___,,,"),
+
+            new Line(   "...good things, I hope?", "lexia", 1,
+                        "_______ ______, _ ____?"),
+
+            new Line(   "Yes yes, don't worry. We just want your help with something.", "onyx", 1,
+                        "___ ___, _____ _____. __ ____ ____ ____ ____ ____ __________"),
+
+            new Line(   "You free to meet at her apartment after work today? Luna and I will be there, too.", "onyx", 1,
+                        "___ ____ __ ____ __ ___ _________ _____ ____ _____. ____ ___ _ ____ __ _____, ____"),
+
+            new Line(   "I mean... what is this all about...?", "lexia", 1,
+                        "_ ____,,, ____ __ ____ ___ _________"),
+
+            new Line(   "Kyana found out tha-", "onyx", 1,
+                        "_____ _____ ___ ____"),
+
+            new Line(   "I'll explain more later. We need another skilled proxy, and that's you.", "kyana", 1,
+                        "____ _______ ____ iiiii. __ ____ _______ _______ _____, ___ ______ ____"),
+
+            new Line(   "How cryptic. But sure, I can be there.", "lexia", 1,
+                        "___ _______. ___ ____, _ ___ __ ______"),
+
+            new Line(   "Perfect!", "onyx", 1,
+                        "_______!"),
+
+            new Line(   "I told you she'd say yes to me.", "kyana", 1,
+                        "_ wwww ___ _____ ___ ___ __ ___"),
+
+            new Line(   "...huh?", "lexia", 1,
+                        ",,,___?"),
+
+            new Line(   "Nothing. Wanna have lunch with us?", "onyx", 1,
+                        "iiiiiii. _____ ____ _____ ____ __?"),
                         
             new Line(   "- END OF RECOVERED DATA -", "system", 2,
                         "p ppp pp ppppppppp pppp p"),
@@ -657,23 +738,33 @@ window.onload = async function() {
     const nyxSpeech = document.getElementById("nyx_speech");
     const arinSpeech = document.getElementById("arin_speech");
     const lexiaSpeech = document.getElementById("lexia_speech");
+    const systemSpeech = document.getElementById("system_speech");
+    const unknownSpeech = document.getElementById("unknown_speech");
+
     const kyanaTrack = speechContext.createMediaElementSource(kyanaSpeech);
     const lunaTrack = speechContext.createMediaElementSource(lunaSpeech);
     const nyxTrack = speechContext.createMediaElementSource(nyxSpeech);
     const arinTrack = speechContext.createMediaElementSource(arinSpeech);
     const lexiaTrack = speechContext.createMediaElementSource(lexiaSpeech);
+    const systemTrack = speechContext.createMediaElementSource(systemSpeech);
+    const unknownTrack = speechContext.createMediaElementSource(unknownSpeech);
+
     kyanaTrack.connect(speechGain);
     lunaTrack.connect(speechGain);
     nyxTrack.connect(speechGain);
     arinTrack.connect(speechGain);
     lexiaTrack.connect(speechGain);
+    systemTrack.connect(speechGain);
+    unknownTrack.connect(speechGain);
 
     const voices = new Map([
         ["kyana", kyanaSpeech],
         ["luna", lunaSpeech],
-        ["nyx", nyxSpeech],
+        ["onyx", nyxSpeech],
         ["arin", arinSpeech],
         ["lexia", lexiaSpeech],
+        ["system", systemSpeech],
+        ["unknown", unknownSpeech],
     ]);
 
     const portraitRoot = "/images/archive/";
@@ -691,18 +782,18 @@ window.onload = async function() {
     const musicGain = musicContext.createGain();
     musicGain.connect(musicContext.destination);
 
-    const ambientResp = await fetch("/archive/music/ambient.wav");
+    const ambientResp = await fetch("/archive/music/dread.ogg");
     ambientBuffer = await musicContext.decodeAudioData(await ambientResp.arrayBuffer());
-    const delicateResp = await fetch("/archive/music/delicate.wav");
-    delicateBuffer = await musicContext.decodeAudioData(await delicateResp.arrayBuffer());
-    const strongResp = await fetch("/archive/music/strong.wav");
-    strongBuffer = await musicContext.decodeAudioData(await strongResp.arrayBuffer());
+    const dreadResp = await fetch("/archive/music/dread.ogg");
+    dreadBuffer = await musicContext.decodeAudioData(await dreadResp.arrayBuffer());
+    const neutralResp = await fetch("/archive/music/dread.ogg");
+    neutralBuffer = await musicContext.decodeAudioData(await neutralResp.arrayBuffer());
 
     const music = new Map([
-        ["ambient", ambientBuffer],   // Name:
-        ["delicate", delicateBuffer], // Name:
-        ["strong", strongBuffer],     // Name:
-    ])
+        ["ambient", ambientBuffer],     // Name: Zone: Void
+        ["dread", dreadBuffer],         // Name: Abandoned World
+        ["neutral", neutralBuffer],     // Name: 
+    ]);
 
     var currentMusic = null;
 
