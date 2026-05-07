@@ -1,6 +1,8 @@
 var musicContext;
 var ambientResp;
 var ambientBuffer;
+var musicVol;
+var musicGain;
 
 $(document).ready(() => {
 
@@ -10,15 +12,17 @@ $(document).ready(() => {
         const titleElement = document.getElementById("credits-title");
 
         buttonElement.classList.add("hidden");
-        creditsElement.classList.remove("hidden");
-        titleElement.scrollIntoView({
-            behavior:"smooth",
-            block:"start",
-        })
+        $(".credits").slideDown(500, () => {
+            titleElement.scrollIntoView({
+                behavior:"smooth",
+                block:"start",
+            })
+        });
         
         const creditsMusic = musicContext.createBufferSource();
+        musicGain.gain.setValueAtTime(musicVol, musicContext.currentTime);
         creditsMusic.buffer = ambientBuffer;
-        creditsMusic.connect(musicContext.destination);
+        creditsMusic.connect(musicGain);
         creditsMusic.loop = true;
         creditsMusic.start();
     })
@@ -26,7 +30,17 @@ $(document).ready(() => {
 })
 
 window.onload = async function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    musicVol = urlParams.get("musicVol") ?? 1;
+    
     musicContext = new AudioContext();
+    musicGain = musicContext.createGain();
+    musicGain.connect(musicContext.destination);
+    
     ambientResp = await fetch("/archive/music/ambient.ogg");
-    ambientBuffer = await musicContext.decodeAudioData(await ambientResp.arrayBuffer());
+    ambientBuffer = await musicContext.decodeAudioData(await ambientResp.arrayBuffer(), () => {
+        // remove the loading screen
+        const loadingScreen = document.querySelector(".loading_screen");
+        loadingScreen.classList.add("hidden");
+    });
 }
