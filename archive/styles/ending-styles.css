@@ -40,6 +40,38 @@
     font-family: "spacemono", 'Courier New', monospace;
 }
 
+.button-wrapper {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+button {
+    padding:0.5rem;
+    color:var(--main-color);
+    font-family:"spacemono", "Courier New", monospace;
+    text-align:center;
+    text-shadow: var(--main-text-glow-color) 0 0 0.75rem;
+    border: 0.1rem solid var(--main-color);
+    box-shadow: 0 0 0.75rem var(--main-box-glow-color),
+                inset 0 0 0.75rem var(--main-box-glow-color);
+    background-color:var(--main-bg-color-2);
+    transition-duration:0.15s;
+    font-size:1.5rem; 
+    height:4rem;
+    width:50%;
+}
+
+button:hover {
+    transform:scale(1.05,1.05);
+    color:var(--bg-color);
+    background-color:var(--main-color);
+}
+
+button:active {
+    transform:scale(0.98,0.98);
+}
+
 .credits {
     text-align:center;
     float:center;
@@ -56,10 +88,22 @@ h2 {
 	margin:1rem;
 }
 
+.credits h3 {
+    background-color:var(--transparent);
+    font-family: "spacemono", 'Courier New', monospace;
+	font-weight: normal;
+	font-size: 1.5rem;
+	color: var(--main-color);
+    text-shadow: var(--main-text-glow-color) 0 0 0.75rem;
+    text-align:center;
+	margin:1rem; 
+}
+
 .message {
     font-family: "spacemono", 'Courier New', monospace;
     font-size: 1.25rem;
     text-align:center;
+    line-height:2;
 }
 
 h4 {
@@ -92,4 +136,8 @@ p {
     background-color:var(--transparent);
     color: var(--main-color);
     text-shadow: var(--main-text-glow-color) 0 0 0.75rem;
+}
+
+.hidden {
+    display:none;
 }

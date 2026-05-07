@@ -72,6 +72,17 @@ export function loadGame() {
         for (const unlockUpgradeKey of upgradeObject.unlockUpgrades) {
             Utils.gameData.upgrades?.get(upgd.upgradeTypeTag)?.get(upgd.resourceName)?.get(unlockUpgradeKey).unlock();
         }
+
+        // add to unlocked upgrades list
+        let purchasedUpgradeList = document.querySelector(`.purchased_upgrade_list[upgrade_type="${upgd.upgradeTypeTag}"]`);
+        if(purchasedUpgradeList) {
+            purchasedUpgradeList.innerHTML = `
+                <div class="purchased_upgrade">
+                    <h3>${upgradeObject.title}</h3>
+                    <span class="description">${upgradeObject.description}</span>
+                </div>
+            ` + purchasedUpgradeList.innerHTML;
+        }
     }
 
     // restore all processes
@@ -79,14 +90,16 @@ export function loadGame() {
         processMap.forEach((process, processName) => {
             process.numBought = saveFile.processes[process.resource.htmlName][processName].numBought;
             process.baseProductionMult = saveFile.processes[process.resource.htmlName][processName].baseProductionMult;
+
+            // unlock next process
+            if(process.numBought > 0) {process.processElement.nextElementSibling.classList.remove("not_unlocked");}
         });
     });
 
     // restore all hypermods
     gameData.hypermods.mods.forEach((hypermod, hypermodName) => {
-        hypermod.enabled = saveFile.hypermods[hypermodName].enabled;
-
-        if(hypermod.enabled) {
+        if(saveFile.hypermods[hypermodName].enabled) {
+            hypermod.enable();
             gameData.hypermods.enabledMods.set(hypermodName, hypermod);
             document.querySelector(`.architecture_list .hypermod[name="${hypermodName}"]`).classList.add("enabled");
         }

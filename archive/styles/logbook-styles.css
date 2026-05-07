@@ -44,6 +44,7 @@ p {
 	background-color:var(--transparent);
 	font-family: 'spacemono', 'Courier New', monospace;
 	font-weight: normal;
+	line-height: 2;
 	font-size: 1.5rem;
 	color: var(--text-color);
 	text-align:justify;

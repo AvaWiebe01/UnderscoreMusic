@@ -28,7 +28,7 @@ export class BonusItem {
         this.effects = {
             "processBoost":
             {   
-                strength:10,
+                strength:2,
                 duration:25,
                 targets:["process"],
                 desc:"process generation for 25 seconds!",
@@ -36,7 +36,7 @@ export class BonusItem {
 
             "buttonBoost":
             {
-                strength:8,
+                strength:3,
                 duration:30,
                 targets:["button"],
                 desc:"manual resource generation for 30 seconds!",
@@ -44,7 +44,7 @@ export class BonusItem {
 
             "coreBoost":
             {
-                strength:6,
+                strength:3,
                 duration:20,
                 targets:["core"],
                 desc:"core generation for 20 seconds!",
@@ -52,7 +52,7 @@ export class BonusItem {
 
             "rareBoost":
             {
-                strength:32,
+                strength:3.2,
                 duration:32,
                 targets:["process", "core", "button"],
                 desc:"process, core, and manual resource generation for 32 seconds!",

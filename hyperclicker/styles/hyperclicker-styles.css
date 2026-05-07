@@ -89,7 +89,7 @@
 }
 
 .fade-out-bonus {
-    animation: fade 10s backwards;
+    animation: fade 20s backwards;
 	animation-timing-function: cubic-bezier(0.5, 0, 1, 0.25);
 }
 

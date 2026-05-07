@@ -66,7 +66,7 @@ class MultUltraboost extends Multiplier {
     constructor(name, gameData = new GameData) {
         super(name, gameData);
 
-        this.perCoreMult = 0.01;
+        this.perCoreMult = 0.001;
         this.totalCoresGenerated = 0;
     }
 
