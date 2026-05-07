@@ -59,7 +59,7 @@ export class Process {
 
     // Get the price multiplier based on current number of instances
     getCostFactor() {
-        return ((this.numBought/4)**3 + 1);
+        return ((1.75)**this.numBought);
     }
 
     calculateCost() {
@@ -99,7 +99,7 @@ export class Process {
         console.log(this.title + " bought!");
 
         // unlock next process
-        this.processElement.nextElementSibling.classList.remove("not_unlocked");
+        if(this.processElement.nextElementSibling) {this.processElement.nextElementSibling.classList.remove("not_unlocked");}
     }
 
     canSell(sellAmount) {
@@ -107,7 +107,7 @@ export class Process {
             console.log("Not enough to sell!");
             return false;
         }
-
+        
         return true;
     }
 
@@ -139,6 +139,8 @@ export class Process {
     }
 
     displayAllFields() {
+        this.calculateCost();
+        
         this.numBoughtDisplay.innerHTML = `${Utils.getDisplayableNumber(this.numBought, false)}`; 
         this.baseGenerationDisplay.innerHTML = `${Utils.getDisplayableNumber(this.baseProduction * this.baseProductionMult * this.resource.deltaBaseMult)} ${this.resource.displayableName}/s`; 
         this.activeGenerationDisplay.innerHTML = `${Utils.getDisplayableNumber(this.getProductionDelta() * this.resource.getDeltaTotalMult())} ${this.resource.displayableName}/s`; 

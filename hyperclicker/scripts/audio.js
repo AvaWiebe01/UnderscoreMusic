@@ -94,71 +94,107 @@ export class GameAudio {
     // Play SFX
 
     playSfxDecrypt() {
-        // randomize pitch between 0.85x-1.15x
-        this.sfxDecrypt.pause();
-        this.sfxDecrypt.currentTime = 0;
-        this.sfxDecrypt.playbackRate = 0.85 + (Math.random()*0.3);
-        this.sfxDecrypt.play();
+        try {
+            // randomize pitch between 0.85x-1.15x
+            this.sfxDecrypt.pause();
+            this.sfxDecrypt.currentTime = 0;
+            this.sfxDecrypt.playbackRate = 0.85 + (Math.random()*0.3);
+            this.sfxDecrypt.play();
+        } catch(e) {
+            console.log("Audio failed to play.");
+        }
     }
 
     playSfxConstruct() {
-        // randomize pitch between 0.85x-1.15x
-        this.sfxConstruct.pause();
-        this.sfxConstruct.currentTime = 0;
-        this.sfxConstruct.playbackRate = 0.85 + (Math.random()*0.3);
-        this.sfxConstruct.play();
+        try {
+            // randomize pitch between 0.85x-1.15x
+            this.sfxConstruct.pause();
+            this.sfxConstruct.currentTime = 0;
+            this.sfxConstruct.playbackRate = 0.85 + (Math.random()*0.3);
+            this.sfxConstruct.play();
+        } catch(e) {
+            console.log("Audio failed to play.");
+        }         
     }
 
     playSfxLocateFailure() {
-        // randomize pitch between 0.85x-1.15x
-        this.sfxLocateFailure.pause();
-        this.sfxLocateFailure.currentTime = 0;
-        this.sfxLocateFailure.playbackRate = 0.85 + (Math.random()*0.3);
-        this.sfxLocateFailure.play();
+        try {
+            // randomize pitch between 0.85x-1.15x
+            this.sfxLocateFailure.pause();
+            this.sfxLocateFailure.currentTime = 0;
+            this.sfxLocateFailure.playbackRate = 0.85 + (Math.random()*0.3);
+            this.sfxLocateFailure.play();
+        } catch(e) {
+            console.log("Audio failed to play.");
+        }      
     }
 
     playSfxLocateSuccess(streak = 0) {
-        this.sfxLocateSuccess.pause();
-        this.sfxLocateSuccess.currentTime = 0;
-        this.sfxLocateSuccess.playbackRate = 1;
-        this.sfxLocateSuccess.play();
+        try {
+            this.sfxLocateSuccess.pause();
+            this.sfxLocateSuccess.currentTime = 0;
+            this.sfxLocateSuccess.playbackRate = 1;
+            this.sfxLocateSuccess.play();
+        } catch(e) {
+            console.log("Audio failed to play.");
+        }  
     }
 
     playSfxUpgrade() {
-        this.sfxUpgrade.pause();
-        this.sfxUpgrade.currentTime = 0;
-        this.sfxUpgrade.playbackRate = 1;
-        this.sfxUpgrade.play();
+        try {
+            this.sfxUpgrade.pause();
+            this.sfxUpgrade.currentTime = 0;
+            this.sfxUpgrade.playbackRate = 1;
+            this.sfxUpgrade.play();
+        } catch(e) {
+            console.log("Audio failed to play.");
+        } 
     }
 
     playSfxInvalid() {
-        // randomize pitch between 0.9x-1.11x
-        this.sfxInvalid.pause();
-        this.sfxInvalid.currentTime = 0;
-        this.sfxInvalid.playbackRate = 0.9 + (Math.random()*0.2);
-        this.sfxInvalid.play();
+        try {
+            // randomize pitch between 0.9x-1.11x
+            this.sfxInvalid.pause();
+            this.sfxInvalid.currentTime = 0;
+            this.sfxInvalid.playbackRate = 0.9 + (Math.random()*0.2);
+            this.sfxInvalid.play();
+        } catch(e) {
+            console.log("Audio failed to play.");
+        }     
     }
 
     playSfxSelect() {
-        // randomize pitch between 0.9x-1.1x
-        this.sfxSelect.pause();
-        this.sfxSelect.currentTime = 0;
-        this.sfxSelect.playbackRate = 0.9 + (Math.random()*0.2);
-        this.sfxSelect.play();
+        try {
+            // randomize pitch between 0.9x-1.1x
+            this.sfxSelect.pause();
+            this.sfxSelect.currentTime = 0;
+            this.sfxSelect.playbackRate = 0.9 + (Math.random()*0.2);
+            this.sfxSelect.play();
+        } catch(e) {
+            console.log("Audio failed to play.");
+        }
     }
 
     playSfxBonus() {
-        this.sfxBonus.pause();
-        this.sfxBonus.currentTime = 0;
-        this.sfxBonus.playbackRate = 1;
-        this.sfxBonus.play();
+        try {
+            this.sfxBonus.pause();
+            this.sfxBonus.currentTime = 0;
+            this.sfxBonus.playbackRate = 1;
+            this.sfxBonus.play();
+        } catch(e) {
+            console.log("Audio failed to play.");
+        }  
     }
 
     playSfxUnlocked() {
-        this.sfxUnlocked.pause();
-        this.sfxUnlocked.currentTime = 0;
-        this.sfxUnlocked.playbackRate = 1;
-        this.sfxUnlocked.play();
+        try {
+            this.sfxUnlocked.pause();
+            this.sfxUnlocked.currentTime = 0;
+            this.sfxUnlocked.playbackRate = 1;
+            this.sfxUnlocked.play();
+        } catch(e) {
+            console.log("Audio failed to play.");
+        }   
     }
 
 

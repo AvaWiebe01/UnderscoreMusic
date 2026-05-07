@@ -71,14 +71,16 @@ export class HyperMod {
 
 export class HyperMultArch extends HyperMod {
     enable() {
-        Utils.gameData.resources.get("arcbits").addDeltaMultSource("hyperMult");
-        Utils.gameData.resources.get("arcbits").addBtnValMultSource("hyperMult");
+        //Utils.gameData.resources.get("arcbits").addDeltaMultSource("hyperMult");
+        //Utils.gameData.resources.get("arcbits").addBtnValMultSource("hyperMult");
+        Utils.gameData.multipliers.get("arcMult").activateUniversalMult();
         this.enabled = true;
     }
 
     disable() {
-        Utils.gameData.resources.get("arcbits").removeDeltaMultSource("hyperMult");
-        Utils.gameData.resources.get("arcbits").removeBtnValMultSource("hyperMult");
+        //Utils.gameData.resources.get("arcbits").removeDeltaMultSource("hyperMult");
+        //Utils.gameData.resources.get("arcbits").removeBtnValMultSource("hyperMult");
+        Utils.gameData.multipliers.get("arcMult").deactivateUniversalMult();
         this.enabled = false;
     }
 }
@@ -86,11 +88,13 @@ export class HyperMultArch extends HyperMod {
 export class HyperCoreArch extends HyperMod {
     enable() {
         Utils.gameData.resources.get("cores").addDeltaMultSource("hyperCore");
+        Utils.gameData.multipliers.get("hyperCore").showDisplays();
         this.enabled = true;
     }
 
     disable() {
         Utils.gameData.resources.get("cores").removeDeltaMultSource("hyperCore");
+        Utils.gameData.multipliers.get("hyperCore").hideDisplays();
         this.enabled = false;
     }
 }
@@ -98,23 +102,27 @@ export class HyperCoreArch extends HyperMod {
 export class KeyMultArch extends HyperMod {
     enable() {
         Utils.gameData.resources.get("hyperkeys").addBtnValMultSource("arcMult");
+        document.querySelector(".game .generate_panel div[id='hyperkeys_btn_main'] .arcmult_display").classList.remove("hidden");
         this.enabled = true;
     }
 
     disable() {
         Utils.gameData.resources.get("hyperkeys").removeBtnValMultSource("arcMult");
+        document.querySelector(".game .generate_panel div[id='hyperkeys_btn_main'] .arcmult_display").classList.add("hidden");
         this.enabled = false;
     }
 }
 
 export class MalwareDefenseArch extends HyperMod {
     enable() {
-        Utils.gameData.bonusItem.effectMultiplier = 6;
+        Utils.gameData.bonusItem.effectMultiplier = 2;
+        Utils.gameData.bonusItem.cooldownMultiplier = 0.70;
         this.enabled = true;
     }   
 
     disable() {
         Utils.gameData.bonusItem.effectMultiplier = 1;
+        Utils.gameData.bonusItem.cooldownMultiplier = 1;
         this.enabled = false;
     }
 }
@@ -122,48 +130,106 @@ export class MalwareDefenseArch extends HyperMod {
 export class MultiProcessArch extends HyperMod {
     enable() {
         Utils.gameData.resources.get("arcbits").addDeltaMultSource("multiProcess");
+        Utils.gameData.multipliers.get("multiProcess").showDisplays();
         this.enabled = true;
     }
 
     disable() {
         Utils.gameData.resources.get("arcbits").removeDeltaMultSource("multiProcess");
+        Utils.gameData.multipliers.get("multiProcess").hideDisplays();
         this.enabled = false;
     }
 }
 
 export class RerollArch extends HyperMod {
     enable() {
-        Utils.gameData.resources.get("nullpointers").rolls = 2;
+        const nullptrs = Utils.gameData.resources.get("nullpointers");
+        nullptrs.rolls += 1;
         this.enabled = true;
     }   
 
     disable() {
-        Utils.gameData.resources.get("nullpointers").rolls = 1;
+        const nullptrs = Utils.gameData.resources.get("nullpointers");
+        nullptrs.rolls -= 1;
         this.enabled = false;
     }
 }
 
 export class StreakArch extends HyperMod {
     enable() {
-        Utils.gameData.resources.get("nullpointers").streakBase = 3;
+        const nullptrs = Utils.gameData.resources.get("nullpointers");
+        nullptrs.streakBase += 1;
         this.enabled = true;
     }
 
     disable() {
-        Utils.gameData.resources.get("nullpointers").streakBase = Utils.gameData.resources.get("nullpointers").defaultStreakBase;
+        const nullptrs = Utils.gameData.resources.get("nullpointers");
+        nullptrs.streakBase -= 1;
         this.enabled = false;
     }
 }
 
+export class NetworkGenerationArch extends HyperMod {
+    enable() {
+        Utils.gameData.resources.get("cores").addDeltaMultSource("networkGeneration");
+        Utils.gameData.multipliers.get("networkGeneration").showDisplays();
+        this.enabled = true;
+    }
+
+    disable() {
+        Utils.gameData.resources.get("cores").addDeltaMultSource("networkGeneration");
+        Utils.gameData.multipliers.get("networkGeneration").hideDisplays();
+        this.enabled = false;
+    } 
+}
+
+export class CpuBleedArch extends HyperMod {
+    fractionOfDelta = 0.01;
+
+    enable() {
+        Utils.gameData.resources.get("arcbits").btnValFractionOfDelta += this.fractionOfDelta;
+        this.enabled = true;
+    }
+
+    disable() {
+        Utils.gameData.resources.get("arcbits").btnValFractionOfDelta -= this.fractionOfDelta;
+        this.enabled = false;
+    } 
+}
+
+export class MemoryRedirectionArch extends HyperMod {
+
+    enable() {
+        Utils.gameData.resources.get("ram").addDeltaMultSource("memoryRedirection");
+        Utils.gameData.multipliers.get("memoryRedirection").showDisplays();
+
+        Utils.gameData.resources.get("arcbits").addDeltaMultSource("memoryRedirectionPenalty");
+        Utils.gameData.multipliers.get("memoryRedirectionPenalty").showDisplays();
+        this.enabled = true;
+    }
+
+    disable() {
+        Utils.gameData.resources.get("ram").removeDeltaMultSource("memoryRedirection");
+        Utils.gameData.multipliers.get("memoryRedirection").hideDisplays();
+
+        Utils.gameData.resources.get("arcbits").removeDeltaMultSource("memoryRedirectionPenalty");
+        Utils.gameData.multipliers.get("memoryRedirectionPenalty").hideDisplays();
+        this.enabled = false;
+    } 
+}
+
 export function initHyperMods(gameData = new GameData()) {
     var mods = new Map([
-        ["hyperMultArch", new HyperMultArch("hyperMultArch", "HyperMult", "<strong>Constructing</strong> HyperKeys provides a lengthy temporary multiplier to <strong>decryption</strong> and <strong>process</strong> ArcBit generation.")],
-        ["hyperCoreArch", new HyperCoreArch("hyperCoreArch", "HyperCore", "<strong>Core</strong> generation rate is multiplied by current <strong>HyperKey</strong> amount.")],
-        ["keyMultArch", new KeyMultArch("keyMultArch", "KeyMult", "<strong>Decrypting</strong> ArcBits also provides a temporary multiplier to <strong>construction</strong> HyperKey generation.")],
-        ["malwareDefenseArch", new MalwareDefenseArch("malwareDefenseArch", "Malware Defense", "Removing a <strong>virus</strong> generates <strong>6x</strong> stronger effects.")],
-        ["multiProcessArch", new MultiProcessArch("multiProcessArch", "Multi-Process", `<strong>Process</strong> ArcBit generation is multiplied by the lowest <strong>number of instances</strong> of all programs [excluding 0].<br>Current multiplier: <span class="multi_process_mult_display"></span>`)],
-        ["rerollArch", new RerollArch("rerollArch", "Reroll+", "Each attempt to <strong>Locate</strong> NullPointers rolls the probability <strong>twice</strong> and takes the best result.")],
-        ["streakArch", new StreakArch("streakArch", "Streak+", "Each consecutive NullPointer <strong>Location</strong> multiplies generation by <strong>3</strong> instead of 2.")],
+        ["hyperMultArch", new HyperMultArch("hyperMultArch", "HyperMult", "<strong>All</strong> resource buttons contribute to <strong>ArcMult</strong>.")],
+        ["keyMultArch", new KeyMultArch("keyMultArch", "KeyMult", "<strong>ArcMult</strong> also provides a multiplier to <strong>construction</strong> HyperKey generation.")],
+        ["cpuBleedArch", new CpuBleedArch("cpuBleedArch", "CPU Bleed", "ArcBit <strong>Decryption</strong> yields <strong>+1%</strong> of active <strong>process</strong> ArcBit generation.")],
+        ["memoryRedirectionArch", new MemoryRedirectionArch("memoryRedirectionArch", "Memory Redirection", "<strong>RAM</strong> generation is multiplied by 1.02^(total process instances).<br><strong>ArcBit</strong> generation is multiplied by 0.98^(total process instances).")],
+        ["networkGenerationArch", new NetworkGenerationArch("networkGenerationArch", "Network Generation", "Each instance of <strong>Link Crawler</strong> increases core generation rate by <strong>5%</strong>.")],
+        ["hyperCoreArch", new HyperCoreArch("hyperCoreArch", "HyperCore", "<strong>Core</strong> generation rate is multiplied by sqrt(current <strong>HyperKey</strong> amount).")],
+        ["malwareDefenseArch", new MalwareDefenseArch("malwareDefenseArch", "Malware Defense", "Removing a <strong>virus</strong> generates <strong>2x</strong> stronger effects.<br>Detect viruses <strong>30%</strong> faster.")],
+        ["multiProcessArch", new MultiProcessArch("multiProcessArch", "Multi-Process", `<strong>Process</strong> ArcBit generation is multiplied by the lowest <strong>number of instances</strong> of all programs [excluding 0].`)],
+        ["rerollArch", new RerollArch("rerollArch", "Reroll+", "Each attempt to <strong>Locate</strong> NullPointers rolls the probability 1 additional time for a positive outcome.")],
+        ["streakArch", new StreakArch("streakArch", "Streak+", "NullPointer <strong>streak</strong> multiplier is increased by <strong>1</strong>.")],
     ])
 
     const hypermods = new HyperMods(mods);

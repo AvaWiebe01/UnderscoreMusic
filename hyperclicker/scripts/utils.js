@@ -11,6 +11,10 @@ export class Utils {
 
     static notationType = 0; // 0 = default, 1 = abbreviated, 2 = engineering, 3 = exponential, 4 = standard decimal, 5 = Abbreviated data size, 6 = data size
     static stickyResources = true;
+    static largeResourceButtons = false;
+
+    static seenIntro = false; // if the introduction message has been seen before
+
     static fxCounter = 0;
 
     static resetCounter = 0; // confirm before resetting save data
@@ -29,9 +33,12 @@ export class Utils {
         this.gameData = gameData;
     }
 
-    static getDisplayableNumber(num, hasDecimals = true) {
+    static getDisplayableNumber(num, hasDecimals = true, notation = this.notationType) {
+
+        let decimalCount = Math.min(num > 0.000000000001 ? Math.max(-Math.log10(num) + 2.99999, 3) : 0, 5);
+
         let suffix = "";
-        switch(this.notationType) {
+        switch(notation) {
             case 0:
                 suffix = " " + Constants.DEFAULT_SUFFIXES[num >= 1000 ? Math.floor(Math.log10(num)/3) : 0];
                 break;
@@ -44,18 +51,19 @@ export class Utils {
             case 3:
                 suffix = num < 1000 ? "" : "e+" + Math.floor(Math.log10(num)/3)*3;
                 break;
+
+            // extra notations
             case 4: // fuck it, don't shorten it at all
                 return num.toFixed((num < 1000) ? 5 : 0);
             case 5:
                 suffix = " " + Constants.DATA_SIZE_ABBREVIATED_SUFFIXES[num >= 1000 ? Math.floor(Math.log10(num)/3) : 0];
-                break;
+                
+                return (num/(10**(Math.floor(Math.log10(num)/3)*3))).toFixed(decimalCount) + '<span class="suffix">' + suffix + '</span>';
             case 6:
                 suffix = " " + Constants.DATA_SIZE_SUFFIXES[num >= 1000 ? Math.floor(Math.log10(num)/3) : 0];
-                break;
 
+                return (num/(10**(Math.floor(Math.log10(num)/3)*3))).toFixed(decimalCount) + '<span class="suffix">' + suffix + '</span>';
         }
-        
-        let decimalCount = Math.min(num > 0.000000000001 ? Math.max(-Math.log10(num) + 2.99999, 3) : 0, 5);
 
         if(num >= 1000) {
             return (num/(10**(Math.floor(Math.log10(num)/3)*3))).toFixed(decimalCount) + '<span class="suffix">' + suffix + '</span>';
@@ -103,6 +111,11 @@ export class Utils {
         }
     }
 
+    static toggleLargeResourceButtons(target) {
+        this.largeResourceButtons = !this.largeResourceButtons;
+        target.innerHTML = (this.largeResourceButtons) ? "Disable" : "Enable";
+    }
+
     // Visual Fx that must be updated every frame
     static visualFxTick() {
 
@@ -141,6 +154,7 @@ export class Utils {
         this.gameData.hypermods.mods.forEach((hypermod, key) => {
             hypermod.updateDisplays();
         })
+        Utils.gameData.hypermods.updateDisplays();
     }
 
     static unlockTab(tabValue) {
@@ -163,11 +177,34 @@ export class Utils {
 
     }
 
+    static getNumTotalProcesses() {
+        var totalProcesses = 0;
+        this.gameData.processes.get("arcbits").forEach((process, processName) => {
+            totalProcesses += process.numBought;
+        });
+        return totalProcesses;
+    }
+
     static save() {
         saveGame(this.gameData);
     }
 
     static resetProgress() {
         resetProgress();
+    }
+
+    static displayError(e, msg = "Something went wrong.") {
+
+        if(!(e instanceof Error)) {
+            e = new Error(e);
+        }
+
+        console.log(`Error: ${e.name}`);
+        console.log(`Message: ${e.message}`);
+        console.log(msg);
+
+        const errorElement = document.querySelector(".error_screen");
+        errorElement.innerHTML = `<h2>Sorry, an error occurred.</h2><p><span class="error_message">${msg}</span><br><br><br>If the issue persists after reloading, please contact me for help.<br><br>Discord: @underscoreofficial<br>Email: underscoremusic.contact@gmail.com</p><div class="debug">Save this info:<br>Type: ${e.name}<br>Msg: ${e.message}</div>`;
+        errorElement.classList.remove("hidden");
     }
 }

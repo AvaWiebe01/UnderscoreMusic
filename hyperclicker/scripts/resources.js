@@ -7,6 +7,7 @@ export class Resource {
     deltaBaseMult;  // For one-time multiplier changes, that never need to be re-calculated
     btnVal;
     btnValBaseMult;  // For one-time multiplier changes, that never need to be re-calculated
+    btnValFractionOfDelta;
     htmlName;
     displayableName;
     gameData;
@@ -31,6 +32,7 @@ export class Resource {
         this.deltaBaseMult = 1;
         this.btnVal = btnVal;
         this.btnValBaseMult = 1; 
+        this.btnValFractionOfDelta = 0;
         this.htmlName = htmlName; // Must be exactly as it appears in HTML, ex. "arcbits"
         this.displayableName = displayableName;
         this.gameData = gameData;
@@ -131,11 +133,18 @@ export class Resource {
         let totalMult = 1;
         totalMult *= this.btnValBaseMult;
 
-        this.btnValMultSources.forEach((multSource) => {
-            totalMult *= multSource.getMult();
-        });
+        totalMult *= this.getBtnValActiveMult();
 
         return totalMult;
+    }
+
+    getBtnValActiveMult() {
+        var activeMult = 1;
+        this.btnValMultSources.forEach((multSource) => {
+            activeMult *= multSource.getMult();
+        });
+
+        return activeMult;
     }
 
     modifyBtnValBaseMult(mult) {
@@ -144,7 +153,18 @@ export class Resource {
     }
 
     getFinalBtnValue() {
-        return this.btnVal * this.getBtnValTotalMult();
+        var additiveDeltaBtnValue = 0;
+        var totalButtonValue = 0;
+        var activeMult = this.getBtnValActiveMult();
+
+        totalButtonValue = this.btnVal * this.btnValBaseMult * activeMult;
+
+        // add percentage of process generation
+        if(Math.abs(this.btnValFractionOfDelta) > 0.0001) {
+            additiveDeltaBtnValue = (this.lastTickDelta/(Utils.gameData?.deltaTime/Constants.ONE_SECOND_MS)) * this.btnValFractionOfDelta * activeMult;
+        }
+    
+        return totalButtonValue + additiveDeltaBtnValue;
     }
 
     modifyBtnValue(value) {
@@ -171,7 +191,7 @@ export class Resource {
     }
 
     resourceTick(deltaTime, gameData) {
-        this.lastTickDelta = ((deltaTime/1000)*this.getBaseDelta()) * this.getDeltaTotalMult()
+        this.lastTickDelta = ((deltaTime/1000)*this.getBaseDelta()) * this.getDeltaTotalMult();
         this.modifyAmt(this.lastTickDelta);
 
         this.displayAmt();
@@ -197,12 +217,14 @@ class Cores extends Resource {
     // Additional parameters
     delta;
     maxCores;
+    atFullCapacity;
 
     constructor(amt, delta, btnVal, htmlName, displayableName, gameData, maxCores) {
         super(amt, btnVal, htmlName, displayableName, gameData);
 
         this.delta = delta;
         this.maxCores = maxCores;
+        this.atFullCapacity = false;
     }
 
     initDisplayElements() {
@@ -228,7 +250,10 @@ class Cores extends Resource {
     }
 
     modifyAmt(value) { // Do not go above core limit
-        this.amt = ((this.amt + value) <= this.maxCores ? this.amt + value : this.maxCores);
+        this.atFullCapacity = ((this.amt + this.lastTickDelta) >= this.maxCores);
+
+        var newAmt = this.amt + value;
+        this.amt = ((newAmt <= this.maxCores) ? newAmt : this.maxCores);
     }
 
     displayAmt() { // Round down to nearest integer
@@ -247,27 +272,100 @@ class Cores extends Resource {
     }
 }
 
+class Ram extends Resource {
+
+    // Additional parameters
+    delta;
+    ramPerCore;
+
+    ramPerCoreDisplay;
+
+    constructor(amt, delta, btnVal, htmlName, displayableName, gameData, ramPerCore) {
+        super(amt, btnVal, htmlName, displayableName, gameData);
+
+        this.delta = delta;
+        this.ramPerCore = ramPerCore;
+    }
+
+    initDisplayElements() {
+
+        this.amtDisplays = document.getElementsByClassName(this.htmlName + "_display");
+        this.gainDisplays = document.getElementsByClassName(this.htmlName + "_gain_display");
+        this.deltaDisplays = document.getElementsByClassName(this.htmlName + "_delta_display");
+        this.btnValDisplays = document.getElementsByClassName(this.htmlName + "_btnval_display");
+
+        this.ramPerCoreDisplays = document.getElementsByClassName("ram_per_core_display");
+
+        this.ramPanelElement = document.querySelector(".game .process_panel .cpu_resources_panel .ram_panel");
+
+        this.displayAmt();
+    }
+
+    unlock() {
+        this.ramPanelElement.classList.remove("not_unlocked");
+    }
+
+    modifyRamPerCore(amount) {
+        this.ramPerCore *= amount;
+    }
+
+    getBaseDelta() {
+        return this.delta;
+    }
+
+    displayAmt() {
+        for(let i = 0; i < this.amtDisplays.length; i++) {
+            this.amtDisplays[i].innerHTML = Utils.getDisplayableNumber(this.amt, true, 6); // display in data size format
+        }
+
+        for(let i = 0; i < this.amtDisplays.length; i++) {
+            this.ramPerCoreDisplays[i].innerHTML = Utils.getDisplayableNumber(this.ramPerCore, true, 6); // display in data size format
+        }
+    }
+
+    resourceTick(deltaTime, gameData) {
+
+        const cores = Utils.gameData.resources.get("cores");
+        if(cores.atFullCapacity) {
+            ((cores.lastTickDelta * this.ramPerCore) ?? 0);
+        }
+
+        var coreBasedDelta = (cores.atFullCapacity) ? (cores.lastTickDelta * this.ramPerCore) : 0; // only gain from cores if core capacity is full
+        var standardDelta = (deltaTime/1000)*this.getBaseDelta();
+
+        this.lastTickDelta = (coreBasedDelta + standardDelta) * this.getDeltaTotalMult(); 
+
+        this.modifyAmt(this.lastTickDelta);
+
+        this.displayAmt();
+        this.displayFinalBtnVal();
+        this.displayFinalDelta();
+    }
+}
+
 class NullPointers extends Resource {
     delta;
+    deltaMult;
     successRate;
 
     streak;
-    defaultStreakBase;
     streakBase;
+    streakDisplay;
 
     failureStreak;
 
     rolls;
+    rollsDisplay;
 
     constructor(amt, delta, btnVal, htmlName, displayableName, gameData, successRate) {
         super(amt, btnVal, htmlName, displayableName, gameData);
 
         this.delta = delta;
+        this.deltaMult = 0;
         this.successRate = successRate;
 
         this.streak = 0;
-        this.defaultStreakBase = 2;
-        this.streakBase = this.defaultStreakBase;
+        this.streakBase = 2;
 
         this.failureStreak = 0;
 
@@ -280,12 +378,14 @@ class NullPointers extends Resource {
         this.gainDisplays = document.getElementsByClassName(this.htmlName + "_gain_display");
         this.deltaDisplays = document.getElementsByClassName(this.htmlName + "_delta_display");
         this.btnValDisplays = document.getElementsByClassName(this.htmlName + "_btnval_display");
+        this.streakDisplay = document.querySelector(".game .generate_panel div[id='nullpointers_btn_main'] .streak_multiplier_display");
+        this.rollsDisplay = document.querySelector(".game .generate_panel div[id='nullpointers_btn_main'] .rolls_amt_display");
 
         this.displayAmt();
     }
 
     getBaseDelta() {
-        return this.delta;
+        return this.delta * (this.deltaMult + 1);
     }
 
     getFinalBtnValue() {
@@ -296,8 +396,8 @@ class NullPointers extends Resource {
         this.successRate = value;
     }
 
-    modifyDelta(value) {
-        this.delta *= value;
+    modifyDeltaMult(value) {
+        this.deltaMult += value;
     }
 
     btnClicked() {
@@ -337,6 +437,22 @@ class NullPointers extends Resource {
             this.btnValDisplays[i].innerHTML = `${(this.successRate * 100).toFixed(2)}% <span class="white">chance for</span> +${Utils.getDisplayableNumber(this.getFinalBtnValue())}`;
         }
     }
+
+    // rolls, streak base
+    displayModifiers() {
+        this.streakDisplay.innerHTML = `[Streak multiplier: ${this.streakBase}x]`;
+        this.rollsDisplay.innerHTML = `[Rolls per click: ${this.rolls}]`;
+    }
+
+    resourceTick(deltaTime, gameData) {
+        this.lastTickDelta = ((deltaTime/1000)*this.getBaseDelta()) * this.getDeltaTotalMult()
+        this.modifyAmt(this.lastTickDelta);
+
+        this.displayAmt();
+        this.displayFinalBtnVal();
+        this.displayFinalDelta();
+        this.displayModifiers();
+    }
 }
 
 export function unlockResource(htmlName) {
@@ -353,6 +469,9 @@ export function initResources(RESOURCE_INFO = [], gameData) {
 
     resources.set(Constants.CORE_INFO[0], new Cores(Constants.CORE_INFO[1], Constants.CORE_INFO[2], Constants.CORE_INFO[3], Constants.CORE_INFO[0], Constants.CORE_INFO[4], gameData, Constants.CORE_INFO[5]));
     resources.get("cores").initDisplayElements();
+
+    resources.set(Constants.RAM_INFO[0], new Ram(Constants.RAM_INFO[1], Constants.RAM_INFO[2], Constants.RAM_INFO[3], Constants.RAM_INFO[0], Constants.RAM_INFO[4], gameData, Constants.RAM_INFO[5]));
+    resources.get("ram").initDisplayElements();
 
     resources.set(Constants.NULLPOINTER_INFO[0], new NullPointers(Constants.NULLPOINTER_INFO[1], Constants.NULLPOINTER_INFO[2], Constants.NULLPOINTER_INFO[3], Constants.NULLPOINTER_INFO[0], Constants.NULLPOINTER_INFO[4], gameData, Constants.NULLPOINTER_INFO[5]));
     resources.get("nullpointers").initDisplayElements();

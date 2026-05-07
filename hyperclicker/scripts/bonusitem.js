@@ -8,6 +8,7 @@ export class BonusItem {
     static durationElement; 
 
     static cooldown;
+    static cooldownMultiplier;
     static timeUntilAppear;
     static xpos;
     static ypos;
@@ -21,6 +22,7 @@ export class BonusItem {
 
     constructor() {
         this.cooldown = Constants.BONUS_COOLDOWN;
+        this.cooldownMultiplier = 1;
         this.timeUntilAppear = this.cooldown;
         this.xpos = 0;
         this.ypos = 0;
@@ -102,7 +104,7 @@ export class BonusItem {
             this.iconElement.classList.remove("fade-out-bonus");
             this.iconElement.style.display = "none";
 
-            this.timeUntilAppear = this.cooldown;
+            this.timeUntilAppear = this.cooldown*this.cooldownMultiplier;
         });
 
         console.log("Bonus spawned!");
@@ -121,7 +123,7 @@ export class BonusItem {
 
         this.startEffect(this.currentEffect);
 
-        this.textElement.innerHTML = `<span class="title">&gt;&gt;&gt; Virus Removed &lt;&lt;&lt;</span><br>${selectedEffect.strength * this.effectMultiplier}x ${selectedEffect.desc}`;
+        this.textElement.innerHTML = `<span class="title">&gt;&gt;&gt; Virus Removed &lt;&lt;&lt;</span><br>${(selectedEffect.strength * this.effectMultiplier).toFixed(1)}x ${selectedEffect.desc}`;
         this.textElement.style.display = "block";
         this.bonusElement.style.left = `calc(25% + ${this.xpos}% - ${this.textElement.offsetWidth/2}px + 25px)`;
         this.bonusElement.style.top = `calc(${this.ypos}% - 50px)`;
@@ -170,7 +172,7 @@ export class BonusItem {
 
         this.durationElement.style.display = "flex";
         this.durationElement.innerHTML = this.effectDuration;
-        this.durationElement.setAttribute("title", `${this.currentEffect.strength * this.effectMultiplier}x ${this.currentEffect.desc}`);
+        this.durationElement.setAttribute("title", `${this.currentEffect.strength.toFixed(1)}x ${this.currentEffect.desc}`);
     }
 
     endEffect() {
