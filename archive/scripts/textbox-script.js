@@ -132,7 +132,8 @@ const DIALOGUE = new Map([
                         "___ __ __, _____. ___ ____ __ _______ __ ___ ___ __ ___ __ ___ ______ __ ____."),
 
             new Line(   "- END OF RECOVERED DATA -", "system", 2,
-                        "p ppp pp ppppppppp pppp p"),
+                        "p ppp pp ppppppppp pppp p",
+                        "stop"),
         ]
     ],
 
@@ -173,7 +174,8 @@ const DIALOGUE = new Map([
                         "____ _____."),
 
             new Line(   "- END OF RECOVERED DATA -", "system", 2,
-                        "p ppp pp ppppppppp pppp p"),
+                        "p ppp pp ppppppppp pppp p",
+                        "stop"),
         ]
     ],
 
@@ -181,8 +183,7 @@ const DIALOGUE = new Map([
         "E-KL32FA",
         [
             new Line(   "New Archon Camera #112D8A39 Audio Feed - Lotus Apartment Complex, 12:37 AM", "system", 2,
-                        "ppp pppppp pppppp _________ ppppp pppp , aaaaa aaaaaaaaa aaaaaaa, ppppp pp",
-                        "ambient"),
+                        "ppp pppppp pppppp _________ ppppp pppp , aaaaa aaaaaaaaa aaaaaaa, ppppp pp"),
 
             new Line(   "Kyana, I’m going to bed~!", "luna", 1,
                         "_____, ___ _____ __ ____."),
@@ -209,7 +210,8 @@ const DIALOGUE = new Map([
                         "__. ___ iii __ __"),
 
             new Line(   "Luna, get over here.", "kyana", 1,
-                        "____, ___ ____ ____."),
+                        "____, ___ ____ ____.",
+                        "ambient"),
 
             new Line(   "Huh?", "luna", 1,
                         "___."),
@@ -438,7 +440,8 @@ const DIALOGUE = new Map([
                         "_____ _____ __ _________ ________."),
 
             new Line(   "- END OF RECOVERED DATA -", "system", 2,
-                        "p ppp pp ppppppppp pppp p"),
+                        "p ppp pp ppppppppp pppp p",
+                        "stop"),
         ]
     ],
 
@@ -453,14 +456,14 @@ const DIALOGUE = new Map([
         "G-ADMIN1",
         [
             new Line(   "HyperI/O Camera #34C1D859 Audio Feed - Hyper Beam HQ Admin Office, 6:00 AM", "system", 2,
-                        "pppppppp pppppp _________ ppppp pppp , aaaaa aaaa aa aaaaa aaaaaa, pppp pp",
-                        "dread"),
+                        "pppppppp pppppp _________ ppppp pppp , aaaaa aaaa aa aaaaa aaaaaa, pppp pp"),
 
             new Line(   "Good morning, Arin. I think it’s time for us to have a little chat, hm?", "kyana", 1,
                         "____ _______, ____. _ _____ ____ ____ ___ __ __ ____ _ ______ iiii, www"),
 
             new Line(   "What the... what do you think you're doing?", "arin", 1,
-                        "____ ___,,, ssss __ ___ _____ ______ sssss."),
+                        "____ ___,,, ssss __ ___ _____ ______ sssss.",
+                        "dread"),
 
             new Line(   "Sit down and shut up, or I'll slit your throat.", "kyana", 1,
                         "___ ____ ___ bbbb bb, __ ____ ____ ____ ______."),
@@ -544,7 +547,8 @@ const DIALOGUE = new Map([
                         "___. __ __."),
 
             new Line(   "- END OF RECOVERED DATA -", "system", 2,
-                        "p ppp pp ppppppppp pppp p"),
+                        "p ppp pp ppppppppp pppp p",
+                        "stop"),
         ]
     ],
 
@@ -581,7 +585,8 @@ const DIALOGUE = new Map([
                         "ppppppppppp,pppp"),
 
             new Line(   "- END OF RECOVERED DATA -", "system", 2,
-                        "p ppp pp ppppppppp pppp p"),
+                        "p ppp pp ppppppppp pppp p",
+                        "stop"),
         ]
     ],
 
@@ -641,10 +646,11 @@ const DIALOGUE = new Map([
                         ",,,___?"),
 
             new Line(   "Nothing. Wanna have lunch with us?", "onyx", 1,
-                        "iiiiiii. _____ ____ _____ ____ __?"),
+                        "iiiiiii. _____ ____ _____ ____ __?"), 
                         
             new Line(   "- END OF RECOVERED DATA -", "system", 2,
-                        "p ppp pp ppppppppp pppp p"),
+                        "p ppp pp ppppppppp pppp p",
+                        "stop"),
         ]
     ],
 ]);
@@ -782,17 +788,17 @@ window.onload = async function() {
     const musicGain = musicContext.createGain();
     musicGain.connect(musicContext.destination);
 
-    const ambientResp = await fetch("/archive/music/dread.ogg");
+    const ambientResp = await fetch("/archive/music/ambient.ogg");
     ambientBuffer = await musicContext.decodeAudioData(await ambientResp.arrayBuffer());
     const dreadResp = await fetch("/archive/music/dread.ogg");
     dreadBuffer = await musicContext.decodeAudioData(await dreadResp.arrayBuffer());
-    const neutralResp = await fetch("/archive/music/dread.ogg");
+    const neutralResp = await fetch("/archive/music/neutral.ogg");
     neutralBuffer = await musicContext.decodeAudioData(await neutralResp.arrayBuffer());
 
     const music = new Map([
         ["ambient", ambientBuffer],     // Name: Zone: Void
         ["dread", dreadBuffer],         // Name: Abandoned World
-        ["neutral", neutralBuffer],     // Name: 
+        ["neutral", neutralBuffer],     // Name: Curiosity
     ]);
 
     var currentMusic = null;
@@ -800,6 +806,10 @@ window.onload = async function() {
     // set audio volumes from URL
     speechGain.gain.setValueAtTime(sfxVol, speechContext.currentTime);
     musicGain.gain.setValueAtTime(musicVol, musicContext.currentTime);
+
+    // remove the loading screen
+    const loadingScreen = document.querySelector(".loading_screen");
+    loadingScreen.classList.add("hidden");
 
     // Force a click to resume the AudioContext
     await waitForInput();

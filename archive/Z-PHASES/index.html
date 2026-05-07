@@ -9,6 +9,9 @@
 		
 		<link rel="stylesheet" href="/styles/global-styles.css">
 		<link rel="stylesheet" href="/archive/styles/ending-styles.css">
+
+		<script src="/scripts/jquery-3.7.1.js"></script>
+		<script src="/archive/scripts/ending-script.js"></script>
 		
 	</head>
 	
@@ -43,8 +46,12 @@
 				</p>
 			</div>
 
-			<div class="credits">
-				<h2>Thank you for playing HyperClicker!</h2>
+			<div class="button-wrapper">
+				<button class="reveal_credits">[ View Credits ]</button>
+			</div>
+
+			<div class="credits hidden">
+				<h2 id="credits-title">Thank you for playing HyperClicker!</h2>
 
 				<p class="message">
 					This is my first fully completed and released game. I hope you liked it!<br>
