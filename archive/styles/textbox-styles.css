@@ -52,6 +52,12 @@
     --nyx-glow-color: rgba(255,0,80,0.5);
 }
 
+* {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none;     /* IE 10 and 11 */
+    user-select: none;         /* Standard syntax */
+}
+
 .loading_screen {
 	position:fixed;
 	top:0;
