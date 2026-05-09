@@ -52,10 +52,11 @@
     --nyx-glow-color: rgba(255,0,80,0.5);
 }
 
+/* Don't select text while clicking */
 * {
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none;     /* IE 10 and 11 */
-    user-select: none;         /* Standard syntax */
+    -webkit-user-select: none; 
+    -ms-user-select: none;    
+    user-select: none;         
 }
 
 .loading_screen {
