@@ -655,7 +655,34 @@ const DIALOGUE = new Map([
     ],
 ]);
 
+function getStyling(chr, style = "") {
+    switch(style ?? "") {
+        case "b": chr.classList.add("bold"); break; // bold
+        case "i": chr.classList.add("italic"); break; // italic
+        case "a": chr.classList.add("accent"); break; // accent color (purple)
+        case "p": chr.classList.add("accent2"); break; // accent2 color (pink)
+        case "w": chr.classList.add("wave"); break; // wavy
+        case "s": chr.classList.add("shake"); break; // shaky
+        case "t": chr.classList.add("boldshake"); break; // bold shaky
+        case "f": chr.classList.add("fade"); break; // fade in
+        case "d": chr.classList.add("drop"); break; // drop in
+        case "r": chr.classList.add("rainbow"); break; // rainbow
+        case "l": chr.classList.add("little"); break; // small text
+    }
+}
+
+function getDelay(style = "") {
+    switch(style ?? "") {
+        case ",": return BASE_TEXT_SPEED * 8;
+        case ".": return BASE_TEXT_SPEED * 24;
+        case "-": return BASE_TEXT_SPEED * 32;
+    }
+    
+    return null;
+}
+
 function displayLine(textbox, line = new Line("content not specified.", null, 1, null), speakerDisplay, voices) {
+
     return new Promise(resolve => {
         function nextLetter(currentTime) { 
 
@@ -683,6 +710,10 @@ function displayLine(textbox, line = new Line("content not specified.", null, 1,
                 case "-": delay = BASE_TEXT_SPEED * 32; break;
             }
 
+            if(skipped) {
+                return;
+            }
+
             // Add the character ascii
             nxtChar.textContent = line.content[line.cursor];
 
@@ -706,9 +737,33 @@ function displayLine(textbox, line = new Line("content not specified.", null, 1,
                     requestAnimationFrame(nextLetter);
                 }, delay);
             } else {
+                $(document).off("keydown click");
                 resolve(); 
             }
         }
+
+        function skipLine() {
+            for(var idx = line.cursor; idx < line.content.length; idx += 1) {
+                var chr = document.createElement("span");
+                getStyling(chr, line.styling?.[idx] ?? "");
+                chr.textContent = line.content[idx];
+                textbox.appendChild(chr);
+            }
+            
+            $(document).off("keydown click");
+            resolve();
+            return;
+        }  
+
+        let skipped = false;
+
+        // skip line if user clicks during display
+        $(document).on("keydown click", function(event) {
+            if(event.key === " " || event.type === "click") { // Check for spacebar or mouse click
+                skipped = true;
+                skipLine();
+            }
+        });
 
         speakerDisplay.innerHTML = line.speaker.toUpperCase(); // Change the speaker name before line displays
 

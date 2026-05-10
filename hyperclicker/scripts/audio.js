@@ -1,3 +1,5 @@
+import { Constants } from "./constants.js";
+
 export class GameAudio {
     static musicContext;
     static musicGain;
@@ -26,6 +28,7 @@ export class GameAudio {
     constructor() {
         this.musicContext = new AudioContext();
         this.musicGain = this.musicContext.createGain();
+        this.musicGain.gain.setValueAtTime(Constants.MAX_SFX_GAIN, this.musicContext.currentTime);
         this.musicGain.connect(this.musicContext.destination);
 
         this.sfxContext = new AudioContext();
@@ -206,14 +209,14 @@ export class GameAudio {
         this.musicMuted = !this.musicMuted;
         target.innerHTML = (this.musicMuted) ? "Enable Music" : "Mute Music";
 
-        this.musicGain.gain.setValueAtTime((this.musicMuted ? 0 : 1), this.musicContext.currentTime);
+        this.musicGain.gain.setValueAtTime((this.musicMuted ? 0 : Constants.MAX_MUSIC_GAIN), this.musicContext.currentTime);
     }
 
     toggleSfx(target) {
         this.sfxMuted = !this.sfxMuted;
         target.innerHTML = (this.sfxMuted) ? "Enable Sound Effects" : "Mute Sound Effects";
 
-        this.sfxGain.gain.setValueAtTime((this.sfxMuted ? 0 : 1), this.sfxContext.currentTime);
+        this.sfxGain.gain.setValueAtTime((this.sfxMuted ? 0 : Constants.MAX_SFX_GAIN), this.sfxContext.currentTime);
     }
 
     toggleStoryMusic(target) {
@@ -225,7 +228,7 @@ export class GameAudio {
         for (let link of links) {
             const url = new URL(link.getAttribute("href"), window.location.href);
             const params = url.searchParams;
-            params.set(`musicVol`, `${(this.storyMusicMuted ? 0 : 1)}`);
+            params.set(`musicVol`, `${(this.storyMusicMuted ? 0 : Constants.MAX_STORY_MUSIC_GAIN)}`);
             url.search = params.toString();
             link.setAttribute("href", url.href);
         }
@@ -240,7 +243,7 @@ export class GameAudio {
         for (let link of links) {
             const url = new URL(link.getAttribute("href"), window.location.href);
             const params = url.searchParams;
-            params.set(`sfxVol`, `${(this.storySfxMuted ? 0 : 1)}`);
+            params.set(`sfxVol`, `${(this.storySfxMuted ? 0 : Constants.MAX_STORY_SFX_GAIN)}`);
             url.search = params.toString();
             link.setAttribute("href", url.href);
         }

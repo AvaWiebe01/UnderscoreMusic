@@ -52,6 +52,13 @@
     --nyx-glow-color: rgba(255,0,80,0.5);
 }
 
+/* Don't select text while clicking */
+* {
+    -webkit-user-select: none; 
+    -ms-user-select: none;    
+    user-select: none;         
+}
+
 .loading_screen {
 	position:fixed;
 	top:0;

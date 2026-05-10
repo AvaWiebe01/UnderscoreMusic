@@ -82,7 +82,7 @@ window.onload = function() {
     gameData.multipliers.forEach((multiplier, key) => {
         multiplier.initDisplayElements();
     });
-
+    
     gameData.hypermods.initDisplayElements();
 
     gameData.bonusItem.initDisplayElements();
@@ -114,10 +114,9 @@ window.onload = function() {
 function gameTick(currentTime, gameData = new GameData()) {
 
     try {
-
         // Performance metric
         //let startTime, endTime; startTime = window.performance.now() * 1000; 
-
+        
         let deltaTime = currentTime - gameData.lastTime;
         gameData.deltaTime = deltaTime;
 

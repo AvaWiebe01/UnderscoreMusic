@@ -4,7 +4,7 @@ import { Process, displayProcesses } from "./processes.js";
 
 import { Upgrade, displayUpgrades } from "./upgrades.js";
 
-import { saveGame, loadGame, resetProgress } from "./save.js";
+import { saveGame, loadGame, resetProgress, copySaveToClipboard, importSave } from "./save.js";
 
 export class Utils {
     static gameData;
@@ -203,8 +203,29 @@ export class Utils {
         console.log(`Message: ${e.message}`);
         console.log(msg);
 
+        const saveManagementHtml = `<div class="options">
+                                        <div class="option save_management_options">
+                                            <p class="option_title">Export/Import Progress&emsp;</p>
+                                            <button class="export_save_button">Export Save Data</button> <span class="export_message hidden">Copied to clipboard!</span>
+                                            <br>
+                                            <button class="import_save_button">Import Save Data</button> <span class="import_message hidden"></span>
+                                            <br>
+                                            <input class="import_input" type="text" placeholder="Paste save data...">
+                                            <br><br>
+                                            <p class="option_desc">[Importing data CANNOT be reverted.]</p>
+                                        </div>
+                                    </div>`;
+
         const errorElement = document.querySelector(".error_screen");
-        errorElement.innerHTML = `<h2>Sorry, an error occurred.</h2><p><span class="error_message">${msg}</span><br><br><br>If the issue persists after reloading, please contact me for help.<br><br>Discord: @underscoreofficial<br>Email: underscoremusic.contact@gmail.com</p><div class="debug">Save this info:<br>Type: ${e.name}<br>Msg: ${e.message}</div>`;
+        errorElement.innerHTML = `<h2>Sorry, an error occurred.</h2><p><span class="error_message">${msg}</span><br><br><br>If the issue persists after reloading, please contact me for help.<br><br>Discord: @underscoreofficial<br>Email: underscoremusic.contact@gmail.com</p><div class="debug">Save this info:<br>Type: ${e.name}<br>Msg: ${e.message}<br><br></div>${saveManagementHtml}`;
         errorElement.classList.remove("hidden");
+    }
+
+    static copySaveToClipboard() {
+        copySaveToClipboard();
+    }
+
+    static importSave(saveFileStr) {
+        importSave(saveFileStr);
     }
 }
