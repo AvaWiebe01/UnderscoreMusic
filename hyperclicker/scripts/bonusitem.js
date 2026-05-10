@@ -117,13 +117,16 @@ export class BonusItem {
         var selected = keys[keys.length * Math.random() << 0];
         var selectedEffect = this.effects[selected];
 
+        // 10% chance to show !-LXAN01 clue
+        var showHiddenArchive2 = (Math.random() < 0.1);
+
         console.log(`Activating ${selected}!`);
 
         this.currentEffect = {strength:(selectedEffect.strength*this.effectMultiplier), duration:selectedEffect.duration, targets:selectedEffect.targets, desc:selectedEffect.desc};
 
         this.startEffect(this.currentEffect);
 
-        this.textElement.innerHTML = `<span class="title">&gt;&gt;&gt; Virus Removed &lt;&lt;&lt;</span><br>${(selectedEffect.strength * this.effectMultiplier).toFixed(1)}x ${selectedEffect.desc}`;
+        this.textElement.innerHTML = `<span class="title">&gt;&gt;&gt; Virus Removed &lt;&lt;&lt;</span><br>${(selectedEffect.strength * this.effectMultiplier).toFixed(1)}x ${selectedEffect.desc}${showHiddenArchive2 ? "<br>!-LXAN01" : ""}`;
         this.textElement.style.display = "block";
         this.bonusElement.style.left = `calc(25% + ${this.xpos}% - ${this.textElement.offsetWidth/2}px + 25px)`;
         this.bonusElement.style.top = `calc(${this.ypos}% - 50px)`;

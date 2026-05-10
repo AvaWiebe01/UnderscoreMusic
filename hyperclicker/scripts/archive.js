@@ -14,6 +14,13 @@ export class Archive {
         fragmentElement.classList.remove("not_unlocked");
         this.noFragmentsDisplay.classList.add("hidden");
 
+        // 5% chance to add !-LMTLOG clue to archive page
+        var showHiddenArchive1 = (Math.random() < 0.05);
+        if (showHiddenArchive1) {
+            document.querySelector(".hidden_archive_1").innerHTML="!-LMTLOG";
+            document.querySelector(".hidden_archive_1").classList.remove('hidden');
+        }
+
         // gameplay incentive for recovering
         Utils.gameData.resources.get("arcbits").modifyBtnValBaseMult(2);
         Utils.gameData.resources.get("arcbits").modifyDeltaBaseMult(2);

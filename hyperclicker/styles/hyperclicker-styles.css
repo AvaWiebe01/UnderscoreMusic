@@ -1052,6 +1052,14 @@ main .game .archive_panel a.fragment_link:active {
 	width:25%;
 }
 
+.hidden_archive_1 {
+	color:var(--bg-color);
+	text-shadow:none;
+	z-index:-100;
+	text-align:center;
+	margin-top:0.5rem;
+}
+
 .options {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
