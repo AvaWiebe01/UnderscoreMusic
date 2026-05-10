@@ -4,6 +4,11 @@ import { unlockHyperMod } from "./hypermods.js";
 
 export class Constants {
 
+static MAX_SFX_GAIN = 0.6;
+static MAX_MUSIC_GAIN = 1;
+static MAX_STORY_SFX_GAIN = 1;
+static MAX_STORY_MUSIC_GAIN = 1.2;
+
 static REFRESH_RATE = 60;
 static ONE_SECOND_MS = 1000;
 
@@ -22,8 +27,8 @@ static DATA_SIZE_ABBREVIATED_SUFFIXES = ["b","Kb","Mb","Gb","Tb","Pb","Eb","Zb",
 static DATA_SIZE_SUFFIXES = ["Bits","Kilobits","Megabits","Gigabits","Terabits","Petabits","Exabits","Zettabits","Yottabits","Ronnabits","Quettabits","Wrennbits"];
 
 static RESOURCE_INFO = [ // htmlName, amt, delta, btnVal, displayableName
-    ["arcbits", 1111111111110, 0.00010, "ArcBits"],
-    ["hyperkeys", 1111110, 0.00001, "HyperKeys"],
+    ["arcbits", 320000, 0.00010, "ArcBits"],
+    ["hyperkeys", 0, 0.00001, "HyperKeys"],
 ];
 
 // htmlName, amt, delta, btnVal, displayableName, initMaxCores
@@ -156,8 +161,14 @@ static ALL_UPGRADES_INFO = new Map([
 
                         ["nullStreak1", "NullPointer: Streamlining v0.15", "NullPointer <strong>streak</strong> multiplier <strong>+0.15x</strong>.", "", 4_250_000_000_000, ["nullStreak2"], (resource) => {Utils.gameData.resources.get("nullpointers").streakBase += 0.15;}],
                         ["nullStreak2", "NullPointer: Streamlining v0.20", "NullPointer <strong>streak</strong> multiplier <strong>+0.20x</strong>.", "", 6_750_000_000_000_000, ["nullStreak3"], (resource) => {Utils.gameData.resources.get("nullpointers").streakBase += 0.20;}],
-                        ["nullStreak3", "NullPointer: Streamlining v0.25", "NullPointer <strong>streak</strong> multiplier <strong>+0.25x</strong>.", "", 15_800_000_000_000_000_000, ["nullStreak4"], (resource) => {Utils.gameData.resources.get("nullpointers").streakBase += 0.25;}],
-                        ["nullStreak4", "NullPointer: Streamlining v0.40", "NullPointer <strong>streak</strong> multiplier <strong>+0.40x</strong>.", "", 75_000_000_000_000_000_000_000, [], (resource) => {Utils.gameData.resources.get("nullpointers").streakBase += 0.40;}],
+                        ["nullStreak3", "NullPointer: Streamlining v0.25", "NullPointer <strong>streak</strong> multiplier <strong>+0.25x</strong>.", "", 150_800_000_000_000_000, ["nullStreak4"], (resource) => {Utils.gameData.resources.get("nullpointers").streakBase += 0.25;}],
+                        ["nullStreak4", "NullPointer: Streamlining v0.40", "NullPointer <strong>streak</strong> multiplier <strong>+0.40x</strong>.", "", 20_000_000_000_000_000_000, ['nullStreak5', 'nullRoll1'], (resource) => {Utils.gameData.resources.get("nullpointers").streakBase += 0.40;}],
+                        ["nullStreak5", "NullPointer: Streamlining v0.45", "NullPointer <strong>streak</strong> multiplier <strong>+0.45x</strong>.", "", 1_000_000_000_000_000_000_000, ['nullStreak6'], (resource) => {Utils.gameData.resources.get("nullpointers").streakBase += 0.45;}],
+                        ["nullStreak6", "NullPointer: Streamlining v0.55", "NullPointer <strong>streak</strong> multiplier <strong>+0.55x</strong>.", "", 32_000_000_000_000_000_000_000, [], (resource) => {Utils.gameData.resources.get("nullpointers").streakBase += 0.55;}],
+                    
+                        ["nullRoll1", "NullPointer: Quantum Luck", "NullPointer <strong>Location</strong> rolls probability <strong>1</strong> additonal time.", "", 500_000_000_000_000_000_000, [], (resource) => {Utils.gameData.resources.get("nullpointers").rolls += 1;}],
+                    
+
 
                     // Bonus item
 
@@ -202,16 +213,19 @@ static ALL_UPGRADES_INFO = new Map([
                     // Unlockable Tabs
                     /* initial upgrade */ ["tab1", "Expansion: Archive", "Unlock an <strong class='rainbow'>Archive</strong> of fragmented data.", "", 0.32, ["tab2"], (resource) => {Utils.unlockTab("archive_panel_tab");}],
                     ["tab2", "Expansion: HyperMods", "Unlock the <strong class='rainbow'>HyperMod</strong> interface.", "", 320_000, ["tab3", "hyperVal1", "keyAug1", "ram1"], (resource) => {Utils.unlockTab("hypermods_panel_tab"); unlockResource("hyperkeys");}],
-                    ["tab3", "Expansion: BEYOND", "Un<span class='obfuscated'>l</span>ock ref<span class='obfuscated'>e</span>rences t<span class='obfuscated'>o</span> <strong class='rainbow'>out-of-b<span class='obfuscated'>o</span>unds</strong> memory addres<span class='obfuscated'>s</span>es.<br>Discover two new HyperMods.", "", 32_000_000_000, ["nullStreak1"], (resource) => {Utils.unlockTab("beyond_panel_tab"); unlockResource("nullpointers"); Utils.unlockUpgrade("hypermod_upgrades_list", "hyperkeys", "hypermodReroll"); Utils.unlockUpgrade("hypermod_upgrades_list", "hyperkeys", "hypermodStreak");}],
+                    ["tab3", "Expansion: BEYOND", "Un<span class='obfuscated'>l</span>ock ref<span class='obfuscated'>e</span>rences t<span class='obfuscated'>o</span> <strong class='rainbow'>out-of-b<span class='obfuscated'>o</span>unds</strong> memory addres<span class='obfuscated'>s</span>es.<br>Discover two new HyperMods.", "", 32_000_000_000, ["nullStreak1"], (resource) => {Utils.unlockTab("beyond_panel_tab"); unlockResource("nullpointers"); Utils.unlockUpgrade("hypermod_upgrades_list", "hyperkeys", "hypermodReroll"); Utils.unlockUpgrade("hypermod_upgrades_list", "hyperkeys", "hypermodStreak"); Utils.unlockUpgrade("hyperkey_upgrades_list", "hyperkeys", "keyNull1");}],
 
                     // Unlockable Systems (new UI elements in existing tabs)
-                    ["ram1", "RAM Interface", "Unlock the ability to manage the CPU's <strong>RAM</strong>.<br><br>When <strong>Core</strong> capacity is full, excess Cores are converted into RAM.<br>Processes receive a multiplier equal to <strong>log10(RAM)</strong>.", "", 5_750_000_000, ["ramHypermod", "ram2"], (resource) => {Utils.gameData.resources.get("ram").unlock(); resource.addDeltaMultSource("ramBoost"); Utils.gameData.multipliers.get("ramBoost").unlock();}],
+                    ["ram1", "RAM Interface", "Unlock the ability to manage the CPU's <strong>RAM</strong>.<br><br>When <strong>Core</strong> capacity is full, excess Cores are converted into RAM.<br>Processes receive a multiplier equal to <strong>log8(RAM)</strong>.", "", 5_750_000_000, ["ramHypermod", "ram2"], (resource) => {Utils.gameData.resources.get("ram").unlock(); resource.addDeltaMultSource("ramBoost"); Utils.gameData.multipliers.get("ramBoost").unlock();}],
 
                     ["ram2", "Memory Salvage", "Generate <strong>2x</strong> more RAM per converted Core.", "", 28_000_000_000, ["ram3"], (resource) => {Utils.gameData.resources.get("ram").modifyRamPerCore(2);}],
                     ["ram3", "Improved Memory Salvage", "Generate <strong>2x</strong> more RAM per converted Core.", "", 945_000_000_000, ["ram4"], (resource) => {Utils.gameData.resources.get("ram").modifyRamPerCore(2);}],
                     ["ram4", "Optimized Memory Salvage", "Generate <strong>2x</strong> more RAM per converted Core.", "", 22_250_000_000_000, ["ram5"], (resource) => {Utils.gameData.resources.get("ram").modifyRamPerCore(2);}],
                     ["ram5", "Atomic Memory Salvage", "Generate <strong>4x</strong> more RAM per converted Core.", "", 740_000_000_000_000, ["ram6"], (resource) => {Utils.gameData.resources.get("ram").modifyRamPerCore(4);}],
-                    ["ram6", "Quantum Memory Salvage", "Generate <strong>8x</strong> more RAM per converted Core.", "", 44_500_000_000_000_000, [], (resource) => {Utils.gameData.resources.get("ram").modifyRamPerCore(8);}],
+                    ["ram6", "Quantum Memory Salvage", "Generate <strong>8x</strong> more RAM per converted Core.", "", 18_500_000_000_000_000, ["ram7"], (resource) => {Utils.gameData.resources.get("ram").modifyRamPerCore(8);}],
+                    ["ram7", "Subquantum Memory Salvage", "Generate <strong>16x</strong> more RAM per converted Core.", "", 440_000_000_000_000_000, ["ram8"], (resource) => {Utils.gameData.resources.get("ram").modifyRamPerCore(16);}],
+                    ["ram8", "Planckian Memory Salvage", "Generate <strong>32x</strong> more RAM per converted Core.", "", 12_000_000_000_000_000_000, ["ram9"], (resource) => {Utils.gameData.resources.get("ram").modifyRamPerCore(32);}],
+                    ["ram9", "<span class='obfuscated'>00000000</span> Memory Salvage", "Generate <strong>64x</strong> more RAM per converted Core.", "", 350_000_000_000_000_000_000, [], (resource) => {Utils.gameData.resources.get("ram").modifyRamPerCore(64);}],
 
                     ["ramHypermod", "RAM: HyperMod Access", "Discover a new <strong>HyperMod</strong>.", "", 290_000_000_000, [], (resource) => {Utils.unlockUpgrade("hypermod_upgrades_list", "hyperkeys", "hypermodMemoryRedirection");}],
                 ]
@@ -228,7 +242,7 @@ static ALL_UPGRADES_INFO = new Map([
                 [
                     /*initial upgrade*/["hypermodNetworkGeneration", "Network Generation Architecture", "Each instance of <strong>Link Crawler</strong> increases core generation rate.", "", 0.0015, [], (resource) => {unlockHyperMod("networkGenerationArch");}],
                     
-                    /*initial upgrade*/["hypermodHyperCore", "HyperCore Architecture", "<strong>Core</strong> generation rate is multiplied by current sqrt(current <strong>HyperKey</strong> amount).", "", 0.0075, [], (resource) => {unlockHyperMod("hyperCoreArch");}],
+                    /*initial upgrade*/["hypermodHyperCore", "HyperCore Architecture", "<strong>Core</strong> generation rate is multiplied by sqrt(current <strong>HyperKey</strong> amount).", "", 0.0075, [], (resource) => {unlockHyperMod("hyperCoreArch");}],
 
                     /*initial upgrade*/["hypermodKeyMult", "KeyMult Architecture", "<strong>ArcMult</strong> also provides a multiplier to <strong>construction</strong> HyperKey generation.", "", 0.08, ["hypermodMultiProcess"], (resource) => {unlockHyperMod("keyMultArch");}],
 
@@ -265,6 +279,11 @@ static ALL_UPGRADES_INFO = new Map([
                     /*initial upgrade*/["modMax1", "HyperMod Slot 2", "A maximum of 2 <strong>HyperMods</strong> can be active concurrently.", "", 0.5, ["modMax2"], (resource) => {Utils.gameData.hypermods.modifyMaxEnabled(2)}],
                     ["modMax2", "HyperMod Slot 3", "A maximum of 3 <strong>HyperMods</strong> can be active concurrently.", "", 350, ["modMax3"], (resource) => {Utils.gameData.hypermods.modifyMaxEnabled(3)}],
                     ["modMax3", "HyperMod Slot 4", "A maximum of 4 <strong>HyperMods</strong> can be active concurrently.", "", 180_000, [], (resource) => {Utils.gameData.hypermods.modifyMaxEnabled(4)}],
+                
+                    ["keyNull1", "Duo-Pointers", "<strong>Locating</strong> NullPointers yields <strong>+1</strong>.", "", 600, ["keyNull2"], (resource) => {Utils.gameData.resources.get("nullpointers").btnVal += 1}],
+                    ["keyNull2", "Tri-Pointers", "<strong>Locating</strong> NullPointers yields another <strong>+1</strong>.", "", 5_250, ["keyNull3"], (resource) => {Utils.gameData.resources.get("nullpointers").btnVal += 1}],
+                    ["keyNull3", "Quad-Pointers", "<strong>Locating</strong> NullPointers yields another <strong>+1</strong>.", "", 38_000, ["keyNull4"], (resource) => {Utils.gameData.resources.get("nullpointers").btnVal += 1}],
+                    ["keyNull4", "Penta-Pointers", "<strong>Locating</strong> NullPointers yields another <strong>+1</strong>.", "", 555_555, [], (resource) => {Utils.gameData.resources.get("nullpointers").btnVal += 1}],
                 ]
             ],
         ])
@@ -288,21 +307,22 @@ static ALL_UPGRADES_INFO = new Map([
                     ["nullBtn10", "nullspace_collapse_protocol_v5", "<strong>nullpointer_location_chance=55.55%; //seems like the limit</strong>", "", 55_555_555, [], (resource) => {resource.modifySuccessRate(0.5555)}],
                     
                     /*initial upgrade*/["nullDelta1", "memory_leak_capture", "<strong>passive_nullpointer_gain_active();</strong>", "", 3, ["nullDelta2"], (resource) => {resource.delta = 0.05}],
-                    ["nullDelta2", "capture_rate+", "<strong>nullpointer_passive_capture_speed(+1x);</strong>", "", 10, ["nullDelta3"], (resource) => {resource.modifyDeltaMult(2)}],
-                    ["nullDelta3", "capture_rate++", "<strong>nullpointer_passive_capture_speed(+1x);</strong>", "", 24, ["nullDelta4"], (resource) => {resource.modifyDeltaMult(2)}],
-                    ["nullDelta4", "capture_rate+++", "<strong>nullpointer_passive_capture_speed(+1x);</strong>", "", 62, ["nullDelta5"], (resource) => {resource.modifyDeltaMult(2)}],
-                    ["nullDelta5", "capture_rate++++", "<strong>nullpointer_passive_capture_speed(+1x);</strong>", "", 105, ["nullDelta6"], (resource) => {resource.modifyDeltaMult(2)}],
-                    ["nullDelta6", "auto_search+", "<strong>nullpointer_passive_capture_speed(+2x);</strong>", "", 225, ["nullDelta7"], (resource) => {resource.modifyDeltaMult(3)}],
-                    ["nullDelta7", "auto_search++", "<strong>nullpointer_passive_capture_speed(+3x);</strong>", "", 500, ["nullDelta8"], (resource) => {resource.modifyDeltaMult(4)}],
-                    ["nullDelta8", "auto_search+++", "<strong>nullpointer_passive_capture_speed(+4x);</strong>", "", 1_400, ["nullDelta9"], (resource) => {resource.modifyDeltaMult(5)}],
-                    ["nullDelta9", "auto_search++++", "<strong>nullpointer_passive_capture_speed(+5x);</strong>", "", 7_200, ["nullDelta10"], (resource) => {resource.modifyDeltaMult(6)}],
+                    ["nullDelta2", "capture_rate+", "<strong>nullpointer_passive_capture_speed(+2x);</strong>", "", 10, ["nullDelta3"], (resource) => {resource.modifyDeltaMult(2)}],
+                    ["nullDelta3", "capture_rate++", "<strong>nullpointer_passive_capture_speed(+2x);</strong>", "", 24, ["nullDelta4"], (resource) => {resource.modifyDeltaMult(2)}],
+                    ["nullDelta4", "capture_rate+++", "<strong>nullpointer_passive_capture_speed(+2x);</strong>", "", 62, ["nullDelta5"], (resource) => {resource.modifyDeltaMult(2)}],
+                    ["nullDelta5", "capture_rate++++", "<strong>nullpointer_passive_capture_speed(+2x);</strong>", "", 105, ["nullDelta6"], (resource) => {resource.modifyDeltaMult(2)}],
+                    ["nullDelta6", "auto_search+", "<strong>nullpointer_passive_capture_speed(+3x);</strong>", "", 225, ["nullDelta7"], (resource) => {resource.modifyDeltaMult(3)}],
+                    ["nullDelta7", "auto_search++", "<strong>nullpointer_passive_capture_speed(+4x);</strong>", "", 500, ["nullDelta8"], (resource) => {resource.modifyDeltaMult(4)}],
+                    ["nullDelta8", "auto_search+++", "<strong>nullpointer_passive_capture_speed(+5x);</strong>", "", 1_400, ["nullDelta9"], (resource) => {resource.modifyDeltaMult(5)}],
+                    ["nullDelta9", "auto_search++++", "<strong>nullpointer_passive_capture_speed(+6x);</strong>", "", 7_200, ["nullDelta10"], (resource) => {resource.modifyDeltaMult(6)}],
                     ["nullDelta10", "optimal_capture", "<strong>nullpointer_passive_capture_speed(+9.99x);</strong>", "", 111_000, [], (resource) => {resource.modifyDeltaMult(9.99)}],
 
                     /*initial upgrade*/["nullBoost1", "arc_hack.exe", "<span class='rainbow'>arcbit_decryption_and_process_multiplier=8;</span>", "", 111, ["nullBoost2"], (resource) => {Utils.gameData.resources.get("arcbits").modifyBtnValBaseMult(8); Utils.gameData.resources.get("arcbits").modifyDeltaBaseMult(100);}],
                     ["nullBoost2", "hyperboost.exe", "<span class='rainbow'>resources.get('hyperkeys').setMultiplier(8);</span>", "", 22_222, ["nullBoost3"], (resource) => {Utils.gameData.resources.get("hyperkeys").modifyBtnValBaseMult(16); Utils.gameData.resources.get("hyperkeys").modifyDeltaBaseMult(175);}],
                     ["nullBoost3", "core_generator_overclock.exe", "<span class='rainbow'>gameData.params.CORE_GENERATION_SPEED*=4;</span>", "", 3_333_333, ["nullBoost4"], (resource) => {Utils.gameData.resources.get("cores").modifyDeltaBaseMult(5);}],
-                    ["nullBoost4", "resourceGen_final_FINAL.exe", '<span class="rainbow">internalFiles("~/var/saveData.json").write("{ALL_RESOURCES_MULTIPLIER: 2}");</span>', "", 444_444_444, ["nullFinal"], (resource) => {Utils.gameData.resources.get("arcbits").modifyBtnValBaseMult(2); Utils.gameData.resources.get("arcbits").modifyDeltaBaseMult(2); Utils.gameData.resources.get("hyperkeys").modifyBtnValBaseMult(2); Utils.gameData.resources.get("hyperkeys").modifyDeltaBaseMult(2); Utils.gameData.resources.get("nullpointers").modifyBtnValBaseMult(2); Utils.gameData.resources.get("nullpointers").modifyDeltaBaseMult(2);}],
-                    ["nullFinal", "<span class='obfuscated'>0000000000000000</span>", "<span class='rainbow'>MOV 0x000A998E, '#4x';</span>", "", 99_999_000_000, [], (resource) => {Utils.gameData.resources.get("arcbits").modifyBtnValBaseMult(4); Utils.gameData.resources.get("arcbits").modifyDeltaBaseMult(4); Utils.gameData.resources.get("hyperkeys").modifyBtnValBaseMult(4); Utils.gameData.resources.get("hyperkeys").modifyDeltaBaseMult(4); Utils.gameData.resources.get("nullpointers").modifyBtnValBaseMult(4); Utils.gameData.resources.get("nullpointers").modifyDeltaBaseMult(4);}],
+                    ["nullBoost4", "resourceGen_final_FINAL.exe", '<span class="rainbow">internalFiles("~/var/saveData.json")<br>.write("{ALL_RESOURCES_MULTIPLIER: 2x}");</span>', "", 444_444_444, ["nullFinal"], (resource) => {Utils.gameData.resources.get("arcbits").modifyBtnValBaseMult(2); Utils.gameData.resources.get("arcbits").modifyDeltaBaseMult(2); Utils.gameData.resources.get("hyperkeys").modifyBtnValBaseMult(2); Utils.gameData.resources.get("hyperkeys").modifyDeltaBaseMult(2); Utils.gameData.resources.get("nullpointers").modifyBtnValBaseMult(2); Utils.gameData.resources.get("nullpointers").modifyDeltaBaseMult(2);}],
+                    ["nullFinal", "<span class='obfuscated'>0000000000000000</span>", "<span class='rainbow'>MOV 0x000A998E, '#4x';</span>", "", 99_999_000_000, ['nullFinalFinal'], (resource) => {Utils.gameData.resources.get("arcbits").modifyBtnValBaseMult(4); Utils.gameData.resources.get("arcbits").modifyDeltaBaseMult(4); Utils.gameData.resources.get("hyperkeys").modifyBtnValBaseMult(4); Utils.gameData.resources.get("hyperkeys").modifyDeltaBaseMult(4); Utils.gameData.resources.get("nullpointers").modifyBtnValBaseMult(4); Utils.gameData.resources.get("nullpointers").modifyDeltaBaseMult(4);}],
+                    ['nullFinalFinal', "NULLSPACE COMPLETE.", "<span class='rainbow'>GLOBAL_ARCBIT_MULTIPLIER = log8(NULLPOINTERS);</span>", "", 3_200_000_000_000_000, [], (resource => {Utils.gameData.resources.get('arcbits').addDeltaMultSource('nullspace'); Utils.gameData.resources.get('arcbits').addBtnValMultSource('nullspace'); Utils.gameData.multipliers.get("nullspace").unlock();})]
                 ]
             ],
         ])
@@ -322,7 +342,7 @@ static ALL_UPGRADES_INFO = new Map([
                     ["fragment5", "Fragment 3", "New Archon Camera #112D8A39 Audio Feed", "", 25_000_000_000_000, ["fragment6", "fragment7"], (resource) => resource.gameData.archive.unlockFragment("fragment_3")],
                     ["fragment6", "Fragment 3.5", "Codex Partition #448A120F", "", 8_000_000_000_000_000, [], (resource) => resource.gameData.archive.unlockFragment("fragment_3.5")],
                     ["fragment7", "Fragment 4", "HyperI/O Camera #34C1D859 Audio Feed", "", 500_000_000_000_000_000_000, ["fragment8"], (resource) => resource.gameData.archive.unlockFragment("fragment_4")],
-                    ["fragment8", "Final Fragment", "The End.", "", 32_000_000_000_000_000_000_000_000_000, [], (resource) => resource.gameData.archive.unlockFragment("fragment_final")],
+                    ["fragment8", "Final Fragment", "The End.", "", 32_000_000_000_000_000_000_000_000, [], (resource) => resource.gameData.archive.unlockFragment("fragment_final")],
                 ]
             ],
         ])

@@ -29,7 +29,7 @@ export class Archive {
                 <div class="fragment not_unlocked" fragment_key="${key}">
                     <h3>${fragmentInfo[0]}</h3>
                     <span class="fragment_description">${fragmentInfo[1]}</span>
-                    <a class="fragment_link" href="${fragmentInfo[2]}" target="_blank">[View ${fragmentInfo[0]}]</a>
+                    <a class="fragment_link" href="${fragmentInfo[2]}?sfxVol=${Constants.MAX_STORY_SFX_GAIN}&musicVol=${Constants.MAX_STORY_MUSIC_GAIN}" target="_blank">[View ${fragmentInfo[0]}]</a>
                 </div>
             `;
         });

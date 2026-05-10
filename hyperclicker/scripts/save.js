@@ -156,6 +156,9 @@ export function loadGame() {
         gameData.audio.storySfxMuted = saveFile.options?.storySfxMuted ?? false;
         Utils.seenIntro = saveFile.options.seenIntro ?? false;
 
+        // reset Bonus cooldown
+        Utils.gameData.bonusItem.timeUntilAppear = Utils.gameData.bonusItem.cooldown * Utils.gameData.bonusItem.cooldownMultiplier;
+
         // update displays
         Utils.refreshAllDisplays();
 
@@ -170,4 +173,24 @@ export function resetProgress() {
     localStorage.removeItem("playerSave");
     
     window.location.reload();
+}
+
+export function copySaveToClipboard() {
+    saveGame();
+    
+    const saveFile = JSON.parse(localStorage.getItem("playerSave"));
+    const saveFileStr = JSON.stringify(saveFile);
+
+    navigator.clipboard.writeText(saveFileStr).then(
+        () => {
+            return true;
+        },
+        () => {
+            return false;
+        }
+    );
+}
+
+export function importSave(saveFileStr) {
+    localStorage.setItem("playerSave", saveFileStr);
 }

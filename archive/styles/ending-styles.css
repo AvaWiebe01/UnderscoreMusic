@@ -141,12 +141,14 @@ h4 {
     text-align:center;
     font-size: 1.25rem;
     font-family: "spacemono", 'Courier New', monospace;
+    margin-bottom:0.75rem;
 }
 
 p {
     text-align:center;
     font-size: 1rem;
     font-family: "spacemono", 'Courier New', monospace;
+    margin-bottom:2.5rem;
 }
 
 .ending {

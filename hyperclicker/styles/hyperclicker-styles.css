@@ -181,6 +181,57 @@ body {
 	color:var(--text-glow-color);
 }
 
+.error_screen div.options {
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+}
+
+.error_screen .options .option {
+	width:34rem;
+}
+
+.error_screen .options .option_title {
+	margin-top: 0;
+}
+
+.error_screen .options .option_desc {
+	margin: 0.5rem 0 0 0;
+}
+
+.error_screen .options .option_title, .error_screen .options p, .error_screen .options .import_message, .error_screen .options .export_message {
+	background:var(--transparent);
+}
+
+.error_screen .hidden {
+	display:none;
+}
+
+.error_screen button {
+    padding:0.5rem;
+    color:var(--main-color);
+    font-family:"spacemono", "Courier New", monospace;
+    text-align:center;
+    text-shadow: var(--main-text-glow-color) 0 0 0.75rem;
+    border: 0.1rem solid var(--main-color);
+    box-shadow: 0 0 0.75rem var(--main-box-glow-color),
+                inset 0 0 0.75rem var(--main-box-glow-color);
+    background-color:var(--main-bg-color-2);
+    transition-duration:0.15s;
+    font-size:1.25rem;
+}
+
+.error_screen button:hover {
+    background-color:var(--main-color);
+    color:var(--bg-color);
+    cursor:pointer;
+}
+
+.error_screen button:active {
+	transform: scale(0.95, 0.95);
+	transition-duration:0.05s;
+}
+
 .loading_screen {
 	position:fixed;
 	top:0;
@@ -1001,14 +1052,14 @@ main .game .archive_panel a.fragment_link:active {
 	width:25%;
 }
 
-main .game .options {
+.options {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 1rem;
 	grid-auto-rows: minmax(100px, auto);
 }
 
-main .game .options .option {
+.options .option {
 	border: 0.1rem solid var(--text-color);
 	box-shadow: 0 0 0.75rem var(--text-glow-color),
 		inset 0 0 0.75rem var(--text-glow-color);
@@ -1019,22 +1070,22 @@ main .game .options .option {
 	text-shadow: none;
 }
 
-main .game .options .option .option_title {
+.options .option .option_title {
 	font-size: 1.25rem;
 	color: var(--text-color);
 	text-shadow: var(--text-glow-color) 0 0 0.5rem;
 }
 
-main .game .options_panel .options button {
+.options button {
 	margin-bottom:1rem;
 }
 
-main .game .options_panel .options button:active {
+.options button:active {
 	transform: scale(0.95, 0.95);
 	transition-duration:0.05s;
 }
 
-main .game .options_panel .options .saved_message {
+.options .saved_message {
 	color: var(--main-color);
 	text-shadow: var(--main-text-glow-color) 0 0 0.5rem;
 	
@@ -1043,7 +1094,7 @@ main .game .options_panel .options .saved_message {
 	left:-1.5rem;
 }
 
-main .game .options_panel .options .reset_message {
+.options .reset_message {
 	color: var(--main-color);
 	text-shadow: var(--main-text-glow-color) 0 0 0.5rem;
 	
@@ -1052,6 +1103,22 @@ main .game .options_panel .options .reset_message {
 	left:2.5rem;
 }
 
+.export_message {
+	color: var(--main-color);
+	text-shadow: var(--main-text-glow-color) 0 0 0.5rem;
+}
+
+.import_input {
+	color:var(--text-color);
+	border: 0.1rem solid var(--text-color);
+	box-shadow: 0 0 0.75rem var(--text-glow-color),
+		inset 0 0 0.75rem var(--text-glow-color);
+}
+
+.import_message {
+	color: var(--main-color);
+	text-shadow: var(--main-text-glow-color) 0 0 0.5rem;
+}
 
 main .game p {
 	text-align:left;

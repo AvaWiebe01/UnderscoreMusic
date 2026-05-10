@@ -146,7 +146,7 @@ export class Process {
         this.activeGenerationDisplay.innerHTML = `${Utils.getDisplayableNumber(this.getProductionDelta() * this.resource.getDeltaTotalMult())} ${this.resource.displayableName}/s`; 
         this.buyCoresDisplay.innerHTML = `-${Utils.getDisplayableNumber(this.coreReq, false)} Cores`; 
         this.buyResourceDisplay.innerHTML = `-${Utils.getDisplayableNumber(this.cost)} ${this.resource.displayableName}`; 
-        this.sellOneCoresDisplay.innerHTML = `+${Utils.getDisplayableNumber((this.numBought ? this.coreReq : 0), false)} Cores`; 
+        this.sellOneCoresDisplay.innerHTML = `+${Utils.getDisplayableNumber((this.numBought ? this.coreReq : 0), false)} Cores`;
         this.sellAllCoresDisplay.innerHTML = `+${Utils.getDisplayableNumber(this.coreReq * this.numBought, false)} Cores`; 
     }
 

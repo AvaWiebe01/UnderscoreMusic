@@ -135,6 +135,61 @@ export function initEventHandlers(gameData = new GameData()) {
             }
         })
 
+        $(".export_save_button").on("click", (event) => {
+            try {
+                Utils.copySaveToClipboard();
+
+                const exportMessage = document.querySelector(".export_message");
+                exportMessage.classList.remove("fade-out-slow");
+                void exportMessage.offsetWidth;
+                exportMessage.classList.add("fade-out-slow");
+                exportMessage.classList.remove("hidden");
+                exportMessage.addEventListener("animationend", () => {
+                    exportMessage.classList.remove("fade-out-slow"); 
+                    exportMessage.classList.add("hidden");
+                })
+
+            } catch(e) {
+                Utils.displayError(e, "Options: exporting save failed.");
+            }
+        })
+
+        $(".import_save_button").on("click", (event) => {
+            try {
+                const inputField = event.currentTarget.closest(".option").querySelector(".import_input");
+                const importMessage = document.querySelector(".import_message");
+                var saveFileStr = inputField.value;
+                
+                try{
+                    var saveFileObj = JSON.parse(saveFileStr);
+                    if ((saveFileObj == {}) || (typeof saveFileObj.validationField != "number")) {
+                        throw new Error("JSON is empty and/or does not contain a validation field.");
+                    }
+
+                    Utils.importSave(saveFileStr);
+
+                    importMessage.innerHTML = "Success! Refresh the website.";
+                    
+                } catch(e) {
+                    console.log(e.message);
+                    importMessage.innerHTML = "Invalid save data.";
+                }
+
+                importMessage.classList.remove("fade-out-slow");
+                void importMessage.offsetWidth;
+                importMessage.classList.add("fade-out-slow");
+                importMessage.classList.remove("hidden");
+                importMessage.addEventListener("animationend", () => {
+                    importMessage.classList.remove("fade-out-slow"); 
+                    importMessage.classList.add("hidden");
+                })
+
+            } catch(e) {
+                Utils.displayError(e, "Options: importing save failed.");
+            }
+            
+        })
+
         // RESOURCE BUTTONS //
         $(".resource_button").click((event) => {
             try {
@@ -360,6 +415,8 @@ export function initEventHandlers(gameData = new GameData()) {
                 }
                     
                 else if(action == "sell_one") {
+                    process.displayAllFields();
+
                     if(!process.canSell(1)) {
                         event.currentTarget.classList.add("cannot_buy");
                         process.displayInvalidButton(action);
@@ -367,6 +424,8 @@ export function initEventHandlers(gameData = new GameData()) {
                 }
 
                 else if(action == "sell_all") {
+                    process.displayAllFields();
+                    
                     if(!process.canSell(process.numBought)) {
                         event.currentTarget.classList.add("cannot_buy");
                         process.displayInvalidButton(action);

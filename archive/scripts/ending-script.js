@@ -6,7 +6,23 @@ var musicGain;
 
 $(document).ready(() => {
 
-    $("button").on("click", (event) => {
+    $("button[class='reveal_doc']").on("click", (event) => {
+        const buttonElement = event.currentTarget;
+        const docElement = document.querySelector(".doc");
+        const titleElement = document.getElementById("credits-title");
+
+        buttonElement.classList.add("hidden");
+        $(".doc_wrapper").slideDown(500);
+        
+        const creditsMusic = musicContext.createBufferSource();
+        musicGain.gain.setValueAtTime(musicVol, musicContext.currentTime);
+        creditsMusic.buffer = ambientBuffer;
+        creditsMusic.connect(musicGain);
+        creditsMusic.loop = true;
+        creditsMusic.start();
+    })
+
+    $("button[class='reveal_credits']").on("click", (event) => {
         const buttonElement = event.currentTarget;
         const creditsElement = document.querySelector(".credits");
         const titleElement = document.getElementById("credits-title");
@@ -18,13 +34,6 @@ $(document).ready(() => {
                 block:"start",
             })
         });
-        
-        const creditsMusic = musicContext.createBufferSource();
-        musicGain.gain.setValueAtTime(musicVol, musicContext.currentTime);
-        creditsMusic.buffer = ambientBuffer;
-        creditsMusic.connect(musicGain);
-        creditsMusic.loop = true;
-        creditsMusic.start();
     })
 
 })

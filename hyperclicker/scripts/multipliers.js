@@ -398,11 +398,36 @@ class MultRamBoost extends Multiplier {
     }
 
     multUpdate() {
-        this.mult = Math.max(Math.log10(Utils.gameData.resources.get("ram").amt), 1);
+        this.mult = Math.max(Math.log(Utils.gameData.resources.get("ram").amt/Math.log(8)), 1);
     }
 
     initDisplayElements() {
         this.displayElements = document.getElementsByClassName("ram_boost_display");
+    }
+
+    toJSON() {
+        return {
+
+        };
+    }
+
+    fromJSON() {
+        
+    }
+}
+
+// multiplier for NullPointers amount
+class MultNullspace extends Multiplier {
+    getMult() {
+        return this.mult;
+    }
+
+    multUpdate() {
+        this.mult = Math.max(Math.log(Utils.gameData.resources.get("nullpointers").amt/Math.log(8)), 1);
+    }
+
+    initDisplayElements() {
+        this.displayElements = document.getElementsByClassName("nullspace_display");
     }
 
     toJSON() {
@@ -505,6 +530,9 @@ export function initMultipliers(gameData = new GameData) {
         ["networkGeneration", new MultNetworkGeneration("networkGeneration", "Network Generation", gameData)],
         ["memoryRedirection", new MultMemoryRedirection("memoryRedirection", "Memory Redirection", gameData)],
         ["memoryRedirectionPenalty", new MultMemoryRedirectionPenalty("memoryRedirectionPenalty", "Memory Redirection", gameData)],
+
+        // nullpointer mults
+        ["nullspace", new MultNullspace("nullspace", "Nullspace", gameData)],
 
         // bonus mult
         ["bonusItem", new MultBonusItem("bonusItem", gameData)],
