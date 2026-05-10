@@ -12,6 +12,7 @@ export function initEventHandlers(gameData = new GameData()) {
                 const introScreenElement = event.currentTarget.closest(".intro_screen");
 
                 Utils.gameData.audio.playSfxUnlocked();
+                Utils.gameData.audio.playSfxStart();
 
                 introScreenElement.classList.add("fade-flash");
                 introScreenElement.addEventListener("animationend", () => {

@@ -23,6 +23,7 @@ export class GameAudio {
     static sfxSelect;
     static sfxBonus;
     static sfxUnlocked;
+    static sfxStart;
 
 
     constructor() {
@@ -92,6 +93,11 @@ export class GameAudio {
         this.sfxUnlocked.preservesPitch = false;
         const sfxUnlockedTrack = this.sfxContext.createMediaElementSource(this.sfxUnlocked);
         sfxUnlockedTrack.connect(this.sfxGain);
+
+        this.sfxStart = document.getElementById("sfx_start");
+        this.sfxStart.preservesPitch = false;
+        const sfxStartTrack = this.sfxContext.createMediaElementSource(this.sfxStart);
+        sfxStartTrack.connect(this.sfxGain);
     }
 
     // Play SFX
@@ -195,6 +201,17 @@ export class GameAudio {
             this.sfxUnlocked.currentTime = 0;
             this.sfxUnlocked.playbackRate = 1;
             this.sfxUnlocked.play();
+        } catch(e) {
+            console.log("Audio failed to play.");
+        }   
+    }
+
+    playSfxStart() {
+        try {
+            this.sfxStart.pause();
+            this.sfxStart.currentTime = 0;
+            this.sfxStart.playbackRate = 1;
+            this.sfxStart.play();
         } catch(e) {
             console.log("Audio failed to play.");
         }   
