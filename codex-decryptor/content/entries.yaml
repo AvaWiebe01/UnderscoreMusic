@@ -1,0 +1,344 @@
+---
+categories:
+
+    -   category-key: catLocations
+        category-title: Locations
+        category-icon: "/images/codex-decryptor/icons/locations.png"
+        category-entries:
+
+            -   entry-key: entNewArchon
+                entry-title: New Archon
+                entry-html: |
+                    New Archon, established 1723, is a mega-city bordering the Atlantic Ocean. It's split into 5 districts: <span class="entrylink" target="entCentral">Central</span>, <span class="entrylink" target="entUpperRidge">Upper Ridge</span>, <span class="entrylink" target="entCrescentBay">Crescent Bay</span>, <span class="entrylink" target="entLowerHull">Lower Hull</span>, and <span class="entrylink" target="entWestArch">West Arch</span>.
+                    With a population of <strong>78 million</strong> over just <strong>4532 km²</strong>, it’s the most populous and dense urban area in the Western Lands.
+                    In 2017, New Archon was chosen as the pilot location for a new technology known as the <span class="entrylink" target="entCodex"><a>Codex</a></span>, which would allow the entire city to run on one advanced, interconnected mainframe.
+                    The technology was finished and fully implemented after 7 years, in 2024.
+                    New Archon has faced numerous societal and economic obstacles, as <strong>criminal organizations</strong> breached security and used the Codex for their own gain.
+                    It is currently the most <strong>dangerous</strong> city on the planet, based on average daily non-natural deaths.<br>
+                sub-entries:
+
+                    -   entry-key: entCentral
+                        entry-title: Central
+                        entry-html: |
+                            Central is the <strong>heart</strong> of New Archon.
+                            The many skyscrapers in this dense metropolis are filled with office space for the richest and most infamous New Archon businesses.
+                            Life in Central is fast-paced and intense - the <span class="entrylink" target="entCodex">Codex</span> is meticulously wired throughout the entire district, allowing for exploits to have <strong>faster</strong> and more <strong>widespread effects</strong>.
+                            With the help of the Codex's regulation, all of Central is kept entirely <strong>pollution-free</strong>, resulting in the cleanest air out of any major city worldwide.
+                            The New Archon <strong>government</strong> operates from Central.<br>
+
+                    -   entry-key: entUpperRidge
+                        entry-title: Upper Ridge
+                        entry-html: |
+                            Upper Ridge is the <strong>wealthiest</strong> district in New Archon.
+                            The region is filled with large houses and mansions, with many malls and businesses lining the streets in more urban areas.
+                            Due to the difference in wealth, other districts are generally <strong>hostile</strong> towards Upper Ridge residents.<br>
+
+                    -   entry-key: entCrescentBay
+                        entry-title: Crescent Bay
+                        entry-html: |
+                            Crescent Bay contains the <strong>importing</strong> and <strong>exporting</strong> industries of New Archon.
+                            The city regularly imports materials such as lumber, steel, and silicon.
+                            Common exports include seafood, electronic components, and clothes.
+                            The area also features a coastline dotted with beaches available to the public, though they are unpopular.
+                            The bay contains few sparsely placed residential areas, mainly housing employees of the nearby companies.
+                            Crescent Bay has <strong>low air quality</strong>, which prevents many from choosing to live nearby.<br>
+
+                    -   entry-key: entLowerHull
+                        entry-title: Lower Hull
+                        entry-html: |
+                            Lower Hull houses most <strong>low-income</strong> New Archon residents, sprawling South of the bay.
+                            The area was initially undeveloped land, but was eventually developed as population grew and a need for cheaper housing arose.
+                            The Codex was implemented less rigidly in Lower Hull due to its <strong>vast</strong> and <strong>expanding</strong> area, meaning that many of the first <span class="entrylink" target="entCodex">Codex</span> exploits originated within its boundaries.<br>
+
+                    -   entry-key: entWestArch
+                        entry-title: West Arch
+                        entry-html: |
+                            West Arch is the largest suburban area in New Archon.
+                            Initially, it was higher-class but fell into relative <strong>disrepair</strong> after many wealthy citizens moved to larger properties in Upper Ridge.
+                            Citizens of West Arch have long been anti-<span class="entrylink" target="entCodex">Codex</span>, and rumors of severing the district from the rest of New Archon are frequent.
+                            So far, they have been <strong>unsuccessful</strong>.
+                            The district reports the lowest homicide rate of any in New Archon.<br>
+
+            -   entry-key: entOutsideWorld
+                entry-title: Outside World
+                entry-html: |
+                    <span class="entrylink" target="entNewArchon">New Archon</span> is isolated from the outside world by a harsh surrounding environment which restricts the majority of the population from leaving.
+                    <span class="entrylink" target="entCrescentBay">Crescent Bay</span> is the most viable route to emigrate, but is still highly dangerous.
+                    The transport vessels that export goods aren't designed to support life, and shipments are subjected to extreme atmospheric conditions, which deters most from attempting an escape.
+                    Alliances with other cities have been attempted, but negotiations have never reached a conclusion that would allow New Archon citizens to safely emigrate elsewhere.<br>
+                    <br>
+
+                    <strong>The Boundary</strong> is an expanse of land that surrounds New Archon, forming a ring of terrain and water.
+                    Mostly consisting of wreckage and decay, few live within it.
+                    Small encampments dot the landscape, filled with those who are willing to sacrifice everything to leave the city.
+                    Feral animals are the main danger for those residing in the Boundary.<br>
+                    <br>
+
+                    <strong>The Threshold</strong> is harsh area acting as a barrier between the Boundary and the Outskirts.
+                    Filled with decades of hazardous and household waste piled high, the risk of serious infection is high.
+                    Those who attempt traversal must contend with uneven and unpredictable topography - avalanches, deep pits, and sharp objects are commonplace.
+                    The water in this area is infectious, and unusual air composition has increased extreme weather conditions.<br>
+                    <br>
+
+                    <strong>The Outskirts</strong> are the final zone surrounding New Archon.
+                    Complete resource depletion, weapons testing, and chemical spills have ravaged the once-beautiful land.
+                    Any contact with the air or water is extremely harmful, as chemical burns form in under two seconds of exposure.
+                    Even reinforced and enclosed vehicles must take advanced precautions, as the toxic environment erodes most materials at a rapid pace.
+                    Only specialized jets and ships, such as those used for resource trade with outside cities, can traverse the conditions safely.<br>
+                    <br>
+
+                    Beyond the Outskirts, lies the outside world.<br>
+
+    -   category-key: catPeople
+        category-title: People
+        category-icon: "/images/codex-decryptor/icons/people.png"
+        category-entries:
+
+            -   entry-key: entOperators
+                entry-title: Operators
+                entry-html: ""
+                entry-photo: null
+                sub-entries:
+
+                    -   entry-key: entKyanaWrenn
+                        entry-title: Kyana Wrenn
+                        entry-photo: "/images/codex-decryptor/kyana_wrenn_image.png"
+                        entry-html: |
+                            <span class="entry-subtitle"><strong><b>Operator Profile:</b></strong></span><br>
+                            <br>
+                            
+                            <strong>Identity</strong>: Kyana Wrenn<br>
+                            <strong>Operator ID</strong>: K-01<br>
+                            <strong>Date of Acceptance</strong>: October 2, 2039<br>
+                            <strong>Assignment</strong>: Team Z04 Head /// Team <span class="redacted">[DATA_LOST]</span> Supervisor<br>
+                            <br>
+                            
+                            <strong>Weapons</strong>: Ranged &gt; KTK-02 /// Melee &gt; Havoc Blades<br>
+                            <strong>Armor</strong>: None<br>
+                            <strong>Strengths</strong>: Accurate and ruthless with submachine guns. 
+                            Skilled at both martial arts and close-range dagger combat. 
+                            Quick and decisive leader who prioritizes the safety of allies and civilians.<br>
+                            <strong>Weaknesses</strong>: Very defensive when receiving criticism. Occasionally too blunt when evaluating others.<br>
+                            <br>
+                            
+                            <strong>Notes</strong>: Kyana is highly respected among many <span class="entrylink" target="entHyperBeam"><a>HYPER BEAM</a></span> <span class="define">operators</span>.
+                            Complaints filed against her describe her insulting other operators, and attacking others with blunt, inconsiderate comments.
+                            An investigation found that operators who file complaints against Kyana have 31% lower performance in HYPER BEAM combat evaluations, compared to the organization average.
+                            The investigation concluded that her behavior required reprimanding, but was not severe enough to warrant termination or demotion.
+                            Those close to her have reported that while not working, she can be an emotional and sensitive person.<br>
+                            <br>
+                            
+                            Despite her cold and serious demeanor, she shows a huge amount of care for her work.
+                            Her ability to keep civilian lives and ally safety as an utmost priority, while successfully completing assignments, is very commendable.						
+                            Kyana advanced to Y and Z-class much faster than most, due to her attention to detail and fighting skills.
+                            She demonstrates absolute mastery of perception and agility in her decision to fight without any armor, using only her <span class="entrylink" target="entWeaponCores">weapon cores</span> as defense.<br>
+                            <br>
+                            
+                            <strong>Assessment:</strong> Valuable and trustworthy - keep in leadership positions indefinitely. Promotion to Head of team <span class="redacted">[DATA_LOST]</span> is likely.<br>
+                        sub-entries:
+
+                            -   entry-key: entKyanaWrennLife
+                                entry-title: Life
+                                entry-html: |
+                                    Despite <strong> extensive </strong> efforts by data-miners, K-01's past remains mostly obscured in the <span class="entrylink" target="entCodex"><a>Codex</a></span>.
+                                    She appears to have taken sweeping measures to permanently delete any records of herself before joining <span class="entrylink" target="entHyperBeam"><a>HYPER BEAM</a></span>.
+                                    An estimation of her history has been assembled from a variety of sources, including K-01's own statements, her former affiliates, and clues left behind in the Codex.
+                                    The following information is <strong>unreliable</strong> and <strong>may contain errors</strong>:<br>
+                                    <br>
+                                    
+                                    K-01 was born on September 30th, 2021, in <span class="entrylink" target="entLowerHull"><a>Lower Hull</a></span>, <span class="entrylink" target="entNewArchon"><a>New Archon</a></span>.
+                                    Her name at birth is <strong>unknown</strong>.
+                                    Her mother was an executive BIOSHAPER employee on the <span class="entrylink" target="entShaper">SHAPER</span> development team, name unknown.
+                                    Her father has not been identified.
+                                    As a teenager, she developed her own Codex backdoor, and manipulated the backend to her advantage frequently.
+                                    Though by modern standards, the tool was primitive, at the time it was one of the most advanced Codex backdoors.
+                                    The program got the attention of <strong>several</strong> criminal factions, who wished to use it and work with K-01.
+                                    She refused to reveal the source code for her backdoor, citing a hatred for those who used the Codex to harm others.
+                                    In retaliation, the faction <span class="entrylink" target="entLimit">LIMIT</span> killed K-01's <strong>only living parent</strong>, her mother.<br>
+                                    <br>
+                                    
+                                    Following the murder, K-01 evaded law enforcement and created a fork of her backdoor - a program that scanned the Codex continuously, <strong>encrypting</strong> any evidence of her past.
+                                    K-01 has no further record of writing code, purportedly <strong>abandoning</strong> her programming skill as a result of the grief it caused her.
+                                    At this point, K-01 began using the name <strong>"Kyana Wrenn"</strong>.
+                                    Authorities terminated the search for her, unable to find a lead.
+                                    K-01 remained hidden from the watchful eye of the Codex for years, finding a new purpose in learning <strong>martial arts</strong> and <strong>firearms handling</strong>.
+                                    Her time in the shadows came naturally - a combination of directness and strength let her make allies fast, and enemies faster.
+                                    K-01's Codex signature reappeared on <strong>September 30, 2039</strong>, when she deactivated her Codex encryption program and applied to join <strong>HYPER BEAM</strong>.<br>
+
+                    -   entry-key: entLunaCrysen
+                        entry-title: Luna Crysen
+                        entry-photo: "/images/codex-decryptor/kyana_wrenn_image.png"
+                        entry-html: |
+                            html
+
+                    -   entry-key: entOnyxVale
+                        entry-title: Onyx Vale
+                        entry-photo: "/images/codex-decryptor/kyana_wrenn_image.png"
+                        entry-html: |
+                            html
+
+                    -   entry-key: entLexiaFletcher
+                        entry-title: Lexia Fletcher
+                        entry-photo: "/images/codex-decryptor/kyana_wrenn_image.png"
+                        entry-html: |
+                            html
+
+
+    -   category-key: catOrganizations
+        category-title: Organizations
+        category-icon: "/images/codex-decryptor/icons/orgs.png"
+        category-entries:
+
+            -   entry-key: entHyperBeam
+                entry-title: HYPER BEAM
+                entry-html: |
+                    HYPER BEAM is a subversive organization consisting of highly trained <strong>hackers</strong> and <strong>fighters</strong>.
+                    It was formed in response to the uptick in <strong>criminal activity</strong> after the introduction of the <span class="entrylink" target="entCodex">Codex</span>.
+                    Members are known as <span class="define">operators</span>, and are classified based on skills and experience.<br>
+                sub-entries:
+
+                    -   entry-key: entProxies
+                        entry-title: Proxies
+                        entry-html: |
+                            HYPER BEAM’s <strong>field</strong> operators.
+                            Proxies conduct reconnaissance work and engage in combat.
+                            Each proxy is equipped with an augmented-reality implant which connects to <span class="entrylink" target="entHyperIO">hyperI/O</span>, overlaying vital information onto their vision and allowing audio/visual communication with <span class="entrylink" target="entSatellites">Satellites</span>.<br>
+
+                    -   entry-key: entSatellites
+                        entry-title: Satellites
+                        entry-html: |
+                            HYPER BEAM’s <strong>support</strong> operators.
+                            Although each Satellite is assigned to a Proxy, they must be alert to the entire team's status and provide intel when necessary.
+                            Satellites use <span class="entrylink" target="entHyperIO">hyperI/O</span> to communicate with and assess the location, vitals, etc. of <span class="entrylink" target="entProxies">Proxies</span>.<br>
+
+                    -   entry-key: entAdmins
+                        entry-title: Admins
+                        entry-html: |
+                            The highest status an <span class="define">operator</span> can achieve.
+                            Admins are <strong>highly experienced</strong> and oversee all HYPER BEAM activities.
+                            They are responsible for ensuring that operators are held to a standard of quality.
+                            As such, they have ultimate authority over hiring, training, and promotion decisions.
+
+                    -   entry-key: entHyperIO
+                        entry-title: "HyperI/O"
+                        entry-html: |
+                            A proprietary <strong>operating system</strong> designed to host all HYPER BEAM activity.
+                            Each <span class="define">operator</span> is assigned a unique 32-character tag, which authenticates access to different levels of security clearance. <br>
+
+                    -   entry-key: entTeams
+                        entry-title: Teams
+                        entry-html: |
+                            HYPER BEAM operators are split into various teams. A team consists of 14 <span class="define">operators</span>, as follows:<br>
+
+                            <strong><b>1 Head</b></strong> &gt; The leader of the team, who issues orders to other operators and is responsible for ensuring the <strong>safe</strong> and <strong>effective</strong> operation of the team. Heads typically must be authorized for one class higher than the team they lead. Heads are always <span class="entrylink" target="entProxies">Proxies</span>.<br>
+                            <strong><b>3 Supervisors</b></strong> &gt; Overseers of the team, when the head is unable to. Supervisors are allowed to <strong>overrule</strong> orders from the head for the safety of the team or HYPER BEAM. Supervisors may be <span class="entrylink" target="entSatellites">Satellites</span> or Proxies, but there must be at least one of each on a team.<br>
+                            <strong><b>5 Proxies</b></strong> &gt; Reconnaissance and combat operators.<br>
+                            <strong><b>5 Satellites</b></strong> &gt; Support operators.<br>
+                            <br>
+                            
+                            Each team is categorized into a class, denoting their capabilities:<br>
+                            <strong><b>&gt; X-class [Recon]</b></strong>: The lowest class, consisting of new recruits who have been in the organization for one to fourteen months. X-class teams are deployed for <strong>recon</strong> and <strong>scouting</strong>, and are forbidden to engage in combat, though they carry light weapons for emergency situations. All X-class operators except for heads are required to attend weekly combat training sessions.<br>
+                            <strong><b>&gt; Y-class [Light Combat]</b></strong>: The class with the most teams, consisting of operators who have been in the organization for one to three years. Y-class teams are deployed for <strong>combat</strong> with <strong>lesser threats</strong>, and also provide occasional recon for highly defended locations. The proxies in Y-class are authorized to carry heavier weapons such as rifles and submachine guns, but operators require permission from the head in order to use lethal force.<br>
+                            <strong><b>&gt; Z-class [Heavy Combat]</b></strong>: An exclusive class that contains only 10 teams, which are highly competitive. Operators are selected for Z-class on a 4-week cycle. HYPER BEAM operators are expected to be ready for Z-class after four years of training. Z-class teams are deployed for <strong>combat</strong> with <strong>high-priority threats</strong>. Z-class operators are authorized to use lethal force without the permission of the head.<br>
+                            <strong><b>&gt; Ω-class [Final Defense]</b></strong>: A restricted class kept hidden from most HYPER BEAM operators. Ω-class contains a single team of the most skilled and trusted operators. Admission to this team requires the unanimous agreement of all current Ω-class, as well as the majority of Admins. The Ω-class is only deployed for <strong>exceedingly dangerous threats</strong>, making use of their secrecy to eviscerate enemies. While no such threats are present, Ω-class operators are split into various Z-class teams as heads or supervisors, in order to not draw attention to Ω-class.<br>
+                            <br>
+                            
+                            Teams are numbered within classes, in the format <strong>[class letter][2-digit team identifier]</strong>. For example, X17 or Z03.
+
+            -   entry-key: entLimit
+                entry-title: LIMIT
+                entry-html: |
+                    LIMIT is the most <strong>established</strong> and dangerous criminal organization in <span class="entrylink" target="entNewArchon">New Archon</span>.
+                    Initially formed in <strong>2002</strong>, they have grown their influence and wealth through countless <strong>illegal</strong> ventures, notably:
+                    assassination, political fraud, substance production and distribution, illicit adult websites, identity theft, and extortion.<br>
+                    <br>
+                    
+                    LIMIT acts as a <strong>leader</strong> for many smaller gangs and syndicates, providing assistance and backup when needed - especially when <span class="entrylink" target="entHyperBeam">HYPER BEAM</span> intervenes.
+                    They are infamous for their hateful and highly unethical morals.
+                    In the pursuit of power and money, LIMIT is unconcerned with <strong>civilian safety</strong>, <strong>economic stability</strong>, and <strong>environmental damage</strong>.<br>
+                    LIMIT's termination is a <strong>critical</strong> objective for HYPER BEAM.
+
+    -   category-key: catTechnologies
+        category-title: Technologies
+        category-icon: "/images/codex-decryptor/icons/techs.png"
+        category-entries:
+
+            -   entry-key: entCodex
+                entry-title: The Codex
+                entry-html: |
+                    The Codex is a city-wide mainframe and computer network in <span class="entrylink" target="entNewArchon"><a>New Archon</a></span>.
+                    It was originally intended to improve quality of life for New Archon citizens by reducing crime and allowing devices across the city to communicate with high efficiency.
+                    The Codex was flawed, however, and several <strong>backdoors</strong> were found within hours of initialization.
+                    The interconnected systems of the Codex were quickly exploited by malicious individuals, and efforts to regain control have been <strong>ineffective</strong>.<br>
+
+            -   entry-key: entWeaponCores
+                entry-title: Weapon Cores
+                entry-photo: "/images/codex-decryptor/weapon_cores_image.png"
+                entry-html: |
+                    Weapon cores are advanced hardware modules that are placed inside weaponry, acting as additional defense and utility against firearms.<br>
+                    <br>
+
+                    All cores share the same basic purpose: They create a strong, close-range <strong>electromagnetic field</strong> which repels projectiles and energy-based attacks.
+                    This provides essential <strong>counterplay</strong> for melee weaponry, allowing close-range combatants a fighting chance against their ranged opponents.<br>
+                    <br>
+
+                    In addition to their electromagentic field, different <strong>builds</strong> of weapon core are engineered to provide additional perks, including but not limited to:<br>
+                    &gt; <strong>PULSE</strong>: Equipped with an additional <span class="define">network spike</span> generator that can temporarily disable nearby <span class="entrylink" target="entCodex">Codex</span> access points.<br>
+                    &gt; <strong>RETURN</strong>: Enables dynamic re-routing, manipulating the trajectory of incoming projectiles back to the sender.<br>
+                    &gt; <strong>ABSORB</strong>: Captures the kinetic energy of repelled projectiles to charge the core, increasing operational time.<br>
+                    <br>
+
+                    Cores require frequent recharging at specialized stations, and only support <strong>15 to 20 minutes</strong> of field generation time per charge.
+                    For this reason, users are advised to only switch them on when absolutely necessary.
+                    Mastery of this technique, known as <strong>core flashing</strong>, can extend the life of a core by upwards of 4 hours in combat.
+                    Larger-scale core fields have been attempted, but are infeasible due to the <strong>inverse-square law</strong>.<br>
+
+            -   entry-key: entShaper
+                entry-title: SHAPER
+                entry-html: |
+                    SHAPER is the flagship genetic engineering product of <span class="entrylink" target="entNewArchon">New Archon</span> company <strong>BIOSHAPER</strong>. 
+                    Formed in 2018, the brand gained widespread recognition when they deployed <strong>SHAPER</strong> in 2021.
+                    SHAPER allows users to genetically modify themselves in order to add or remove <strong>cosmetic features</strong> such as eye color, hair color, or a variety of other options.<br>
+                    <br>
+                    
+                    In 2025, BIOSHAPER announced <strong>SHAPER 2.0</strong>, which increased the range of modifications.
+                    This included more impactful biological changes, including adding various <strong>animal characteristics</strong> to humans.
+                    Since SHAPER 2.0 launched, the ability to grow feline and canine features became and remains the most <strong>popular</strong> cosmetic genetic modification.<br>
+                    <br>
+                    
+                    Further updates have been released - <strong>SHAPER 3.0</strong> and <strong>SHAPER+</strong> - but the extra risk and expense of the newly introduced modifications meant they never reached the mainstream appeal of SHAPER 2.0.<br>
+                    
+
+    -   category-key: catEvents
+        category-title: Events
+        category-icon: "/images/codex-decryptor/icons/events.png"
+        category-entries:
+
+            -   entry-key: entAlternateTimelineDivergence
+                entry-title: Alternate Timeline Divergence
+                entry-html: |
+                    The Alternate Timeline Divergence is an event that took place on <strong>July 30, 2039</strong>, where time appears to have been fragmented into infinite timelines.
+                    During the Divergence, all electronic devices were temporarily disrupted, meaning that no recordings of it exist.<br>
+                    <br>
+                    
+                    Scientific consensus supports the following chronology:<br>
+                    <strong><b>Phase 1 - Light</b></strong> > At exactly <strong>15:00 UTC</strong>, colors began distorting. Everything appeared to have a red tint, then blue, and finally purple, over the course of about 5 minutes.
+                    It is believed that this was a side-effect of the speed of light being altered.<br>
+                    <strong><b>Phase 2 - Time</b></strong> > At approximately <strong>15:05 UTC</strong>, time began distorting. All time seemed to pass more quickly, and then exponentially more slowly, over the course of about 30 seconds.
+                    Past this point, estimates of elapsed time are impossible.<br>
+                    <strong><b>Phase 3 - Space</b></strong> > At some point afterwards, space began distorting.
+                    It was as if the world was shifting between different geometries rapidly, from euclidian, to hyperbolic, to spherical, and so on, through endless <strong>inexplicable</strong> projections of reality.<br>
+                    <strong><b>Phase 4 - Completion</b></strong> > Eventually, suddenly, the world turned infinitely dark.
+                    Complete silence, for an uncomfortably long duration.
+                    Finally, an overwhelmingly intense light shone through, covering everything in a blinding white.
+                    Slowly, the world faded back into view, and appeared to be reset back to its <strong>previous state</strong>, at 15:00 UTC.
+                    The memory of the event remained for nearly everyone.<br>
+                    <br>
+                    
+                    The <span class="entrylink" target="entCodex"><a>Codex</a></span> was one of the only electronic devices to have suffered damage from the Divergence, likely due to its size and complexity. A large amount of data was scrambled following the event, and recovering its data is still an ongoing effort.<br>
+                    <br>
+                    
+                    Extensive research has been done in an attempt to discover the <strong>cause</strong> and <strong>effects</strong> of the Alternate Timeline Divergence.
+                    The current accepted explanation attributes the event to a celestial object about <strong>2,750,000,000 kilometers</strong> away: the <strong>Frequency Annihilator</strong>.
+                    There is no evidence of this object existing prior to the Divergence, and study of its <strong>electromagnetic signature</strong> has revealed clues that strongly point towards an infinite multiverse of unsynchronized timelines.
+                    The creator or ultimate purpose of the Frequency Annihilator is unknown.<br>

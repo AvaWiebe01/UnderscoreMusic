@@ -1,0 +1,9 @@
+---
+    operator: |
+        A member of the organization HYPER BEAM.
+
+    operators: |
+        Members of the organization HYPER BEAM.
+
+    network spike: |
+        A device that disrupts network activity within a certain radius, especially one used in combat.

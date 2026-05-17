@@ -104,6 +104,11 @@
 	--accent-bg-color: #17071D;
 	--accent-text-glow-color: rgba(208,68,255,0.5);
 	--accent-box-glow-color: rgba(208,68,255,0.35);
+
+	--alt-accent-color: rgba(114, 217, 255, 1);
+	--alt-accent-bg-color: rgba(114, 217, 255, 0.05);
+	--alt-accent-text-glow-color: rgba(114, 217, 255, 0.5);
+	--alt-accent-box-glow-color: rgba(114, 217, 255, 0.35);
 	
 	--text-color: #FFFFFF;
 	--text-glow-color: rgba(255,255,255,0.3);
