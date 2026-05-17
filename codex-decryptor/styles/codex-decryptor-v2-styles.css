@@ -277,30 +277,6 @@ div.entry-content > img {
 	text-shadow: var(--alt-accent-text-glow-color) 0 0 0.5rem;
 }
 
-
-/* Lexicon */
-div.entry h3 {
-	font-size: 1.25rem;
-	font-weight:normal;
-	margin-bottom:3rem;
-	margin-left:1rem;
-	color: var(--main-color);
-	text-shadow: var(--main-text-glow-color) 0 0 0.5rem;
-}
-
-div.entry dl {
-	margin-left:3rem;
-}
-
-div.entry dd {
-	margin-bottom:2rem;
-}
-
-div.entry dt {
-	color: var(--main-color);
-	text-shadow: var(--main-text-glow-color) 0 0 0.5rem;
-}
-
 /* Dropdown Button Formatting */
 button.dropdownbutton {
 	font-family: 'spacemono', 'Courier New', monospace;
@@ -344,6 +320,22 @@ img.dropdownarrow {
 }
 
 /* Highlights and other special text effect stylings */
+
+.entrylink {
+	font-weight: bold;
+	color: var(--main-color);
+	text-decoration:underline;
+	text-shadow: var(--main-text-glow-color) 0 0 0.5rem;
+	transition-duration:0.2s;
+	cursor:pointer;
+}
+
+.entrylink:hover {
+	text-decoration:none;
+	text-shadow: var(--accent-text-glow-color) 0 0 0.5rem;
+	color: var(--accent-color);
+}
+
 main strong {
 	color: var(--accent-color);
 	font-weight: normal;

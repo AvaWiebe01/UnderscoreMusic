@@ -73,7 +73,7 @@ function getEntryHtml(entry) {
                 ${entry.title}
             </button>
 
-            <img class='dropdownarrow' key='${entry.key}' src='/images/downarrow.png'>
+            <img class='dropdownarrow' key='${entry.key}' src='/images/codex-decryptor/downarrow.png'>
 
             <div class='content-wrapper' key='${entry.key}'>
                 <div class='entry-content'>

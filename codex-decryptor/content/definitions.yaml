@@ -5,5 +5,14 @@
     operators: |
         Members of the organization HYPER BEAM.
 
+    operation: |
+        A mission conducted by HYPER BEAM.
+
+    operations: |
+        Missions conducted by HYPER BEAM.
+
     network spike: |
         A device that disrupts network activity within a certain radius, especially one used in combat.
+
+    lupine: |
+        Relating to wolves.

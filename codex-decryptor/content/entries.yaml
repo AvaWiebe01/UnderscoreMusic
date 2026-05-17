@@ -108,20 +108,19 @@ categories:
                             <br>
                             
                             <strong>Identity</strong>: Kyana Wrenn<br>
-                            <strong>Operator ID</strong>: K-01<br>
-                            <strong>Date of Acceptance</strong>: October 2, 2039<br>
-                            <strong>Assignment</strong>: Team Z04 Head /// Team <span class="redacted">[DATA_LOST]</span> Supervisor<br>
+                            <strong>Date of Acceptance</strong>: September 30, 2039<br>
+                            <strong>Assignment</strong>: Team Z04 Head Proxy /// Team <span class="redacted">[DATA_LOST]</span> Supervisor<br>
                             <br>
                             
-                            <strong>Weapons</strong>: Ranged &gt; KTK-02 /// Melee &gt; Havoc Blades<br>
-                            <strong>Armor</strong>: None<br>
+                            <strong>Weapons</strong>: Ranged &gt; KTK-02 Submachine Gun /// Melee &gt; Havoc Blades<br>
+                            <strong>Armor Class</strong>: None<br>
                             <strong>Strengths</strong>: Accurate and ruthless with submachine guns. 
                             Skilled at both martial arts and close-range dagger combat. 
                             Quick and decisive leader who prioritizes the safety of allies and civilians.<br>
                             <strong>Weaknesses</strong>: Very defensive when receiving criticism. Occasionally too blunt when evaluating others.<br>
                             <br>
                             
-                            <strong>Notes</strong>: Kyana is highly respected among many <span class="entrylink" target="entHyperBeam"><a>HYPER BEAM</a></span> <span class="define">operators</span>.
+                            <strong>Notes</strong>: Kyana is highly respected among many <span class="entrylink" target="entHyperBeam">HYPER BEAM</span> <span class="define">operators</span>.
                             Complaints filed against her describe her insulting other operators, and attacking others with blunt, inconsiderate comments.
                             An investigation found that operators who file complaints against Kyana have 31% lower performance in HYPER BEAM combat evaluations, compared to the organization average.
                             The investigation concluded that her behavior required reprimanding, but was not severe enough to warrant termination or demotion.
@@ -140,13 +139,13 @@ categories:
                             -   entry-key: entKyanaWrennLife
                                 entry-title: Life
                                 entry-html: |
-                                    Despite <strong> extensive </strong> efforts by data-miners, K-01's past remains mostly obscured in the <span class="entrylink" target="entCodex"><a>Codex</a></span>.
+                                    Despite <strong> extensive </strong> efforts by data-miners, Kyana's past remains mostly obscured in the <span class="entrylink" target="entCodex"><a>Codex</a></span>.
                                     She appears to have taken sweeping measures to permanently delete any records of herself before joining <span class="entrylink" target="entHyperBeam"><a>HYPER BEAM</a></span>.
-                                    An estimation of her history has been assembled from a variety of sources, including K-01's own statements, her former affiliates, and clues left behind in the Codex.
+                                    An estimation of her history has been assembled from a variety of sources, including Kyana's own statements, her former affiliates, and clues left behind in the Codex.
                                     The following information is <strong>unreliable</strong> and <strong>may contain errors</strong>:<br>
                                     <br>
                                     
-                                    K-01 was born on September 30th, 2021, in <span class="entrylink" target="entLowerHull"><a>Lower Hull</a></span>, <span class="entrylink" target="entNewArchon"><a>New Archon</a></span>.
+                                    Kyana was born on September 30th, 2021, in <span class="entrylink" target="entLowerHull">Lower Hull</span>, <span class="entrylink" target="entNewArchon">New Archon</span>.
                                     Her name at birth is <strong>unknown</strong>.
                                     Her mother was an executive BIOSHAPER employee on the <span class="entrylink" target="entShaper">SHAPER</span> development team, name unknown.
                                     Her father has not been identified.
@@ -154,34 +153,112 @@ categories:
                                     Though by modern standards, the tool was primitive, at the time it was one of the most advanced Codex backdoors.
                                     The program got the attention of <strong>several</strong> criminal factions, who wished to use it and work with K-01.
                                     She refused to reveal the source code for her backdoor, citing a hatred for those who used the Codex to harm others.
-                                    In retaliation, the faction <span class="entrylink" target="entLimit">LIMIT</span> killed K-01's <strong>only living parent</strong>, her mother.<br>
+                                    In retaliation, the faction <span class="entrylink" target="entLimit">LIMIT</span> killed Kyana's <strong>only living parent</strong>, her mother.<br>
                                     <br>
                                     
-                                    Following the murder, K-01 evaded law enforcement and created a fork of her backdoor - a program that scanned the Codex continuously, <strong>encrypting</strong> any evidence of her past.
-                                    K-01 has no further record of writing code, purportedly <strong>abandoning</strong> her programming skill as a result of the grief it caused her.
-                                    At this point, K-01 began using the name <strong>"Kyana Wrenn"</strong>.
+                                    Following the murder, Kyana evaded law enforcement.
+                                    Kyana has no further record of writing code, assumedly <strong>abandoning</strong> the skill as a result of the grief it caused her.
+                                    She hired the former hacking group <span class="entrylink" target="entEclipse">Eclipse</span> to scan the Codex and <strong>encrypt</strong> all evidence of her past.
+                                    At this point, Kyana began using the name <strong>"Kyana Wrenn"</strong>.
                                     Authorities terminated the search for her, unable to find a lead.
-                                    K-01 remained hidden from the watchful eye of the Codex for years, finding a new purpose in learning <strong>martial arts</strong> and <strong>firearms handling</strong>.
+                                    Kyana remained hidden from the watchful eye of the Codex for years, finding a new purpose in learning <strong>martial arts</strong> and <strong>firearms handling</strong>.
                                     Her time in the shadows came naturally - a combination of directness and strength let her make allies fast, and enemies faster.
-                                    K-01's Codex signature reappeared on <strong>September 30, 2039</strong>, when she deactivated her Codex encryption program and applied to join <strong>HYPER BEAM</strong>.<br>
+                                    Kyana's Codex signature appeared on <strong>September 30, 2039</strong>, when she applied to join <strong>HYPER BEAM</strong>.<br>
 
                     -   entry-key: entLunaCrysen
                         entry-title: Luna Crysen
-                        entry-photo: "/images/codex-decryptor/kyana_wrenn_image.png"
+                        entry-photo: "/images/codex-decryptor/luna_crysen_image.png"
                         entry-html: |
-                            html
+                            <span class="entry-subtitle"><strong><b>Operator Profile:</b></strong></span><br>
+                            <br>
+                            
+                            <strong>Identity</strong>: Luna Crysen<br>
+                            <strong>Date of Acceptance</strong>: November 28, 2039<br>
+                            <strong>Assignment</strong>: Team Z04 Supervisor Satellite<br>
+                            <br>
+                            
+                            <strong>Weapons</strong>: Melee &gt; Axiom Scythe<br>
+                            <strong>Strengths</strong>: Extremely observant.
+                            Locates and communicates potential threats to Proxies with precision.<br>
+                            <strong>Weaknesses</strong>: Anger management issues.<br>
+                            <br>
+                            
+                            <strong>Notes</strong>: Luna, while socially reclusive, manages to be one of the top-performing <span class="entrylink target="entSatellites">Satellites</span>.
+                            Once on an <span class="define">operation</span>, her communication improves dramatically, and she proves more than capable of decisive calls and highly technical <span class="entrylink" target="entCodex">Codex</span> manipulation.
+                            Her emotional connection to <span class="entrylink" target="entKyanaWrenn">Kyana Wrenn</span> seems to motivate extra caution in her work.<br>
+                            <br>
+                            
+                            <strong>Assessment:</strong> Strong Satellite - Keep alongside current team.<br>
+                        sub-entries:
+
+                            -   entry-key: entLunaCrysenLife
+                                entry-title: Life
+                                entry-html: |
+                                    Luna was born on November 12, 2021, in <span class="entrylink" target="entCentral">Central</span>, <span class="entrylink" target="entNewArchon">New Archon</span>.
+                                    She attended Ashworth elementary school, receiving below-average grades and avoiding most other students.
+                                    Instead, her social interaction consisted of <strong>messaging apps</strong> and <strong>competitive online games</strong>.<br>
+                                    <br>
+
+                                    She took a particular interest in learning to program, captivated by the complex scripting possibilities it opened.
+                                    After school, she often used her newfound knowledge to cause <strong>mischief</strong> in video games and other online spaces.
+                                    She didn't aspire to her parents' expectations, despite their encouragement to improve her scores in high school.
+                                    At the age of <strong>15</strong>, Luna left home and dropped out of her education.
+                                    She joined the group <span class="entrylink" target="entEclipse">Eclipse</span> as a hacker, using the skills she'd developed to become a valuable asset.
+                                    With the steady income she earned, she purchased a <span class="entrylink" target="entShaper">SHAPER</span> modification to acquire <span class="define">lupine</span> features.
+                                    Unfortunately, Eclipse would disband just three years later under threat from <span class="entrylink" target="entLimit">LIMIT</span>, which left Luna unsure of her future.
+                                    She ultimately decided to apply to <span class="entrylink" target="entHyperBeam">HYPER BEAM</span>, hoping to stay protected from the <strong>criminal underground</strong>.<br>
 
                     -   entry-key: entOnyxVale
                         entry-title: Onyx Vale
-                        entry-photo: "/images/codex-decryptor/kyana_wrenn_image.png"
+                        entry-photo: "/images/codex-decryptor/onyx_vale_image.png"
                         entry-html: |
-                            html
+                            <span class="entry-subtitle"><strong><b>Operator Profile:</b></strong></span><br>
+                            <br>
+                            
+                            <strong>Identity</strong>: Onyx Vale<br>
+                            <strong>Date of Acceptance</strong>: July 22, 2038<br>
+                            <strong>Assignment</strong>: HyperI/O Backend Developer<br>
+                            <br>
+                            
+                            <strong>Strengths</strong>: Strong, self-motivated problem-solver.
+                            Charismatic and friendly, especially while collaborating.
+                            <br>
+                            <strong>Weaknesses</strong>: Lacks assertiveness. Doesn't provide adequate criticism to low-quality code contributions.<br>
+                            <br>
+                            
+                            <strong>Notes</strong>: Prefers to be called Nyx.
+                            Nyx is a valuable member of the <span class="entrylink" target="entHyperIO">HyperI/O</span> team.
+                            He is well-liked by other <span class="define">operators</span>, and makes connections quickly.
+                            New additions to the development team often report feeling welcome in large part due to Nyx's friendly demeanor.<br>
+                            <br>
+                            
+                            <strong>Assessment:</strong> Highly skilled developer. Continue to monitor for development of leadership qualities.<br>
 
                     -   entry-key: entLexiaFletcher
                         entry-title: Lexia Fletcher
-                        entry-photo: "/images/codex-decryptor/kyana_wrenn_image.png"
+                        entry-photo: "/images/codex-decryptor/lexia_fletcher_image.png"
                         entry-html: |
-                            html
+                            <span class="entry-subtitle"><strong><b>Operator Profile:</b></strong></span><br>
+                            <br>
+                            
+                            <strong>Identity</strong>: Lexia Fletcher<br>
+                            <strong>Date of Acceptance</strong>: January 9, 2037<br>
+                            <strong>Assignment</strong>: Team Z09 Head Proxy<br>
+                            <br>
+                            
+                            <strong>Weapons</strong>: Ranged &gt; Titan Sniper /// Melee &gt; Axiom HeavySword<br>
+                            <strong>Armor Class</strong>: Medium<br>
+                            <strong>Strengths</strong>: Quick and brutal with heavy firearms, especially over long distances. 
+                            Intelligently positions her team for maximum effect.<br>
+                            <strong>Weaknesses</strong>: Fragile, though still effective, in close-quarters combat.<br>
+                            <br>
+                            
+                            <strong>Notes</strong>: Many <span class="entrylink" target="entProxies">Proxies</span> aspire to be on Lexia's team.
+                            Her focus on long-range support allows others to take active roles in combat.
+                            Lexia is the leader of the <span class="entrylink" target="entHyperBeam">HYPER BEAM</span> LGBTQ+ support group, which is important for maintaining <span class="define">operator</span> mental health.<br>
+                            <br>
+                            
+                            <strong>Assessment:</strong> Deadly. Protect at all costs.<br>
 
 
     -   category-key: catOrganizations
@@ -257,6 +334,15 @@ categories:
                     They are infamous for their hateful and highly unethical morals.
                     In the pursuit of power and money, LIMIT is unconcerned with <strong>civilian safety</strong>, <strong>economic stability</strong>, and <strong>environmental damage</strong>.<br>
                     LIMIT's termination is a <strong>critical</strong> objective for HYPER BEAM.
+
+            -   entry-key: entEclipse
+                entry-title: Eclipse
+                entry-html: |
+                    Eclipse is an ex-hacking group, running from 2030 to 2039.
+                    The group offered various services involving the addition, deletion, and modification of <span class="entrylink" target="entCodex">Codex</span> records.
+                    Eclipse was often criticized for their <strong>inconsistent</strong> morals, refusing services to certain criminal organizations and accepting payment from others.
+                    By <strong>2039</strong>, the group had lost the majority of their members, and their activity landed them in the sights of several branches of <span class="entrylink" target="entLimit">LIMIT</span>.
+                    The remaining members fled for their safety, with many choosing to apply to <span class="entrylink" target="entHyperBeam">HYPER BEAM</span>.
 
     -   category-key: catTechnologies
         category-title: Technologies
