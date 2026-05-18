@@ -102,9 +102,41 @@ main p {
 	margin:2.5rem 0rem;
 }
 
+.horizontal-line {
+	height:0;
+	border:0.125rem solid var(--main-color);
+	box-shadow: 0 0 0.75rem var(--main-box-glow-color);
+}
+
+main h3 {
+	margin: 4rem 0 0.75rem 0;
+	text-align:center;
+	font-size: 1.75rem;
+	font-weight:normal; 
+}
+
+main .featured-link {
+	background-color:var(--main-bg-color);
+	border:0.3rem solid var(--main-color);
+	box-shadow: 0 0 0.75rem var(--main-box-glow-color),
+				inset 0 0 0.75rem var(--main-box-glow-color);
+	width: 65vw; 
+	margin:auto;
+}
+
+main .featured-link p {
+	background: var(--transparent);
+	font-size: 2.5rem;
+}
+
+main .featured-link p a {
+	background: var(--transparent);
+}
+
 main span.pink {
 	color: var(--main-color);
 	text-shadow: var(--main-text-glow-color) 0 0 0.5rem;
+	background: var(--transparent);
 }	
 
 main strong {
