@@ -166,6 +166,25 @@ function toggleDropdown(targetDiv, animate = true) {
     });
 }
 
+function seekEntry(targetDiv) {
+
+    if(!targetDiv) {
+        return;
+    }
+
+    var currTargetDiv = targetDiv;
+
+    while(currTargetDiv) {
+        if(currTargetDiv.classList.contains("collapsed")) {
+            toggleDropdown(currTargetDiv, false);
+        }
+
+        currTargetDiv = currTargetDiv.parentElement.closest(".entry") ?? null;
+    }
+
+    targetDiv?.scrollIntoView({behavior: "smooth"});    
+}
+
 // ======== MAIN ======== //
 window.onload = function() {
     
@@ -220,17 +239,7 @@ window.onload = function() {
             const targetKey = event.currentTarget.getAttribute("target");
             const targetDiv = document.getElementById(targetKey) ?? null;
             
-            var currTargetDiv = targetDiv;
-
-            while(currTargetDiv) {
-                if(currTargetDiv.classList.contains("collapsed")) {
-                    toggleDropdown(currTargetDiv, false);
-                }
-
-                currTargetDiv = currTargetDiv.parentElement.closest(".entry") ?? null;
-            }
-
-            targetDiv?.scrollIntoView({behavior: "smooth"});
+            seekEntry(targetDiv);
         })
 
 
@@ -267,6 +276,15 @@ window.onload = function() {
                 // remove the loading screen
                 const loadingScreen = document.querySelector(".loading_screen");
                 loadingScreen.classList.add("hidden");
+
+                // jump to the entry in search params
+                const urlParams = new URLSearchParams(window.location.search);
+                var initialEntry = urlParams?.get("entry") ?? null;
+
+                if(initialEntry) {
+                    var initialDiv = document.getElementById(initialEntry) ?? null;
+                    seekEntry(initialDiv);
+                }
         })
     })
     .catch(error => console.error('Error while loading: ', error));
