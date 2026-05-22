@@ -260,6 +260,29 @@ categories:
                             
                             <strong>Assessment:</strong> Deadly. Protect at all costs.<br>
 
+                    -   entry-key: entRavenAshgate
+                        entry-title: Raven Ashgate
+                        entry-photo: "/images/codex-decryptor/raven_ashgate_image.png"
+                        entry-html: |
+                            <span class="entry-subtitle"><strong><b>Operator Profile:</b></strong></span><br>
+                            <br>
+                            
+                            <strong>Identity</strong>: Raven Ashgate<br>
+                            <strong>Date of Acceptance</strong>: April 26, 2030<br>
+                            <strong>Assignment</strong>: Admin<br>
+                            <br>
+                            
+                            <strong>Weapons</strong>: Ranged &gt; PicoTek Stealth Pistol /// Melee &gt; PicoTek M102 Light Blade<br>
+                            <strong>Armor Class</strong>: Light<br>
+                            <br>
+                            
+                            <strong>Date of Admin Approval</strong>: March 2, 2038<br>
+                            <strong>Admin Responsibilities:</strong>:<br>
+                            <strong>&gt;</strong> Z-class Proxy admissions team<br>
+                            <strong>&gt;</strong> Proxy recruitment assessments team<br>
+                            <strong>&gt;</strong> X-class training development team<br>
+                            <br>
+
 
     -   category-key: catOrganizations
         category-title: Organizations
