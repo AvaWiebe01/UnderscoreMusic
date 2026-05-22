@@ -314,6 +314,12 @@ body {
 	}
 }
 
+@media (height <= 800px) {
+	.game .intro_screen {
+		top:6rem;
+	}
+}
+
 main {
 	padding-top:0;
 }
