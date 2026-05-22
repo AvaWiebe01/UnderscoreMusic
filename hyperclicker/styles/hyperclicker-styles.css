@@ -262,7 +262,10 @@ body {
 	justify-content:space-between;
 	padding:2rem;
 	width:50vw;
-	left:calc(50% - 25vw - 1rem);
+	min-width: 1024px; 
+	left:0;
+	right:0;
+	margin:auto;
 	top:12rem;
 	background:var(--bg-color);
 	border:0.3rem solid var(--main-color);
@@ -296,6 +299,19 @@ body {
 	height:0;
 	z-index:0;
 	display:none;
+}
+
+/* scale for smaller sizes */
+@media (max-width:1500px) {
+	.game .intro_screen {
+		min-width: 720px; 
+		font-size:1rem;
+	}
+
+	.game .intro_screen p {
+		text-align:center;
+		line-height:1;
+	}
 }
 
 main {
