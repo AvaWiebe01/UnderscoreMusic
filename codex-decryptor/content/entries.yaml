@@ -233,6 +233,12 @@ categories:
                             <br>
                             
                             <strong>Assessment:</strong> Highly skilled developer. Continue to monitor for development of leadership qualities.<br>
+                        sub-entries:
+                        
+                            -   entry-key: entOnyxValeLife
+                                entry-title: Life
+                                entry-html: |
+                                    Nyx
 
                     -   entry-key: entLexiaFletcher
                         entry-title: Lexia Fletcher
@@ -259,7 +265,12 @@ categories:
                             <br>
                             
                             <strong>Assessment:</strong> Deadly. Protect at all costs.<br>
-
+                        sub-entries:
+                        
+                            -   entry-key: entLexiaFletcherLife
+                                entry-title: Life
+                                entry-html: |
+                                    Lexia
 
     -   category-key: catOrganizations
         category-title: Organizations
