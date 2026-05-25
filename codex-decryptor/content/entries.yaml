@@ -233,12 +233,23 @@ categories:
                             <br>
                             
                             <strong>Assessment:</strong> Highly skilled developer. Continue to monitor for development of leadership qualities.<br>
-                        #sub-entries:
-                        #
-                        #    -   entry-key: entOnyxValeLife
-                        #        entry-title: Life
-                        #        entry-html: |
-                        #            Nyx 
+                        sub-entries:
+                        
+                            -   entry-key: entOnyxValeLife
+                                entry-title: Life
+                                entry-html: |
+                                    Nyx was born on December 26, 2016, in <span class="entrylink" target="entCentral">Central</span>, <span class="entrylink" target="entNewArchon">New Archon</span>.
+                                    His father, a software engineer, and his brother, a computer engineer, both got Nyx interested in computing very early on.
+                                    Much to his mother's dismay, Nyx would spend his days indoors figuring out how to create rudimentary processors and <strong>operating systems</strong>.
+                                    In sixth grade, he joined the school's robotics club, and won a gold medal for their maze-navigating robot at a Central-wide competition.
+                                    In addition to his technical interests, Nyx loved animated shows and movies, decorating his room with <strong>countless</strong> posters and figurines of his favorite characters.
+                                    Nyx's interests would often garner mockery from his classmates, but his affable personality helped him defuse difficult situations.
+                                    He had no difficulty making friends with anyone who shared even a sliver of his passion, carrying conversations for hours on his own.<br>
+                                    <br>
+                                    After secondary school, Nyx looked to get an <strong>engineering degree</strong> and pave a path towards a high-paying job at a tech company.
+                                    Unfortunately, he found his classes repetitive and unhelpful, and he dropped out after three terms.
+                                    Nyx would search for jobs that expected a high degree of technical knowledge, but no formal education.
+                                    Soon after, he applied to be a developer at <span class="entrylink" target="entHyperBeam">Hyper Beam</span>.
 
                     -   entry-key: entLexiaFletcher
                         entry-title: Lexia Fletcher
@@ -265,12 +276,20 @@ categories:
                             <br>
                             
                             <strong>Assessment:</strong> Deadly. Protect at all costs.<br>
-                        #sub-entries:
-                        #
-                        #    -   entry-key: entLexiaFletcherLife
-                        #        entry-title: Life
-                        #        entry-html: |
-                        #            Lexia
+                        sub-entries:
+                        
+                            -   entry-key: entLexiaFletcherLife
+                                entry-title: Life
+                                entry-html: |
+                                    Lexia was born on June 15, 2018, in <span class="entrylink" target="entWestArch">West Arch</span>, <span class="entrylink" target="entNewArchon">New Archon</span>.
+                                    As part of a middle-class family, she was able to pursue her interest in <strong>sports</strong> by participating in community leagues for soccer, basketball, and <span class="define">leafnet</span>.
+                                    She was popular in her classes, making friends easily and always happy to <strong>mentor</strong> others, even if they played for the opposing team.<br>
+                                    <br>
+                                    When Lexia was <strong>14</strong>, she medically transitioned from male to female.
+                                    Shortly after, she began strength training in her secondary school's gym, and joined the weightlifting team.
+                                    While she never won any medals in competition, her teammates described Lexia as an <strong>inspiration</strong> to everyone around her, always encouraging them to push further.
+                                    Lexia's grades were passable, and enough to enrol in tertiary education, but she decided against it since her passions laid elsewhere. She applied to <span class="entrylink" target="entHyperBeam">Hyper Beam</span> as a <span class="entrylink" target="entProxies">Proxy</span>, hoping to use her strength to make New Archon safer.
+                                    
 
                     -   entry-key: entRavenAshgate
                         entry-title: Raven Ashgate
