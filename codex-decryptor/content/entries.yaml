@@ -398,6 +398,29 @@ categories:
                     By <strong>2039</strong>, the group had lost the majority of their members, and their activity landed them in the sights of several branches of <span class="entrylink" target="entLimit">LIMIT</span>.
                     The remaining members fled for their safety, with many choosing to apply to <span class="entrylink" target="entHyperBeam">HYPER BEAM</span>.
 
+            -   entry-key: entWeaponManufacturers
+                entry-title: Weapon Manufacturers
+                entry-html: |
+                sub-entries:
+
+                    -   entry-key: entAxiomArmories
+                        entry-title: Axiom Armories
+                        entry-html: |
+                            Axiom Armories, established 1970, is a weapons manufacturer based in Central.
+                            As the primary supplier of heavy weaponry, Axiom is one of the most profitable companies in New Archon.
+                            Axiom 
+
+                    -   entry-key: entPicoTek
+                        entry-title: PicoTek
+                        entry-html: |
+                            Picotek is a light weaponry company located in West Arch.
+                            Formed in 2014, they produce concealable, self-defense oriented products. 
+                            In addition to blades, firearms, and deterrents, Picotek produces light fiber armor intended to be worn underneath clothing.
+
+                    -   entry-key: entInversion
+                        entry-title: Inversion
+                        entry-html: |
+                        
     -   category-key: catTechnologies
         category-title: Technologies
         category-icon: "/images/codex-decryptor/icons/techs.png"
