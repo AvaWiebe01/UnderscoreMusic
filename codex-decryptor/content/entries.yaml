@@ -406,20 +406,35 @@ categories:
                     -   entry-key: entAxiomArmories
                         entry-title: Axiom Armories
                         entry-html: |
-                            Axiom Armories, established 1970, is a weapons manufacturer based in Central.
-                            As the primary supplier of heavy weaponry, Axiom is one of the most profitable companies in New Archon.
-                            Axiom 
+                            Axiom Armories, established <strong>1970</strong>, is a weapons manufacturer based in <span class="entrylink" target="entCentral">Central</span>.
+                            As the primary supplier of <strong>heavy weaponry</strong>, Axiom is one of the most profitable companies in <span class="entrylink" target="entNewArchon">New Archon</span>.
+                            Axiom produces various LMGs, MGs, DMRs, and Sniper Rifles. 
+                            To complement their armaments, they also manufacture several heavy ballistic armors and armored vehicles.<br>
+                            <br>
+                            Unlike lighter weaponry, most of Axiom's wares are not readily sold in stores.
+                            Their clients include the New Archon government, <span class="entrylink" target="entHyperBeam">Hyper Beam</span>, and many private security companies - though, a significant amount of Axiom's output is <strong>smuggled</strong> into the criminal underground.
 
                     -   entry-key: entPicoTek
                         entry-title: PicoTek
                         entry-html: |
-                            Picotek is a light weaponry company located in West Arch.
-                            Formed in 2014, they produce concealable, self-defense oriented products. 
-                            In addition to blades, firearms, and deterrents, Picotek produces light fiber armor intended to be worn underneath clothing.
+                            PicoTek is a <strong>light weaponry</strong> company located in <span class="entrylink" target="entWestArch">West Arch</span>.
+                            Formed in <strong>2014</strong>, they produce concealable, self-defense oriented products. 
+                            In addition to blades, firearms, and deterrents, PicoTek produces light fiber armor intended to be worn underneath clothing.<br>
+                            <br>
+                            PicoTek's biggest market comes from citizens who choose to carry small <strong>emergency weapons</strong>.
+                            As such, their products can be found in nearly every weapon store in the city.
 
                     -   entry-key: entInversion
                         entry-title: Inversion
                         entry-html: |
+                            Starting in <strong>2025</strong> from an office in <span class="entrylink" target="entCentral">Central</span>, Inversion began with just 3 engineers.
+                            They claimed to produce innovative and <strong>highly specialized</strong> combat gear, such as ballistic knives, grappling devices, and seeking projectiles.
+                            After gaining the attention of the newly-formed <span class="entrylink" target="entHyperBeam">Hyper Beam</span>, Inversion would enter a <strong>5-year contract</strong> to produce equipment for operators.
+                            During this time, Inversion grew rapidly and began producing gear for many private security companies.<br>
+                            <br>
+                            In an effort to reduce outside access, Hyper Beam would propose and sign an exclusive deal with Inversion, <strong>prohibiting</strong> them from selling to any other organizations.
+                            Inversion continues to be a main supplier of weapons for Hyper Beam.
+                            In addition to their widely-used items that are supplied to any operator who requires them, they also create <strong>custom weapons</strong> for high-ranking operators.
                         
     -   category-key: catTechnologies
         category-title: Technologies
