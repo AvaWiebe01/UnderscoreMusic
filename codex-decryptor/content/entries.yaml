@@ -398,8 +398,8 @@ categories:
                     By <strong>2039</strong>, the group had lost the majority of their members, and their activity landed them in the sights of several branches of <span class="entrylink" target="entLimit">LIMIT</span>.
                     The remaining members fled for their safety, with many choosing to apply to <span class="entrylink" target="entHyperBeam">HYPER BEAM</span>.
 
-            -   entry-key: entWeaponManufacturers
-                entry-title: Weapon Manufacturers
+            -   entry-key: entWeaponsManufacturers
+                entry-title: Weapons Manufacturers
                 entry-html: |
                 sub-entries:
 
@@ -432,7 +432,7 @@ categories:
                             After gaining the attention of the newly-formed <span class="entrylink" target="entHyperBeam">Hyper Beam</span>, Inversion would enter a <strong>5-year contract</strong> to produce equipment for operators.
                             During this time, Inversion grew rapidly and began producing gear for many private security companies.<br>
                             <br>
-                            In an effort to reduce outside access, Hyper Beam would propose and sign an exclusive deal with Inversion, <strong>prohibiting</strong> them from selling to any other organizations.
+                            In an effort to reduce outside access to Inversion's 2030 product, <span class="entrylink" target="entWeaponCores">weapon cores</span>, Hyper Beam would propose and sign an exclusive deal with Inversion, <strong>prohibiting</strong> them from selling to any other organizations.
                             Inversion continues to be a main supplier of weapons for Hyper Beam.
                             In addition to their widely-used items that are supplied to any operator who requires them, they also create <strong>custom weapons</strong> for high-ranking operators.
                         
