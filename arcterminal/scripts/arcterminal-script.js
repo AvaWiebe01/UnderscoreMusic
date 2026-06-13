@@ -51,8 +51,11 @@ function getDelay(style = "") {
 
 function displayLine(textbox, line, speakerDisplay, voices) {
     line.cursor = 0;
+    line.content = line.content ?? "";
+    line.styling = line.styling ?? "";
     line.speed = line.speed ?? 1;
     line.speaker = line.speaker ?? "system";
+    line.musicTrigger = line.musicTrigger ?? null;
     return new Promise(resolve => {
         function nextLetter(currentTime) { 
 
