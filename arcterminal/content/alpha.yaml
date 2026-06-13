@@ -1,0 +1,18 @@
+dialogue:
+
+  - content: "Yaml test"
+    styling: "iiii ssss"
+    speaker: "system"
+    speed: 1
+    musicTrigger: none
+
+  - content: "another test line"
+    styling: "                 "
+    speaker: "kyana"
+    speed: 1
+
+  - content: "what am I doing here?"
+    styling: "                     "
+    speaker: "onyx"
+    speed: 3
+

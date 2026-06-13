@@ -1,0 +1,6 @@
+dialogue:
+  - content: "Invalid Filename!"
+    styling: "rrrrrrrrrrrrrrrrr"
+    speaker: "system"
+    speed: 1
+    musicTrigger: none
