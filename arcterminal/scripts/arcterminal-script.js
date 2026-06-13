@@ -51,6 +51,8 @@ function getDelay(style = "") {
 
 function displayLine(textbox, line, speakerDisplay, voices) {
     line.cursor = 0;
+    line.speed = line.speed ?? 1;
+    line.speaker = line.speaker ?? "system";
     return new Promise(resolve => {
         function nextLetter(currentTime) { 
 
